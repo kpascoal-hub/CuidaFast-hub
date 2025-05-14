@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="back">&lt; Voltar</div>
+    <h1>Cadastre-se</h1>
+
+    <div class="options">
+      <label class="option">
+        <input type="radio" name="tipo" value="cliente" />
+        <strong>Cliente</strong><br />
+        <small>Quero contratar um cuidador</small>
+      </label>
+      <label class="option">
+        <input type="radio" name="tipo" value="profissional" />
+        <strong>Profissional</strong><br />
+        <small>Quero oferecer serviço de cuidado</small>
+      </label>
+    </div>
+
+    <div class="divider"><span>Acesso rápido</span></div>
+
+    <div class="social-icons">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" alt="Google" />
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" />
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" />
+    </div>
+
+    <div class="divider"><span>Ou</span></div>
+
+    <form>
+      <div class="input-group">
+        <input type="text" placeholder="Nome" required />
+        <input type="email" placeholder="E-mail" required />
+        <input type="tel" placeholder="Telefone" />
+        <input type="password" placeholder="Senha" required />
+      </div>
+      <button class="btn" type="submit">Criar conta</button>
+    </form>
+
+    <p class="terms">
+      Ao criar uma conta, você concorda com nossos<br />
+      <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>.
+    </p>
+  </div>
+</body>
+</html>
