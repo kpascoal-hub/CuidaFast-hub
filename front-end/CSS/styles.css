@@ -97,3 +97,42 @@ body {
   border-radius: 8px;
 }
 
+.servicos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background-color: #FFFBED;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .icon {
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-family: 'Inter', sans-serif;
+  color: #1B475D;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #1B475D;
+}
