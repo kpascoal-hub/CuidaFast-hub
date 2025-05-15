@@ -2,26 +2,24 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebas
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
 // Substitua pelos dados REAIS do Firebase
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY_REAL",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJETO",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SEU_APP_ID"
+  apiKey: "AIzaSyC_ZTNiWWOD1wk8nnbkIPZXlakr0ezQnrc",
+  authDomain: "cuidafasta-hub.firebaseapp.com",
+  projectId: "cuidafasta-hub",
+  storageBucket: "cuidafasta-hub.firebasestorage.app",
+  messagingSenderId: "376865099896",
+  appId: "1:376865099896:web:d57765f649efe4fe965d8d",
+  measurementId: "G-ENLD00XFD5"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-document.getElementById("btnGoogle").addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user;
-      alert(`Bem-vindo, ${user.displayName}`);
-    })
-    .catch((error) => {
-      alert(`Erro: ${error.message}`);
-    });
-});
+const analytics = getAnalytics(app);
