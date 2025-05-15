@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro</title>
 
-  <!-- NÃO usar essa linha se for usar ES Modules -->
-  <!-- <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script> -->
-
   <link rel="stylesheet" href="../CSS/cadastro.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -44,39 +41,4 @@
       <div class="input-group">
         <input type="text" placeholder="Nome" required />
         <input type="email" placeholder="E-mail" required />
-        <input type="tel" placeholder="Telefone" />
-        <input type="password" placeholder="Senha" required />
-      </div>
-      <button class="btn" type="submit">Criar conta</button>
-    </form>
-
-    <p class="terms">
-      Ao criar uma conta, você concorda com nossos<br />
-      <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>.
-    </p>
-  </div>
-
-  <!-- Firebase + Inicialização -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBMGC_CK4nNBY-uiR9FFQzvHZPpBC1K0rI",
-      authDomain: "cuidafast-hub.firebaseapp.com",
-      projectId: "cuidafast-hub",
-      storageBucket: "cuidafast-hub.appspot.com", // <-- aqui estava o erro, sem comentário no meio do objeto JS
-      messagingSenderId: "874969570734",
-      appId: "1:874969570734:web:9792f6be7fd3adc74afc3f",
-      measurementId: "G-XQ7TBM7TH5"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
-
-  <!-- Seu JS separado (com as importações ES modules) -->
-  <script type="module" src="../JS/cadastro.js"></script>
-
-</body>
-</html>
+        <input type="tel" placeholder="Telefone"
