@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-  <script type="module" src="../JS/cadastro.js"></script>
+
+  <!-- NÃO usar essa linha se for usar ES Modules -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script> -->
+
   <link rel="stylesheet" href="../CSS/cadastro.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -53,28 +55,28 @@
       <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>.
     </p>
   </div>
+
+  <!-- Firebase + Inicialização -->
   <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBMGC_CK4nNBY-uiR9FFQzvHZPpBC1K0rI",
-    authDomain: "cuidafast-hub.firebaseapp.com",
-    projectId: "cuidafast-hub",
-    storageBucket: "cuidafast-hub.firebasestorage.app",
-    messagingSenderId: "874969570734",
-    appId: "1:874969570734:web:9792f6be7fd3adc74afc3f",
-    measurementId: "G-XQ7TBM7TH5"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyBMGC_CK4nNBY-uiR9FFQzvHZPpBC1K0rI",
+      authDomain: "cuidafast-hub.firebaseapp.com",
+      projectId: "cuidafast-hub",
+      storageBucket: "cuidafast-hub.appspot.com", <!-- ✅ corrigido -->
+      messagingSenderId: "874969570734",
+      appId: "1:874969570734:web:9792f6be7fd3adc74afc3f",
+      measurementId: "G-XQ7TBM7TH5"
+    };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <!-- Seu JS separado (também deve usar type="module" se importar algo) -->
+  <script type="module" src="../JS/cadastro.js"></script>
+
 </body>
 </html>
