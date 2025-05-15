@@ -1,35 +1,31 @@
-// Importações do Firebase
+// Importações do Firebase (v9+ modular, direto do CDN)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-../JS/cadastro.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-import { getAuth } from "firebase/auth";
+// Suas credenciais do Firebase (copie do console do Firebase)
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY_AQUI", // ⚠️ substitua corretamente
+  authDomain: "SEU_PROJETO.firebaseapp.com",
+  projectId: "SEU_PROJETO",
+  storageBucket: "SEU_PROJETO.appspot.com",
+  messagingSenderId: "1234567890",
+  appId: "1:1234567890:web:abcdef123456"
+};
 
-
-// To apply the default browser preference instead of explicitly setting it.
-// auth.useDeviceLanguage();
-// Inicializa Firebase
-const cadastro = initializeApp(firebaseConfig);
-const auth = getAuth(cadastro);
+// Inicializa o Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Ação ao clicar no botão
-document.getElementById('btnGoogle').addEventListener('click', () => {
+// Função para login com o Google
+document.getElementById("google-login").addEventListener("click", () => {
   signInWithPopup(auth, provider)
-    .then(result => {
+    .then((result) => {
       const user = result.user;
-      alert("Login com Google: " + user.displayName);
+      alert(`Bem-vindo, ${user.displayName}`);
     })
-    .catch(error => {
-      console.error(error);
-      alert("Erro: " + error.message);
+    .catch((error) => {
+      alert(`Erro: ${error.message}`);
     });
 });
 
-// Monitorar autenticação
-onAuthStateChanged(auth, user => {
-  if (user) {
-    console.log("Usuário logado:", user.email);
-  } else {
-    console.log("Usuário deslogado");
-  }
-});
