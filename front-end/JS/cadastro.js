@@ -16,8 +16,8 @@ const firebaseConfig = {
   projectId: "cuidafasta-hub",
   storageBucket: "cuidafasta-hub.firebasestorage.app",
   messagingSenderId: "376865099896",
-  appId: "1:376865099896:web:d57765f649efe4fe965d8d",
-  measurementId: "G-ENLD00XFD5"
+  appId: "1:376865099896:web:6e2547c4731a6626965d8d",
+  measurementId: "G-KDHEPLER7P"
 };
 
 // Initialize Firebase
