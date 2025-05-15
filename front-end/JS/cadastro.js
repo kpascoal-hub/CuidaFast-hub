@@ -1,17 +1,15 @@
 // Importações do Firebase
-import { GoogleAuthProvider } from "firebase/auth";
-const provider = new GoogleAuthProvider();
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getAuth } from "firebase/auth";
 
-const auth = getAuth();
-auth.languageCode = 'it';
+
 // To apply the default browser preference instead of explicitly setting it.
 // auth.useDeviceLanguage();
 // Inicializa Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const cadastro = initializeApp(firebaseConfig);
+const auth = getAuth(cadastro);
 const provider = new GoogleAuthProvider();
 
 // Ação ao clicar no botão
