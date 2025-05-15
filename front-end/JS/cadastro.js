@@ -1,8 +1,8 @@
-// Importa os módulos do Firebase (modo "module")
+// Importações do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-// Configuração do Firebase
+// Configuração do seu projeto Firebase
 const firebaseConfig = {
   apiKey: "SUA_API_KEY",
   authDomain: "SEU_PROJETO.firebaseapp.com",
@@ -12,33 +12,20 @@ const firebaseConfig = {
   appId: "SEU_APP_ID"
 };
 
-// Inicializa o Firebase
+// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-// Funções
-document.getElementById('btnRegister').addEventListener('click', () => {
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('password').value;
-
-  createUserWithEmailAndPassword(auth, email, senha)
-    .then(userCredential => {
-      alert("Usuário registrado com sucesso!");
+// Ação ao clicar no botão
+document.getElementById('btnGoogle').addEventListener('click', () => {
+  signInWithPopup(auth, provider)
+    .then(result => {
+      const user = result.user;
+      alert("Login com Google: " + user.displayName);
     })
     .catch(error => {
-      alert("Erro: " + error.message);
-    });
-});
-
-document.getElementById('btnLogin').addEventListener('click', () => {
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('password').value;
-
-  signInWithEmailAndPassword(auth, email, senha)
-    .then(userCredential => {
-      alert("Login realizado com sucesso!");
-    })
-    .catch(error => {
+      console.error(error);
       alert("Erro: " + error.message);
     });
 });
