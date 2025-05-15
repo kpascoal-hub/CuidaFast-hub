@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
 
-// Config Firebase (com os dados do seu projeto novo)
+// Configuração da SUA conta Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBsiC8RaCd-6bwuThixa1ZxFkK4JhHgfjk",
   authDomain: "cuidafast-hub-af250.firebaseapp.com",
@@ -14,23 +15,26 @@ const firebaseConfig = {
 
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig);
+getAnalytics(app);
+
+// Autenticação
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+// Evento no botão do Google
 const btnGoogle = document.getElementById("btnGoogle");
 if (btnGoogle) {
   btnGoogle.addEventListener("click", () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        console.log("Usuário logado:", user);
-        alert(`Bem-vindo(a), ${user.displayName || "usuário"}!`);
+        console.log("Usuário logado com Google:", user);
+        alert(`Bem-vindo, ${user.displayName}!`);
+        // Aqui você pode redirecionar ou preencher campos, se quiser
       })
       .catch((error) => {
         console.error("Erro no login com Google:", error);
-        alert("Erro no login: " + error.message);
+        alert("Erro no login com Google: " + error.message);
       });
   });
-} else {
-  console.warn("Botão 'btnGoogle' não encontrado.");
 }
