@@ -181,7 +181,15 @@ body {
 
 .cliente {
   max-width: 220px;
+  min-height: 250px; /* Altura mínima igual para alinhar */
+  background-color: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .topo {
