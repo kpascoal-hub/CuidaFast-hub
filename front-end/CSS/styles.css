@@ -148,3 +148,108 @@ body {
   color: #1B475D;
   margin: 0;
 }
+:root {
+  --creme: #FFFBEC;
+  --azul-escuro: #1B475D;
+  --cinza-input: #D9D9D9;
+  --amarelo: #FFD700;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: var(--creme);
+}
+
+.depoimentos {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.depoimentos h2 {
+  font-size: 22px;
+  margin-bottom: 32px;
+  font-weight: bold;
+}
+
+.clientes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.cliente {
+  max-width: 220px;
+  text-align: left;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.topo img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.cliente strong {
+  font-size: 16px;
+}
+
+.cliente p {
+  font-size: 14px;
+  margin: 4px 0 6px;
+}
+
+.stars {
+  color: var(--amarelo);
+  font-size: 18px;
+}
+
+.newsletter {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.newsletter h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.newsletter p {
+  font-size: 14px;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.newsletter form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.newsletter input {
+  padding: 12px;
+  width: 300px;
+  background-color: var(--cinza-input);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.newsletter button {
+  background-color: var(--azul-escuro);
+  color: white;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
