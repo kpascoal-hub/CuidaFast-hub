@@ -126,6 +126,23 @@
     </div>
   </div>
 </div>
+<script>
+  const modal = document.getElementById('loginModal');
+  const logo = document.getElementById('logo');
+  const mainContent = document.getElementById('main-content');
+
+  if (modal && logo && mainContent) {
+    modal.addEventListener('show.bs.modal', () => {
+      logo.src = 'Logotipo_2_vetorizado.SVG';
+      mainContent.style.filter = 'brightness(0.5)';
+    });
+
+    modal.addEventListener('hidden.bs.modal', () => {
+      logo.src = 'Logotipo_1_vetorizado.SVG';
+      mainContent.style.filter = 'none';
+    });
+  }
+</script>
 
 </body>
 </html>
