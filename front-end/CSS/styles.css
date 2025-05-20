@@ -262,3 +262,73 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+.footer {
+  background-color: #2f5563;
+  color: white;
+  padding: 40px;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 120px;
+}
+
+.footer-logo img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.footer-logo h1 {
+  font-size: 1.5em;
+  font-weight: normal;
+  color: #ffffff;
+}
+
+.footer-logo .bold {
+  color: #D3DC7C;
+  font-weight: bold;
+}
+
+.footer-line {
+  width: 1px;
+  background-color: #dcdcdc;
+  height: 100px;
+  margin: 0 20px;
+}
+
+.footer-section {
+  max-width: 200px;
+}
+
+.footer-section h2 {
+  font-size: 1em;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.footer-section p {
+  font-size: 0.9em;
+  margin: 5px 0;
+  color: #e6e6e6;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+}
