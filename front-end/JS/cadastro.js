@@ -38,3 +38,19 @@ if (btnGoogle) {
       });
   });
 }
+const btnCuidador = document.getElementById('btn-cuidador');
+const btnCliente = document.getElementById('btn-cliente');
+
+btnCuidador.addEventListener('click', () => {
+  btnCuidador.classList.add('active');
+  btnCuidador.classList.remove('inactive');
+  btnCliente.classList.remove('active');
+  btnCliente.classList.add('inactive');
+});
+
+btnCliente.addEventListener('click', () => {
+  btnCliente.classList.add('active');
+  btnCliente.classList.remove('inactive');
+  btnCuidador.classList.remove('active');
+  btnCuidador.classList.add('inactive');
+});
