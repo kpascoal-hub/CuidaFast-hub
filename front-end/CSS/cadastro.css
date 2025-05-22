@@ -139,23 +139,7 @@
     text-decoration: none;
   }
   
-body {
-  background-color: #f5f7fa;
-  font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
-.toggle-container {
-  background-color: #ffffff;
-  border-radius: 999px;
-  display: flex;
-  padding: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  width: fit-content;
-}
 
 .toggle-button {
   border: none;
