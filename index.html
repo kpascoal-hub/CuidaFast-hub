@@ -1,189 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CuidaFast</title>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="front-end/CSS/styles.css" />
+  <title>Home - Seu Site</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <header class="navbar">
-    <img id="logo" src="front-end/assets/Logotipo_1_vetorizado.svg" alt="Logotipo 1 CuidaFast" class="logo" />
-    <nav class="menu">
-      <a href="#">Sobre nós</a>
-      <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</a>
-      <a class="btn" href="front-end/HTML/cadastro.html">Cadastrar-se</a>
-    </nav>
+  <nav class="navbar">
+    <img src="front-end/assets/img/Logotipo_1_vetorizado.svg" alt="Logo" class="logo" />
+    <div class="menu">
+      <a href="#" aria-label="Sobre nós">Sobre nós</a>
+      <a href="#" aria-label="Serviços">Serviços</a>
+      <a href="#" aria-label="Planos">Planos</a>
+      <a href="#" aria-label="Contato">Contato</a>
+      <button class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</button>
+    </div>
+  </nav>
+
+  <header class="container">
+    <div class="textos">
+      <h1><mark class="destaque">Descomplique</mark> sua saúde</h1>
+      <p>A sua saúde é prioridade! Agende consultas, exames, terapias e muito mais com rapidez e praticidade.</p>
+      <a href="#" class="btn">Cadastrar-se</a>
+    </div>
+    <img src="front-end/assets/img/imagem1.png" alt="Saúde e bem-estar" />
   </header>
 
-  <main class="container" id="main-content">
-    <section class="content">
-      <h1>Cuidados<br />quando e<br />onde precisar</h1>
-      <p>
-        Consultas, terapias, bem-estar e muito mais — uma rede completa de
-        <mark class="highlight verde-escuro">cuidados para a saúde e o bem-estar</mark> de
-        <mark class="highlight verde-claro">pessoas e animais</mark>,
-        <mark class="highlight amarelo">em um só lugar</mark>.
-      </p>
-      <div class="buttons">
-        <a href="#" class="btn primary">Contrate Agora!</a>
-        <a href="#" class="btn outline">Saiba mais</a>
-      </div>
-    </section>
-    <section class="image">
-      <img src="front-end/assets/Imagen1.jpg" alt="Família com cachorro e gato" />
-    </section>
-  </main>
-
   <section class="servicos">
-    <div class="card">
-      <div class="icon">
-        <i class="ph ph-dog" style="font-size: 40px; color: #1B475D;"></i>
-      </div>
-      <h3>Cuidado para Pets</h3>
-      <p>Serviços veterinários completos e cuidados especiais para seu animal.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">
-        <i class="ph ph-heartbeat" style="font-size: 40px; color: #1B475D;"></i>
-      </div>
-      <h3>Cuidado de Idosos</h3>
-      <p>Atendimento especializado para pessoas idosas.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">
-        <i class="ph ph-baby" style="font-size: 40px; color: #1B475D;"></i>
-      </div>
-      <h3>Cuidado Infantil</h3>
-      <p>Atendimento especializado para bebês e crianças.</p>
+    <h2>Serviços</h2>
+    <div class="cards">
+      <article class="card">
+        <img src="front-end/assets/icons/icon_pessoa.svg" alt="Consultas médicas" />
+        <h3>Consultas</h3>
+        <p>Agendamento de consultas com médicos e especialistas da saúde.</p>
+      </article>
+      <article class="card">
+        <img src="front-end/assets/icons/icon_celular.svg" alt="Telemedicina" />
+        <h3>Telemedicina</h3>
+        <p>Consultas online com profissionais qualificados via celular ou computador.</p>
+      </article>
+      <article class="card">
+        <img src="front-end/assets/icons/icon_remedio.svg" alt="Descontos em medicamentos" />
+        <h3>Descontos</h3>
+        <p>Medicamentos com descontos em farmácias parceiras de todo o Brasil.</p>
+      </article>
     </div>
   </section>
 
   <section class="depoimentos">
-    <h2>O que nossos clientes dizem...</h2>
+    <h2>Depoimentos</h2>
     <div class="cards">
-      <div class="card">
-        <img src="https://via.placeholder.com/50" alt="Luis">
-        <strong>Luis</strong>
-        <p>“Muito bom, recomendo. melhor aplicativo que eu ja vi.”</p>
-        <div class="stars">★★★★★</div>
-      </div>
-
-      <div class="card">
-        <img src="https://via.placeholder.com/50" alt="Daniela">
-        <strong>Daniela</strong>
-        <p>“incrível recomendo muito me deram uma torta de nutella de brinde.”</p>
-        <div class="stars">★★★★☆</div>
-      </div>
-
-      <div class="card">
-        <img src="https://via.placeholder.com/50" alt="Rodrigo">
-        <strong>Rodrigo</strong>
-        <p>“Muito fácil de usar, prático e com várias funcionalidades e garante a segurança da criança.”</p>
-        <div class="stars">★★★★☆</div>
-      </div>
+      <article class="card">
+        <p>"Excelente plataforma! Consegui marcar uma consulta em menos de 5 minutos."</p>
+        <h3>Juliana A.</h3>
+      </article>
+      <article class="card">
+        <p>"A consulta online foi super prática, e o atendimento muito atencioso."</p>
+        <h3>Marcos P.</h3>
+      </article>
+      <article class="card">
+        <p>"Recomendo! Usei o plano para minha família inteira e funcionou muito bem."</p>
+        <h3>Fernanda S.</h3>
+      </article>
     </div>
   </section>
 
   <section class="newsletter">
-    <h2>Fique por dentro!</h2>
-    <p>Cadastre seu e-mail e receba novidades e notícias sobre a CuidaFast e mantenha-se atualizado(a).</p>
-    <form onsubmit="event.preventDefault(); alert('Cadastro enviado!');">
-      <input type="text" placeholder="Insira seu nome" required />
-      <input type="email" placeholder="Insira seu e-mail" required />
-      <button type="submit">Enviar</button>
+    <h2>Fique por dentro das novidades</h2>
+    <form>
+      <input type="email" placeholder="Digite seu e-mail" required />
+      <button class="btn">Cadastrar</button>
     </form>
   </section>
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-logo">
-      <img src="front-end/assets/Logotipo_1_vetorizado.svg" alt="Logo CuidaFast">
-    </div>
-    
-    <div class="footer-line"></div>
 
-    <div class="footer-section">
-      <h2>CuidaFast</h2>
-      <p>Cuidando de você e seus parentes de idade, filhos e pets com amor e profissionalismo.</p>
-    </div>
-
-    <div class="footer-section">
-      <h2>Contato</h2>
-      <p>📞 (11) 9623-2423</p>
-      <p>📧 CuidaFast@gmail.com</p>
-      <p>📍 São Paulo, SP</p>
-    </div>
-
-    <div class="footer-section">
-      <h2>Redes Sociais</h2>
-      <div class="social-icons">
-        <img src="icon_instagram.svg" alt="Instagram">
-        <img src="icon_linkedin.svg" alt="LinkedIn">
-        <img src="icon_facebook.svg" alt="Facebook">
+  <footer class="footer">
+    <div class="footer-container">
+      <img src="front-end/assets/img/Logotipo_1_vetorizado.svg" alt="Logo" class="logo" />
+      <p>&copy; 2025 Seu Site. Todos os direitos reservados.</p>
+      <div class="social">
+        <a href="#"><img src="front-end/assets/icons/icon_instagram.svg" alt="Instagram" /></a>
+        <a href="#"><img src="front-end/assets/icons/icon_facebook.svg" alt="Facebook" /></a>
+        <a href="#"><img src="front-end/assets/icons/icon_twitter.svg" alt="Twitter" /></a>
       </div>
     </div>
-  </div>
-</footer>
-
-  <!-- Modal de Login (compacto e bonito) -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0" style="border-radius: 16px; background-color: #FFFBEC; max-width: 380px; margin: auto;">
-      <div class="modal-header border-0 justify-content-center py-2">
-        <h5 class="modal-title fw-bold" style="font-size: 22px;">Entrar na CuidaFast</h5>
-        <button type="button" class="btn-close position-absolute end-0 top-0 m-2" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body px-4 pb-3">
-        <form>
-          <div class="mb-3">
-            <label class="form-label fw-semibold text-dark" style="font-size: 14px;">E-mail ou usuário</label>
-            <input type="text" class="form-control p-2 rounded-2" placeholder="exemplo@email.com" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-semibold text-dark" style="font-size: 14px;">Senha</label>
-            <input type="password" class="form-control p-2 rounded-2" placeholder="********" required>
-          </div>
-          <button type="submit" class="btn w-100 fw-bold text-white py-2 rounded-2" style="background-color: #1B475D;">
-            Entrar
-          </button>
-        </form>
-
-        <hr class="my-3" />
-
-        <div class="text-center">
-          <a href="#" class="d-block mb-1 text-decoration-none text-muted" style="font-size: 13px;">Esqueceu sua senha?</a>
-          <a href="#" class="text-decoration-none fw-semibold" style="font-size: 13px; color: #1B475D;">Criar uma conta</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  <script>
-    const modal = document.getElementById('loginModal');
-    const logo = document.getElementById('logo');
-    const mainContent = document.getElementById('main-content');
-
-    if (modal && logo && mainContent) {
-      modal.addEventListener('show.bs.modal', () => {
-        logo.src = 'front-end/assets/Logotipo_2_vetorizado.SVG';
-        mainContent.style.filter = 'brightness(0.5)';
-      });
-
-      modal.addEventListener('hidden.bs.modal', () => {
-        logo.src = 'front-end/assets/Logotipo_1_vetorizado.svg';
-        mainContent.style.filter = 'none';
-      });
-    }
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </footer>
 </body>
 </html>
