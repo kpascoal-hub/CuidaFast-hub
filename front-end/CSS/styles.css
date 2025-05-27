@@ -332,3 +332,211 @@ body {
   width: 24px;
   height: 24px;
 }
+.macbook-air-1 {
+  position: absolute;
+  top: 1278px;
+  left: -3041px;
+  background-color: #fff;
+  width: 1433px;
+  height: 832px;
+  overflow: hidden;
+}
+.sobre-ns-child {
+  position: absolute;
+  top: 0px;
+  left: -8px;
+  background-color: rgba(27, 71, 93, 0.9);
+  width: 1448px;
+  height: 274px;
+}
+.logotipo-5-vetorizado-2-icon {
+  position: absolute;
+  top: 96px;
+  left: 63px;
+  width: 355.1px;
+  height: 70.4px;
+  overflow: hidden;
+  object-fit: contain;
+}
+.redes-sociais {
+  position: absolute;
+  top: 52px;
+  left: 1193px;
+  line-height: 20px;
+  display: inline-block;
+  width: 143px;
+  height: 24px;
+}
+.cuidafast {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  line-height: 20px;
+}
+.cuidando-de-voc {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  font-size: 16px;
+  line-height: 16px;
+  display: inline-block;
+  width: 278px;
+  height: 19px;
+}
+.div {
+  position: absolute;
+  top: 52px;
+  left: 572px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 288px;
+  height: 164px;
+  color: #fffbed;
+}
+.contato {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  line-height: 20px;
+  display: inline-block;
+  width: 84px;
+  height: 24px;
+}
+.div2 {
+  position: absolute;
+  top: 2px;
+  left: 24px;
+  display: inline-block;
+  width: 111px;
+  height: 19px;
+}
+.frame-icon {
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+}
+.li {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 288px;
+  height: 24px;
+}
+.cuidafastgmailcom {
+  position: absolute;
+  top: 2px;
+  left: 24px;
+  display: inline-block;
+  width: 184px;
+  height: 19px;
+}
+.li1 {
+  position: absolute;
+  top: 32px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 288px;
+  height: 24px;
+}
+.so-paulo-sp {
+  position: absolute;
+  top: 2px;
+  left: 20px;
+  display: inline-block;
+  width: 108px;
+  height: 19px;
+}
+.frame-icon2 {
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  width: 12px;
+  height: 16px;
+  overflow: hidden;
+}
+.li2 {
+  position: absolute;
+  top: 64px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 288px;
+  height: 24px;
+}
+.ul {
+  position: absolute;
+  top: 44px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 288px;
+  height: 88px;
+  font-size: 16px;
+  color: #9ca3af;
+}
+.div1 {
+  position: absolute;
+  top: 50px;
+  left: 911px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 288px;
+  height: 164px;
+}
+.linkedin-1-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.facebook-v2-1-icon {
+  position: absolute;
+  top: 1px;
+  left: 45px;
+  border-radius: 7px;
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+}
+.linkedin-1-parent {
+  position: absolute;
+  top: 109px;
+  left: 1235px;
+  width: 83px;
+  height: 42px;
+}
+.sobre-ns-item {
+  position: absolute;
+  top: 38px;
+  left: 471px;
+  width: 1px;
+  height: 198px;
+  object-fit: contain;
+}
+.vector-icon {
+  position: absolute;
+  height: 12.45%;
+  width: 2.5%;
+  top: 41.24%;
+  right: 14.65%;
+  bottom: 46.31%;
+  left: 82.85%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  cursor: pointer;
+}
+.sobre-ns {
+  width: 100%;
+  position: relative;
+  background-color: #fffbec;
+  height: 274px;
+  overflow: hidden;
+  text-align: left;
+  font-size: 20px;
+  color: #fff;
+  font-family: Montserrat;
+}
