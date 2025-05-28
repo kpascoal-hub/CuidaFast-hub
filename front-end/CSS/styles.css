@@ -344,6 +344,7 @@ body {
   cursor: pointer;
 }
 
+
 /* Posicionamentos absolutos (mantidos sem mudança para não quebrar layout) */
 .macbook-air-1 {
   position: absolute;
