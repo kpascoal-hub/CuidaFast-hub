@@ -277,7 +277,7 @@ body {
 
 /* Footer */
 .rodape {
-  background-color: var(--footer-bg); /* azul escuro */
+  background-color: var(--azul-escuro); /* azul escuro */
   color: var(--footer-text); /* branco */
   padding: 40px;
   font-family: 'Inter', sans-serif;
