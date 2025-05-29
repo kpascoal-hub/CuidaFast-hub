@@ -69,3 +69,40 @@ form.addEventListener("submit", (event) => {
     alert("Selecione um tipo de usuário antes de continuar.");
   }
 });
+
+const btnSubmit = document.querySelector("button[type='submit']");
+
+btnCuidador.addEventListener('click', () => {
+  btnCuidador.classList.add('active');
+  btnCuidador.classList.remove('inactive');
+  btnCliente.classList.remove('active');
+  btnCliente.classList.add('inactive');
+
+  // Muda texto do botão para "Continuar"
+  if (btnSubmit) btnSubmit.textContent = "Continuar";
+});
+
+btnCliente.addEventListener('click', () => {
+  btnCliente.classList.add('active');
+  btnCliente.classList.remove('inactive');
+  btnCuidador.classList.remove('active');
+  btnCuidador.classList.add('inactive');
+
+  // Restaura texto do botão para "Entrar" (ou outro texto desejado)
+  if (btnSubmit) btnSubmit.textContent = "Entrar";
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const isCuidador = btnCuidador.classList.contains("active");
+  const isCliente = btnCliente.classList.contains("active");
+
+  if (isCuidador) {
+    window.location.href = "CadastroContinuar.html";
+  } else if (isCliente) {
+    window.location.href = "HomeCliente.html";
+  } else {
+    alert("Selecione um tipo de usuário antes de continuar.");
+  }
+});
