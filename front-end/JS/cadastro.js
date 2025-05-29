@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebas
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
 
-// Configuração da SUA conta Firebase
+// Configuração Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBsiC8RaCd-6bwuThixa1ZxFkK4JhHgfjk",
   authDomain: "cuidafast-hub-af250.firebaseapp.com",
@@ -17,90 +17,70 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 getAnalytics(app);
 
-// Autenticação
+// Autenticação Google
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Evento no botão do Google
 const btnGoogle = document.getElementById("btnGoogle");
 if (btnGoogle) {
   btnGoogle.addEventListener("click", () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(result => {
         const user = result.user;
         console.log("Usuário logado com Google:", user);
         alert(`Bem-vindo, ${user.displayName}!`);
-        // Aqui você pode redirecionar ou preencher campos, se quiser
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Erro no login com Google:", error);
         alert("Erro no login com Google: " + error.message);
       });
   });
 }
+
+// Seleciona elementos
 const btnCuidador = document.getElementById('btn-cuidador');
 const btnCliente = document.getElementById('btn-cliente');
-
-btnCuidador.addEventListener('click', () => {
-  btnCuidador.classList.add('active');
-  btnCuidador.classList.remove('inactive');
-  btnCliente.classList.remove('active');
-  btnCliente.classList.add('inactive');
-});
-
-btnCliente.addEventListener('click', () => {
-  btnCliente.classList.add('active');
-  btnCliente.classList.remove('inactive');
-  btnCuidador.classList.remove('active');
-  btnCuidador.classList.add('inactive');
-});
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault(); // Impede o envio tradicional do formulário
-
-  const isCuidador = btnCuidador.classList.contains("active");
-  const isCliente = btnCliente.classList.contains("active");
-
-  if (isCuidador) {
-    window.location.href = "CadastroTipoProfissional.html";
-  } else if (isCliente) {
-    window.location.href = "HomeCliente.html";
-  } else {
-    alert("Selecione um tipo de usuário antes de continuar.");
-  }
-});
-
+const form = document.querySelector('form'); // Certifique-se que seu formulário tem tag <form>
 const btnSubmit = document.querySelector("button[type='submit']");
 
-btnCuidador.addEventListener('click', () => {
-  btnCuidador.classList.add('active');
-  btnCuidador.classList.remove('inactive');
-  btnCliente.classList.remove('active');
-  btnCliente.classList.add('inactive');
-
-  // Muda texto do botão para "Continuar"
-  if (btnSubmit) btnSubmit.textContent = "Continuar";
-});
-
-btnCliente.addEventListener('click', () => {
+// Define Cliente como selecionado ao carregar a página
+window.addEventListener('DOMContentLoaded', () => {
   btnCliente.classList.add('active');
   btnCliente.classList.remove('inactive');
   btnCuidador.classList.remove('active');
   btnCuidador.classList.add('inactive');
-
-  // Restaura texto do botão para "Entrar" (ou outro texto desejado)
-  if (btnSubmit) btnSubmit.textContent = "Entrar";
+  if (btnSubmit) btnSubmit.textContent = "Entrar"; // Texto inicial
 });
 
+// Função para ativar Cuidador
+function ativarCuidador() {
+  btnCuidador.classList.add('active');
+  btnCuidador.classList.remove('inactive');
+  btnCliente.classList.remove('active');
+  btnCliente.classList.add('inactive');
+  if (btnSubmit) btnSubmit.textContent = "Continuar";
+}
+
+// Função para ativar Cliente
+function ativarCliente() {
+  btnCliente.classList.add('active');
+  btnCliente.classList.remove('inactive');
+  btnCuidador.classList.remove('active');
+  btnCuidador.classList.add('inactive');
+  if (btnSubmit) btnSubmit.textContent = "Entrar";
+}
+
+// Eventos de clique
+btnCuidador.addEventListener('click', ativarCuidador);
+btnCliente.addEventListener('click', ativarCliente);
+
+// Submit do formulário
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const isCuidador = btnCuidador.classList.contains("active");
-  const isCliente = btnCliente.classList.contains("active");
-
-  if (isCuidador) {
+  if (btnCuidador.classList.contains("active")) {
     window.location.href = "CadastroContinuar.html";
-  } else if (isCliente) {
+  } else if (btnCliente.classList.contains("active")) {
     window.location.href = "HomeCliente.html";
   } else {
     alert("Selecione um tipo de usuário antes de continuar.");
