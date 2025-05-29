@@ -54,3 +54,18 @@ btnCliente.addEventListener('click', () => {
   btnCuidador.classList.remove('active');
   btnCuidador.classList.add('inactive');
 });
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); // Impede o envio tradicional do formulário
+
+  const isCuidador = btnCuidador.classList.contains("active");
+  const isCliente = btnCliente.classList.contains("active");
+
+  if (isCuidador) {
+    window.location.href = "CadastroTipoProfissional.html";
+  } else if (isCliente) {
+    window.location.href = "HomeCliente.html";
+  } else {
+    alert("Selecione um tipo de usuário antes de continuar.");
+  }
+});
