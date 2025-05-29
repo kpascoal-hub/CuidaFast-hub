@@ -42,7 +42,6 @@ const btnCuidador = document.getElementById('btn-cuidador');
 const btnCliente = document.getElementById('btn-cliente');
 const form = document.querySelector('form'); // Certifique-se que seu formulário tem tag <form>
 const btnSubmit = document.querySelector("button[type='submit']");
-
 // Define Cliente como selecionado ao carregar a página
 window.addEventListener('DOMContentLoaded', () => {
   btnCliente.classList.add('active');
