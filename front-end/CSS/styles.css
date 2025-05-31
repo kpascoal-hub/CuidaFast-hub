@@ -237,6 +237,42 @@ body {
   font-size: 18px;
 }
 
+
+#faq-section {
+  background-color: #FFFBEC;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 700px;
+}
+
+.faq-title {
+  color: #1B475D;
+  font-weight: 800;
+  font-size: 2.3rem;
+  line-height: 1.2;
+}
+
+.faq-subtitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1B475D;
+}
+
+mark.verde {
+  background-color: #8EBD9D80; /* verde escuro com 50% opacidade */
+  color: inherit;
+}
+
+mark.verde-claro {
+  background-color: #D3DC7C80; /* verde claro com 50% opacidade */
+  color: inherit;
+}
+
+mark.amarelo {
+  background-color: #FAD56480; /* amarelo com 50% opacidade */
+  color: inherit;
+}
+
 #faqAccordion .accordion-button {
   background-color: #FFFBEC; /* creme */
   color: #1B475D; /* azul escuro */
