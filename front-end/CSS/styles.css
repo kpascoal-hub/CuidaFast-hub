@@ -60,7 +60,7 @@ body {
   max-width: 50%;
 }
 
-.content h1 {
+h1 {
   font-size: 48px;
   font-weight: 700;
   line-height: 1.2;
@@ -68,7 +68,7 @@ body {
   color: var(--azul-escuro);
 }
 
-.content p {
+p {
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 32px;
