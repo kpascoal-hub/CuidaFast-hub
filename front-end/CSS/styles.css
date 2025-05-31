@@ -237,6 +237,37 @@ body {
   font-size: 18px;
 }
 
+
+
+#faqAccordion .accordion-button {
+  background-color: #FFFFFF;
+  color: #1B475D;
+  font-weight: 500;
+  border: 2px solid #4AA9FF;
+  border-radius: 8px !important;
+  margin-bottom: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#faqAccordion .accordion-button:not(.collapsed) {
+  background-color: #E6F3FF;
+  color: #1B475D;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#faqAccordion .accordion-body {
+  background-color: #FFFFFF;
+  border: 1px solid #DDE9F3;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  color: #333;
+}
+
+#faqAccordion .accordion-item {
+  background-color: transparent;
+  border: none;
+}
+
 /* Newsletter */
 .newsletter {
   text-align: center;
