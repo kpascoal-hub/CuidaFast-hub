@@ -237,36 +237,36 @@ body {
   font-size: 18px;
 }
 
-
-
-.faqAccordion .accordion-button {
-  background-color: #FFFFFF;
-  color: #1B475D;
-  font-weight: 500;
-  border: 2px solid #4AA9FF;
+#faqAccordion .accordion-button {
+  background-color: #FFFBEC; /* creme */
+  color: #1B475D; /* azul escuro */
+  font-weight: 600;
+  border: 2px solid #8EBD9D; /* verde escuro */
   border-radius: 8px !important;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.faqAccordion .accordion-button:not(.collapsed) {
-  background-color: #E6F3FF;
-  color: #1B475D;
+#faqAccordion .accordion-button:not(.collapsed) {
+  background-color: #D3DC7C; /* verde claro */
+  color: #1B475D; /* azul escuro */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.faqAccordion .accordion-body {
+#faqAccordion .accordion-body {
   background-color: #FFFFFF;
   border: 1px solid #DDE9F3;
   border-top: none;
   border-radius: 0 0 8px 8px;
-  color: #333;
+  color: #1B475D;
+  font-size: 16px;
 }
 
-.faqAccordion .accordion-item {
+#faqAccordion .accordion-item {
   background-color: transparent;
   border: none;
 }
+
 
 /* Newsletter */
 .newsletter {
