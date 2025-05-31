@@ -269,28 +269,6 @@ p {
   background-color: transparent;
   border: none;
 }
-#faq-section {
-  background-color: #FFFBEC;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.faq-title {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 24px;
-  color: var(--azul-escuro);
-}
-
-.faq-subtitle {
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 32px;
-  color: var(--azul-escuro);
-}
 
 /* Marca-texto com 50% de opacidade */
 mark.verde {
