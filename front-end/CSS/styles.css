@@ -239,7 +239,7 @@ body {
 
 
 
-#faqAccordion .accordion-button {
+.faqAccordion .accordion-button {
   background-color: #FFFFFF;
   color: #1B475D;
   font-weight: 500;
@@ -249,13 +249,13 @@ body {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#faqAccordion .accordion-button:not(.collapsed) {
+.faqAccordion .accordion-button:not(.collapsed) {
   background-color: #E6F3FF;
   color: #1B475D;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-#faqAccordion .accordion-body {
+.faqAccordion .accordion-body {
   background-color: #FFFFFF;
   border: 1px solid #DDE9F3;
   border-top: none;
@@ -263,7 +263,7 @@ body {
   color: #333;
 }
 
-#faqAccordion .accordion-item {
+.faqAccordion .accordion-item {
   background-color: transparent;
   border: none;
 }
