@@ -253,7 +253,6 @@ body {
   transition: transform 0.3s ease;
   color: #1B475D; /* azul escuro */
   font-weight: 600;
-  border-radius: 8px !important;
   margin-bottom: 10px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
