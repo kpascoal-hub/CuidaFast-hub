@@ -254,6 +254,14 @@ body {
   color: #1B475D; /* azul escuro */
   font-weight: 600;
 }
+.card-es h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  color: #1B475D;
+}
+
 
 #faqAccordion .accordion-button:not(.collapsed) {
   background-color: #D3DC7C; /* verde claro */
