@@ -240,67 +240,40 @@ body {
 
 
 
-:root {
-  --creme-claro: #FFFBEC;
-  --verde-claro: #D3DC7C;
-  --verde-escuro: #8EBD9D;
-  --azul-escuro: #1B475D;
-  --amarelo: #FAD564;
-  --shadow: rgba(0, 0, 0, 0.05);
-}
-
-body {
-  background-color: var(--creme-claro);
-  font-family: 'Inter', sans-serif;
-}
-
-/* FAQ Accordion Estilo */
-#faqAccordion .accordion-item {
-  background-color: transparent;
-  border: none;
-  margin-bottom: 1rem;
-}
-
-#faqAccordion .accordion-button {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  padding: 1rem 1.5rem;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--azul-escuro);
-  box-shadow: 0 4px 10px var(--shadow);
-  transition: background-color 0.3s ease;
-  border: none;
+.card-es {
+  width: 100%;
   text-align: left;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #F1F1F1;
+  border: 1px solid #000;
+  color: #000;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border-radius: 0;
+  transition: background-color 0.2s ease-in-out;
 }
 
-#faqAccordion .accordion-button::after {
-  content: '+';
-  font-size: 20px;
-  color: var(--azul-escuro);
-  transition: transform 0.3s ease;
+.card-es:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-#faqAccordion .accordion-button:not(.collapsed)::after {
-  transform: rotate(45deg); /* transforma o + em um x */
+.card-es:not(.collapsed) {
+  background-color: #E8E8E8;
 }
 
-#faqAccordion .accordion-button:not(.collapsed) {
-  background-color: var(--verde-claro);
-  color: var(--azul-escuro);
+/* Conteúdo interno do acordeão */
+.accordion-body {
+  border: 1px solid #000;
+  border-top: none;
+  background-color: #FFF;
+  padding: 1rem;
+  color: #000;
 }
 
-#faqAccordion .accordion-body {
-  background-color: #FFFFFF;
+/* Remove bordas duplas entre os itens */
+.accordion-flush .accordion-item {
   border: none;
-  border-top: 1px dashed #1B475D;
-  border-radius: 0 0 16px 16px;
-  color: var(--azul-escuro);
-  font-size: 14px;
-  padding: 1rem 1.5rem;
 }
 
 /* Marca-texto com 50% de opacidade */
