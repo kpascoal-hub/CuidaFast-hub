@@ -240,6 +240,21 @@ body {
 
 
 
+:root {
+  --creme-claro: #FFFBEC;
+  --verde-claro: #D3DC7C;
+  --verde-escuro: #8EBD9D;
+  --azul-escuro: #1B475D;
+  --amarelo: #FAD564;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background-color: var(--creme-claro);
+  font-family: 'Inter', sans-serif;
+}
+
+/* FAQ Accordion Estilo */
 #faqAccordion .accordion-item {
   background-color: transparent;
   border: none;
@@ -247,39 +262,46 @@ body {
 }
 
 #faqAccordion .accordion-button {
-  background-color: var(--creme-claro);
+  background-color: #FFFFFF;
   border-radius: 16px;
-  padding: 1.5rem 2rem;
-  font-size: 24px;
-  font-weight: 700;
-  color: #1B475D;
+  padding: 1rem 1.5rem;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--azul-escuro);
   box-shadow: 0 4px 10px var(--shadow);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease;
   border: none;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#faqAccordion .accordion-button::after {
+  content: '+';
+  font-size: 20px;
+  color: var(--azul-escuro);
+  transition: transform 0.3s ease;
+}
+
+#faqAccordion .accordion-button:not(.collapsed)::after {
+  transform: rotate(45deg); /* transforma o + em um x */
 }
 
 #faqAccordion .accordion-button:not(.collapsed) {
-  background-color: #D3DC7C;
-  color: #1B475D;
-}
-
-#faqAccordion .accordion-button:focus {
-  box-shadow: none;
-  outline: none;
+  background-color: var(--verde-claro);
+  color: var(--azul-escuro);
 }
 
 #faqAccordion .accordion-body {
   background-color: #FFFFFF;
-  border: 1px solid #DDE9F3;
-  border-top: none;
+  border: none;
+  border-top: 1px dashed #1B475D;
   border-radius: 0 0 16px 16px;
-  color: #1B475D;
-  font-size: 16px;
-  padding: 1.5rem 2rem;
+  color: var(--azul-escuro);
+  font-size: 14px;
+  padding: 1rem 1.5rem;
 }
-
-
 
 /* Marca-texto com 50% de opacidade */
 mark.verde {
@@ -296,6 +318,7 @@ mark.amarelo {
   background-color: rgba(250, 213, 100, 0.5);
   color: inherit;
 }
+
 
 
 
