@@ -240,41 +240,45 @@ body {
 
 
 
-#faqAccordion .card-es {
-  background-color: var(--creme-claro);
-  padding: 1.5rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px var(--shadow);
-  width: 100%;
-  text-align: left;
-  display: block;
-  font-size: 20px;
-  line-height: 1.4;
-  font-weight: 600;
-  color: #1B475D;
+#faqAccordion .accordion-item {
+  background-color: transparent;
   border: none;
-  appearance: none;
+  margin-bottom: 1rem;
+}
+
+#faqAccordion .accordion-button {
+  background-color: var(--creme-claro);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1B475D;
+  box-shadow: 0 4px 10px var(--shadow);
   transition: background-color 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
+  border: none;
+  text-align: left;
 }
 
 #faqAccordion .accordion-button:not(.collapsed) {
   background-color: #D3DC7C;
   color: #1B475D;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-#faqAccordion .accordion-button {
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
 }
 
 #faqAccordion .accordion-button:focus {
   box-shadow: none;
   outline: none;
 }
+
+#faqAccordion .accordion-body {
+  background-color: #FFFFFF;
+  border: 1px solid #DDE9F3;
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  color: #1B475D;
+  font-size: 16px;
+  padding: 1.5rem 2rem;
+}
+
 
 
 /* Marca-texto com 50% de opacidade */
