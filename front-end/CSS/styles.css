@@ -272,7 +272,7 @@ body {
 }
 
 /* Conteúdo interno do acordeão */
-.accordion-body {
+.card-es {
   background-color: var(--creme-claro);
   padding: 2rem;
   border-radius: 16px;
