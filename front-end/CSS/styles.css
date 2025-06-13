@@ -263,7 +263,7 @@ body {
 
 .card-es:focus {
   outline: none;
-  box-shadow: none;
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
 .card-es:not(.collapsed) {
