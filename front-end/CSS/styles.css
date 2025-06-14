@@ -282,14 +282,11 @@ body {
 
     .card {
       background-color: var(--creme-claro);
-      padding: 1.5rem 2rem;
+      padding: 1rem 1.5rem;
       border-radius: 16px;
       box-shadow: 0 4px 10px var(--shadow);
       width: 320px;
       text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       transition: transform 0.3s ease;
       cursor: pointer;
     }
@@ -303,6 +300,26 @@ body {
       font-size: 1rem;
       color: var(--azul-escuro);
       margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 0.5rem;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    input[type="checkbox"]:checked ~ .accordion-body {
+      max-height: 500px;
     }
 
     .plus {
