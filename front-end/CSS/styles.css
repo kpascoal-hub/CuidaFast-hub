@@ -240,76 +240,75 @@ body {
 
 
 
-.card-es {
-  background-color: var(--creme-claro);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px var(--shadow);
-  width: 260px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.3s ease;
-  width: 100%;
-  text-align: left;
-  color: #000;
-  padding: 1rem;
-  font-size: 1.5rem;
-  font-weight: 500;
-  border-radius: 0;
-  transition: background-color 0.2s ease-in-out;
-}
+.faq-container {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+    }
 
-.card-es:focus {
-  outline: none;
-  box-shadow: 0 4px 10px var(--shadow);
-}
+    .faq-text {
+      max-width: 300px;
+    }
 
-.card-es:not(.collapsed) {
-  background-color: #E8E8E8;
-}
+    .faq-text h1 {
+       font-size: 48px;
+       font-weight: 700;
+       line-height: 1.2;
+       margin-bottom: 24px;
+       color: var(--azul-escuro);
+    }
 
-/* Conteúdo interno do acordeão */
-.card-es {
-  background-color: var(--creme-claro);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px var(--shadow);
-  width: 260px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.3s ease;
-  border: 1px solid #000;
-  border-top: none;
-  padding: 1rem;
-  color: #000;
-}
+    .faq-text p {
+      font-size: 1rem;
+      color: #000;
+      line-height: 1.5;
+    }
 
-/* Remove bordas duplas entre os itens */
-.accordion-flush .accordion-item {
-  border: none;
-}
+    .faq-text .verde {
+      background-color: var(--verde-claro);
+      padding: 0 4px;
+    }
 
-/* Marca-texto com 50% de opacidade */
-mark.verde {
-  background-color: rgba(142, 189, 157, 0.5);
-  color: inherit;
-}
+    .faq-text .amarelo {
+      background-color: var(--amarelo);
+      padding: 0 4px;
+    }
 
-mark.verde-claro {
-  background-color: rgba(211, 220, 124, 0.5);
-  color: inherit;
-}
+    .faq-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-mark.amarelo {
-  background-color: rgba(250, 213, 100, 0.5);
-  color: inherit;
-}
+    .card {
+      background-color: var(--creme-claro);
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px var(--shadow);
+      width: 320px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
 
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
+    .card h3 {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--azul-escuro);
+      margin: 0;
+    }
+
+    .plus {
+      font-size: 1.5rem;
+      color: var(--azul-escuro);
+    }
 
 
 /* Newsletter */
