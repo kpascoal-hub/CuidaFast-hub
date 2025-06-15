@@ -86,28 +86,18 @@ form.addEventListener("submit", (event) => {
   }
 });
 
-document.querySelectorAll('.social-icons i').forEach(icon => {
-  icon.addEventListener('mouseenter', () => {
-    icon.classList.remove('ph-fill');
-    console.log('mouseenter', icon);
-  });
-  icon.addEventListener('mouseleave', () => {
-    icon.classList.add('ph-fill');
-    console.log('mouseleave', icon);
-  });
-});
-
-
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.social-icons i').forEach(icon => {
     icon.addEventListener('mouseenter', () => {
       icon.classList.remove('ph-fill');
+      icon.classList.add('ph');
     });
-
     icon.addEventListener('mouseleave', () => {
       icon.classList.add('ph-fill');
+      icon.classList.remove('ph');
     });
   });
 });
+
 
 
