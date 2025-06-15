@@ -86,13 +86,16 @@ form.addEventListener("submit", (event) => {
   }
 });
 
-document.querySelectorAll('.social-icons i').forEach(icon => {
-  icon.addEventListener('mouseenter', () => {
-    icon.classList.remove('ph-fill');
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.social-icons i').forEach(icon => {
+    icon.addEventListener('mouseenter', () => {
+      icon.classList.remove('ph-fill');
+    });
 
-  icon.addEventListener('mouseleave', () => {
-    icon.classList.add('ph-fill');
+    icon.addEventListener('mouseleave', () => {
+      icon.classList.add('ph-fill');
+    });
   });
 });
+
 
