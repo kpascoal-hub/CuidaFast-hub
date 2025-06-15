@@ -103,7 +103,7 @@
     color: #444;
   }
 
-social-icons i {
+.social-icons i {
   color: var(--azul-escuro); /* ou outra cor que queira para os ícones */
   font-size: 24px;
   cursor: pointer;
