@@ -85,3 +85,27 @@ form.addEventListener("submit", (event) => {
     alert("Selecione um tipo de usuário antes de continuar.");
   }
 });
+
+document.querySelectorAll('.social-icons i').forEach(icon => {
+  icon.addEventListener('mouseenter', () => {
+    icon.classList.forEach(cls => {
+      if (cls.startsWith('ph-') && !cls.endsWith('-fill')) {
+        icon.dataset.originalClass = cls; // salva o original
+        icon.classList.remove(cls);
+        icon.classList.add(cls + '-fill');
+      }
+    });
+  });
+
+  icon.addEventListener('mouseleave', () => {
+    const currentClasses = Array.from(icon.classList);
+    currentClasses.forEach(cls => {
+      if (cls.endsWith('-fill')) {
+        icon.classList.remove(cls);
+        const original = cls.replace('-fill', '');
+        icon.classList.add(original);
+      }
+    });
+  });
+});
+
