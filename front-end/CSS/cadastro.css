@@ -39,7 +39,12 @@
     font-size: 14px;
     cursor: pointer;
   }
-  
+
+.back i {
+    color: var(--azul-escuro);
+  font-size: 47px;
+  }
+
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
