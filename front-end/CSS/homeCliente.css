@@ -36,6 +36,16 @@
   left: 0px;
   line-height: 20px;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
 .cuidando-de-voc {
   position: absolute;
   top: 50px;
