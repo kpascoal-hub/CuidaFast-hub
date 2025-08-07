@@ -260,7 +260,6 @@ function scrollToBottom() {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Funções do menu de anexos
 function toggleAttachmentMenu() {
     const isVisible = attachmentMenu.classList.contains('show');
     if (isVisible) {
@@ -302,8 +301,8 @@ function handleAttachmentOption(type) {
 }
 
 function handleFileUpload(file) {
-    const fileSize = (file.size / 1024 / 1024).toFixed(2); // MB
-    const maxSize = 10; // 10MB
+    const fileSize = (file.size / 1024 / 1024).toFixed(2); 
+    const maxSize = 10; 
     
     if (fileSize > maxSize) {
         showErrorNotification(`Arquivo muito grande. Tamanho máximo: ${maxSize}MB`);
@@ -480,7 +479,7 @@ async function uploadFileToBackend(file, message) {
     }
 }
 
-// Funções de integração com backend
+
 async function sendMessageToBackend(message) {
     try {
         const response = await fetch('/api/messages', {
@@ -491,7 +490,7 @@ async function sendMessageToBackend(message) {
             body: JSON.stringify({
                 conteudo: message.content,
                 data_envio: message.timestamp,
-                remetente: 'user', // ou ID do usuário logado
+                remetente: 'user',
                 destinatario: currentContactId
             })
         });
@@ -505,7 +504,7 @@ async function sendMessageToBackend(message) {
 
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
-        // Aqui você pode mostrar uma notificação de erro para o usuário
+     
         showErrorNotification('Erro ao enviar mensagem. Tente novamente.');
     }
 }
@@ -540,13 +539,11 @@ async function loadContactsFromBackend() {
 
     } catch (error) {
         console.error('Erro ao carregar contatos:', error);
-        return mockContacts; // Fallback para dados simulados
+        return mockContacts; 
     }
 }
 
-function showErrorNotification(message) {
-    // Criar notificação de erro simples
-    const notification = document.createElement('div');
+function showErrorNotification(message) {    const notification = document.createElement('div');
     notification.className = 'error-notification';
     notification.textContent = message;
     notification.style.cssText = `
@@ -568,9 +565,8 @@ function showErrorNotification(message) {
     }, 3000);
 }
 
-// Atualização em tempo real (WebSocket ou polling)
+
 function setupRealTimeUpdates() {
-    // Exemplo com polling (verificar novas mensagens a cada 5 segundos)
     setInterval(async () => {
         try {
             const response = await fetch('/api/messages/new');
@@ -611,7 +607,6 @@ function handleNewMessages(newMessages) {
     });
 }
 
-// Responsividade adicional
 window.addEventListener('resize', function() {
     if (window.innerWidth > 768) {
         sidebar.classList.remove('open');
