@@ -26,6 +26,7 @@ if (btnGoogle) {
   btnGoogle.addEventListener("click", () => {
     signInWithPopup(auth, provider)
       .then(result => {
+        window.location.href = "../HTML/homeCliente.html";
         const user = result.user;
         console.log("Usuário logado com Google:", user);
         alert(`Bem-vindo, ${user.displayName}!`);
