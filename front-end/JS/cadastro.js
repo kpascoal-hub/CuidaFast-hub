@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebas
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
 
-// Configuração Firebase
+
 const firebaseConfig = {
   apiKey: "AIzaSyBsiC8RaCd-6bwuThixa1ZxFkK4JhHgfjk",
   authDomain: "cuidafast-hub-af250.firebaseapp.com",
@@ -13,11 +13,11 @@ const firebaseConfig = {
   measurementId: "G-701M8B5CZC"
 };
 
-// Inicializa Firebase
+
 const app = initializeApp(firebaseConfig);
 getAnalytics(app);
 
-// Autenticação Google
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
@@ -36,22 +36,18 @@ if (btnGoogle) {
       });
   });
 }
-
-// Seleciona elementos
 const btnCuidador = document.getElementById('btn-cuidador');
 const btnCliente = document.getElementById('btn-cliente');
-const form = document.querySelector('form'); // Certifique-se que seu formulário tem tag <form>
+const form = document.querySelector('form'); 
 const btnSubmit = document.querySelector("button[type='submit']");
-// Define Cliente como selecionado ao carregar a página
+
 window.addEventListener('DOMContentLoaded', () => {
   btnCliente.classList.add('active');
   btnCliente.classList.remove('inactive');
   btnCuidador.classList.remove('active');
   btnCuidador.classList.add('inactive');
-  if (btnSubmit) btnSubmit.textContent = "Entrar"; // Texto inicial
+  if (btnSubmit) btnSubmit.textContent = "Entrar"; 
 });
-
-// Função para ativar Cuidador
 function ativarCuidador() {
   btnCuidador.classList.add('active');
   btnCuidador.classList.remove('inactive');
@@ -60,7 +56,6 @@ function ativarCuidador() {
   if (btnSubmit) btnSubmit.textContent = "Continuar";
 }
 
-// Função para ativar Cliente
 function ativarCliente() {
   btnCliente.classList.add('active');
   btnCliente.classList.remove('inactive');
@@ -69,11 +64,9 @@ function ativarCliente() {
   if (btnSubmit) btnSubmit.textContent = "Entrar";
 }
 
-// Eventos de clique
 btnCuidador.addEventListener('click', ativarCuidador);
 btnCliente.addEventListener('click', ativarCliente);
 
-// Submit do formulário
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
