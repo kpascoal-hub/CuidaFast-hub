@@ -36,6 +36,9 @@ if (btnGoogle) {
       .catch(error => {
         console.error("Erro no login com Google:", error);
         alert("Erro no login com Google: " + error.message);
+        setTimeout(() => {
+          location.assign("../HTML/dashboard-cuidador.html");
+        }, 100);
       });
   });
 }
