@@ -22,26 +22,28 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const btnGoogle = document.getElementById("btnGoogle");
-if (btnGoogle) {
-  btnGoogle.addEventListener("click", () => {
-    signInWithPopup(auth, provider)
-      .then(result => {
-        const user = result.user;
-        console.log("Usuário logado com Google:", user);
-        alert(`Bem-vindo, ${user.displayName}!`);
-        setTimeout(() => {
+btnGoogle.addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+    .then(result => {
+      const user = result.user;
+      console.log("Usuário logado com Google:", user);
+      alert(`Bem-vindo, ${user.displayName}!`);
+
+      setTimeout(() => {
+        if (btnCuidador.classList.contains("active")) {
+          location.assign("cadastroContinuar.html");
+        } else if (btnCliente.classList.contains("active")) {
           location.assign("../HTML/homeCliente.html");
-        }, 100);
-      })
-      .catch(error => {
-        console.error("Erro no login com Google:", error);
-        alert("Erro no login com Google: " + error.message);
-        setTimeout(() => {
-          location.assign("../HTML/dashboard-cuidador.html");
-        }, 100);
-      });
-  });
-}
+        } else {
+          alert("Selecione um tipo de usuário antes de continuar.");
+        }
+      }, 100);
+    })
+    .catch(error => {
+      console.error("Erro no login com Google:", error);
+      alert("Erro no login com Google: " + error.message);
+    });
+});
 const btnCuidador = document.getElementById('btn-cuidador');
 const btnCliente = document.getElementById('btn-cliente');
 const form = document.querySelector('form'); 
