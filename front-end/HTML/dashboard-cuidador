@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuidaFast - Dashboard Cuidador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/css/icons.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/dashboard-cuidador.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg custom-navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="../assets/logo.png" alt="CuidaFast Logo" class="logo me-2">
+                    <span class="brand-text">CuidaFast</span>
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="ph ph-bell"></i> Notificações</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="ph ph-chat-circle"></i> Mensagens</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="ph ph-user-circle"></i> Perfil
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-gear"></i> Configurações</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-sign-out"></i> Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container-fluid py-4">
+        <!-- Welcome Section -->
+        <div class="welcome-section text-center mb-5">
+            <h1 class="welcome-title">Seja bem-vindo ao CuidaFast</h1>
+            <p class="welcome-subtitle">Sempre cuidando quando e onde precisar</p>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="row g-4 mb-5">
+            <!-- Total de Consultas -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-calendar-check card-icon"></i>
+                        <h3>Total de Consultas</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">127</div>
+                        <div class="metric-label">Consultas realizadas</div>
+                        <div class="chart-container">
+                            <canvas id="consultasChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valor Total Arrecadado -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-currency-circle-dollar card-icon"></i>
+                        <h3>Valor Arrecadado</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value" id="valorArrecadado">
+                            <span class="hidden-value">••••••</span>
+                            <span class="real-value d-none">R$ 8.450,00</span>
+                        </div>
+                        <div class="metric-label">Total este mês</div>
+                        <button class="btn btn-sm btn-outline-primary mt-2" id="toggleValor">
+                            <i class="ph ph-eye"></i> Visualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usuários Atendidos -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-users card-icon"></i>
+                        <h3>Usuários Atendidos</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">45</div>
+                        <div class="metric-label">Este mês</div>
+                        <div class="period-selector mt-2">
+                            <select class="form-select form-select-sm" id="periodoSelect">
+                                <option value="mes">Mês</option>
+                                <option value="bimestre">Bimestre</option>
+                                <option value="trimestre">Trimestre</option>
+                                <option value="semestre">Semestre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avaliação Média -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-star card-icon"></i>
+                        <h3>Avaliação Média</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">4.8</div>
+                        <div class="metric-label">
+                            <div class="stars">
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                            </div>
+                            Baseado em 89 avaliações
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Heatmap Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-calendar-dots card-icon"></i>
+                        <h3>Atividade de Consultas - Últimos 150 Dias</h3>
+                        <div class="calendar-navigation">
+                            <button class="btn btn-sm btn-outline-primary" id="prevPeriod">
+                                <i class="ph ph-arrow-left"></i> Anterior
+                            </button>
+                            <span id="currentPeriod" class="mx-3">Dezembro 2024</span>
+                            <button class="btn btn-sm btn-outline-primary" id="nextPeriod">
+                                Próximo <i class="ph ph-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="calendarHeatmap" class="calendar-heatmap-horizontal"></div>
+                        <div class="heatmap-legend mt-3">
+                            <span class="legend-label">Menos</span>
+                            <div class="legend-colors">
+                                <div class="legend-color" data-level="0"></div>
+                                <div class="legend-color" data-level="1"></div>
+                                <div class="legend-color" data-level="2"></div>
+                                <div class="legend-color" data-level="3"></div>
+                                <div class="legend-color" data-level="4"></div>
+                            </div>
+                            <span class="legend-label">Mais</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance e Analytics -->
+        <div class="row g-4 mb-5">
+            <!-- Performance Geral -->
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-chart-line-up card-icon"></i>
+                        <h3>Performance Mensal</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribuição de Serviços -->
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-chart-pie card-icon"></i>
+                        <h3>Distribuição de Serviços</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="servicosChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Histórico de Pagamentos -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-credit-card card-icon"></i>
+                        <h3>Histórico de Pagamentos</h3>
+                        <div class="ms-auto">
+                            <select class="form-select form-select-sm" id="filtroMes">
+                                <option value="todos">Todos os meses</option>
+                                <option value="atual">Mês atual</option>
+                                <option value="anterior">Mês anterior</option>
+                                <option value="trimestre">Último trimestre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="tabelaPagamentos">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Cliente</th>
+                                        <th>Serviço</th>
+                                        <th>Valor</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pagamentosTableBody">
+                                    <!-- Dados serão inseridos via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="pagination-info">
+                                Mostrando <span id="paginaAtual">1-10</span> de <span id="totalRegistros">45</span> registros
+                            </div>
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0" id="paginacao">
+                                    <!-- Paginação será inserida via JavaScript -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas Adicionais -->
+        <div class="row g-4 mb-5">
+            <!-- Taxa de Conversão -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card metric-card">
+                    <div class="card-body text-center">
+                        <i class="ph ph-target metric-icon"></i>
+                        <div class="metric-value">87%</div>
+                        <div class="metric-label">Taxa de Conversão</div>
+                        <div class="metric-change positive">
+                            <i class="ph ph-arrow-up"></i> +5.2%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tempo Médio de Resposta -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card metric-card">
+                    <div class="card-body text-center">
+                        <i class="ph ph-clock metric-icon"></i>
+                        <div class="metric-value">2.3h</div>
+                        <div class="metric-label">Tempo Médio de Resposta</div>
+                        <div class="metric-change negative">
+                            <i class="ph ph-arrow-down"></i> -12min
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clientes Recorrentes -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card metric-card">
+                    <div class="card-body text-center">
+                        <i class="ph ph-repeat metric-icon"></i>
+                        <div class="metric-value">68%</div>
+                        <div class="metric-label">Clientes Recorrentes</div>
+                        <div class="metric-change positive">
+                            <i class="ph ph-arrow-up"></i> +3.1%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Receita por Hora -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card metric-card">
+                    <div class="card-body text-center">
+                        <i class="ph ph-money metric-icon"></i>
+                        <div class="metric-value">R$ 45</div>
+                        <div class="metric-label">Receita por Hora</div>
+                        <div class="metric-change positive">
+                            <i class="ph ph-arrow-up"></i> +R$ 3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Categories -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ph ph-paw"></i>
+                    </div>
+                    <h4>Cuidado para Pets</h4>
+                    <p>Serviços especializados para animais de estimação</p>
+                    <a href="#" class="btn btn-outline-primary">Ver Agendamentos</a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ph ph-user"></i>
+                    </div>
+                    <h4>Cuidado de Idosos</h4>
+                    <p>Atendimento especializado para a terceira idade</p>
+                    <a href="#" class="btn btn-outline-primary">Ver Agendamentos</a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="ph ph-baby"></i>
+                    </div>
+                    <h4>Cuidado Infantil</h4>
+                    <p>Serviços de cuidado para crianças</p>
+                    <a href="#" class="btn btn-outline-primary">Ver Agendamentos</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="custom-footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-brand">
+                        <img src="../assets/logo.png" alt="CuidaFast Logo" class="footer-logo">
+                        <span>CuidaFast</span>
+                    </div>
+                    <p>Conectando cuidadores qualificados com quem precisa de cuidados especializados.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contato</h5>
+                    <p><i class="ph ph-phone"></i> (11) 9999-9999</p>
+                    <p><i class="ph ph-envelope"></i> contato@cuidafast.com.br</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Redes Sociais</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph ph-twitter-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/dashboard-cuidador.js"></script>
+</body>
+</html>
+
