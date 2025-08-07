@@ -29,7 +29,9 @@ if (btnGoogle) {
         const user = result.user;
         console.log("Usuário logado com Google:", user);
         alert(`Bem-vindo, ${user.displayName}!`);
-        window.location.href = "../HTML/homeCliente.html";
+        setTimeout(() => {
+          location.assign("../HTML/homeCliente.html");
+        }, 100);
       })
       .catch(error => {
         console.error("Erro no login com Google:", error);
