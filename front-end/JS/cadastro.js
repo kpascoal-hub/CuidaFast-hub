@@ -31,7 +31,7 @@ btnGoogle.addEventListener("click", () => {
 
       setTimeout(() => {
         if (btnCuidador.classList.contains("active")) {
-          location.assign("dashboard-cuidador.html");
+          location.assign("../HTML/dashboard-cuidador.html");
         } else if (btnCliente.classList.contains("active")) {
           location.assign("../HTML/homeCliente.html");
         } else {
