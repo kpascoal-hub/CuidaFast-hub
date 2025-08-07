@@ -44,11 +44,10 @@ const mockContacts = [
     }
 ];
 
-// Estado da aplicação
+
 let currentContactId = 1;
 let contacts = [...mockContacts];
 
-// Elementos DOM
 const contactList = document.getElementById('contact-list');
 const messagesContainer = document.getElementById('messages-container');
 const messageInput = document.getElementById('message-input');
@@ -60,7 +59,6 @@ const searchInput = document.getElementById('search-input');
 const menuIcon = document.querySelector('.menu-icon');
 const sidebar = document.querySelector('.sidebar');
 
-// Inicialização da aplicação
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
 });
@@ -69,42 +67,31 @@ function initializeApp() {
     renderContacts();
     loadMessages(currentContactId);
     setupEventListeners();
-    
-    // Auto-scroll para a última mensagem
     scrollToBottom();
 }
 
 function setupEventListeners() {
-    // Enviar mensagem
     sendButton.addEventListener('click', sendMessage);
     messageInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             sendMessage();
         }
     });
-
-    // Busca de contatos
     searchInput.addEventListener('input', function(e) {
         filterContacts(e.target.value);
     });
 
-    // Menu mobile
     menuIcon.addEventListener('click', toggleSidebar);
-
-    // Botão adicionar - mostrar/ocultar menu de anexos
     addButton.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleAttachmentMenu();
     });
 
-    // Fechar menu de anexos ao clicar fora
     document.addEventListener('click', function(e) {
         if (!attachmentMenu.contains(e.target) && !addButton.contains(e.target)) {
             hideAttachmentMenu();
         }
     });
-
-    // Opções do menu de anexos
     document.querySelectorAll('.attachment-option').forEach(option => {
         option.addEventListener('click', function() {
             const type = this.dataset.type;
@@ -113,14 +100,12 @@ function setupEventListeners() {
         });
     });
 
-    // Input de arquivo
     fileInput.addEventListener('change', function(e) {
         if (e.target.files.length > 0) {
             handleFileUpload(e.target.files[0]);
         }
     });
 
-    // Clique nos contatos
     contactList.addEventListener('click', function(e) {
         const contactItem = e.target.closest('.contact-item');
         if (contactItem) {
@@ -161,20 +146,14 @@ function createContactElement(contact) {
 }
 
 function selectContact(contactId) {
-    // Atualizar contato ativo
     currentContactId = contactId;
-    
-    // Marcar mensagens como lidas
     const contact = contacts.find(c => c.id === contactId);
     if (contact) {
         contact.unreadCount = 0;
     }
-    
-    // Atualizar UI
     renderContacts();
     loadMessages(contactId);
-    
-    // Fechar sidebar no mobile
+  
     if (window.innerWidth <= 768) {
         sidebar.classList.remove('open');
     }
@@ -185,7 +164,6 @@ function loadMessages(contactId) {
     if (!contact) return;
     
     messagesContainer.innerHTML = '';
-    
     contact.messages.forEach(message => {
         const messageElement = createMessageElement(message);
         messagesContainer.appendChild(messageElement);
@@ -206,35 +184,27 @@ function createMessageElement(message) {
 function sendMessage() {
     const messageText = messageInput.value.trim();
     if (!messageText) return;
-    
-    // Criar nova mensagem
+
     const newMessage = {
         id: Date.now(),
         content: messageText,
         sender: 'user',
         timestamp: new Date().toISOString()
     };
-    
-    // Adicionar mensagem ao contato atual
     const contact = contacts.find(c => c.id === currentContactId);
     if (contact) {
         contact.messages.push(newMessage);
-        
-        // Simular resposta automática (para demonstração)
+
         setTimeout(() => {
             simulateResponse(contact);
         }, 1000 + Math.random() * 2000);
     }
-    
-    // Adicionar mensagem à UI
+
     const messageElement = createMessageElement(newMessage);
     messagesContainer.appendChild(messageElement);
-    
-    // Limpar input e fazer scroll
+
     messageInput.value = '';
     scrollToBottom();
-    
-    // Aqui seria feita a chamada para o backend
     sendMessageToBackend(newMessage);
 }
 
@@ -258,13 +228,11 @@ function simulateResponse(contact) {
     
     contact.messages.push(responseMessage);
     
-    // Atualizar UI se for o contato ativo
     if (contact.id === currentContactId) {
         const messageElement = createMessageElement(responseMessage);
         messagesContainer.appendChild(messageElement);
         scrollToBottom();
     } else {
-        // Incrementar contador de não lidas
         contact.unreadCount++;
         renderContacts();
     }
@@ -342,7 +310,6 @@ function handleFileUpload(file) {
         return;
     }
     
-    // Criar mensagem de arquivo
     const fileMessage = {
         id: Date.now(),
         content: `📎 ${file.name} (${fileSize}MB)`,
@@ -351,19 +318,17 @@ function handleFileUpload(file) {
         type: 'file',
         file: file
     };
-    
-    // Adicionar mensagem ao contato atual
-    const contact = contacts.find(c => c.id === currentContactId);
+        const contact = contacts.find(c => c.id === currentContactId);
     if (contact) {
         contact.messages.push(fileMessage);
     }
     
-    // Adicionar mensagem à UI
+    
     const messageElement = createFileMessageElement(fileMessage);
     messagesContainer.appendChild(messageElement);
     scrollToBottom();
     
-    // Simular upload para o backend
+
     uploadFileToBackend(file, fileMessage);
 }
 
@@ -411,13 +376,13 @@ function sendLocationMessage() {
                     coordinates: { lat, lng }
                 };
                 
-                // Adicionar mensagem ao contato atual
+         
                 const contact = contacts.find(c => c.id === currentContactId);
                 if (contact) {
                     contact.messages.push(locationMessage);
                 }
                 
-                // Adicionar mensagem à UI
+
                 const messageElement = createLocationMessageElement(locationMessage);
                 messagesContainer.appendChild(messageElement);
                 scrollToBottom();
@@ -449,7 +414,7 @@ function createLocationMessageElement(message) {
 }
 
 function sendContactMessage() {
-    // Simular compartilhamento de contato
+
     const contactMessage = {
         id: Date.now(),
         content: `👤 Contato compartilhado: João Silva`,
@@ -462,13 +427,12 @@ function sendContactMessage() {
         }
     };
     
-    // Adicionar mensagem ao contato atual
+    
     const contact = contacts.find(c => c.id === currentContactId);
     if (contact) {
         contact.messages.push(contactMessage);
     }
-    
-    // Adicionar mensagem à UI
+ 
     const messageElement = createContactMessageElement(contactMessage);
     messagesContainer.appendChild(messageElement);
     scrollToBottom();
