@@ -909,3 +909,82 @@
   color: #1f2937;
   font-family: Montserrat;
 }
+.rodape {
+  background-color: var(--azul-escuro); /* azul escuro */
+  color: var(--footer-text); /* branco */
+  padding: 40px;
+  font-family: 'Inter', sans-serif;
+}
+
+.rodape-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.rodape .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centraliza verticalmente dentro da coluna */
+  max-width: 200px;
+  height: 100%; /* garante que siga a altura da linha */
+}
+
+.rodape .logo img {
+  width: 500;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+
+
+.linha-vertical {
+  width: 1px;
+  background-color: #dcdcdc;
+  height: 100px;
+  margin: 0 20px;
+}
+
+.rodape .col {
+  max-width: 200px;
+  color: var(--footer-text);
+}
+
+.rodape h4 {
+  font-size: 150%;
+  margin-bottom: 10px;
+  border: #fff;
+  color: var(--footer-text);
+}
+
+.rodape a {
+  font-size: 0.9em;
+  text-decoration: none;
+  color: inherit;
+}
+
+.redes-sociais {
+  display: flex;
+  gap: 10px;
+}
+
+.redes-sociais i {
+  color: var(--footer-text); /* ou outra cor que queira para os ícones */
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
+/* Posicionamentos absolutos (mantidos sem mudança para não quebrar layout) */
+.macbook-air-1 {
+  position: absolute;
+  top: 1278px;
+  left: -3041px;
+  background-color: #fff;
+  width: 1433px;
+  height: 832px;
+  overflow: hidden;
+}
