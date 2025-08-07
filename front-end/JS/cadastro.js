@@ -73,7 +73,7 @@ form.addEventListener("submit", (event) => {
   if (btnCuidador.classList.contains("active")) {
     window.location.href = "cadastroContinuar.html";
   } else if (btnCliente.classList.contains("active")) {
-    window.location.href = "homeCliente.html";
+    window.location.href = "../HTML/homeCliente.html";
   } else {
     alert("Selecione um tipo de usuário antes de continuar.");
   }
