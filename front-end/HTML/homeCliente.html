@@ -1,458 +1,150 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, width=device-width">
   
-  
-  <link rel="stylesheet"  href="../CSS/styles.css" />
-  <link rel="stylesheet"  href="../CSS/homeCliente.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" />
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/phosphor.css">
- 
- 
+  <link rel="stylesheet" href="../CSS/styles.css">
+  <link rel="stylesheet" href="../CSS/homeCliente.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/phosphor.css">
 </head>
 <body>
-   <div class="group-parent">
-    <div class="home-parent" id="groupContainer">
-      <div class="home">Home</div>
-      <i class="ph ph-house" style="color: #1B475D;"></i>
-     
-    </div>
-    <div class="mensagens-parent" id="groupContainer1">
-  <a href="../HTML/mensagens.html" class="mensagens-link">
-    <div class="mensagens">Mensagens</div>
-    <i class="ph ph-chat-centered-dots" style="color: #1B475D;"></i>
-  </a>
-</div>
-    <div class="notificaes-parent" id="groupContainer2">
-      <div class="notificaes">Notificações</div>
-      <i class="ph ph-bell" style="color: #1B475D;"></i>
-     
-    </div>
-    <div class="group-wrapper">
-      <div class="moon-1-parent">
-        <i class="ph ph-moon" style="color: #1B475D;"></i>
-       
-        <div class="tema">Tema</div>
+
+  <!-- Barra de navegação -->
+  <nav class="menu">
+    <a href="#" class="menu-item"><i class="ph ph-house"></i> Home</a>
+    <a href="../HTML/mensagens.html" class="menu-item"><i class="ph ph-chat-centered-dots"></i> Mensagens</a>
+    <a href="#" class="menu-item"><i class="ph ph-bell"></i> Notificações</a>
+    <a href="#" class="menu-item"><i class="ph ph-moon"></i> Tema</a>
+    <a href="#" class="menu-item"><i class="ph ph-clock-countdown"></i> In-time</a>
+    <a href="#" class="menu-item"><i class="ph ph-sign-out"></i> Log-out</a>
+  </nav>
+
+  <!-- Seção principal -->
+  <main class="homecliente">
+    <img class="logo" src="Logotipo_5_vetorizado 1.png" alt="Logo CuidaFast">
+    
+    <section class="sobre">
+      <h2>CuidaFast</h2>
+      <p>Cuidando de você, seus parentes de idade, filhos e pets com amor e profissionalismo.</p>
+    </section>
+
+    <section class="contato">
+      <h3>Contato</h3>
+      <ul>
+        <li><i class="ph ph-phone"></i> (11) 9623-2423</li>
+        <li><i class="ph ph-envelope-simple"></i> CuidaFast@gmail.com</li>
+        <li><i class="ph ph-map-pin"></i> São Paulo, SP</li>
+      </ul>
+    </section>
+
+    <section class="redes-sociais">
+      <h3>Redes Sociais</h3>
+      <a href="#"><img src="Vector.svg" alt="Instagram"></a>
+      <a href="#"><img src="linkedin 1.png" alt="LinkedIn"></a>
+      <a href="#"><img src="facebook--v2 1.png" alt="Facebook"></a>
+    </section>
+
+    <h3>Melhores sugestões de cuidadores para você!</h3>
+    <h4>Cuidadores por perto:</h4>
+
+    <!-- Lista de cuidadores -->
+    <section class="lista-cuidadores">
+      <article class="cuidador">
+        <img src="img.png" alt="Sarah Johnson">
+        <h5>Sarah Johnson</h5>
+        <p>Especialista com idosos</p>
+        <span>⭐ 4.9 (127 reviews)</span>
+        <button>Ver Orçamento</button>
+      </article>
+
+      <article class="cuidador">
+        <img src="img.png" alt="Jeniffer Lopez">
+        <h5>Jeniffer Lopez</h5>
+        <p>Pet-sitter e Pet-walker</p>
+        <span>⭐ 4.8 (93 reviews)</span>
+        <button>Contrate Agora</button>
+      </article>
+
+      <article class="cuidador">
+        <img src="img.png" alt="Emily Rodriguez">
+        <h5>Emily Rodriguez</h5>
+        <p>Assistente em casa</p>
+        <span>⭐ 4.9 (156 reviews)</span>
+        <button>Ver Orçamento</button>
+      </article>
+
+      <article class="cuidador">
+        <img src="img.png" alt="David Thompson">
+        <h5>David Thompson</h5>
+        <p>Physical Therapy Assistant</p>
+        <span>⭐ 4.7 (82 reviews)</span>
+        <button>Contrate Agora</button>
+      </article>
+
+      <article class="cuidador">
+        <img src="img.png" alt="Maria Santos">
+        <h5>Maria Santos</h5>
+        <p>Babá</p>
+        <span>⭐ 4.9 (108 reviews)</span>
+        <button>Contrate Agora</button>
+      </article>
+
+      <article class="cuidador">
+        <img src="img.png" alt="James Wilson">
+        <h5>James Wilson</h5>
+        <p>Cuidador de Idosos</p>
+        <span>⭐ 4.8 (135 reviews)</span>
+        <button>Ver Orçamento</button>
+      </article>
+    </section>
+
+    <h3>Cuidados quando e onde precisar</h3>
+    <p>Bem-vindo, Max</p>
+
+    <section class="categorias-servicos">
+      <article>
+        <h4>Cuidado Infantil</h4>
+        <img src="i.svg" alt="">
+      </article>
+      <article>
+        <h4>Cuidados Pet</h4>
+        <img src="div.svg" alt="">
+      </article>
+      <article>
+        <h4>Cuidado para Idosos</h4>
+        <img src="div.svg" alt="">
+      </article>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <div class="rodape-container">
+      <div class="logo-footer">
+        <img src="front-end/assets/Logotipo_5_vetorizado.svg" alt="Logo CuidaFast">
       </div>
-    </div>
-    <div class="in-time-parent">
-      <div class="tema">In-time</div>
-      <i class="ph ph-clock-countdown" style="color: #1B475D;"></i>
-     
-    </div>
-    <div class="log-out-parent" id="groupContainer5">
-      <div class="log-out">Log-out</div>
-      <i class="ph ph-sign-out" style="color: #1B475D;"></i>
-     
-    </div>
-  </div>
-  <div class="homecliente">
-    <div class="homecliente-child">
-    </div>
-    <img class="logotipo-5-vetorizado-1-icon" alt="" src="Logotipo_5_vetorizado 1.png">
-   
-    <b class="redes-sociais">Redes Sociais</b>
-    <div class="div">
-      <b class="cuidafast">CuidaFast</b>
-      <div class="cuidando-de-voc">Cuidando de você seus parentes de idade, filhos e pets com amor e profissionalismo.</div>
-    </div>
-    <div class="div5">
-      <b class="contato">Contato</b>
-      <div class="ul">
-        <div class="li">
-          <div class="div2">(11) 9623-2423</div>
-          <img class="frame-icon" alt="" src="Frame.svg">
-         
-        </div>
-        <div class="li1">
-          <div class="cuidafastgmailcom">CuidaFast@gmail.com</div>
-          <img class="frame-icon" alt="" src="Frame.svg">
-         
-        </div>
-        <div class="li2">
-          <div class="so-paulo-sp">São Paulo, SP</div>
-          <img class="frame-icon2" alt="" src="Frame.svg">
-         
-        </div>
-      </div>
-    </div>
-    <div class="vector-parent">
-      <img class="vector-icon" alt="" src="Vector.svg" id="vectorIcon">
-     
-      <img class="linkedin-1-icon" alt="" src="linkedin 1.png">
-     
-      <img class="facebook-v2-1-icon" alt="" src="facebook--v2 1.png">
-     
-    </div>
-    <div class="melhores-sujestes-de">Melhores sujestões de cuidadores para você!</div>
-    <div class="cuidadores-por-perto">Cuidadores por perto:</div>
-    <div class="div3">
-      <div class="div4">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="sarah-johnson">Sarah Johnson</b>
-          <div class="especialista-com-idosos">Especialista com idosos</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-          </div>
-            <div class="reviews">4.9 (127 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Ver Orçamento</div>
-          </div>
-        </div>
-      </div>
-      <div class="div7">
-        <div class="img">
-          <img class="img-icon" alt="" src="img.png">
-         
-          <img class="img-icon2" alt="" src="img.png">
-         
-        </div>
-        <div class="div5">
-          <b class="jeniffer-lopez">Jeniffer Lopez</b>
-          <div class="pet-sitter-e-pet-walker">Pet-sitter e Pet-walker</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews1">4.8 (93 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="contrate-agora">Contrate Agora</div>
-          </div>
-        </div>
-      </div>
-      <div class="div10">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="emily-rodriguez">Emily Rodriguez</b>
-          <div class="assistente-em-casa">Assistente em casa</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews">4.9 (156 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Ver Orçamento</div>
-          </div>
-        </div>
-      </div>
-      <div class="div13">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="david-thompson">David Thompson</b>
-          <div class="physical-therapy-assistant">Physical Therapy Assistant</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews3">4.7 (82 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Contrate Agora</div>
-          </div>
-        </div>
-      </div>
-      <div class="div16">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="maria-santos">Maria Santos</b>
-          <div class="bab">Babá</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews4">4.9 (108 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="contrate-agora">Contrate Agora</div>
-          </div>
-        </div>
-      </div>
-      <div class="div19">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="james-wilson">James Wilson</b>
-          <div class="cuidador-de-idosos">Cuidador de Idosos</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews">4.8 (135 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Ver Orçamento</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="div22">
-      <img class="img-icon" alt="" src="img.png">
-     
-      <div class="div5">
-        <b class="sarah-johnson">Sarah Johnson</b>
-        <div class="especialista-com-idosos">Cuidadora de Idosos</div>
-        <div class="div6">
-          <img class="frame-icon3" alt="" src="Frame.svg">
-         
-          <div class="reviews">4.9 (127 reviews)</div>
-        </div>
-        <div class="button">
-          <div class="ver-oramento">Ver Orçamento</div>
-        </div>
-      </div>
-    </div>
-    <div class="div25">
-      <div class="img">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <img class="img-icon2" alt="" src="img.png">
-       
-      </div>
-      <div class="div5">
-        <b class="jeniffer-lopez">Jeniffer Lopez</b>
-        <div class="pet-sitter-e-pet-walker">Pet-sitter e Pet-walker</div>
-        <div class="div6">
-          <img class="frame-icon3" alt="" src="Frame.svg">
-         
-          <div class="reviews1">4.8 (93 reviews)</div>
-        </div>
-        <div class="button">
-          <div class="contrate-agora">Contrate Agora</div>
-        </div>
-      </div>
-    </div>
-    <div class="div28">
-      <img class="img-icon" alt="" src="img.png">
-     
-      <div class="div5">
-        <b class="emily-rodriguez">Emily Rodriguez</b>
-        <div class="assistente-em-casa">Cuidadora de idosos</div>
-        <div class="div6">
-          <img class="frame-icon3" alt="" src="Frame.svg">
-         
-          <div class="reviews">4.9 (156 reviews)</div>
-        </div>
-        <div class="button">
-          <div class="ver-oramento">Ver Orçamento</div>
-        </div>
-      </div>
-    </div>
-    <div class="div31">
-      <img class="img-icon" alt="" src="img.png">
-     
-      <div class="div5">
-        <b class="david-thompson">David Thompson</b>
-        <div class="physical-therapy-assistant">Physical Therapy Assistant</div>
-        <div class="div6">
-          <img class="frame-icon3" alt="" src="Frame.svg">
-         
-          <div class="reviews3">4.7 (82 reviews)</div>
-        </div>
-        <div class="button">
-          <div class="ver-oramento">Contrate Agora</div>
-        </div>
-      </div>
-    </div>
-    <div class="div34">
-      <img class="img-icon" alt="" src="img.png">
-     
-      <div class="div5">
-        <b class="maria-santos">Maria Santos</b>
-        <div class="bab">Babá e diarista</div>
-        <div class="div6">
-          <img class="frame-icon3" alt="" src="Frame.svg">
-         
-          <div class="reviews4">4.9 (108 reviews)</div>
-        </div>
-        <div class="button">
-          <div class="contrate-agora">Contrate Agora</div>
-        </div>
-      </div>
-    </div>
-    <div class="div37">
-      <img class="img-icon" alt="" src="img.png">
-     
-      <div class="div5">
-        <b class="james-wilson">James Wilson</b>
-        <div class="cuidador-de-idosos">Especialista em reabilitação</div>
-        <div class="div6">
-          <img class="frame-icon3" alt="" src="Frame.svg">
-         
-          <div class="reviews">4.8 (135 reviews)</div>
-        </div>
-        <div class="button">
-          <div class="ver-oramento">Ver Orçamento</div>
-        </div>
-      </div>
-    </div>
-    <div class="div40">
-      <div class="div4">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="sarah-johnson">Sarah Johnson</b>
-          <div class="especialista-com-idosos">Especialista com idosos</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews">4.9 (127 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Ver Orçamento</div>
-          </div>
-        </div>
-      </div>
-      <div class="div7">
-        <div class="img">
-          <img class="img-icon" alt="" src="img.png">
-         
-          <img class="img-icon2" alt="" src="img.png">
-         
-        </div>
-        <div class="div5">
-          <b class="jeniffer-lopez">Jeniffer Lopez</b>
-          <div class="pet-sitter-e-pet-walker">Pet-sitter e Pet-walker</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews1">4.8 (93 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="contrate-agora">Contrate Agora</div>
-          </div>
-        </div>
-      </div>
-      <div class="div10">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="emily-rodriguez">Emily Rodriguez</b>
-          <div class="assistente-em-casa">Assistente em casa</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews">4.9 (156 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Ver Orçamento</div>
-          </div>
-        </div>
-      </div>
-      <div class="div50">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="david-thompson">David Thompson</b>
-          <div class="physical-therapy-assistant">Physical Therapy Assistant</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews3">4.7 (82 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Contrate Agora</div>
-          </div>
-        </div>
-      </div>
-      <div class="div53">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="maria-santos">Maria Santos</b>
-          <div class="bab">Babá e diarista</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews4">4.9 (108 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="contrate-agora">Contrate Agora</div>
-          </div>
-        </div>
-      </div>
-      <div class="div56">
-        <img class="img-icon" alt="" src="img.png">
-       
-        <div class="div5">
-          <b class="james-wilson">James Wilson</b>
-          <div class="cuidador-de-idosos">Especialista em reabilitação</div>
-          <div class="div6">
-            <img class="frame-icon3" alt="" src="Frame.svg">
-           
-            <div class="reviews">4.8 (135 reviews)</div>
-          </div>
-          <div class="button">
-            <div class="ver-oramento">Ver Orçamento</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cuidados-quando-e">Cuidados quando e onde precisar</div>
-    <div class="bem-vindo-max"> Bem vindo, Max</div>
-    <div class="div-wrapper">
-      <div class="div59">
-        <div class="div60">
-        </div>
-        <div class="h4">
-          <b class="cuidado-infantil">Cuidado Infantil</b>
-        </div>
-        <img class="i-icon" alt="" src="i.svg">
-       
-      </div>
-    </div>
-    <div class="div61">
-      <img class="div-icon" alt="" src="div.svg">
-     
-      <div class="h41">
-        <b class="cuidados-pet">Cuidados Pet</b>
-      </div>
-    </div>
-    <div class="div62">
-      <img class="div-icon1" alt="" src="div.svg">
-     
-      <div class="h42">
-        <b class="cuidado-para-idosos">Cuidado para Idosos</b>
-      </div>
-    <footer class="rodape">
-    <div class="container rodape-container">
-      <div class="col logo">
-        <img src="front-end/assets/Logotipo_5_vetorizado.svg" alt="Logo CuidaFast" />
-      </div>
-  
-      <div class="linha-vertical"></div>
-  
-      <div class="col">
+      <div>
         <h4>CuidaFast</h4>
-        <p class="p-rodape">
-          Cuidados quando e onde precisar.
-        </p>
+        <p>Cuidados quando e onde precisar.</p>
       </div>
-  
-      <div class="col">
+      <div>
         <h4>Contato</h4>
         <p><i class="ph ph-linktree-logo"></i> <a href="https://linktr.ee/cuidafast" target="_blank">LinkTree</a></p>
         <p><i class="ph ph-envelope-simple"></i> <a href="mailto:CuidaFast@gmail.com">CuidaFast@gmail.com</a></p>
         <p><i class="ph ph-map-pin"></i> <a href="https://www.google.com/maps/place/São+Paulo,+SP" target="_blank">São Paulo, SP</a></p>
       </div>
-      
-      <div class="col redes-sociais-col">
+      <div>
         <h4>Redes Sociais</h4>
-        <div class="redes-sociais">
-          <a href="https://www.instagram.com/CuidaFast" target="_blank"><i class="ph ph-instagram-logo"></i></a>
-          <a href="https://www.linkedin.com/in/CuidaFast" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
-          <a href="https://www.facebook.com/CuidaFast" target="_blank"><i class="ph ph-facebook-logo"></i></a>
-        </div>
-      </div>
-      
+        <a href="https://www.instagram.com/CuidaFast" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+        <a href="https://www.linkedin.com/in/CuidaFast" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="https://www.facebook.com/CuidaFast" target="_blank"><i class="ph ph-facebook-logo"></i></a>
       </div>
     </div>
-  </footer></body>
-  
+  </footer>
+
+</body>
 </html>
