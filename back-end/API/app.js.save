@@ -1,7 +1,0 @@
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://admin:startupVENCEDORA25@cluster-cuidafast.invrki9.mongodb.net/CuidaFast?retryWrites=true&w=majority')
-	.then(() => console.log('mongodbconectado'))
-	.catch(err => console.error('erro na conexão:',err));
-
-
