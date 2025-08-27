@@ -3,60 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CuidaFast - Notificações</title>
+    <meta name="description" content="Notificações do Cuidador - Gerencie suas notificações no CuidaFast.">
+    <title>Notificações - CuidaFast Cuidador</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/images/Logotipo_1_vetorizado.svg">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Phosphor Icons -->
+  
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/pages/notificacao.css">
     
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="../CSS/styles.css">
-    <link rel="stylesheet" href="../CSS/Notificaçao.css">
 </head>
-<body>
+<body class="dashboard-page caregiver-dashboard">
     <!-- Header -->
-    <header class="header">
-        <div class="container">
+    <header class="dashboard-header">
+        <div class="container-fluid">
             <div class="header-content">
-                <div class="logo">
-                    <img src="../assets/logo-cuidafast.png" alt="CuidaFast" class="logo-img">
-                    <span class="logo-text">CuidaFast</span>
-                </div>
-                
-                <div class="header-actions">
-                    <button class="menu-toggle" id="menuToggle">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu lateral">
                         <i class="ph ph-list"></i>
                     </button>
+                    <a href="../../index.html" class="brand-logo">
+                        <img src="../../assets/images/Logotipo_1_vetorizado.svg" alt="CuidaFast Logo" width="32" height="32">
+                        <span>CuidaFast</span>
+                        <span class="user-type">Cuidador</span>
+                    </a>
+                </div>
+                
+                <div class="header-center">
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Buscar notificações..." id="searchInput">
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="status-toggle" id="statusToggle">
+                        <span class="status-label">Status:</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="availabilityToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="status-text" id="statusText">Disponível</span>
+                    </div>
+                    
+                    <button class="notification-btn active" id="notificationBtn" aria-label="Notificações">
+                        <i class="ph ph-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+                    
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-avatar" id="userAvatarBtn" aria-label="Menu do usuário">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face" alt="Ana Santos">
+                            <span>Ana Santos</span>
+                            <i class="ph ph-caret-down"></i>
+                        </button>
+                        
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="perfil-cuidador/informacoes-pessoais.html" class="dropdown-item">
+                                <i class="ph ph-user"></i>
+                                Meu Perfil
+                            </a>
+                            <a href="configuracoes.html" class="dropdown-item">
+                                <i class="ph ph-gear"></i>
+                                Configurações
+                            </a>
+                            <a href="#" class="dropdown-item" id="logoutBtn">
+                                <i class="ph ph-sign-out"></i>
+                                Sair
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Modal Dropdown -->
-    <div class="sidebar-dropdown" id="sidebarDropdown">
-        <nav class="dropdown-nav">
+
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="home-cliente.html" class="nav-link">
+                    <a href="home-cuidador.html" class="nav-link">
                         <i class="ph ph-house"></i>
-                        <span>Home</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="mensagens.html" class="nav-link">
                         <i class="ph ph-chat-circle"></i>
                         <span>Mensagens</span>
+                        <span class="nav-badge">3</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="notificacoes-cliente.html" class="nav-link active">
+                    <a href="notificacao-cuidador.html" class="nav-link active">
                         <i class="ph ph-bell"></i>
                         <span>Notificações</span>
+                        <span class="nav-badge">5</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -68,91 +119,255 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="ph ph-clock"></i>
-                        <span>In Time</span>
+                        <span>Histórico</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="ph ph-sign-out"></i>
-                        <span>Sair</span>
+                        <i class="ph ph-currency-dollar"></i>
+                        <span>Financeiro</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="ph ph-star"></i>
+                        <span>Avaliações</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="configuracoes.html" class="nav-link">
+                        <i class="ph ph-gear"></i>
+                        <span>Configurações</span>
                     </a>
                 </li>
             </ul>
         </nav>
-    </div>
+    </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
+
+    <main class="main-content" id="mainContent">
+        <div class="container-fluid">
+
+            <nav class="breadcrumb">
+                <a href="home-cuidador.html" class="breadcrumb-item">
+                    <i class="ph ph-house"></i>
+                    Dashboard
+                </a>
+                <span class="breadcrumb-separator">
+                    <i class="ph ph-caret-right"></i>
+                </span>
+                <span class="breadcrumb-item active">Notificações</span>
+            </nav>
+
             <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title">Suas Notificações</h1>
-                <p class="page-subtitle">Acompanhe todas as atualizações importantes</p>
-            </div>
-
-            <!-- Filters -->
-            <div class="notification-filters">
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">
-                        <i class="ph ph-list"></i>
-                        Todas
-                    </button>
-                    <button class="filter-btn" data-filter="unread">
-                        <i class="ph ph-bell"></i>
-                        Não Lidas
-                    </button>
-                    <button class="filter-btn" data-filter="messages">
-                        <i class="ph ph-chat-circle"></i>
-                        Mensagens
-                    </button>
-                    <button class="filter-btn" data-filter="appointments">
-                        <i class="ph ph-calendar"></i>
-                        Agendamentos
-                    </button>
-                    <button class="filter-btn" data-filter="promotions">
-                        <i class="ph ph-gift"></i>
-                        Promoções
-                    </button>
-                </div>
-                
-                <div class="filter-actions">
-                    <button class="action-btn" id="markAllRead">
-                        <i class="ph ph-check-circle"></i>
-                        Marcar todas como lidas
-                    </button>
-                </div>
-            </div>
-
-            <!-- Notifications List -->
-            <div class="notifications-container">
-                <div class="notifications-list" id="notificationsList">
-                    <!-- Notificações serão inseridas aqui via JavaScript -->
-                </div>
-                
-                <!-- Empty State -->
-                <div class="empty-state" id="emptyState" style="display: none;">
-                    <div class="empty-icon">
-                        <i class="ph ph-bell-slash"></i>
+            <section class="page-header">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h1>
+                            <i class="ph ph-bell"></i>
+                            Notificações
+                        </h1>
+                        <p>Gerencie suas notificações e mantenha-se atualizado sobre solicitações, agendamentos e mensagens.</p>
                     </div>
-                    <h3>Nenhuma notificação encontrada</h3>
-                    <p>Você não possui notificações para os filtros selecionados.</p>
+                    <div class="page-actions">
+                        <button class="btn btn-outline" id="markAllReadBtn">
+                            <i class="ph ph-check-circle"></i>
+                            Marcar Todas como Lidas
+                        </button>
+                        <button class="btn btn-primary" id="notificationSettingsBtn">
+                            <i class="ph ph-gear"></i>
+                            Configurações
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Load More -->
-            <div class="load-more-container" id="loadMoreContainer">
-                <button class="load-more-btn" id="loadMoreBtn">
-                    <i class="ph ph-arrow-down"></i>
-                    Carregar mais notificações
-                </button>
-            </div>
+
+            <section class="notifications-section">
+
+                <div class="notifications-filters">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all" id="filterAll">
+                            Todas
+                            <span class="filter-count" id="countAll">12</span>
+                        </button>
+                        <button class="filter-tab" data-filter="unread" id="filterUnread">
+                            Não Lidas
+                            <span class="filter-count" id="countUnread">5</span>
+                        </button>
+                        <button class="filter-tab" data-filter="requests" id="filterRequests">
+                            Solicitações
+                            <span class="filter-count" id="countRequests">3</span>
+                        </button>
+                        <button class="filter-tab" data-filter="schedules" id="filterSchedules">
+                            Agendamentos
+                            <span class="filter-count" id="countSchedules">4</span>
+                        </button>
+                        <button class="filter-tab" data-filter="messages" id="filterMessages">
+                            Mensagens
+                            <span class="filter-count" id="countMessages">2</span>
+                        </button>
+                        <button class="filter-tab" data-filter="payments" id="filterPayments">
+                            Pagamentos
+                            <span class="filter-count" id="countPayments">2</span>
+                        </button>
+                        <button class="filter-tab" data-filter="system" id="filterSystem">
+                            Sistema
+                            <span class="filter-count" id="countSystem">1</span>
+                        </button>
+                    </div>
+                    
+                    <div class="search-notifications">
+                        <div class="search-input-wrapper">
+                            <i class="ph ph-magnifying-glass"></i>
+                            <input type="text" placeholder="Buscar notificações..." id="notificationSearch">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="notifications-container">
+                    <div class="notifications-list" id="notificationsList">
+                    </div>
+                    
+                    <div class="load-more-container" id="loadMoreContainer">
+                        <button class="btn btn-outline btn-block" id="loadMoreBtn">
+                            <i class="ph ph-plus"></i>
+                            Carregar Mais Notificações
+                        </button>
+                    </div>
+                    
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="ph ph-bell-slash"></i>
+                        </div>
+                        <h3>Nenhuma notificação encontrada</h3>
+                        <p>Não há notificações que correspondam aos filtros selecionados.</p>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="../JS/notificacoes-cliente.js"></script>
+
+    <div class="modal" id="notificationSettingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Configurações de Notificação</h3>
+                <button class="modal-close" id="closeNotificationSettingsModal" aria-label="Fechar modal">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h4>Notificações Push</h4>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Novas solicitações de trabalho</label>
+                            <p>Receba notificações quando clientes enviarem solicitações</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushRequests" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Confirmações de agendamento</label>
+                            <p>Notificações sobre confirmações e alterações de agendamentos</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushSchedules" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Novas mensagens</label>
+                            <p>Alertas quando receber mensagens de clientes</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushMessages" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Pagamentos recebidos</label>
+                            <p>Confirmações de pagamentos e transferências</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushPayments" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Notificações por E-mail</h4>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Resumo diário</label>
+                            <p>Receba um resumo das atividades do dia por e-mail</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailDaily" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Relatório semanal</label>
+                            <p>Relatório com estatísticas e ganhos da semana</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailWeekly" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label>Promoções e novidades</label>
+                            <p>Informações sobre novos recursos e promoções</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailPromotions">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Horário de Notificações</h4>
+                    <div class="time-settings">
+                        <div class="time-setting">
+                            <label for="notificationStart">Início:</label>
+                            <input type="time" id="notificationStart" value="07:00">
+                        </div>
+                        <div class="time-setting">
+                            <label for="notificationEnd">Fim:</label>
+                            <input type="time" id="notificationEnd" value="22:00">
+                        </div>
+                    </div>
+                    <p class="time-note">Fora deste horário, apenas notificações urgentes serão enviadas.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelSettingsBtn">Cancelar</button>
+                <button class="btn btn-primary" id="saveSettingsBtn">
+                    <i class="ph ph-check"></i>
+                    Salvar Configurações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/notificacao.js"></script>
 </body>
 </html>
+
