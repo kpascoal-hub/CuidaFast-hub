@@ -69,7 +69,7 @@ function ativarCliente() {
   btnCliente.classList.remove('inactive');
   btnCuidador.classList.remove('active');
   btnCuidador.classList.add('inactive');
-  if (btnSubmit) btnSubmit.textContent = "Entrar";
+  if (btnSubmit) btnSubmit.textContent = "Continuar";
 }
 
 btnCuidador.addEventListener('click', ativarCuidador);
@@ -79,7 +79,7 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   if (btnCuidador.classList.contains("active")) {
-    window.location.href = "../HTML/cadastroContinuar.html";
+    window.location.href = "../HTML/enviardocumentoscuidador.html";
   } else if (btnCliente.classList.contains("active")) {
     window.location.href = "../HTML/homeCliente.html";
   } else {
