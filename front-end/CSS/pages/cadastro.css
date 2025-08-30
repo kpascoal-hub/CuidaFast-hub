@@ -39,10 +39,11 @@
     cursor: pointer;
   }
 
-.back i {
-    color: var(--azul-escuro);
+.back {
   font-size: 30px;
   text-decoration: none;
+  text-decoration: none;
+  color: inherit; /* opcional: mantém a cor herdada, sem azul padrão */
   }
 
   h1 {
@@ -160,10 +161,6 @@
     text-decoration: none;
   }
   
-.back-link {
-  text-decoration: none;
-  color: inherit; /* opcional: mantém a cor herdada, sem azul padrão */
-}
 
 .toggle-button {
   border: none;
