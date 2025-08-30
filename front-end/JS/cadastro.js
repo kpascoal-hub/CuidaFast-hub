@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
   btnCliente.classList.remove('inactive');
   btnCuidador.classList.remove('active');
   btnCuidador.classList.add('inactive');
-  if (btnSubmit) btnSubmit.textContent = "Entrar"; 
+  if (btnSubmit) btnSubmit.textContent = "Continuar"; 
 });
 function ativarCuidador() {
   btnCuidador.classList.add('active');
@@ -79,7 +79,7 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   if (btnCuidador.classList.contains("active")) {
-    window.location.href = "cadastroContinuar.html";
+    window.location.href = "../HTML/cadastroContinuar.html";
   } else if (btnCliente.classList.contains("active")) {
     window.location.href = "../HTML/homeCliente.html";
   } else {
