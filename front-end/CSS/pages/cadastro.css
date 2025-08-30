@@ -160,7 +160,10 @@
     text-decoration: none;
   }
   
-
+.back-link {
+  text-decoration: none;
+  color: inherit; /* opcional: mantém a cor herdada, sem azul padrão */
+}
 
 .toggle-button {
   border: none;
