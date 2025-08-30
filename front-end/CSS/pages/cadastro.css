@@ -139,17 +139,22 @@
     background-color: #FFF5E8;
   }
   
-  .btn {
-    background: #003B4A;
-    color: #FFF5E8;
-    padding: 14px;
-    border: none;
-    border-radius: 999px;
-    width: 100%;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
+ .btn {
+  display: block;              /* faz o botão se comportar como bloco */
+  text-align: center;          /* centraliza o texto dentro */
+  background: var(--azul-escuro);
+  color: #FFF;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  width: 100%;                 /* ocupa toda a largura */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;       /* remove sublinhado do link */
+  font-size: 16px;
+}
+
   
   .terms {
     font-size: 12px;
