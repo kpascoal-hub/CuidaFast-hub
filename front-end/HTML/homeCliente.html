@@ -1,98 +1,438 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CuidaFast</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap">
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/phosphor.css">
-  <link rel="stylesheet" href="../CSS/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard do cliente CuidaFast - Gerencie seus cuidadores, agendamentos e serviços.">
+    <title>Meu Dashboard - CuidaFast</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/Logotipo_1_vetorizado.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/pages/home-cliente.css">
 </head>
-<body>
+<body class="dashboard-page">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="container-fluid">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu lateral">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <a href="../../index.html" class="brand-logo">
+                        <img src="../../assets/images/Logotipo_1_vetorizado.svg" alt="CuidaFast Logo" width="32" height="32">
+                        <span>CuidaFast</span>
+                    </a>
+                </div>
+                
+                <div class="header-center">
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Buscar cuidadores, serviços..." id="searchInput">
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button class="notification-btn" id="notificationBtn" aria-label="Notificações">
+                        <i class="ph ph-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-avatar" id="userAvatarBtn" aria-label="Menu do usuário">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="João Silva">
+                            <span>João Silva</span>
+                            <i class="ph ph-caret-down"></i>
+                        </button>
+                        
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="perfil-cliente/informacoes-pessoais.html" class="dropdown-item">
+                                <i class="ph ph-user"></i>
+                                Meu Perfil
+                            </a>
+                            <a href="configuracoes.html" class="dropdown-item">
+                                <i class="ph ph-gear"></i>
+                                Configurações
+                            </a>
+                            <a href="#" class="dropdown-item" id="logoutBtn">
+                                <i class="ph ph-sign-out"></i>
+                                Sair
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <nav class="menu">
-    <a href="#" class="menu-item"><i class="ph ph-house"></i> Home</a>
-    <a href="../HTML/mensagens.html" class="menu-item"><i class="ph ph-chat-centered-dots"></i> Mensagens</a>
-    <a href="../HTML/notificacao.html" class="menu-item"><i class="ph ph-bell"></i> Notificações</a>
-    <a href="#" class="menu-item"><i class="ph ph-moon"></i> Tema</a>
-    <a href="#" class="menu-item"><i class="ph ph-clock-countdown"></i> In-time</a>
-    <a href="#" class="menu-item"><i class="ph ph-sign-out"></i> Log-out</a>
-  </nav>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="home-cliente.html" class="nav-link active">
+                        <i class="ph ph-house"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="mensagens.html" class="nav-link">
+                        <i class="ph ph-chat-circle"></i>
+                        <span>Mensagens</span>
+                        <span class="nav-badge">2</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="in-time.html" class="nav-link">
+                        <i class="ph ph-lightning"></i>
+                        <span>InTime</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="notificacao-cliente.html" class="nav-link">
+                        <i class="ph ph-bell"></i>
+                        <span>Notificações</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="ph ph-calendar"></i>
+                        <span>Agendamentos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="ph ph-credit-card"></i>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="ph ph-star"></i>
+                        <span>Avaliações</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="configuracoes.html" class="nav-link">
+                        <i class="ph ph-gear"></i>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
-  <header class="cabecalho">
-    <img class="logo" src="Logotipo_5_vetorizado 1.png" alt="Logo CuidaFast">
-    <div>
-      <h1>CuidaFast</h1>
-      <p>Cuidados onde e quando precisar.</p>
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="container-fluid">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Bem-vindo de volta, João!</h1>
+                    <p>Aqui está um resumo das suas atividades recentes na CuidaFast.</p>
+                </div>
+                <div class="quick-actions">
+                    <button class="btn btn-primary" id="findCuidadorBtn">
+                        <i class="ph ph-plus"></i>
+                        Encontrar Cuidador
+                    </button>
+                    <button class="btn btn-accent" id="inTimeBtn">
+                        <i class="ph ph-lightning"></i>
+                        InTime
+                    </button>
+                </div>
+            </section>
+
+            <!-- Stats Cards -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ph ph-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>12</h3>
+                            <p>Agendamentos este mês</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ph ph-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>5</h3>
+                            <p>Cuidadores favoritos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>4.8</h3>
+                            <p>Avaliação média</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ph ph-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>R$ 1.240</h3>
+                            <p>Gasto este mês</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Recent Activities -->
+                <section class="dashboard-card recent-activities">
+                    <div class="card-header">
+                        <h2>Atividades Recentes</h2>
+                        <a href="#" class="view-all">Ver todas</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="ph ph-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Serviço concluído</h4>
+                                    <p>Maria Santos cuidou da sua mãe por 4 horas</p>
+                                    <span class="activity-time">Há 2 horas</span>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="ph ph-calendar-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Novo agendamento</h4>
+                                    <p>Agendamento com Ana Costa para amanhã às 14h</p>
+                                    <span class="activity-time">Há 5 horas</span>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="ph ph-star"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Avaliação enviada</h4>
+                                    <p>Você avaliou Carlos Oliveira com 5 estrelas</p>
+                                    <span class="activity-time">Ontem</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upcoming Appointments -->
+                <section class="dashboard-card upcoming-appointments">
+                    <div class="card-header">
+                        <h2>Próximos Agendamentos</h2>
+                        <a href="#" class="view-all">Ver agenda</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="appointment-list">
+                            <div class="appointment-item">
+                                <div class="appointment-date">
+                                    <span class="day">15</span>
+                                    <span class="month">DEZ</span>
+                                </div>
+                                <div class="appointment-content">
+                                    <h4>Ana Costa</h4>
+                                    <p>Cuidado infantil - 14:00 às 18:00</p>
+                                    <div class="appointment-actions">
+                                        <button class="btn btn-sm btn-outline">Reagendar</button>
+                                        <button class="btn btn-sm btn-primary">Mensagem</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="appointment-item">
+                                <div class="appointment-date">
+                                    <span class="day">16</span>
+                                    <span class="month">DEZ</span>
+                                </div>
+                                <div class="appointment-content">
+                                    <h4>Maria Santos</h4>
+                                    <p>Cuidado de idosos - 08:00 às 12:00</p>
+                                    <div class="appointment-actions">
+                                        <button class="btn btn-sm btn-outline">Reagendar</button>
+                                        <button class="btn btn-sm btn-primary">Mensagem</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Favorite Caregivers -->
+                <section class="dashboard-card favorite-caregivers">
+                    <div class="card-header">
+                        <h2>Cuidadores Favoritos</h2>
+                        <a href="#" class="view-all">Ver todos</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="caregiver-grid">
+                            <div class="caregiver-card">
+                                <div class="caregiver-avatar">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face" alt="Maria Santos">
+                                    <span class="status-indicator online"></span>
+                                </div>
+                                <div class="caregiver-info">
+                                    <h4>Maria Santos</h4>
+                                    <p>Cuidadora de Idosos</p>
+                                    <div class="rating">
+                                        <i class="ph ph-star-fill"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary">Contratar</button>
+                            </div>
+                            
+                            <div class="caregiver-card">
+                                <div class="caregiver-avatar">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Ana Costa">
+                                    <span class="status-indicator offline"></span>
+                                </div>
+                                <div class="caregiver-info">
+                                    <h4>Ana Costa</h4>
+                                    <p>Babá</p>
+                                    <div class="rating">
+                                        <i class="ph ph-star-fill"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary">Contratar</button>
+                            </div>
+                            
+                            <div class="caregiver-card">
+                                <div class="caregiver-avatar">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Carlos Oliveira">
+                                    <span class="status-indicator online"></span>
+                                </div>
+                                <div class="caregiver-info">
+                                    <h4>Carlos Oliveira</h4>
+                                    <p>Pet Sitter</p>
+                                    <div class="rating">
+                                        <i class="ph ph-star-fill"></i>
+                                        <span>5.0</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary">Contratar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Stats -->
+                <section class="dashboard-card quick-stats">
+                    <div class="card-header">
+                        <h2>Resumo do Mês</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats-list">
+                            <div class="stat-item">
+                                <div class="stat-label">Total de horas</div>
+                                <div class="stat-value">48h</div>
+                                <div class="stat-change positive">+12%</div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-label">Economia</div>
+                                <div class="stat-value">R$ 320</div>
+                                <div class="stat-change positive">+8%</div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-label">Satisfação</div>
+                                <div class="stat-value">98%</div>
+                                <div class="stat-change positive">+2%</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Find Caregiver Modal -->
+    <div class="modal" id="findCuidadorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Encontrar Cuidador</h3>
+                <button class="modal-close" id="closeFindCuidadorModal" aria-label="Fechar modal">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="findCuidadorForm">
+                    <div class="form-group">
+                        <label for="serviceType" class="form-label">Tipo de serviço</label>
+                        <select id="serviceType" class="form-control form-select" required>
+                            <option value="">Selecione o tipo de cuidado</option>
+                            <option value="idosos">Cuidado de Idosos</option>
+                            <option value="infantil">Cuidado Infantil</option>
+                            <option value="pets">Cuidado de Pets</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceDate" class="form-label">Data do serviço</label>
+                        <input type="date" id="serviceDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceTime" class="form-label">Horário</label>
+                        <input type="time" id="serviceTime" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceDuration" class="form-label">Duração (horas)</label>
+                        <select id="serviceDuration" class="form-control form-select" required>
+                            <option value="">Selecione a duração</option>
+                            <option value="2">2 horas</option>
+                            <option value="4">4 horas</option>
+                            <option value="6">6 horas</option>
+                            <option value="8">8 horas</option>
+                            <option value="12">12 horas</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="ph ph-magnifying-glass"></i>
+                        Buscar Cuidadores
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <main class="container">
-    <section class="contato">
-      <h2>Contato</h2>
-      <ul>
-        <li><i class="ph ph-phone"></i> (11) 9623-2423</li>
-        <li><i class="ph ph-envelope-simple"></i> CuidaFast@gmail.com</li>
-        <li><i class="ph ph-map-pin"></i> São Paulo, SP</li>
-      </ul>
-    </section>
-
-    <section class="redes-sociais">
-      <h2>Redes Sociais</h2>
-      <a href="#"><img src="Vector.svg" alt="Instagram"></a>
-      <a href="#"><img src="linkedin 1.png" alt="LinkedIn"></a>
-      <a href="#"><img src="facebook--v2 1.png" alt="Facebook"></a>
-    </section>
-
-    <h2>Melhores sugestões de cuidadores para você!</h2>
-
-    <section class="lista-cuidadores">
-      <!-- repita para cada cuidador -->
-      <article class="cuidador">
-        <img src="img.png" alt="Sarah Johnson">
-        <h3>Sarah Johnson</h3>
-        <p>Especialista com idosos</p>
-        <span>⭐ 4.9 (127 reviews)</span>
-        <button>Ver Orçamento</button>
-      </article>
-
-      <!-- Outras pessoas... -->
-    </section>
-
-    <section class="categorias-servicos">
-      <article>
-        <h3>Cuidado Infantil</h3>
-        <img src="i.svg" alt="">
-      </article>
-      <article>
-        <h3>Cuidados Pet</h3>
-        <img src="div.svg" alt="">
-      </article>
-      <article>
-        <h3>Cuidado para Idosos</h3>
-        <img src="div.svg" alt="">
-      </article>
-    </section>
-  </main>
-
-  <footer class="rodape">
-    <div>
-      <img src="front-end/assets/Logotipo_5_vetorizado.svg" alt="Logo CuidaFast">
-      <p>CuidaFast — Cuidados quando e onde precisar.</p>
-    </div>
-    <div>
-      <h4>Contato</h4>
-      <p><a href="mailto:CuidaFast@gmail.com">CuidaFast@gmail.com</a></p>
-      <p>São Paulo, SP</p>
-    </div>
-    <div>
-      <h4>Redes Sociais</h4>
-      <a href="#"><i class="ph ph-instagram-logo"></i></a>
-      <a href="#"><i class="ph ph-linkedin-logo"></i></a>
-      <a href="#"><i class="ph ph-facebook-logo"></i></a>
-    </div>
-  </footer>
-
+    <!-- JavaScript -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/client.js"></script>
 </body>
 </html>
