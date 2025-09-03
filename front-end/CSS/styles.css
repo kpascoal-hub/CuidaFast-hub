@@ -55,12 +55,7 @@ body {
   align-items: center;
   padding: 64px;
 }
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--espaco-lg);
-}
+
 .content {
   max-width: 50%;
 }
