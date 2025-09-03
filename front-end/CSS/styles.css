@@ -1,7 +1,7 @@
-/* Cores definidas no root */
+
 :root {
   --creme: #FFFBEC;
-  --creme-claro: #FFFBED; /* cor usada em servicos e cards */
+  --creme-claro: #FFFBED; 
   --azul-escuro: #1B475D;
   --verde-escuro: rgba(142, 189, 157, 0.5);
   --verde-claro: rgba(211, 220, 124, 0.5);
@@ -13,9 +13,37 @@
   --footer-text-light: #e6e6e6;
   --shadow: rgba(0, 0, 0, 0.1);
   --shadow-strong: rgba(0, 0, 0, 0.1);
+  
+  --espaco-3xl: 4rem;
+  --espaco-xl: 2.5rem;
+  --espaco-lg: 1.5rem;
+  --espaco-md: 1rem;
+
+  --cor-fundo: var(--creme);
+  --cor-primaria: var(--azul-escuro);
+  --azul-escuro-hover: #163947;
+  --branco: #ffffff;
+  --cinza-texto: #333;
+
+  --sombra-card: 0 4px 8px rgba(0,0,0,0.1);
+  --sombra-forte: 0 6px 14px rgba(0,0,0,0.15);
+
+  --radius-lg: 16px;
+  --radius-md: 8px;
+
+  --peso-bold: 700;
+  --peso-semibold: 600;
+
+  --texto-4xl: 2.5rem;
+  --texto-3xl: 2rem;
+  --texto-2xl: 1.5rem;
+  --texto-xl: 1.25rem;
+  --texto-lg: 1.125rem;
+  --texto-base: 1rem;
+
+  --transicao-normal: 0.3s ease;
 }
 
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
