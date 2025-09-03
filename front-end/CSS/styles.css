@@ -116,7 +116,7 @@ body {
 }
 
 .amarelo {
-  background-color: var(--amarelo);
+  background-color: var(--amarelo-light);
 }
 
 /* Botões */
