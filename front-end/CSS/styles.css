@@ -460,6 +460,57 @@ body {
   line-height: 1.6;
 }
 
+/* Newsletter Section */
+.newsletter-section {
+  padding: var(--espaco-3xl) 0;
+  background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--azul-escuro-hover) 100%);
+  color: var(--branco);
+  text-align: center;
+}
+
+.newsletter-section h2 {
+  font-size: var(--texto-3xl);
+  font-weight: var(--peso-bold);
+  margin-bottom: var(--espaco-md);
+}
+
+.newsletter-section p {
+  font-size: var(--texto-lg);
+  margin-bottom: var(--espaco-xl);
+  opacity: 0.9;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--espaco-md);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: var(--espaco-md);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--texto-base);
+}
+
+.newsletter-button {
+  background-color: var(--cor-destaque);
+  color: var(--cor-primaria);
+  border: none;
+  padding: var(--espaco-md) var(--espaco-xl);
+  border-radius: var(--radius-md);
+  font-weight: var(--peso-semibold);
+  cursor: pointer;
+  transition: all var(--transicao-normal);
+  white-space: nowrap;
+}
+
+.newsletter-button:hover {
+  background-color: var(--amarelo-hover);
+  transform: translateY(-1px);
+}
 
 /* Footer */
 .rodape {
