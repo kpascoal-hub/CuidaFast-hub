@@ -550,17 +550,16 @@ body {
 }
 
 @media (max-width: 600px) {
-  .newsletter-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
+    .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-  .newsletter-input,
-  .newsletter-button {
-    width: 100%;
-  }
+    .newsletter-input,
+    .newsletter-button {
+        width: 100%;
+    }
 }
-
 
 /* Footer */
 .rodape {
