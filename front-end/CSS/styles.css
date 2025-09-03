@@ -657,34 +657,4 @@ body {
   }
 
 
-.chat-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    height: calc(100vh - 120px);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-}
 
-@media (max-width: 767px) {
-    .chat-container {
-        grid-template-columns: 1fr;
-        height: calc(100vh - 100px);
-    }
-    
-    .chat-sidebar {
-        display: none;
-    }
-    
-    .chat-sidebar.active {
-        display: block;
-    }
-    
-    .chat-main {
-        display: none;
-    }
-    
-    .chat-main.active {
-        display: flex;
-    }
-}
