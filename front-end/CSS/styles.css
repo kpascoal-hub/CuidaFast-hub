@@ -511,13 +511,17 @@ body {
 
 .newsletter-form {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--espaco-md);
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .newsletter-input {
   flex: 1;
+  min-width: 200px;
   padding: var(--espaco-md);
   border: none;
   border-radius: var(--radius-md);
@@ -525,6 +529,7 @@ body {
 }
 
 .newsletter-button {
+  flex-shrink: 0;
   background-color: var(--cor-destaque);
   color: var(--cor-primaria);
   border: none;
@@ -534,12 +539,28 @@ body {
   cursor: pointer;
   transition: all var(--transicao-normal);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
 }
 
 .newsletter-button:hover {
   background-color: var(--amarelo-hover);
   transform: translateY(-1px);
 }
+
+@media (max-width: 600px) {
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter-input,
+  .newsletter-button {
+    width: 100%;
+  }
+}
+
 
 /* Footer */
 .rodape {
