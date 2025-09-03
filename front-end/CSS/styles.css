@@ -490,18 +490,15 @@ body {
 }
 
 /* Newsletter Section */
-/* Newsletter Section */
+
 .newsletter-section {
   padding: var(--espaco-3xl) 0;
   background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--azul-escuro-hover) 100%);
   color: var(--branco);
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
+/* Título e texto */
 .newsletter-section h2 {
   font-size: var(--texto-3xl);
   font-weight: var(--peso-bold);
@@ -512,18 +509,20 @@ body {
   font-size: var(--texto-lg);
   margin-bottom: var(--espaco-xl);
   opacity: 0.9;
-  max-width: 600px; /* deixa o texto mais legível */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto; /* centraliza o texto */
 }
 
-/* Form */
+/* Formulário */
 .newsletter-form {
-  display: flex;
+  display: flex;       /* aqui sim usamos flex */
   gap: var(--espaco-md);
   max-width: 600px;
   width: 100%;
+  margin: 0 auto;      /* centraliza o form */
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* mantém responsivo */
 }
 
 .newsletter-input {
@@ -544,8 +543,6 @@ body {
   border-radius: var(--radius-md);
   font-weight: var(--peso-semibold);
   cursor: pointer;
-  transition: all var(--transicao-normal);
-  white-space: nowrap;
   display: flex;
   align-items: center;
   gap: var(--espaco-sm);
@@ -568,6 +565,7 @@ body {
         width: 100%;
     }
 }
+
 
 /* Footer */
 .rodape {
