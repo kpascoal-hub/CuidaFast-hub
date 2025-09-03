@@ -431,7 +431,7 @@ body {
 }
 
 .faq-item {
-  background-color: var(--branco);
+  background-color: var(--cor-fundo);
   border-radius: var(--radius-lg);
   margin-bottom: var(--espaco-md);
   box-shadow: var(--sombra-card);
