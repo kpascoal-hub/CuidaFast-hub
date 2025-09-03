@@ -1,39 +1,34 @@
 function initFAQ() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = item.querySelector('.faq-icon');
-        
-        if (question && answer) {
-            question.addEventListener('click', function() {
-                const isActive = item.classList.contains('active');
-                
-                // Fechar todos os outros itens
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                        const otherQuestion = otherItem.querySelector('.faq-question');
-                        if (otherQuestion) {
-                            otherQuestion.setAttribute('aria-expanded', 'false');
-                        }
-                    }
-                });
-                
-                // Toggle do item atual
-                if (isActive) {
-                    item.classList.remove('active');
-                    question.setAttribute('aria-expanded', 'false');
-                } else {
-                    item.classList.add('active');
-                    question.setAttribute('aria-expanded', 'true');
-                }
-            });
-        }
-    });
-}
+  const faqItems = document.querySelectorAll(".faq-item");
 
+  faqItems.forEach(item => {
+    const question = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+
+    if (!question || !answer) return;
+
+    question.addEventListener("click", () => {
+      const isActive = item.classList.contains("active");
+
+      // fecha todos os outros
+      faqItems.forEach(otherItem => {
+        const otherAnswer = otherItem.querySelector(".faq-answer");
+        const otherQuestion = otherItem.querySelector(".faq-question");
+
+        otherItem.classList.remove("active");
+        if (otherAnswer) otherAnswer.style.maxHeight = null;
+        if (otherQuestion) otherQuestion.setAttribute("aria-expanded", "false");
+      });
+
+      // abre o atual (se estava fechado)
+      if (!isActive) {
+        item.classList.add("active");
+        question.setAttribute("aria-expanded", "true");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+}
 // ===== NEWSLETTER =====
 
 function initNewsletterForm() {
