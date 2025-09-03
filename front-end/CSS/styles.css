@@ -524,7 +524,7 @@ body {
 }
 
 .newsletter-button {
-  background-color: var(--cor-destaque);
+  background-color: var(--amarelo);
   color: var(--cor-primaria);
   border: none;
   padding: var(--espaco-md) var(--espaco-xl);
