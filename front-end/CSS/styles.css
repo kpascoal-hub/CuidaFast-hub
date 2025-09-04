@@ -57,6 +57,15 @@ body {
   font-family: 'Inter', sans-serif;
   color: #000;
 }
+p {
+  font-size: var(--texto-lg);
+  line-height: 1.6;
+  color: var(--cinza-texto);
+}
+h1 {
+
+
+}
 
 /* Navbar */
 .navbar {
@@ -270,50 +279,7 @@ body {
 
 
 
-.faq-container {
-  display: flex;
-  gap: 3rem;
-  width: 80%;      
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto; 
-}
 
-
-    .faq-text {
-      max-width: 300px;
-    }
-
-    .faq-text h1 {
-       font-size: 48px;
-       font-weight: 700;
-       line-height: 1.2;
-       margin-bottom: 24px;
-       color: var(--azul-escuro);
-    }
-
-    .faq-text p {
-      font-size: 1rem;
-      color: #000;
-      line-height: 1.5;
-    }
-
-    .faq-text .verde {
-      background-color: var(--verde-claro);
-      padding: 0 4px;
-    }
-
-    .faq-text .amarelo {
-      background-color: var(--amarelo);
-      padding: 0 4px;
-    }
-
-    .faq-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
 
     .card {
       background-color: var(--creme-claro);
