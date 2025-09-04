@@ -89,13 +89,21 @@ body {
 .content {
   max-width: 50%;
 }
-
+/*
 .content h1 {
   font-size: 48px;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 24px;
   color: var(--azul-escuro);
+}
+*/
+.content h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--azul-escuro);
+    margin-bottom: 24px;
 }
 
 .content p {
