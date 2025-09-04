@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CuidaFast - Cadastro de Serviço</title>
+  <link rel="stylesheet" href="cadastrocuidadortipo.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="#" class="back">&larr; Voltar</a>
+    </header>
+
+    <main>
+      <h1>Qual serviço você vai fornecer?</h1>
+
+      <div class="cards">
+        <label class="card">
+          <input type="checkbox">
+          <div class="card-content">
+            <span class="card-title">Cuidador de Idoso</span>
+            <p>Quero oferecer serviços de cuidado a pessoas idosas</p>
+          </div>
+        </label>
+
+        <label class="card">
+          <input type="checkbox">
+          <div class="card-content">
+            <span class="card-title">Cuidador de Pet</span>
+            <p>Quero oferecer serviços relacionados a pets, como: petwalker, petsitter</p>
+          </div>
+        </label>
+
+        <label class="card">
+          <input type="checkbox">
+          <div class="card-content">
+            <span class="card-title">Cuidador Infantil</span>
+            <p>Quero oferecer serviços de cuidados infantil.</p>
+          </div>
+        </label>
+      </div>
+
+      <button class="btn">Continuar</button>
+
+      <p class="terms">
+        Ao criar uma conta, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>
+      </p>
+    </main>
+  </div>
+</body>
+</html>
