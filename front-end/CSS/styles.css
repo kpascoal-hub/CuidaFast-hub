@@ -57,15 +57,7 @@ body {
   font-family: 'Inter', sans-serif;
   color: #000;
 }
-p {
-  font-size: var(--texto-lg);
-  line-height: 1.6;
-  color: var(--cinza-texto);
-}
-h1 {
 
-
-}
 
 /* Navbar */
 .navbar {
