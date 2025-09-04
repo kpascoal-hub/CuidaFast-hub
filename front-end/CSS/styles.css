@@ -371,11 +371,11 @@ body {
 }
 
 .faq-intro h2 {
-  font-size: var(--texto-4xl);
-  font-weight: var(--peso-bold);
+  font-size: 48px;
+  font-weight: 700;
   line-height: 1.2;
-  color: var(--cor-primaria);
-  margin-bottom: var(--espaco-lg);
+  margin-bottom: 24px;
+  color: var(--azul-escuro);
 }
 
 .faq-intro p {
