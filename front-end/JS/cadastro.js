@@ -33,7 +33,7 @@ btnGoogle.addEventListener("click", () => {
         if (btnCuidador.classList.contains("active")) {
           location.assign("../HTML/enviardocumentoscuidador.html");
         } else if (btnCliente.classList.contains("active")) {
-          location.assign("../HTML/homeCliente.html");
+          location.assign("../HTML/enviardocumentocliente.html");
         } else {
           alert("Selecione um tipo de usuário antes de continuar.");
         }
