@@ -462,36 +462,42 @@ body {
   text-align: center;
 }
 
-/* Título e texto */
+/* Centraliza o conteúdo geral */
+.newsletter-section {
+  text-align: center;
+  padding: var(--espaco-3xl) var(--espaco-md);
+}
+
+/* Título */
 .newsletter-section h2 {
   font-size: var(--texto-3xl);
   font-weight: var(--peso-bold);
   margin-bottom: var(--espaco-md);
 }
 
+/* Texto */
 .newsletter-section p {
   font-size: var(--texto-lg);
   margin-bottom: var(--espaco-xl);
   opacity: 0.9;
   max-width: 600px;
   margin-left: auto;
-  margin-right: auto; /* centraliza o texto */
+  margin-right: auto;
 }
 
 /* Formulário */
 .newsletter-form {
-  display: flex;       /* aqui sim usamos flex */
+  display: flex;
   gap: var(--espaco-md);
   max-width: 600px;
-  width: 100%;
-  margin: 0 auto;      /* centraliza o form */
+  margin: 0 auto; /* centraliza */
   justify-content: center;
   align-items: center;
 }
 
 .newsletter-input {
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
   padding: var(--espaco-md);
   border: none;
   border-radius: var(--radius-md);
@@ -509,26 +515,27 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: var(--espaco-sm);
+  gap: 0.5rem;
 }
 
 .newsletter-button:hover {
-  background-color: var(--amarelo-hover);
+  background-color: var(--amarelo);
   transform: translateY(-1px);
 }
 
-/* Responsividade */
+/* Responsividade: inputs ficam em coluna no mobile */
 @media (max-width: 600px) {
-    .newsletter-form {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .newsletter-input,
-    .newsletter-button {
-        width: 100%;
-    }
+  .newsletter-input,
+  .newsletter-button {
+    width: 100%;
+  }
 }
+
 
 
 /* Footer */
