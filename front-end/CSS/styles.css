@@ -489,8 +489,10 @@ body {
 .newsletter-form {
   display: flex;
   gap: var(--espaco-md);
+  justify-content: center;
   align-items: center;
 }
+
 
 /* Inputs */
 .newsletter-input {
@@ -514,6 +516,12 @@ body {
   display: flex;
   align-items: center;
   gap: var(--espaco-sm);
+}
+.newsletter-section .container {
+  display: flex;
+  flex-direction: column; /* título, parágrafo e form em coluna */
+  align-items: center;    /* centraliza horizontalmente */
+  text-align: center;     /* mantém o texto centralizado */
 }
 
 .newsletter-button:hover {
