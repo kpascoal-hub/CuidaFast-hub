@@ -454,8 +454,9 @@ body {
 }
 
 /* Mantém seu fundo e centralização */
+/* Container da newsletter */
 .newsletter-section {
-  text-align: center;
+  text-align: center; /* título e parágrafo centralizados */
   padding: var(--espaco-3xl) var(--espaco-md);
   background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--azul-escuro-hover) 100%);
   color: var(--branco);
@@ -468,7 +469,7 @@ body {
   margin-bottom: var(--espaco-md);
 }
 
-/* Texto */
+/* Parágrafo */
 .newsletter-section p {
   font-size: var(--texto-lg);
   margin-bottom: var(--espaco-xl);
@@ -478,18 +479,22 @@ body {
   margin-right: auto;
 }
 
-/* Formulário */
+/* Wrapper do form para centralizar apenas os inputs + botão */
+.newsletter-form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Formulário em linha */
 .newsletter-form {
   display: flex;
   gap: var(--espaco-md);
-  max-width: 600px;
-  margin: 0 auto;
-  justify-content: center;
   align-items: center;
 }
 
+/* Inputs */
 .newsletter-input {
-  width: 200px; /* controla largura sem quebrar o layout */
+  width: 200px; /* fixa largura sem quebrar botão */
   padding: var(--espaco-md);
   border: none;
   border-radius: var(--radius-md);
@@ -520,6 +525,7 @@ body {
 @media (max-width: 600px) {
   .newsletter-form {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .newsletter-input,
@@ -527,6 +533,7 @@ body {
     width: 100%;
   }
 }
+
 
 
 /* Footer */
