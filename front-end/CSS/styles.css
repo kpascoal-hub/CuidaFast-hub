@@ -453,61 +453,80 @@ body {
   line-height: 1.6;
 }
 
-.newsletter-section h2 { 
-  font-size: var(--texto-3xl); 
-  font-weight: var(--peso-bold); 
-  margin-bottom: var(--espaco-md); 
-} 
+/* Mantém seu fundo e centralização */
+.newsletter-section {
+  text-align: center;
+  padding: var(--espaco-3xl) var(--espaco-md);
+  background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--azul-escuro-hover) 100%);
+  color: var(--branco);
+}
 
-.newsletter-section p { 
-  font-size: var(--texto-lg); 
-  margin-bottom: var(--espaco-xl); 
-  opacity: 0.9; max-width: 600px; 
-  margin-left: auto; 
-  margin-right: auto; /* centraliza o texto */ 
-} /* Formulário */ 
+/* Título */
+.newsletter-section h2 {
+  font-size: var(--texto-3xl);
+  font-weight: var(--peso-bold);
+  margin-bottom: var(--espaco-md);
+}
 
-.newsletter-form { 
-  display: flex; /* aqui sim usamos flex */ 
-  gap: var(--espaco-md); 
-  max-width: 600px; 
-  width: 100%; 
-  margin: 0 auto; /* centraliza o form */ 
+/* Texto */
+.newsletter-section p {
+  font-size: var(--texto-lg);
+  margin-bottom: var(--espaco-xl);
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Formulário */
+.newsletter-form {
+  display: flex;
+  gap: var(--espaco-md);
+  max-width: 600px;
+  margin: 0 auto;
   justify-content: center;
   align-items: center;
-} 
+}
 
-.newsletter-input { 
-  flex: 1; 
-  min-width: 200px; 
-  padding: var(--espaco-md); 
-  border: none; 
-  border-radius: var(--radius-md); 
-  font-size: var(--texto-base); 
-} 
-.newsletter-button { 
-  flex-shrink: 0; 
-  background-color: var(--cor-destaque); 
-  color: var(--cor-primaria); 
-  border: none; 
-  padding: var(--espaco-md) var(--espaco-xl); 
-  border-radius: var(--radius-md); 
-  font-weight: var(--peso-semibold); 
-  cursor: pointer; 
-  display: flex; 
-  align-items: center; 
-  gap: var(--espaco-sm); 
-} 
-.newsletter-button:hover { 
-  background-color: var(--amarelo-hover); 
-  transform: translateY(-1px); 
-} /* Responsividade */ 
+.newsletter-input {
+  width: 200px; /* controla largura sem quebrar o layout */
+  padding: var(--espaco-md);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--texto-base);
+}
+
+/* Botão */
+.newsletter-button {
+  flex-shrink: 0;
+  background-color: var(--cor-destaque);
+  color: var(--cor-primaria);
+  border: none;
+  padding: var(--espaco-md) var(--espaco-xl);
+  border-radius: var(--radius-md);
+  font-weight: var(--peso-semibold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+}
+
+.newsletter-button:hover {
+  background-color: var(--amarelo);
+  transform: translateY(-1px);
+}
+
+/* Responsividade */
 @media (max-width: 600px) {
-  .newsletter-form { 
-    flex-direction: column; 
-    align-items: stretch; 
-  } 
-  .newsletter-input, .newsletter-button { width: 100%; } }
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-input,
+  .newsletter-button {
+    width: 100%;
+  }
+}
 
 
 /* Footer */
