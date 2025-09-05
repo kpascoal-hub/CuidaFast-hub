@@ -136,32 +136,26 @@
   
 <section class="newsletter-section">
   <div class="container">
+    <!-- Título -->
     <h2>Fique por dentro!</h2>
+
+    <!-- Parágrafo -->
     <p>Cadastre seu e-mail e receba novidades e notícias sobre a CuidaFast e mantenha-se atualizado(a).</p>
 
-    <form class="newsletter-form" id="newsletterForm">
-      <input 
-        type="text" 
-        class="newsletter-input" 
-        placeholder="Insira seu nome" 
-        required 
-        aria-label="Nome"
-      >
-
-      <input 
-        type="email" 
-        class="newsletter-input" 
-        placeholder="Insira seu e-mail" 
-        required 
-        aria-label="E-mail"
-      >
-
-      <button type="submit" class="newsletter-button">
-        <i class="ph ph-paper-plane-tilt"></i> Enviar
-      </button>
-    </form>
+    <!-- Formulário -->
+    <div class="newsletter-form-wrapper">
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="text" class="newsletter-input" placeholder="Insira seu nome" required aria-label="Nome">
+        <input type="email" class="newsletter-input" placeholder="Insira seu e-mail" required aria-label="E-mail">
+        <button type="submit" class="newsletter-button">
+          <i class="ph ph-paper-plane-tilt"></i>
+          Enviar
+        </button>
+      </form>
+    </div>
   </div>
 </section>
+
 
 
   
@@ -281,6 +275,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>   
+
 
 
 
