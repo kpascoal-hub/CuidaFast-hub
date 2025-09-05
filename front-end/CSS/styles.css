@@ -611,9 +611,7 @@ body {
     padding: var(--espaco-xl) 0;
   }
   
-  .faq-intro h2 {
-    font-size: var(--texto-2xl);
-  }
+ 
   
   .newsletter-section h2 {
     font-size: var(--texto-xl);
