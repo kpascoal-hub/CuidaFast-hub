@@ -191,7 +191,13 @@ body {
   font-size: 32px;
   color: var(--azul-escuro);
 }
+.servicos .card {
+  cursor: default; /* deixa o mouse normal, não "clicável" */
+}
 
+.servicos .card i {
+  pointer-events: none; /* impede clique sobre os ícones */
+}
 .card h3,
 .card p {
   font-family: 'Inter', sans-serif;
