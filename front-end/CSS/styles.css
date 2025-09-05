@@ -455,13 +455,6 @@ body {
 
 /* Newsletter Section */
 
-.newsletter-section {
-  padding: var(--espaco-3xl) 0;
-  background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--azul-escuro-hover) 100%);
-  color: var(--branco);
-  text-align: center;
-}
-
 /* Centraliza o conteúdo geral */
 .newsletter-section {
   text-align: center;
@@ -488,24 +481,21 @@ body {
 /* Formulário */
 .newsletter-form {
   display: flex;
-  gap: var(--espaco-md);
-  max-width: 600px;
-  margin: 0 auto; /* centraliza */
-  justify-content: center;
+  justify-content: center; /* tudo centralizado na mesma linha */
   align-items: center;
+  gap: var(--espaco-md);
+  flex-wrap: nowrap; /* impede quebra de linha */
 }
 
 .newsletter-input {
-  flex: 1;
-  min-width: 180px;
+  width: 200px; /* tamanho fixo para não esticar demais */
   padding: var(--espaco-md);
-  border: none;
+  border: 1px solid var(--cinza-input);
   border-radius: var(--radius-md);
   font-size: var(--texto-base);
 }
 
 .newsletter-button {
-  flex-shrink: 0;
   background-color: var(--cor-destaque);
   color: var(--cor-primaria);
   border: none;
@@ -516,6 +506,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap; /* não quebra o texto Enviar */
 }
 
 .newsletter-button:hover {
@@ -523,11 +514,10 @@ body {
   transform: translateY(-1px);
 }
 
-/* Responsividade: inputs ficam em coluna no mobile */
+/* Responsivo (inputs embaixo no mobile) */
 @media (max-width: 600px) {
   .newsletter-form {
     flex-direction: column;
-    align-items: stretch;
   }
 
   .newsletter-input,
