@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dashboard do cliente CuidaFast - Gerencie seus cuidadores, agendamentos e serviços.">
-    <title>Meu Dashboard - CuidaFast</title>
+    <meta name="description" content="Home Cliente - CuidaFast. Encontre cuidadores qualificados quando e onde precisar.">
+    <title>Home Cliente - CuidaFast</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../../assets/images/Logotipo_1_vetorizado.svg">
@@ -18,421 +18,1201 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="../CSS/main.css">
-    <link rel="stylesheet" href="../CSS/components.css">
-    <link rel="stylesheet" href="../CSS/layout.css">
-    <link rel="stylesheet" href="../CSS/pages/homeCliente.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/accessibility.css">
 </head>
-<body class="dashboard-page">
+<body class="client-home">
+    <!-- Skip Link para Acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    
     <!-- Header -->
-    <header class="dashboard-header">
-        <div class="container-fluid">
-            <div class="header-content">
-                <div class="header-left">
-                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu lateral">
-                        <i class="ph ph-list"></i>
-                    </button>
-                    <a href="../../index.html" class="brand-logo">
-                        <img src="../../assets/images/Logotipo_1_vetorizado.svg" alt="CuidaFast Logo" width="32" height="32">
-                        <span>CuidaFast</span>
-                    </a>
-                </div>
+    <header class="client-header" role="banner">
+        <div class="container">
+            <nav class="client-navbar" role="navigation" aria-label="Navegação principal">
+                <!-- Menu Toggle -->
+                <button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação">
+                    <i class="ph ph-list" aria-hidden="true"></i>
+                </button>
                 
-                <div class="header-center">
-                    <div class="search-bar">
-                        <i class="ph ph-magnifying-glass"></i>
-                        <input type="text" placeholder="Buscar cuidadores, serviços..." id="searchInput">
+                <!-- Brand -->
+                <a href="../../index.html" class="client-brand" aria-label="CuidaFast - Página inicial">
+                    <img src="../../assets/images/Logotipo_1_vetorizado.svg" alt="CuidaFast Logo" width="32" height="32">
+                    <span>CuidaFast</span>
+                </a>
+                
+                <!-- User Profile -->
+                <div class="user-profile" id="userProfile">
+                    <div class="user-avatar">
+                        <i class="ph ph-user" aria-hidden="true"></i>
                     </div>
                 </div>
-                
-                <div class="header-right">
-                    <button class="notification-btn" id="notificationBtn" aria-label="Notificações">
-                        <i class="ph ph-bell"></i>
-                        <span class="notification-badge">3</span>
-                    </button>
-                    
-                    <div class="user-menu" id="userMenu">
-                        <button class="user-avatar" id="userAvatarBtn" aria-label="Menu do usuário">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="João Silva">
-                            <span>João Silva</span>
-                            <i class="ph ph-caret-down"></i>
-                        </button>
-                        
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="perfil-cliente/informacoes-pessoais.html" class="dropdown-item">
-                                <i class="ph ph-user"></i>
-                                Meu Perfil
-                            </a>
-                            <a href="configuracoes.html" class="dropdown-item">
-                                <i class="ph ph-gear"></i>
-                                Configurações
-                            </a>
-                            <a href="#" class="dropdown-item" id="logoutBtn">
-                                <i class="ph ph-sign-out"></i>
-                                Sair
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </nav>
         </div>
     </header>
 
     <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <nav class="sidebar-nav">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="home-cliente.html" class="nav-link active">
-                        <i class="ph ph-house"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="mensagens.html" class="nav-link">
-                        <i class="ph ph-chat-circle"></i>
-                        <span>Mensagens</span>
-                        <span class="nav-badge">2</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="in-time.html" class="nav-link">
-                        <i class="ph ph-lightning"></i>
-                        <span>InTime</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="notificacao-cliente.html" class="nav-link">
-                        <i class="ph ph-bell"></i>
-                        <span>Notificações</span>
-                        <span class="nav-badge">3</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="ph ph-calendar"></i>
-                        <span>Agendamentos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="ph ph-credit-card"></i>
-                        <span>Pagamentos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="ph ph-star"></i>
-                        <span>Avaliações</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="configuracoes.html" class="nav-link">
-                        <i class="ph ph-gear"></i>
-                        <span>Configurações</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <aside class="client-sidebar" id="clientSidebar" role="navigation" aria-label="Menu lateral">
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="user-avatar-large">
+                        <i class="ph ph-user" aria-hidden="true"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3 id="userName">João Silva</h3>
+                        <p>Cliente desde 2024</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-house" aria-hidden="true"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="mensagens.html" class="nav-link">
+                            <i class="ph ph-chat-circle" aria-hidden="true"></i>
+                            <span>Mensagens</span>
+                            <span class="nav-badge">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="notificacao-cliente.html" class="nav-link">
+                            <i class="ph ph-bell" aria-hidden="true"></i>
+                            <span>Notificações</span>
+                            <span class="nav-badge">5</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="in-time.html" class="nav-link">
+                            <i class="ph ph-lightning" aria-hidden="true"></i>
+                            <span>InTime</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracoes.html" class="nav-link">
+                            <i class="ph ph-gear" aria-hidden="true"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="logoutBtn">
+                            <i class="ph ph-sign-out" aria-hidden="true"></i>
+                            <span>Sair da conta</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </aside>
 
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- Main Content -->
-    <main class="main-content" id="mainContent">
-        <div class="container-fluid">
+    <main id="main-content" class="client-main" role="main">
+        <div class="container">
             <!-- Welcome Section -->
             <section class="welcome-section">
                 <div class="welcome-content">
-                    <h1>Bem-vindo de volta, João!</h1>
-                    <p>Aqui está um resumo das suas atividades recentes na CuidaFast.</p>
-                </div>
-                <div class="quick-actions">
-                    <button class="btn btn-primary" id="findCuidadorBtn">
-                        <i class="ph ph-plus"></i>
-                        Encontrar Cuidador
-                    </button>
-                    <button class="btn btn-accent" id="inTimeBtn">
-                        <i class="ph ph-lightning"></i>
-                        InTime
-                    </button>
+                    <h1 class="welcome-title">Bem vindo, <span id="welcomeName">Cliente</span></h1>
+                    <p class="welcome-subtitle">Cuidados quando e onde precisar</p>
                 </div>
             </section>
 
-            <!-- Stats Cards -->
-            <section class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="ph ph-calendar-check"></i>
+            <!-- Service Categories -->
+            <section class="service-categories">
+                <div class="categories-grid">
+                    <div class="category-card elderly" data-category="elderly">
+                        <div class="category-icon">
+                            <i class="ph ph-heart" aria-hidden="true"></i>
                         </div>
-                        <div class="stat-content">
-                            <h3>12</h3>
-                            <p>Agendamentos este mês</p>
-                        </div>
+                        <h3>Cuidado para Idosos</h3>
+                        <p>Cuidadores especializados em terceira idade</p>
                     </div>
                     
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="ph ph-users"></i>
+                    <div class="category-card childcare" data-category="childcare">
+                        <div class="category-icon">
+                            <i class="ph ph-baby" aria-hidden="true"></i>
                         </div>
-                        <div class="stat-content">
-                            <h3>5</h3>
-                            <p>Cuidadores favoritos</p>
-                        </div>
+                        <h3>Cuidado Infantil</h3>
+                        <p>Babás e cuidadores para crianças</p>
                     </div>
                     
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="ph ph-star"></i>
+                    <div class="category-card petcare" data-category="petcare">
+                        <div class="category-icon">
+                            <i class="ph ph-dog" aria-hidden="true"></i>
                         </div>
-                        <div class="stat-content">
-                            <h3>4.8</h3>
-                            <p>Avaliação média</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="ph ph-money"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>R$ 1.240</h3>
-                            <p>Gasto este mês</p>
-                        </div>
+                        <h3>Cuidados Pet</h3>
+                        <p>Pet sitters e cuidadores de animais</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Main Dashboard Grid -->
-            <div class="dashboard-grid">
-                <!-- Recent Activities -->
-                <section class="dashboard-card recent-activities">
-                    <div class="card-header">
-                        <h2>Atividades Recentes</h2>
-                        <a href="#" class="view-all">Ver todas</a>
+            <!-- Caregivers Section -->
+            <section class="caregivers-section">
+                <div class="section-header">
+                    <h2>Melhores sugestões de cuidadores para você!</h2>
+                    <div class="section-actions">
+                        <button type="button" class="btn btn-outline" id="filterBtn">
+                            <i class="ph ph-funnel" aria-hidden="true"></i>
+                            Filtros
+                        </button>
+                        <button type="button" class="btn btn-outline" id="sortBtn">
+                            <i class="ph ph-sort-ascending" aria-hidden="true"></i>
+                            Ordenar
+                        </button>
                     </div>
-                    <div class="card-content">
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="ph ph-check-circle"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <h4>Serviço concluído</h4>
-                                    <p>Maria Santos cuidou da sua mãe por 4 horas</p>
-                                    <span class="activity-time">Há 2 horas</span>
-                                </div>
-                            </div>
-                            
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="ph ph-calendar-plus"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <h4>Novo agendamento</h4>
-                                    <p>Agendamento com Ana Costa para amanhã às 14h</p>
-                                    <span class="activity-time">Há 5 horas</span>
-                                </div>
-                            </div>
-                            
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="ph ph-star"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <h4>Avaliação enviada</h4>
-                                    <p>Você avaliou Carlos Oliveira com 5 estrelas</p>
-                                    <span class="activity-time">Ontem</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                </div>
 
-                <!-- Upcoming Appointments -->
-                <section class="dashboard-card upcoming-appointments">
-                    <div class="card-header">
-                        <h2>Próximos Agendamentos</h2>
-                        <a href="#" class="view-all">Ver agenda</a>
-                    </div>
-                    <div class="card-content">
-                        <div class="appointment-list">
-                            <div class="appointment-item">
-                                <div class="appointment-date">
-                                    <span class="day">15</span>
-                                    <span class="month">DEZ</span>
-                                </div>
-                                <div class="appointment-content">
-                                    <h4>Ana Costa</h4>
-                                    <p>Cuidado infantil - 14:00 às 18:00</p>
-                                    <div class="appointment-actions">
-                                        <button class="btn btn-sm btn-outline">Reagendar</button>
-                                        <button class="btn btn-sm btn-primary">Mensagem</button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="appointment-item">
-                                <div class="appointment-date">
-                                    <span class="day">16</span>
-                                    <span class="month">DEZ</span>
-                                </div>
-                                <div class="appointment-content">
-                                    <h4>Maria Santos</h4>
-                                    <p>Cuidado de idosos - 08:00 às 12:00</p>
-                                    <div class="appointment-actions">
-                                        <button class="btn btn-sm btn-outline">Reagendar</button>
-                                        <button class="btn btn-sm btn-primary">Mensagem</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <div class="caregivers-grid" id="caregiversGrid">
+                    <!-- Cuidadores serão carregados dinamicamente -->
+                </div>
 
-                <!-- Favorite Caregivers -->
-                <section class="dashboard-card favorite-caregivers">
-                    <div class="card-header">
-                        <h2>Cuidadores Favoritos</h2>
-                        <a href="#" class="view-all">Ver todos</a>
-                    </div>
-                    <div class="card-content">
-                        <div class="caregiver-grid">
-                            <div class="caregiver-card">
-                                <div class="caregiver-avatar">
-                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face" alt="Maria Santos">
-                                    <span class="status-indicator online"></span>
-                                </div>
-                                <div class="caregiver-info">
-                                    <h4>Maria Santos</h4>
-                                    <p>Cuidadora de Idosos</p>
-                                    <div class="rating">
-                                        <i class="ph ph-star-fill"></i>
-                                        <span>4.9</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-primary">Contratar</button>
-                            </div>
-                            
-                            <div class="caregiver-card">
-                                <div class="caregiver-avatar">
-                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Ana Costa">
-                                    <span class="status-indicator offline"></span>
-                                </div>
-                                <div class="caregiver-info">
-                                    <h4>Ana Costa</h4>
-                                    <p>Babá</p>
-                                    <div class="rating">
-                                        <i class="ph ph-star-fill"></i>
-                                        <span>4.8</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-primary">Contratar</button>
-                            </div>
-                            
-                            <div class="caregiver-card">
-                                <div class="caregiver-avatar">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Carlos Oliveira">
-                                    <span class="status-indicator online"></span>
-                                </div>
-                                <div class="caregiver-info">
-                                    <h4>Carlos Oliveira</h4>
-                                    <p>Pet Sitter</p>
-                                    <div class="rating">
-                                        <i class="ph ph-star-fill"></i>
-                                        <span>5.0</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-primary">Contratar</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Quick Stats -->
-                <section class="dashboard-card quick-stats">
-                    <div class="card-header">
-                        <h2>Resumo do Mês</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="stats-list">
-                            <div class="stat-item">
-                                <div class="stat-label">Total de horas</div>
-                                <div class="stat-value">48h</div>
-                                <div class="stat-change positive">+12%</div>
-                            </div>
-                            
-                            <div class="stat-item">
-                                <div class="stat-label">Economia</div>
-                                <div class="stat-value">R$ 320</div>
-                                <div class="stat-change positive">+8%</div>
-                            </div>
-                            
-                            <div class="stat-item">
-                                <div class="stat-label">Satisfação</div>
-                                <div class="stat-value">98%</div>
-                                <div class="stat-change positive">+2%</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+                <div class="load-more-section">
+                    <button type="button" class="btn btn-outline btn-lg" id="loadMoreBtn">
+                        Carregar mais cuidadores
+                        <i class="ph ph-arrow-down" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- Find Caregiver Modal -->
-    <div class="modal" id="findCuidadorModal">
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filterModal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Encontrar Cuidador</h3>
-                <button class="modal-close" id="closeFindCuidadorModal" aria-label="Fechar modal">
-                    <i class="ph ph-x"></i>
+                <h3>Filtrar Cuidadores</h3>
+                <button type="button" class="modal-close" id="closeFilterModal" aria-label="Fechar modal">
+                    <i class="ph ph-x" aria-hidden="true"></i>
                 </button>
             </div>
+            
             <div class="modal-body">
-                <form id="findCuidadorForm">
-                    <div class="form-group">
-                        <label for="serviceType" class="form-label">Tipo de serviço</label>
-                        <select id="serviceType" class="form-control form-select" required>
-                            <option value="">Selecione o tipo de cuidado</option>
-                            <option value="idosos">Cuidado de Idosos</option>
-                            <option value="infantil">Cuidado Infantil</option>
-                            <option value="pets">Cuidado de Pets</option>
-                        </select>
+                <div class="filter-group">
+                    <label class="filter-label">Especialidade</label>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="elderly" checked>
+                            <span>Cuidado de Idosos</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="childcare">
+                            <span>Cuidado Infantil</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="petcare">
+                            <span>Cuidado de Pets</span>
+                        </label>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="serviceDate" class="form-label">Data do serviço</label>
-                        <input type="date" id="serviceDate" class="form-control" required>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Avaliação mínima</label>
+                    <div class="rating-filter">
+                        <input type="range" id="ratingRange" min="0" max="5" step="0.5" value="4">
+                        <div class="rating-display">
+                            <span id="ratingValue">4.0</span>
+                            <div class="stars">
+                                <i class="ph ph-star" aria-hidden="true"></i>
+                                <i class="ph ph-star" aria-hidden="true"></i>
+                                <i class="ph ph-star" aria-hidden="true"></i>
+                                <i class="ph ph-star" aria-hidden="true"></i>
+                                <i class="ph ph-star" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="serviceTime" class="form-label">Horário</label>
-                        <input type="time" id="serviceTime" class="form-control" required>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Distância máxima</label>
+                    <div class="distance-filter">
+                        <input type="range" id="distanceRange" min="1" max="50" value="15">
+                        <div class="distance-display">
+                            <span id="distanceValue">15</span> km
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="serviceDuration" class="form-label">Duração (horas)</label>
-                        <select id="serviceDuration" class="form-control form-select" required>
-                            <option value="">Selecione a duração</option>
-                            <option value="2">2 horas</option>
-                            <option value="4">4 horas</option>
-                            <option value="6">6 horas</option>
-                            <option value="8">8 horas</option>
-                            <option value="12">12 horas</option>
-                        </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Preço por hora</label>
+                    <div class="price-filter">
+                        <div class="price-inputs">
+                            <input type="number" id="minPrice" placeholder="Mín" min="0" value="20">
+                            <span>até</span>
+                            <input type="number" id="maxPrice" placeholder="Máx" min="0" value="80">
+                        </div>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="ph ph-magnifying-glass"></i>
-                        Buscar Cuidadores
-                    </button>
-                </form>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn btn-outline" id="clearFilters">Limpar filtros</button>
+                <button type="button" class="btn btn-primary" id="applyFilters">Aplicar filtros</button>
             </div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script src="../../js/main.js"></script>
-    <script src="../../js/client.js"></script>
+    <script src="../../js/navigation.js"></script>
+    <script src="../../js/accessibility.js"></script>
+    <script src="../../js/page-integration.js"></script>
+    
+    <style>
+        /* Estilos específicos para a nova HomeCliente */
+        .client-home {
+            background: var(--creme);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .client-header {
+            background: white;
+            border-bottom: 1px solid var(--cinza-claro);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .client-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            padding: 0 1rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--azul-escuro);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--creme);
+        }
+
+        .client-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--azul-escuro);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .user-profile {
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--azul-escuro);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        /* Sidebar */
+        .client-sidebar {
+            position: fixed;
+            top: 70px;
+            left: -300px;
+            width: 300px;
+            height: calc(100vh - 70px);
+            background: white;
+            border-right: 1px solid var(--cinza-claro);
+            transition: left 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .client-sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-content {
+            padding: 2rem 0;
+        }
+
+        .sidebar-header {
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid var(--cinza-claro);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar-large {
+            width: 60px;
+            height: 60px;
+            background: var(--azul-escuro);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .user-details h3 {
+            color: var(--azul-escuro);
+            margin-bottom: 0.25rem;
+            font-size: 1.125rem;
+        }
+
+        .user-details p {
+            color: var(--cinza-escuro);
+            font-size: 0.875rem;
+        }
+
+        .sidebar-nav {
+            padding-top: 2rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--cinza-escuro);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-item.active .nav-link {
+            background: var(--creme);
+            color: var(--azul-escuro);
+        }
+
+        .nav-link i {
+            font-size: 1.25rem;
+        }
+
+        .nav-badge {
+            background: var(--verde-escuro);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content */
+        .client-main {
+            margin-top: 70px;
+            padding: 2rem 0;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-title {
+            color: var(--azul-escuro);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-title span {
+            color: var(--verde-escuro);
+        }
+
+        .welcome-subtitle {
+            color: var(--cinza-escuro);
+            font-size: 1.125rem;
+        }
+
+        /* Service Categories */
+        .service-categories {
+            margin-bottom: 3rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card.elderly {
+            background: linear-gradient(135deg, var(--verde-escuro) 0%, #00D4AA 100%);
+            color: white;
+        }
+
+        .category-card.childcare {
+            background: linear-gradient(135deg, var(--verde-claro) 0%, var(--amarelo) 100%);
+            color: var(--azul-escuro);
+        }
+
+        .category-card.petcare {
+            background: linear-gradient(135deg, var(--amarelo) 0%, #f39c12 100%);
+            color: var(--azul-escuro);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .category-card.childcare .category-icon,
+        .category-card.petcare .category-icon {
+            background: rgba(27, 71, 93, 0.1);
+        }
+
+        .category-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-card p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        /* Caregivers Section */
+        .caregivers-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            color: var(--azul-escuro);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .caregivers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .caregiver-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .caregiver-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .caregiver-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .caregiver-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--creme);
+        }
+
+        .caregiver-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caregiver-info h3 {
+            color: var(--azul-escuro);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .caregiver-specialty {
+            color: var(--cinza-escuro);
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .caregiver-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .star {
+            color: var(--amarelo);
+            font-size: 0.875rem;
+        }
+
+        .rating-text {
+            color: var(--cinza-escuro);
+            font-size: 0.875rem;
+            margin-left: 0.25rem;
+        }
+
+        .caregiver-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--cinza-escuro);
+            font-size: 0.875rem;
+        }
+
+        .detail-value {
+            color: var(--azul-escuro);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .caregiver-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .caregiver-actions .btn {
+            flex: 1;
+            font-size: 0.875rem;
+            padding: 0.75rem 1rem;
+        }
+
+        .load-more-section {
+            text-align: center;
+        }
+
+        /* Filter Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--cinza-claro);
+        }
+
+        .modal-header h3 {
+            color: var(--azul-escuro);
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cinza-escuro);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--creme);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            display: block;
+            color: var(--azul-escuro);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--verde-escuro);
+        }
+
+        .rating-filter,
+        .distance-filter {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .rating-display,
+        .distance-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--azul-escuro);
+            font-weight: 600;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.125rem;
+        }
+
+        .price-inputs {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .price-inputs input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--cinza-claro);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+
+        .price-inputs span {
+            color: var(--cinza-escuro);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 2rem 2rem;
+            border-top: 1px solid var(--cinza-claro);
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .client-main {
+                padding: 1rem 0;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .section-actions {
+                justify-content: center;
+            }
+
+            .caregivers-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .caregiver-actions {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                max-height: calc(100vh - 2rem);
+            }
+
+            .modal-header,
+            .modal-body,
+            .modal-actions {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        .category-card,
+        .caregiver-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .caregiver-card:nth-child(2) { animation-delay: 0.1s; }
+        .caregiver-card:nth-child(3) { animation-delay: 0.2s; }
+        .caregiver-card:nth-child(4) { animation-delay: 0.3s; }
+        .caregiver-card:nth-child(5) { animation-delay: 0.4s; }
+        .caregiver-card:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        // Inicialização da nova HomeCliente
+        document.addEventListener('DOMContentLoaded', function() {
+            initClientHome();
+        });
+
+        function initClientHome() {
+            initSidebar();
+            loadUserData();
+            loadCaregivers();
+            initFilters();
+            initCategorySelection();
+            console.log('Nova HomeCliente inicializada');
+        }
+
+        function initSidebar() {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('clientSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            });
+
+            // Fechar sidebar ao clicar em um link
+            const navLinks = sidebar.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        function loadUserData() {
+            // Carregar dados do usuário do localStorage ou usar dados simulados
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            const defaultUser = {
+                name: 'João Silva',
+                firstName: 'João'
+            };
+
+            const user = { ...defaultUser, ...userData };
+            
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('welcomeName').textContent = user.firstName;
+        }
+
+        function loadCaregivers() {
+            const caregiversGrid = document.getElementById('caregiversGrid');
+            
+            // Dados simulados de cuidadores
+            const caregivers = [
+                {
+                    id: 1,
+                    name: 'Sarah Johnson',
+                    specialty: 'Cuidadora de Idosos',
+                    rating: 4.9,
+                    reviews: 127,
+                    experience: '5 anos',
+                    distance: '2.3 km',
+                    price: 35,
+                    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face'
+                },
+                {
+                    id: 2,
+                    name: 'Jennifer Lopez',
+                    specialty: 'Pet sitter e Cuidadora',
+                    rating: 4.8,
+                    reviews: 93,
+                    experience: '3 anos',
+                    distance: '1.8 km',
+                    price: 28,
+                    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
+                },
+                {
+                    id: 3,
+                    name: 'Emily Rodriguez',
+                    specialty: 'Cuidadora de Idosos',
+                    rating: 4.9,
+                    reviews: 156,
+                    experience: '7 anos',
+                    distance: '3.1 km',
+                    price: 42,
+                    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face'
+                },
+                {
+                    id: 4,
+                    name: 'David Thompson',
+                    specialty: 'Cuidador Especializado',
+                    rating: 4.7,
+                    reviews: 84,
+                    experience: '4 anos',
+                    distance: '2.7 km',
+                    price: 38,
+                    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face'
+                },
+                {
+                    id: 5,
+                    name: 'Maria Santos',
+                    specialty: 'Cuidado Infantil',
+                    rating: 4.8,
+                    reviews: 112,
+                    experience: '6 anos',
+                    distance: '1.5 km',
+                    price: 32,
+                    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face'
+                },
+                {
+                    id: 6,
+                    name: 'James Wilson',
+                    specialty: 'Cuidador Noturno',
+                    rating: 4.6,
+                    reviews: 67,
+                    experience: '2 anos',
+                    distance: '4.2 km',
+                    price: 45,
+                    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+                }
+            ];
+
+            displayCaregivers(caregivers);
+            window.allCaregivers = caregivers;
+        }
+
+        function displayCaregivers(caregivers) {
+            const caregiversGrid = document.getElementById('caregiversGrid');
+            
+            caregiversGrid.innerHTML = caregivers.map(caregiver => `
+                <div class="caregiver-card" data-id="${caregiver.id}">
+                    <div class="caregiver-header">
+                        <div class="caregiver-avatar">
+                            <img src="${caregiver.image}" alt="${caregiver.name}" loading="lazy">
+                        </div>
+                        <div class="caregiver-info">
+                            <h3>${caregiver.name}</h3>
+                            <p class="caregiver-specialty">${caregiver.specialty}</p>
+                            <div class="caregiver-rating">
+                                ${generateStars(caregiver.rating)}
+                                <span class="rating-text">${caregiver.rating} (${caregiver.reviews} reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="caregiver-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">${caregiver.experience}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Distância</span>
+                            <span class="detail-value">${caregiver.distance}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Preço/hora</span>
+                            <span class="detail-value">R$ ${caregiver.price}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="caregiver-actions">
+                        <button type="button" class="btn btn-outline" onclick="viewCaregiverProfile(${caregiver.id})">
+                            Abrir perfil do cuidador
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="ph ph-star star" aria-hidden="true"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="ph ph-star-half star" aria-hidden="true"></i>';
+            }
+            
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="ph ph-star" style="color: var(--cinza-claro);" aria-hidden="true"></i>';
+            }
+            
+            return stars;
+        }
+
+        function viewCaregiverProfile(caregiverId) {
+            // Salvar ID do cuidador e navegar para o perfil
+            localStorage.setItem('selectedCaregiverId', caregiverId);
+            window.location.href = 'open-perfil-cuidador.html';
+        }
+
+        function initFilters() {
+            const filterBtn = document.getElementById('filterBtn');
+            const filterModal = document.getElementById('filterModal');
+            const closeFilterModal = document.getElementById('closeFilterModal');
+            const applyFilters = document.getElementById('applyFilters');
+            const clearFilters = document.getElementById('clearFilters');
+
+            filterBtn.addEventListener('click', () => {
+                filterModal.style.display = 'flex';
+            });
+
+            closeFilterModal.addEventListener('click', () => {
+                filterModal.style.display = 'none';
+            });
+
+            filterModal.addEventListener('click', (e) => {
+                if (e.target === filterModal) {
+                    filterModal.style.display = 'none';
+                }
+            });
+
+            // Range inputs
+            const ratingRange = document.getElementById('ratingRange');
+            const ratingValue = document.getElementById('ratingValue');
+            const distanceRange = document.getElementById('distanceRange');
+            const distanceValue = document.getElementById('distanceValue');
+
+            ratingRange.addEventListener('input', () => {
+                ratingValue.textContent = parseFloat(ratingRange.value).toFixed(1);
+                updateStarsDisplay(parseFloat(ratingRange.value));
+            });
+
+            distanceRange.addEventListener('input', () => {
+                distanceValue.textContent = distanceRange.value;
+            });
+
+            applyFilters.addEventListener('click', () => {
+                applyFilterSettings();
+                filterModal.style.display = 'none';
+            });
+
+            clearFilters.addEventListener('click', () => {
+                resetFilters();
+            });
+        }
+
+        function updateStarsDisplay(rating) {
+            const starsContainer = document.querySelector('.rating-display .stars');
+            starsContainer.innerHTML = generateStars(rating);
+        }
+
+        function applyFilterSettings() {
+            // Implementar lógica de filtros
+            console.log('Filtros aplicados');
+            // Aqui você filtraria os cuidadores baseado nos critérios selecionados
+        }
+
+        function resetFilters() {
+            // Resetar todos os filtros para valores padrão
+            document.getElementById('ratingRange').value = 4;
+            document.getElementById('ratingValue').textContent = '4.0';
+            document.getElementById('distanceRange').value = 15;
+            document.getElementById('distanceValue').textContent = '15';
+            document.getElementById('minPrice').value = 20;
+            document.getElementById('maxPrice').value = 80;
+            
+            // Resetar checkboxes
+            const checkboxes = document.querySelectorAll('.filter-option input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = checkbox.value === 'elderly';
+            });
+            
+            updateStarsDisplay(4);
+        }
+
+        function initCategorySelection() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const category = card.dataset.category;
+                    filterByCategory(category);
+                });
+            });
+        }
+
+        function filterByCategory(category) {
+            // Implementar filtro por categoria
+            console.log(`Filtrando por categoria: ${category}`);
+            // Aqui você filtraria os cuidadores pela categoria selecionada
+        }
+
+        // Load more functionality
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            // Simular carregamento de mais cuidadores
+            console.log('Carregando mais cuidadores...');
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('Tem certeza que deseja sair da sua conta?')) {
+                localStorage.removeItem('userData');
+                localStorage.removeItem('userType');
+                window.location.href = '../../pages/login.html';
+            }
+        });
+    </script>
 </body>
 </html>
+
