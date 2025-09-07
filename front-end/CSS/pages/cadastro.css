@@ -58,7 +58,7 @@
   }
   
   .option {
-    background: #FFF5E8;         /* mesmo fundo da página */
+    background: --creme;         /* mesmo fundo da página */
     padding: 15px;
     flex: 1;
     border-radius: 12px;
@@ -103,7 +103,7 @@
   }
   
   .divider span {
-    background: #FFF5E8;
+    background: --creme;
     padding: 0 10px;
     color: #444;
   }
