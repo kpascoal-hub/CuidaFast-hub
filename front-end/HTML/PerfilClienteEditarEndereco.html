@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil - CuidaFast</title>
+  <link rel="stylesheet" href="perfilClienteEditarEndereco.css">
+</head>
+<body>
+  <!-- Header fixo no topo -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="Logo CuidaFast">
+    </div>
+    <div class="menu-icon">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- Main centraliza a caixa -->
+  <main class="main">
+    <section class="form-container">
+      <h2>Editar Perfil</h2>
+
+      <!-- Abas -->
+      <div class="tabs">
+        <button class="tab">Informações pessoais</button>
+        <button class="tab active">Endereço</button>
+      </div>
+
+      <!-- Formulário -->
+      <form class="form">
+        <div class="form-group">
+          <label for="cep">CEP</label>
+          <input type="text" id="cep" value="015001-002">
+        </div>
+        <div class="form-group">
+          <label for="tel">Telefone</label>
+          <input type="text" id="tel" value="(55)11 0000-0000">
+        </div>
+        <div class="form-group">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" value="Rua Zumbi dos Palmares 201">
+        </div>
+        <div class="form-group">
+          <label for="complemento">Complemento</label>
+          <input type="text" id="complemento" value="Apt 123">
+        </div>
+        <div class="form-group">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" value="Liberdade">
+        </div>
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" value="São Paulo">
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input type="text" id="estado" value="SP">
+        </div>
+
+        <!-- Botões -->
+        <div class="buttons">
+          <button type="submit" class="btn-primary">Salvar alterações</button>
+          <button type="button" class="btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
