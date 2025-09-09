@@ -1,0 +1,114 @@
+/* pagamento-pix.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf9e8;
+    color: #1b475d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+  }
+  
+  .voltar {
+    display: inline-block;
+    text-align: left;
+    font-weight: bold;
+    color: #1b475d;
+    text-decoration: none;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .pix-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  
+  .summary {
+    text-align: left;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+  
+  .summary-item.total {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 8px 0;
+  }
+  
+  .qr-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .qr-code img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .pedido {
+    font-size: 0.8rem;
+    color: #555;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #1b475d;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .copiar {
+    background-color: #1b475d;
+    color: #fff;
+    border: none;
+  }
+  
+  .copiar:hover {
+    background-color: #16384a;
+  }
+  
+  .ver-pedido {
+    background-color: transparent;
+    color: #1b475d;
+  }
+  
+  .ver-pedido:hover {
+    background-color: #e5eaf0;
+  }
+  
