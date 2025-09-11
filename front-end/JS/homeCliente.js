@@ -76,6 +76,11 @@ function initUserMenu() {
             userMenu.classList.remove('open');
         });
         
+        if (userMenu.classList.toggle('open') == true {
+        userAvatarBtn.addEventListener('click', function() {
+            userMenu.classList.remove('open');
+        });}
+        
         // Prevenir fechamento ao clicar dentro do dropdown
         userMenu.addEventListener('click', function(e) {
             e.stopPropagation();
