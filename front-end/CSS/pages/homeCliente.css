@@ -47,12 +47,15 @@
 .menu-toggle,
 .user-profile {
   display: flex;
-  align-items: center;
+  align-items: right;
   gap: 0.5rem;
 }
 
 .client-brand {
-  margin-right: auto; /* garante que a logo fica colada à esquerda */
+  margin-right: auto; /* garante que a logo fica colada à esquerda */ 
+}
+.client-brand img {
+  margin-top: -10px; /* ajusta o valor até ficar bom */
 }
 
 .user-profile {
