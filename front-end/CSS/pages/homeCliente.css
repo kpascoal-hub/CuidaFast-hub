@@ -21,7 +21,7 @@
 
 .client-navbar {
   display: flex;
-  align-items: center;
+  align-items: right;
   justify-content: space-between; /* logo à esquerda, outros à direita */
   gap: 1rem;
   height: 70px;
