@@ -973,13 +973,13 @@
                 {
                     id: 2,
                     name: 'Jennifer Lopez',
-                    specialty: 'Pet sitter e Cuidadora',
+                    specialty: 'Pet sitter e Cuidadora de Idosos',
                     rating: 4.8,
                     reviews: 93,
                     experience: '3 anos',
                     distance: '1.8 km',
                     price: 28,
-                    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
+                    image: 'https://s2.glbimg.com/XcrPi1OFnbbUybFQK52JC_0Jjrs=/smart/e.glbimg.com/og/ed/f/original/2019/01/19/jlo_50163141_329600424430635_8889962438239638413_n.jpg'
                 },
                 {
                     id: 3,
@@ -1098,7 +1098,7 @@
         function viewCaregiverProfile(caregiverId) {
             // Salvar ID do cuidador e navegar para o perfil
             localStorage.setItem('selectedCaregiverId', caregiverId);
-            window.location.href = 'open-perfil-cuidador.html';
+            window.location.href = '../HTML/open-perfil-cuidador.html';
         }
 
         function initFilters() {
@@ -1205,7 +1205,7 @@
             if (confirm('Tem certeza que deseja sair da sua conta?')) {
                 localStorage.removeItem('userData');
                 localStorage.removeItem('userType');
-                window.location.href = '../../pages/login.html';
+                window.location.href = '../HTML/index.html';
             }
         });
     </script>
