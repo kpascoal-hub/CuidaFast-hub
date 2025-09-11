@@ -1,5 +1,3 @@
- <style>
-        /* Estilos específicos para a nova HomeCliente */
         .client-home {
             background: var(--creme);
             min-height: 100vh;
@@ -631,4 +629,3 @@
                 transform: translateY(0);
             }
         }
-    </style>
