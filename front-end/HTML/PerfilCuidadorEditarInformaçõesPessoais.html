@@ -1,18 +1,259 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar Perfil - CuidaFast</title>
-  <link rel="stylesheet" href="../CSS/pages/PerfilCuidadorEditarInformaçõesPessoais.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fdf8f3;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .header {
+      background-color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    
+    .logo img {
+      height: 28px;
+    }
+    
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+    
+    .menu .bar {
+      width: 22px;
+      height: 3px;
+      background-color: #0b3342;
+      border-radius: 2px;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      padding: 0 10px;
+    }
+    
+    .card {
+      background-color: #fff;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 450px;
+    }
+    
+    .card h1 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: #0b3342;
+      font-weight: 700;
+    }
+    
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      color: #555;
+      font-weight: 500;
+    }
+    
+    .tab.active {
+      color: #0b3342;
+      border-bottom: 3px solid #0b3342;
+      font-weight: 600;
+    }
+    
+    .avatar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .avatar-circle {
+      width: 70px;
+      height: 70px;
+      background-color: #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    
+    .avatar-circle i {
+      font-size: 22px;
+      color: #fff;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .field {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 calc(50% - 15px);
+      min-width: 200px;
+    }
+    
+    .field label {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #0b3342;
+      background-color: #fff;
+    }
+    
+    .email-field .email-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .email-field .email-wrapper input {
+      flex: 1;
+    }
+    
+    .email-field .email-wrapper .change-email {
+      font-size: 12px;
+      color: #0b3342;
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    
+    .email-field .email-wrapper .change-email:hover {
+      text-decoration: underline;
+    }
+    
+    textarea {
+      resize: none;
+      min-height: 80px;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .save {
+      flex: 1;
+      background-color: #0b3342;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .cancel {
+      flex: 1;
+      background-color: #fff;
+      color: #0b3342;
+      border: 1px solid #0b3342;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .save:hover {
+      background-color: #094252;
+    }
+    
+    .cancel:hover {
+      background-color: #f5f5f5;
+    }
+    
+    @media (max-width: 500px) {
+      .row {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .field {
+        flex: 1 1 100%;
+      }
+      
+      .email-field .email-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+    }
+
+    /* Placeholder styling */
+    input::placeholder,
+    textarea::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
   <header class="header">
     <div class="logo">
-      <img src="logo.png" />
-      
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTUwIDQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iIzBiMzM0MiIvPgo8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiPkN1aWRhRmFzdDwvdGV4dD4KPC9zdmc+" alt="Logo CuidaFast">
     </div>
-    <div class="menu">
+    <div class="menu" aria-label="Abrir menu">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
@@ -23,26 +264,29 @@
     <div class="card">
       <h1>Editar Perfil</h1>
 
-      <div class="tabs">
-        <button class="tab active">Informações pessoais</button>
-        <button class="tab">Documentos</button>
+      <div class="tabs" role="tablist">
+        <button class="tab active" aria-selected="true">Informações pessoais</button>
+        <button class="tab" aria-selected="false">Documentos</button>
       </div>
 
       <div class="avatar">
-        <div class="avatar-circle">
-          <span class="camera">&#128247;</span>
-        </div>
+        <label for="upload-foto" class="avatar-circle">
+          <i class="fa-solid fa-camera"></i>
+        </label>
+        <input type="file" id="upload-foto" accept="image/*" hidden>
       </div>
+      
 
       <form>
         <div class="row">
           <div class="field">
-            <label>Nome Completo</label>
-            <input type="text" placeholder="Seu nome">
+            <label for="nome">Nome Completo</label>
+            <input id="nome" type="text" placeholder="Seu nome">
           </div>
           <div class="field">
-            <label>Gênero</label>
-            <select>
+            <label for="genero">Gênero</label>
+            <select id="genero">
+              <option value="" disabled selected>Selecione o gênero</option>
               <option>Masculino</option>
               <option>Feminino</option>
               <option>Outro</option>
@@ -52,34 +296,32 @@
 
         <div class="row">
           <div class="field">
-            <label>Data de nascimento</label>
-            <input type="text" placeholder="01/15/1985">
+            <label for="data-nasc">Data de nascimento</label>
+            <input id="data-nasc" type="text" placeholder="15/01/1985" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
           </div>
           <div class="field">
-            <label>Número de telefone</label>
-            <input type="text" placeholder="(55)11 0000-0000">
+            <label for="telefone">Número de telefone</label>
+            <input id="telefone" type="text" placeholder="(5511) 0000-0000">
           </div>
         </div>
 
         <div class="field email-field">
-          <label>E-mail</label>
+          <label for="email">E-mail</label>
           <div class="email-wrapper">
-            <input type="email" value="Max@gmail.com">
-            <a href="#">Alterar Email</a>
+            <input id="email" type="email" placeholder="Mar@email.com">
+            <a href="#" class="change-email">Alterar Email</a>
           </div>
         </div>
 
         <div class="field">
-          <label>Senha</label>
-          <input type="password" value="******">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" placeholder="Senha">
         </div>
 
         <div class="field">
-          <label>Descrição</label>
-          <textarea></textarea>
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" placeholder="Fale um pouco sobre você"></textarea>
         </div>
-
-        <small class="change-pass">Alterar senha atual</small>
 
         <div class="buttons">
           <button type="submit" class="save">Salvar alterações</button>
@@ -88,5 +330,29 @@
       </form>
     </div>
   </main>
+
+  <script>
+    // Function to clear placeholder text when field is focused
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input, textarea');
+      
+      inputs.forEach(input => {
+        // Save the placeholder text
+        input.setAttribute('data-placeholder', input.placeholder);
+        
+        // Clear placeholder on focus
+        input.addEventListener('focus', function() {
+          this.removeAttribute('placeholder');
+        });
+        
+        // Restore placeholder if empty on blur
+        input.addEventListener('blur', function() {
+          if (!this.value) {
+            this.placeholder = this.getAttribute('data-placeholder');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
