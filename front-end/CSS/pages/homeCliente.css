@@ -21,7 +21,7 @@
 
 .client-navbar {
     display: flex;
-    justify-content: flex-end; /* elementos principais colados na direita */
+    justify-content: space-between; /* elementos principais colados na direita */
     gap: 1rem;
     height: 70px;
     padding: 0 1rem;
@@ -30,7 +30,6 @@
 /* Perfil do usuário sempre na esquerda */
 .client-navbar .user-profile {
     margin-right: 0;
-    margin-left: auto; /* empurra logo + menu para direita */
 }
 
 .menu-toggle {
