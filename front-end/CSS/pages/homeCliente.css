@@ -53,6 +53,7 @@
 
 .client-brand {
   margin-right: auto; /* garante que a logo fica colada à esquerda */ 
+ margin-top: -5px;
 }
 .client-brand img {
   margin-top: -10px; /* ajusta o valor até ficar bom */
