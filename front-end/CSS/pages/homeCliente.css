@@ -30,8 +30,8 @@
 
 /* Perfil do usuário sempre na esquerda */
 .client-navbar .user-profile {
-    margin-left: 0;
-    margin-right: auto; /* empurra logo + menu para direita */
+    margin-right: 0;
+    margin-left: auto; /* empurra logo + menu para direita */
 }
 
 .menu-toggle {
