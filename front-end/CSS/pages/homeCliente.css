@@ -20,11 +20,12 @@
 }
 
 .client-navbar {
-    display: flex;
-    justify-content: space-between; /* elementos principais colados na direita */
-    gap: 1rem;
-    height: 70px;
-    padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo à esquerda, outros à direita */
+  gap: 1rem;
+  height: 70px;
+  padding: 0 1rem;
 }
 
 /* Perfil do usuário sempre na esquerda */
@@ -43,18 +44,15 @@
     transition: all 0.3s ease;
 }
 
-.menu-toggle:hover {
-    background: var(--creme);
+.menu-toggle,
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .client-brand {
-    display: flex;
-    align-items: left;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: var(--azul-escuro);
-    font-weight: 600;
-    font-size: 1.125rem;
+  margin-right: auto; /* garante que a logo fica colada à esquerda */
 }
 
 .user-profile {
