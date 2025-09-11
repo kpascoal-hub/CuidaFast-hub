@@ -51,7 +51,7 @@
 
 .client-brand {
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: 0.5rem;
     text-decoration: none;
     color: var(--azul-escuro);
