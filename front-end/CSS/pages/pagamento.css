@@ -1,34 +1,6 @@
-/* Variáveis CSS para cores */
-:root {
-    --color-background: #FFFBEC; /* Nova cor de fundo */
-    --color-card: #FFFFFF; /* Manter branco para cards */
-    --color-text-primary: #1B475D; /* Nova cor para texto principal */
-    --color-text-secondary: #8EBD9D; /* Nova cor para texto secundário */
-    --color-button-primary: #1B475D; /* Nova cor para botão principal */
-    --color-button-hover: #FAD564; /* Nova cor para hover do botão */
-    --color-border-input: #D3DC7C; /* Nova cor para bordas/inputs */
-    --color-accent: #FAD564; /* Nova cor de destaque */
-    --color-shadow: rgba(0, 0, 0, 0.08); /* Manter sombra suave */
-    --color-shadow-hover: rgba(0, 0, 0, 0.15); /* Manter sombra no hover */
-}
-
 /* Estilos globais */
 * {
     box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 20px;
-    line-height: 1.6;
 }
 
 .container {
