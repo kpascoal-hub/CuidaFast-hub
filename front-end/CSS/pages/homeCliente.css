@@ -12,7 +12,7 @@ body {
 
 /* Header */
 .client-header {
-    background: white;
+    background: #FFFBEC ;
     border-bottom: 1px solid var(--cinza-claro);
     position: fixed;
     top: 0;
