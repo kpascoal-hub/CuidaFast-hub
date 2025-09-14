@@ -1,163 +1,524 @@
+/* Variáveis CSS para cores */
+:root {
+    --color-background: #FFFBEC; /* Nova cor de fundo */
+    --color-card: #FFFFFF; /* Manter branco para cards */
+    --color-text-primary: #1B475D; /* Nova cor para texto principal */
+    --color-text-secondary: #8EBD9D; /* Nova cor para texto secundário */
+    --color-button-primary: #1B475D; /* Nova cor para botão principal */
+    --color-button-hover: #FAD564; /* Nova cor para hover do botão */
+    --color-border-input: #D3DC7C; /* Nova cor para bordas/inputs */
+    --color-accent: #FAD564; /* Nova cor de destaque */
+    --color-shadow: rgba(0, 0, 0, 0.08); /* Manter sombra suave */
+    --color-shadow-hover: rgba(0, 0, 0, 0.15); /* Manter sombra no hover */
+}
+
+/* Estilos globais */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #fbf7ed;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #1b475d;
-  }
-  
-  .container {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
     display: flex;
-    max-width: 1200px;
-    margin: 40px auto;
-    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
     padding: 20px;
-  }
-  
-  .form-section {
-    flex: 2;
-  }
-  
-  .voltar {
-    color: #1b475d;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .form-card {
-    background: #fffdf7;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  
-  .question {
-    font-weight: bold;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-  }
-  
-  .toggle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  /* Toggle switch */
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-  }
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0;
-    right: 0; bottom: 0;
-    background-color: #ccc;
-    border-radius: 24px;
-    transition: .4s;
-  }
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: .4s;
-  }
-  input:checked + .slider {
-    background-color: #1b475d;
-  }
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
-  
-  .row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .input-group {
+    line-height: 1.6;
+}
+
+.container {
+    background-color: var(--color-card);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px var(--color-shadow);
+    padding: 32px;
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
-    flex: 1;
-  }
-  
-  .input-group label {
-    font-size: 0.85rem;
-    margin-bottom: 4px;
-    color: #000;
-  }
-  
-  .input-group input {
-    padding: 8px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-  }
-  
-  .continuar {
-    display: block;
-    width: 200px;
-    padding: 12px;
-    margin: 20px auto 0 auto;
-    background-color: #1b475d;
-    color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 12px 48px var(--color-shadow-hover);
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border-input);
+}
+
+.header .back-button {
+    background: none;
     border: none;
-    border-radius: 30px;
-    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-size: 1.1em;
     cursor: pointer;
-  }
-  .continuar:hover {
-    background-color: #16384a;
-  }
-  
-  .summary-section {
-    flex: 1;
-    background-color: transparent;
-    padding: 10px;
-  }
-  
-  .summary-section h2 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .summary-item {
+    margin-right: 16px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .back-button:hover {
+    background-color: var(--color-border-input);
+    color: var(--color-text-primary);
+    transform: translateX(-2px);
+}
+
+.header h1 {
+    font-size: 1.75em;
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* Cards */
+.card {
+    background-color: var(--color-card);
+    border-radius: 12px;
+    border: 1px solid var(--color-border-input);
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px var(--color-shadow);
+    transform: translateY(-2px);
+}
+
+.card.text-center {
+    text-align: center;
+}
+
+/* Formulários */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--color-border-input);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.2s ease;
+    background-color: #FAFAFA;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-group input[type="text"]:hover,
+.form-group input[type="number"]:hover {
+    border-color: var(--color-text-secondary);
+}
+
+/* Botões */
+.button {
+    background-color: var(--color-button-primary);
+    color: white;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: none;
+    letter-spacing: 0.5px;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(27, 71, 93, 0.3);
+    background-color: var(--color-button-hover);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(27, 71, 93, 0.2);
+}
+
+/* Botão secundário */
+.button.secondary {
+    background: transparent;
+    color: var(--color-button-primary);
+    border: 2px solid var(--color-button-primary);
+}
+
+.button.secondary:hover {
+    background-color: var(--color-button-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 74, 82, 0.2);
+}
+
+/* Painel lateral (resumo da compra) */
+.summary-panel {
+    background-color: var(--color-card);
+    border-radius: 12px;
+    border: 1px solid var(--color-border-input);
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.summary-panel:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px var(--color-shadow);
+}
+
+.summary-panel h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.summary-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
     padding: 8px 0;
-    color: #000;
-  }
-  
-  .summary-item.total {
+    color: var(--color-text-secondary);
+}
+
+.summary-item span:first-child {
+    font-weight: 500;
+}
+
+.summary-item span:last-child {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.summary-total {
+    font-weight: 600;
+    font-size: 1.1em;
+    border-top: 2px solid var(--color-border-input);
+    padding-top: 16px;
+    margin-top: 16px;
+    color: var(--color-text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Radio buttons customizados */
+.payment-method-option {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 2px solid var(--color-border-input);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.payment-method-option:hover {
+    border-color: var(--color-accent);
+    background-color: rgba(16, 185, 129, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.payment-method-option input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border-input);
+    border-radius: 50%;
+    margin-right: 12px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.payment-method-option input[type="radio"]:checked {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent);
+}
+
+.payment-method-option input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.payment-method-option label {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    flex: 1;
+    margin: 0;
+}
+
+.payment-method-option input[type="radio"]:checked + label {
+    color: var(--color-accent);
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 32px;
+    }
+
+    .main-content {
+        flex: 2;
+    }
+
+    .summary-panel {
+        flex: 1;
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .header {
+        margin-bottom: 24px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    .summary-panel {
+        margin-top: 24px;
+    }
+
+    .button {
+        padding: 16px 24px;
+        font-size: 1.1em;
+    }
+}
+
+/* Animações e transições suaves */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.card {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.summary-panel {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Estilos para QR Code */
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 16px;
+    margin: 20px 0;
+    border: 2px dashed var(--color-border-input);
+    transition: all 0.3s ease;
+}
+
+.qr-code-container:hover {
+    border-color: var(--color-accent);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.qr-code-container img {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--color-shadow);
+    transition: transform 0.3s ease;
+}
+
+.qr-code-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Melhorias nos textos */
+p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border-input);
+    border-top: 2px solid var(--color-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+
+/* Espaço para Logo */
+.logo-placeholder {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px; /* Ajuste conforme necessário */
+    height: 50px; /* Ajuste conforme necessário */
+    background-color: #ccc; /* Cor temporária para visualização */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
-    font-size: 1rem;
+    color: #333;
+    font-size: 1.2em;
+    z-index: 1000;
+}
+
+/*! NOTE: These are just recommended default global styles, edit as required */
+@import (
+  'Import reset stylesheet here, (I recommend modern-normalize) or even better, import the reset stylesheet in the HTML as the first imported stylesheet'
+);
+
+::selection { /* Optional */
+  /* It can be really hard to read highlighted text with a text-shadow, it should be removed when selected */
+  text-shadow: none;
+  /* NOTE: Using this means the color and background-color are set to transparent for selected text... */
+  /* So you can customise your styles below */
+  color: #fff;
+  background-color: #00f;
+}
+
+html {
+  /* Make base font-size 100% of browser font-size */
+  font-size: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth; /* Smoothly animate to different sections within a page, only if the user doesn't mind animations */
   }
-  
-  hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 10px 0;
-  }
-  
+}
+
+*,
+*::before,
+*::after,
+html {
+  /* Declare your box-sizing here
+  https://css-tricks.com/box-sizing */
+  box-sizing: border-box | content-box;
+}
+
+body {
+  /* Declare your default font stack here */
+  font-family: "Font Stack", sans-serif | serif | monospace | cursive | fantasy;
+  /* Better text rendering - font-smoothing has not been officially declared, but can still be useful */
+  text-rendering: geometricPrecision | optimizeLegibility | optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  /* For responsive images that adjust & adapt */
+  height: auto;
+  max-width: 100%;
+  /* This isn't needed, but as a user, I get frustrated when I highlight text and the image gets highlighted too */
+  user-select: none;
+}
+
+button {
+  color: inherit; /* By default, buttons don't inherit the font colour, this is a useful default to override */
+}
+
+a, button {
+  touch-action: manipulation; /* Element doesn't want double-tap on mobile to zoom */
+}
+
+svg {
+  /* Make the SVGs fit the parent container by default */
+  height: 100%;
+  width: 100%;
+  /* Optional - make the SVG's fill be the same as the inherited color */
+  fill: currentColor;
+  /* Prevent the SVG from altering cursor interaction */
+  pointer-events: none;
+}
+
+iframe, video {
+  /* Make iframes & videos fit the parent container by default */
+  height: 100%;
+  width: 100%
+}
+
