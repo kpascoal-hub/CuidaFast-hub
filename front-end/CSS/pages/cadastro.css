@@ -7,7 +7,7 @@
   }
   
   body {
-    background-color: #FFFBEC;
+    background-color: var(--creme);
     padding: 20px;
     color: #000;
   }
@@ -45,7 +45,7 @@
   }
   
   .option {
-    background: --creme;         /* mesmo fundo da página */
+    background: var(--creme);         /* mesmo fundo da página */
     padding: 15px;
     flex: 1;
     border-radius: 12px;
@@ -90,7 +90,7 @@
   }
   
   .divider span {
-    background: --creme;
+    background: var(--creme);
     padding: 0 10px;
     color: #444;
   }
