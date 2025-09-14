@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
+    const containerzin = document.querySelector('.containerzin');
 
     // Simulação de dados do pedido
     const order = {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderiza a página de agendamento
     function renderAgendado() {
-        container.innerHTML = `
+        containerzin.innerHTML = `
             <div class="main-content">
                 <div class="header">
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderiza a página de método de pagamento
     function renderMetodoPagamento() {
-        container.innerHTML = `
+        containerzin.innerHTML = `
             <div class="main-content">
                 <div class="header">
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderiza a página de pagamento com PIX
     function renderPix() {
-        container.innerHTML = `
+        containerzin.innerHTML = `
             <div class="main-content">
                 <div class="header">
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderiza a página de pagamento com PagSeguro
     function renderPagseguro() {
-        container.innerHTML = `
+        containerzin.innerHTML = `
             <div class="main-content">
                 <div class="header">
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderiza a página de finalização do PagSeguro
     function renderPagseguroFinalizar(data) {
-        container.innerHTML = `
+        containerzin.innerHTML = `
             <div class="main-content">
                 <div class="header">
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
