@@ -81,7 +81,7 @@ form.addEventListener("submit", (event) => {
   if (btnCuidador.classList.contains("active")) {
     window.location.href = "../HTML/enviardocumentoscuidador.html";
   } else if (btnCliente.classList.contains("active")) {
-    window.location.href = "../HTML/homeCliente.html";
+    window.location.href = "../HTML/enviardocumentocliente.html";
   } else {
     alert("Selecione um tipo de usuário antes de continuar.");
   }
