@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Contratar</h1>
                 </div>
-                <div class="card">
+                <div class="cardzin">
                     <div class="form-group">
                         <label for="cep">CEP</label>
                         <input type="text" id="cep" value="015001-002">
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Método de pagamento</h1>
                 </div>
-                <div class="card">
+                <div class="cardzin">
                     <div class="payment-method-option">
                         <input type="radio" id="pix" name="payment-method" value="pix" checked>
                         <label for="pix"><i class="ph ph-pix-logo"></i> Pix</label>
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Pagamento PIX</h1>
                 </div>
-                <div class="card text-center">
+                <div class="cardzin text-center">
                     <div class="qr-code-container">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/google/generative-ai-docs" alt="QR Code PIX" style="margin-bottom: 20px;">
                         <p><strong>Pedido #0001</strong></p>
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Pagamento PagSeguro</h1>
                 </div>
-                <div class="card">
+                <div class="cardzin">
                     <p>Simulação de formulário de cartão de crédito:</p>
                     <div class="form-group">
                         <label for="card-number">Número do Cartão</label>
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Pagamento ${data.status === "success" ? "realizado com sucesso!" : "falhou!"}</h1>
                 </div>
-                <div class="card text-center">
+                <div class="cardzin text-center">
                     ${data.status === "success" ? `<div class="qr-code-container"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/google/generative-ai-docs" alt="QR Code" style="margin-bottom: 20px;"><p><strong>Resumo do Pedido #0001</strong></p></div>` : `<p>❌ Ocorreu um erro no pagamento.</p>`}
                     <button class="button" id="cancel-order-btn">❌ Cancelar pedido</button>
                     <button class="button secondary" id="back-btn">⬅️ Voltar</button>
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Pagamento ${data.status === "success" ? "realizado com sucesso!" : "falhou!"}</h1>
                 </div>
-                <div class="card text-center">
+                <div class="cardzin text-center">
                     ${data.status === "success" ? `<div class="qr-code-container"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/google/generative-ai-docs" alt="QR Code" style="margin-bottom: 20px;"><p><strong>Resumo do Pedido #0001</strong></p></div>` : `<p>❌ Ocorreu um erro no pagamento.</p>`}
                     <button class="button" id="cancel-order-btn">❌ Cancelar pedido</button>
                     <button class="button secondary" id="back-btn">⬅️ Voltar</button>
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Pagamento In Time</h1>
                 </div>
-                <div class="card">
+                <div class="cardzin">
                     <p>Esta é uma simulação de pagamento rápido.</p>
                     <button class="button" id="process-intime-btn">⚡ Processar Pagamento Rápido</button>
                 </div>
@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="back-button"><i class="ph ph-arrow-left"></i></button>
                     <h1>Resumo do Pagamento In Time</h1>
                 </div>
-                <div class="card text-center">
+                <div class="cardzin text-center">
                     ${data.status === "success" ? `<p>Pagamento rápido realizado com sucesso!</p>` : `<p>O pagamento rápido falhou.</p>`}
                     <p>Detalhes do Pedido #0001</p>
                     <div class="summary-item">
