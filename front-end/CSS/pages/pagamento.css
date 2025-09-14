@@ -1,3 +1,6 @@
+.logoscuda {
+float: left;
+}
 /* Variáveis CSS para cores */
 :root {
     --color-background: #FFFBEC; /* Nova cor de fundo */
