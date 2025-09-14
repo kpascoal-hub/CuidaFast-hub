@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h1>Pagamento PIX</h1>
                 </div>
                 <div class="cardzin text-center">
-                    <div class="qr-code-container">
+                    <div class="qr-code-containerzin">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/google/generative-ai-docs" alt="QR Code PIX" style="margin-bottom: 20px;">
                         <p><strong>Pedido #0001</strong></p>
                     </div>
