@@ -47,7 +47,8 @@ h1 {
 
 .card {
   display: flex;
-  align-items: center; /* centraliza checkbox e texto */
+  align-items: center;    /* <-- centraliza checkbox verticalmente com o conteúdo */
+  gap: 12px;              /* espaçamento checkbox ↔ conteúdo */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
@@ -57,17 +58,20 @@ h1 {
 }
 
 .card input[type="checkbox"] {
-  margin-top: 5px;
-  margin-right: 12px;
+  margin: 0;              /* importante: remove o margin-top que pode deslocar só um checkbox */
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  accent-color: #000; /* cor do check */
+  accent-color: #000;
+  flex: 0 0 20px;
+  align-self: center;     /* garante alinhamento dentro do flex */
 }
 
 .card-content {
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  word-wrap: break-word;
+  min-width: 0;           
 }
 
 .card-title {
