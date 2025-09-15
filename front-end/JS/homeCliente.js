@@ -18,17 +18,23 @@ function initClientDashboard() {
 }
 
 // ===== SIDEBAR =====
-
 function initSidebar() {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
+    const userAvatar = document.getElementById('user-avatar'); // <-- peguei o bonequinho aqui
     
-    if (sidebarToggle && sidebar && mainContent) {
+    if (sidebarToggle && sidebar && mainContent && userAvatar) {
         // Toggle sidebar
         sidebarToggle.addEventListener('click', function() {
             sidebar.classList.toggle('open');
             mainContent.classList.toggle('sidebar-open');
+
+            if (sidebar.classList.contains('open')) {
+                userAvatar.style.display = "none";   // esconde quando abre
+            } else {
+                userAvatar.style.display = "block";  // mostra quando fecha
+            }
         });
         
         // Fechar sidebar ao clicar fora (mobile)
@@ -37,6 +43,7 @@ function initSidebar() {
                 if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
                     sidebar.classList.remove('open');
                     mainContent.classList.remove('sidebar-open');
+                    userAvatar.style.display = "block"; // mostra de volta
                 }
             }
         });
@@ -46,9 +53,11 @@ function initSidebar() {
             if (window.innerWidth > 992) {
                 sidebar.classList.add('open');
                 mainContent.classList.add('sidebar-open');
+                userAvatar.style.display = "none"; // já esconde no desktop
             } else {
                 sidebar.classList.remove('open');
                 mainContent.classList.remove('sidebar-open');
+                userAvatar.style.display = "block"; // mostra no mobile
             }
         }
         
@@ -56,6 +65,7 @@ function initSidebar() {
         handleResize(); // Executar na inicialização
     }
 }
+
 
 // ===== USER MENU =====
 
