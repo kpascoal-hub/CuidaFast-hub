@@ -5,8 +5,13 @@ body {
     background: var(--creme);
     min-height: 100vh;
 }
-
-/* Header */
+.avatar{
+ width: 50px; /* Define a largura para 50px */
+  height: 50px; /* Define a altura para 50px */
+  border-radius: 50%; /* Transforma a imagem em círculo */
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+}
+    /* Header */
 .client-header {
     background: #FFFBEC ;
     border-bottom: 1px solid var(--cinza-claro);
