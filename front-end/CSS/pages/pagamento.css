@@ -33,26 +33,34 @@ body {
     padding: 20px;
     line-height: 1.6;
 }
-
 .containerzin {
     background-color: var(--color-card);
     border-radius: 16px;
     box-shadow: 0 8px 32px var(--color-shadow);
     padding: 32px;
-    width: 100%;
+    width: 90%;             /* ocupa 90% da largura da tela, adaptando-se */
     max-width: 1000px;
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.3s ease;
-    position: fixed; /* Fixa o elemento na janela de visualização (viewport) */
-    top: 50%;      /* Move o topo do elemento para o centro vertical */
-    left: 50%;     /* Move a esquerda do elemento para o centro horizontal */
+    position: fixed;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .containerzin:hover {
     box-shadow: 0 12px 48px var(--color-shadow-hover);
 }
+
+/* Ajustes para telas pequenas */
+@media (max-width: 600px) {
+    .containerzin {
+        padding: 16px;
+        width: 95%;
+    }
+}
+
 
 /* Header */
 .header {
