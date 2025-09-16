@@ -100,6 +100,11 @@ body {
     margin-bottom: 24px;
     transition: all 0.3s ease;
     position: relative;
+
+    /* Responsividade */
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
 }
 
 .cardzin:hover {
@@ -110,6 +115,15 @@ body {
 
 .cardzin.text-center {
     text-align: center;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 600px) {
+    .cardzin {
+        padding: 16px;
+        margin-bottom: 16px;
+        max-width: 100%;
+    }
 }
 
 /* Formulários */
