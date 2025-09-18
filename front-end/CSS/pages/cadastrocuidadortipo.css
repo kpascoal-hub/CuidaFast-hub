@@ -55,7 +55,7 @@ h1 {
   border: 1px solid #eee;
 }
 
-.cardzin input[type="checkbox"] {
+.cardzin input[type="checkboxi"] {
   margin: 0;              /* importante: remove o margin-top que pode deslocar só um checkbox */
   width: 20px;
   height: 20px;
