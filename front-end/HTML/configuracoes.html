@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -23,18 +23,30 @@
 
   <div class="container">
     <div class="sidebar">
-      <a href="#">Voltar</a>
+      <a href="../HTML/home.html">Voltar</a>
     </div>
     <div class="content">
       <div class="card">
         <h2>Configurações</h2>
-        <div class="option">Perfil</div>
-        <div class="option">Segurança</div>
-        <div class="option">Suas atividades</div>
-        <div class="option">Sair da conta</div>
-        <div class="delete-account">Excluir conta</div>
+
+        <a href="../HTML/perfil.html" class="option">Perfil</a>
+        <a href="../HTML/seguranca.html" class="option">Segurança</a>
+        <a href="../HTML/atividades.html" class="option">Suas atividades</a>
+        <a href="../HTML/login.html" class="option">Sair da conta</a>
+        <a href="../HTML/excluir-conta.html" class="delete-account" id="deleteAccount">Excluir conta</a>
+
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById("deleteAccount").addEventListener("click", function(event) {
+      event.preventDefault(); // evita o redirecionamento automático
+      const confirmar = confirm("⚠️ Tem certeza que deseja excluir sua conta? Essa ação não poderá ser desfeita.");
+      if (confirmar) {
+        window.location.href = this.href; // redireciona se confirmar
+      }
+    });
+  </script>
 </body>
 </html>
