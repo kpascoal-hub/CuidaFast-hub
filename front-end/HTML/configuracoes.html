@@ -7,20 +7,92 @@
   <link rel="stylesheet" href="../CSS/pages/configuracao.css">
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <span>Cuida</span><span class="fast">Fast</span>
-    </div>
-    <div class="header-right">
-      <div class="menu-icon">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="profile-pic"></div>
-    </div>
-  </header>
+  <header class="client-header">
+  <div class="containerzin">
+    <nav class="client-navbar">
+      <!-- Logo no canto esquerdo -->
+      <a href="../../index.html" class="client-brand">
+        <img id="logoscuda" src="../assets/Logotipo_1_vetorizado.svg" 
+             alt="CuidaFast Logo" width="200" height="90">
+      </a>
 
+      <!-- Menu Toggle -->
+      <button type="button" class="menu-toggle" id="menuToggle">
+        <i class="ph ph-list"></i>
+      </button>
+
+      <!-- User Profile (no canto direito) -->
+      <div class="user-profile" id="userProfile">
+        <div class="user-avatar">
+         <img id="avatar" class="avatar" src="../assets/images.webp"
+             alt="cuidafast">
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+    <!-- Sidebar -->
+    <aside class="client-sidebar" id="clientSidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="user-avatar-large">
+         <img id="avatar" class="avatar" src="../assets/images.webp"
+             alt="cuidafast">
+                    </div>
+                    <div class="user-details">
+                        <h3 id="userName">João Silva</h3>
+                        <p>Cliente desde 2024</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-house" aria-hidden="true"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTMLmensagens.html" class="nav-link">
+                            <i class="ph ph-chat-circle"></i>
+                            <span>Mensagens</span>
+                            <span class="nav-badge">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTML/notificacao.html" class="nav-link">
+                            <i class="ph ph-bell" aria-hidden="true"></i>
+                            <span>Notificações</span>
+                            <span class="nav-badge">5</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="in-time.html" class="nav-link">
+                            <i class="ph ph-lightning"></i>
+                            <span>InTime</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTML/configuracoes.html" class="nav-link">
+                            <i class="ph ph-gear"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="logoutBtn">
+                            <i class="ph ph-sign-out"></i>
+                            <span>Sair da conta</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
   <div class="container">
     <div class="sidebar">
       <a href="../HTML/home.html">Voltar</a>
