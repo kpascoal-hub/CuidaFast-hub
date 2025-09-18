@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #fdf9f1;
+  color: #333;
+  padding: 20px;
+}
+
+header .voltar {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+h1 {
+  text-align: center;
+  color: #1a4c68;
+  margin: 10px 0 20px;
+}
+
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.form-container h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+form .linha {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.campo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.campo input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Placeholder mais claro e some ao focar */
+.campo input::placeholder {
+  color: #aaa;
+}
+.campo input:focus::placeholder {
+  color: transparent;
+}
+
+.selecionar {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.selecionar p {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.opcoes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.opcao {
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  border: 2px solid transparent;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.opcao:hover {
+  transform: scale(1.03);
+}
+
+.opcao input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.opcao .icone {
+  font-size: 30px;
+  line-height: 1;
+  color: #1a4c68;
+}
+
+.opcao .texto {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  color: #000;
+}
+
+/* estado selecionado */
+.opcao:has(input:checked) {
+  background: #f0f8fb;
+  border-color: #1a4c68;
+}
+
+.opcao:has(input:checked) .icone,
+.opcao:has(input:checked) .texto {
+  color: #1a4c68;
+}
+
+.contratar-btn {
+  display: block;
+  margin: 0 auto;
+  background: #1a4c68;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.contratar-btn:hover {
+  background: #163b51;
+}
