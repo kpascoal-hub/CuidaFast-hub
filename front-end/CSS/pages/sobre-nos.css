@@ -1,8 +1,7 @@
-
-/* Cores definidas no root */
+/* 🎨 Cores definidas no root */
 :root {
   --creme: #FFFBEC;
-  --creme-claro: #FFFBED; /* cor usada em servicos e cards */
+  --creme-claro: #FFFBED; /* cor usada em serviços e cards */
   --azul-escuro: #1B475D;
   --verde-escuro: rgba(142, 189, 157, 0.5);
   --verde-claro: rgba(211, 220, 124, 0.5);
@@ -30,16 +29,17 @@ body {
   color: #000;
 }
 
-/* Navbar */
+/* 🔹 Navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* logo à esquerda, menu à direita */
   align-items: center;
-  padding: 24px 64px;
+  padding: 16px 48px;
+  background-color: var(--creme);
 }
 
 .logo {
-  height: 40px;
+  height: 50px; /* tamanho aceitável */
 }
 
 .menu a {
@@ -49,7 +49,7 @@ body {
   font-weight: 500;
 }
 
-/* Container principal */
+/* 🔹 Container principal */
 .container {
   display: flex;
   justify-content: space-between;
@@ -91,7 +91,7 @@ body {
   background-color: var(--amarelo);
 }
 
-/* Botões */
+/* 🔹 Botões */
 .buttons {
   display: flex;
   gap: 16px;
@@ -116,13 +116,13 @@ body {
   color: var(--azul-escuro);
 }
 
-/* Imagem da direita */
+/* 🔹 Imagem da direita */
 .image img {
   max-width: 400px;
   border-radius: 8px;
 }
 
-/* Seção de Serviços */
+/* 🔹 Seção de Serviços */
 .servicos {
   display: flex;
   justify-content: center;
@@ -177,7 +177,7 @@ body {
   font-size: 0.95rem;
 }
 
-/* Depoimentos */
+/* 🔹 Depoimentos */
 .depoimentos {
   text-align: center;
   padding: 40px 20px;
@@ -190,7 +190,7 @@ body {
   font-weight: bold;
 }
 
-/* Clientes */
+/* 🔹 Clientes */
 .clientes {
   display: flex;
   justify-content: center;
@@ -238,7 +238,7 @@ body {
   font-size: 18px;
 }
 
-/* Newsletter */
+/* 🔹 Newsletter */
 .newsletter {
   text-align: center;
   padding: 40px 20px;
@@ -276,55 +276,44 @@ body {
   cursor: pointer;
 }
 
-/* Footer */
+/* 🔹 Footer */
 .rodape {
-  background-color: var(--azul-escuro); /* azul escuro */
-  color: var(--footer-text); /* branco */
-  padding: 40px;
+  background-color: var(--azul-escuro);
+  color: var(--footer-text);
+  padding: 40px 20px;
   font-family: 'Inter', sans-serif;
 }
 
 .rodape-container {
   display: flex;
+  justify-content: center; /* centraliza os itens */
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 40px;
+  gap: 60px;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .rodape .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* centraliza verticalmente dentro da coluna */
-  max-width: 200px;
-  height: 100%; /* garante que siga a altura da linha */
+  justify-content: center;
 }
 
 .rodape .logo img {
-  width: 500;
-  margin-bottom: 0;
-  vertical-align: middle;
-}
-
-
-
-.linha-vertical {
-  width: 1px;
-  background-color: #dcdcdc;
-  height: 100px;
-  margin: 0 20px;
+  width: 150px; /* tamanho fixo aceitável */
+  height: auto;
+  margin-bottom: 12px;
 }
 
 .rodape .col {
-  max-width: 200px;
+  max-width: 220px;
   color: var(--footer-text);
 }
 
 .rodape h4 {
-  font-size: 150%;
-  margin-bottom: 10px;
-  border: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
   color: var(--footer-text);
 }
 
@@ -336,16 +325,36 @@ body {
 
 .redes-sociais {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  gap: 14px;
 }
 
 .redes-sociais i {
-  color: var(--footer-text); /* ou outra cor que queira para os ícones */
+  color: var(--footer-text);
   font-size: 24px;
-  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-/* Posicionamentos absolutos (mantidos sem mudança para não quebrar layout) */
+.redes-sociais i:hover {
+  color: var(--amarelo-sólido);
+}
+
+/* Linha vertical ajustada */
+.linha-vertical {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .linha-vertical {
+    display: block;
+    width: 1px;
+    background-color: #dcdcdc;
+    height: 100px;
+    margin: 0 20px;
+  }
+}
+
+/* 🔹 Posicionamentos absolutos (mantidos, mas revise se são necessários) */
 .macbook-air-1 {
   position: absolute;
   top: 1278px;
