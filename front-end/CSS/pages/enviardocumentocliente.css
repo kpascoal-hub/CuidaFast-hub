@@ -12,15 +12,17 @@ body {
     margin: 40px auto;
     text-align: center;
   }
-  
-  .voltar {
-    display: block;
-    text-align: left;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-  }
+ .voltar {
+  position: absolute;   /* tira do fluxo normal */
+  top: 20px;            /* distância do topo */
+  left: 20px;           /* distância da esquerda */
+  text-decoration: none;
+  color: #333;
+}
+
+.voltar i {
+  font-size: 28px;      /* tamanho do ícone */
+}
   
   h1 {
     font-size: 28px;
