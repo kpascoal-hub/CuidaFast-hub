@@ -86,11 +86,6 @@ function initUserMenu() {
             userMenu.classList.remove('open');
         });
         
-        if (userMenu.classList.toggle('open') == true {
-        userAvatarBtn.addEventListener('click', function() {
-            userMenu.classList.remove('open');
-        });}
-        
         // Prevenir fechamento ao clicar dentro do dropdown
         userMenu.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -451,3 +446,225 @@ window.CuidaFastClient = {
     handleLogout: handleLogout
 };
 
+// ===== HOME CLIENTE (página específica) =====
+// Código migrado do inline script de front-end/HTML/homeCliente.html
+// Mantido em namespace para evitar colisões com funções globais existentes aqui.
+
+(function() {
+  const HomeCliente = {
+    init() {
+      this.initSidebar();
+      this.loadUserData();
+      this.loadCaregivers();
+      this.initFilters();
+      this.initCategorySelection();
+      this.initLoadMore();
+      this.initLogout();
+      console.log('HomeCliente inicializada');
+    },
+
+    // Sidebar desta página (usa ids: menuToggle, clientSidebar, sidebarOverlay)
+    initSidebar() {
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('clientSidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      if (!menuToggle || !sidebar || !overlay) return;
+
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+      });
+
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+      });
+
+      const navLinks = sidebar.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+          }
+        });
+      });
+    },
+
+    loadUserData() {
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+      const defaultUser = { name: 'João Silva', firstName: 'João' };
+      const user = { ...defaultUser, ...userData };
+
+      const userNameEl = document.getElementById('userName');
+      const welcomeNameEl = document.getElementById('welcomeName');
+      if (userNameEl) userNameEl.textContent = user.name;
+      if (welcomeNameEl) welcomeNameEl.textContent = user.firstName;
+    },
+
+    loadCaregivers() {
+      const caregivers = [
+        { id: 1, name: 'Sarah Johnson', specialty: 'Cuidadora de Idosos', rating: 4.9, reviews: 127, experience: '5 anos', distance: '2.3 km', price: 35, image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face' },
+        { id: 2, name: 'Jennifer Lopez', specialty: 'Pet sitter e Cuidadora de Idosos', rating: 4.8, reviews: 93, experience: '3 anos', distance: '1.8 km', price: 28, image: 'https://s2.glbimg.com/XcrPi1OFnbbUybFQK52JC_0Jjrs=/smart/e.glbimg.com/og/ed/f/original/2019/01/19/jlo_50163141_329600424430635_8889962438239638413_n.jpg' },
+        { id: 3, name: 'Emily Rodriguez', specialty: 'Cuidadora de Idosos', rating: 4.9, reviews: 156, experience: '7 anos', distance: '3.1 km', price: 42, image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face' },
+        { id: 4, name: 'David Thompson', specialty: 'Cuidador Especializado', rating: 4.7, reviews: 84, experience: '4 anos', distance: '2.7 km', price: 38, image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face' },
+        { id: 5, name: 'Maria Santos', specialty: 'Cuidado Infantil', rating: 4.8, reviews: 112, experience: '6 anos', distance: '1.5 km', price: 32, image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face' },
+        { id: 6, name: 'James Wilson', specialty: 'Cuidador Noturno', rating: 4.6, reviews: 67, experience: '2 anos', distance: '4.2 km', price: 45, image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face' }
+      ];
+
+      this.displayCaregivers(caregivers);
+      window.allCaregivers = caregivers;
+    },
+
+    displayCaregivers(caregivers) {
+      const caregiversGrid = document.getElementById('caregiversGrid');
+      if (!caregiversGrid) return;
+      caregiversGrid.innerHTML = caregivers.map(caregiver => `
+        <div class="caregiver-card" data-id="${caregiver.id}">
+          <div class="caregiver-header">
+            <div class="caregiver-avatar">
+              <img src="${caregiver.image}" alt="${caregiver.name}" loading="lazy">
+            </div>
+            <div class="caregiver-info">
+              <h3>${caregiver.name}</h3>
+              <p class="caregiver-specialty">${caregiver.specialty}</p>
+              <div class="caregiver-rating">
+                ${this.generateStars(caregiver.rating)}
+                <span class="rating-text">${caregiver.rating} (${caregiver.reviews} reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="caregiver-details">
+            <div class="detail-row"><span class="detail-label">Experiência</span><span class="detail-value">${caregiver.experience}</span></div>
+            <div class="detail-row"><span class="detail-label">Distância</span><span class="detail-value">${caregiver.distance}</span></div>
+            <div class="detail-row"><span class="detail-label">Preço/hora</span><span class="detail-value">R$ ${caregiver.price}</span></div>
+          </div>
+          <div class="caregiver-actions">
+            <button type="button" class="btn primary" onclick="HomeCliente.viewCaregiverProfile(${caregiver.id})">Abrir perfil do cuidador</button>
+          </div>
+        </div>
+      `).join('');
+    },
+
+    generateStars(rating) {
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 !== 0;
+      let stars = '';
+      for (let i = 0; i < fullStars; i++) stars += '<i class="ph ph-star star" aria-hidden="true"></i>';
+      if (hasHalfStar) stars += '<i class="ph ph-star-half star" aria-hidden="true"></i>';
+      const emptyStars = 5 - Math.ceil(rating);
+      for (let i = 0; i < emptyStars; i++) stars += '<i class="ph ph-star" style="color: var(--cinza-claro);" aria-hidden="true"></i>';
+      return stars;
+    },
+
+    viewCaregiverProfile(caregiverId) {
+      localStorage.setItem('selectedCaregiverId', caregiverId);
+      window.location.href = '../HTML/open-perfil-cuidador.html';
+    },
+
+    initFilters() {
+      const filterBtn = document.getElementById('filterBtn');
+      const filterModal = document.getElementById('filterModal');
+      const closeFilterModal = document.getElementById('closeFilterModal');
+      const applyFilters = document.getElementById('applyFilters');
+      const clearFilters = document.getElementById('clearFilters');
+      if (!filterBtn || !filterModal) return;
+
+      filterBtn.addEventListener('click', () => { filterModal.style.display = 'flex'; });
+      if (closeFilterModal) closeFilterModal.addEventListener('click', () => { filterModal.style.display = 'none'; });
+      filterModal.addEventListener('click', (e) => { if (e.target === filterModal) filterModal.style.display = 'none'; });
+
+      const ratingRange = document.getElementById('ratingRange');
+      const ratingValue = document.getElementById('ratingValue');
+      const distanceRange = document.getElementById('distanceRange');
+      const distanceValue = document.getElementById('distanceValue');
+      if (ratingRange && ratingValue) {
+        ratingRange.addEventListener('input', () => {
+          ratingValue.textContent = parseFloat(ratingRange.value).toFixed(1);
+          this.updateStarsDisplay(parseFloat(ratingRange.value));
+        });
+      }
+      if (distanceRange && distanceValue) {
+        distanceRange.addEventListener('input', () => { distanceValue.textContent = distanceRange.value; });
+      }
+      if (applyFilters) applyFilters.addEventListener('click', () => { this.applyFilterSettings(); filterModal.style.display = 'none'; });
+      if (clearFilters) clearFilters.addEventListener('click', () => { this.resetFilters(); });
+    },
+
+    updateStarsDisplay(rating) {
+      const starsContainer = document.querySelector('.rating-display .stars');
+      if (starsContainer) starsContainer.innerHTML = this.generateStars(rating);
+    },
+
+    applyFilterSettings() {
+      console.log('Filtros aplicados');
+      // Implementar lógica real de filtros se necessário
+    },
+
+    resetFilters() {
+      const ratingRange = document.getElementById('ratingRange');
+      const ratingValue = document.getElementById('ratingValue');
+      const distanceRange = document.getElementById('distanceRange');
+      const distanceValue = document.getElementById('distanceValue');
+      const minPrice = document.getElementById('minPrice');
+      const maxPrice = document.getElementById('maxPrice');
+
+      if (ratingRange) ratingRange.value = 4;
+      if (ratingValue) ratingValue.textContent = '4.0';
+      if (distanceRange) distanceRange.value = 15;
+      if (distanceValue) distanceValue.textContent = '15';
+      if (minPrice) minPrice.value = 20;
+      if (maxPrice) maxPrice.value = 80;
+
+      const checkboxes = document.querySelectorAll('.filter-option input[type="checkbox"]');
+      checkboxes.forEach(checkbox => { checkbox.checked = checkbox.value === 'elderly'; });
+      this.updateStarsDisplay(4);
+    },
+
+    initCategorySelection() {
+      const categoryCards = document.querySelectorAll('.category-card');
+      categoryCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const category = card.dataset.category;
+          this.filterByCategory(category);
+        });
+      });
+    },
+
+    filterByCategory(category) {
+      console.log(`Filtrando por categoria: ${category}`);
+    },
+
+    initLoadMore() {
+      const btn = document.getElementById('loadMoreBtn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        console.log('Carregando mais cuidadores...');
+      });
+    },
+
+    initLogout() {
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (!logoutBtn) return;
+      logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (confirm('Tem certeza que deseja sair da sua conta?')) {
+          localStorage.removeItem('userData');
+          localStorage.removeItem('userType');
+          window.location.href = '../HTML/index.html';
+        }
+      });
+    }
+  };
+
+  // Expor no escopo global para o onclick do botão
+  window.HomeCliente = HomeCliente;
+
+  // Inicializar ao carregar DOM, somente nesta página
+  document.addEventListener('DOMContentLoaded', function() {
+    // Executar somente se existir um marcador desta página
+    if (document.body && document.body.classList.contains('client-home')) {
+      HomeCliente.init();
+    }
+  });
+})();
