@@ -19,6 +19,7 @@ body {
   left: 20px;           /* distância da esquerda */
   text-decoration: none;
   color: #333;
+     z-index: 1000;
 }
 
 .voltar i {
