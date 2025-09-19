@@ -16,7 +16,7 @@ body {
  .voltar {
   position: absolute;   /* tira do fluxo normal */
   top: 20px;            /* distância do topo */
-  left: 150px;           /* distância da esquerda */
+  left: 350px;           /* distância da esquerda */
   text-decoration: none;
   color: #333;
      z-index: 1000;
