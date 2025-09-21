@@ -353,14 +353,3 @@ body {
     margin: 0 20px;
   }
 }
-
-/* 🔹 Posicionamentos absolutos (mantidos, mas revise se são necessários) */
-.macbook-air-1 {
-  position: absolute;
-  top: 1278px;
-  left: -3041px;
-  background-color: #fff;
-  width: 1433px;
-  height: 832px;
-  overflow: hidden;
-}
