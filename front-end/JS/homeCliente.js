@@ -415,25 +415,7 @@ function loadRecentActivities() {
     ];
 }
 
-// ===== VERIFICAÇÃO DE AUTENTICAÇÃO =====
 
-function checkAuthentication() {
-    const token = localStorage.getItem('cuidafast_token') || sessionStorage.getItem('cuidafast_token');
-    const user = localStorage.getItem('cuidafast_user') || sessionStorage.getItem('cuidafast_user');
-    
-    if (!token || !user) {
-        // Redirecionar para login se não estiver autenticado
-        window.location.href = '../login.html';
-        return false;
-    }
-    
-    return true;
-}
-
-// Verificar autenticação na inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    checkAuthentication();
-});
 
 // ===== EXPORTAR FUNÇÕES =====
 
