@@ -1,0 +1,183 @@
+ /* Reset básico */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+
+ 
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #fffbec;
+     color: #1E293B;
+     /* cor do texto escuro */
+ }
+
+ .navbar {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 24px 64px;
+     background-color: #fffbec;
+     /* ou var(--azul-escuro) */
+ }
+
+ .logo img {
+     height: 40px;
+ }
+
+ .menu a {
+     margin-left: 32px;
+     text-decoration: none;
+     color: var(--azul-escuro);
+     font-weight: 500;
+ }
+
+
+ header img {
+     height: 40px;
+ }
+
+ main {
+     max-width: 1000px;
+     margin: 0 auto;
+     padding: 40px 20px;
+ }
+
+ h2 {
+     color: #0E4F4F;
+     /* cor principal */
+     margin-bottom: 50px;
+     text-align: center;
+     
+ }
+
+ .section {
+     margin-bottom: 0px;
+ }
+
+ .problem-solution {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 50px;
+ }
+
+ 
+ .problem {
+    flex: 1;
+   width: 280px;  
+}
+
+.solution {
+    flex: 1;
+   width: 280px;  
+   padding-top: 100px;
+}
+
+
+ /* Container dos membros da equipe */
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas iguais */
+    gap: 20px; /* espaçamento entre os cartões */
+    justify-items: center; /* centraliza os cartões horizontalmente */
+    padding: 60px; /* espaçamento interno do container */
+}
+
+/* Cartões individuais */
+.team-member {
+    
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px; /* largura fixa para consistência */
+   
+}
+
+.team-member img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.team-member h3 {
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.team-member p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+ /* Footer */
+ .rodape {
+    
+     background-color: #1b475d;
+     color: #fffbec;
+     /* branco */
+     padding: 40px;
+     font-family: 'Inter', sans-serif;
+ }
+
+ .rodape-container {
+     display: flex;
+     align-items: flex-start;
+     justify-content: space-between;
+     gap: 40px;
+     flex-wrap: wrap;
+ }
+
+ .rodape .logo {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+    /* max-width: 200px;*/
+     height: 100px;
+     width: 200px;
+ }
+
+ .rodape .logo img {
+     width: 500;
+     /* ajuste para px: 500px se quiser largura fixa */
+     margin-bottom: 0;
+     vertical-align: middle;
+ }
+
+ .linha-vertical {
+     width: 1px;
+     background-color: #dcdcdc;
+     height: 100px;
+     margin: 0 20px;
+ }
+
+ .rodape .col {
+     max-width: 200px;
+     color: var(--footer-text);
+ }
+
+ .rodape h4 {
+     font-size: 150%;
+     margin-bottom: 10px;
+     color: var(--footer-text);
+ }
+
+ .rodape a {
+     font-size: 0.9em;
+     text-decoration: none;
+     color: inherit;
+ }
+
+ .redes-sociais {
+     display: flex;
+     gap: 10px;
+ }
+
+ .redes-sociais i {
+     color: var(--footer-text);
+     /* ou outra cor que queira para os ícones */
+     font-size: 24px;
+     cursor: pointer;
+ }
