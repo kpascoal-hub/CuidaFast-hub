@@ -13,40 +13,113 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/pages/homeCliente.css">
+    
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="../CSS/pages/homeCliente.css">
+    <!-- CSS - styles.css primeiro para ser a base -->
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/pages/homeCliente.css">
 </head>
 <body class="client-home">
     
-    <!-- Header -->
-<header class="client-header">
-  <div class="containerzin">
-    <nav class="client-navbar">
-      <!-- Logo no canto esquerdo -->
-      <a href="../../index.html" class="client-brand">
-        <img id="logoscuda" src="../assets/Logotipo_1_vetorizado.svg" 
-             alt="CuidaFast Logo" width="200" height="90">
-      </a>
-
-      <!-- Menu Toggle -->
-      <button type="button" class="menu-toggle" id="menuToggle">
-        <i class="ph ph-list"></i>
-      </button>
-
-      <!-- User Profile (no canto direito) -->
-      <div class="user-profile" id="userProfile">
-        <div class="user-avatar">
-          <img src="../assets/images.webp" alt="Foto do usuário" class="avatar-header">
+    <!-- Header Moderno -->
+    <header class="modern-header">
+        <div class="header-container">
+            <!-- Logo Section -->
+            <div class="header-left">
+                <a href="../../index.html" class="logo-link">
+                    <img id="logo" src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
+                    <span class="logo-text">CuidaFast</span>
+                </a>
+            </div>
+            
+            <!-- Search Bar (Desktop) -->
+            <div class="header-center">
+                <div class="search-container">
+                    <i class="ph ph-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Buscar cuidadores..." class="search-input" id="headerSearch">
+                    <button class="search-btn" type="button">
+                        <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Actions -->
+            <div class="header-right">
+                <!-- Notifications -->
+                <button class="header-action-btn notification-btn" id="notificationBtn">
+                    <i class="ph ph-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                
+                <!-- Messages -->
+                <button class="header-action-btn message-btn" id="messageBtn">
+                    <i class="ph ph-chat-circle"></i>
+                    <span class="message-badge">2</span>
+                </button>
+                
+                <!-- User Profile -->
+                <div class="user-profile-dropdown" id="userProfileDropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
+                        <span class="user-name" id="headerUserName">João Silva</span>
+                        <i class="ph ph-caret-down dropdown-arrow"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                        <div class="dropdown-header">
+                            <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
+                            <div class="dropdown-user-info">
+                                <h4>João Silva</h4>
+                                <p>Cliente Premium</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="ph ph-user"></i>
+                            <span>Meu Perfil</span>
+                        </a>
+                        <a href="../HTML/configuracoes.html" class="dropdown-item">
+                            <i class="ph ph-gear"></i>
+                            <span>Configurações</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="ph ph-clock"></i>
+                            <span>Histórico</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="ph ph-question"></i>
+                            <span>Ajuda</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                            <i class="ph ph-sign-out"></i>
+                            <span>Sair</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
         </div>
-      </div>
-    </nav>
-  </div>
-</header>
+        
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container" id="mobileSearchContainer">
+            <div class="mobile-search-wrapper">
+                <i class="ph ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Buscar cuidadores..." class="mobile-search-input">
+                <button class="mobile-search-btn" type="button">
+                    <i class="ph ph-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
 
     <!-- Sidebar -->
@@ -125,61 +198,293 @@
             </section>
 
             <!-- Service Categories -->
-            <section class="service-categories">
-                <div class="categories-grid">
-                    <div class="category-card elderly" data-category="elderly">
-                        <div class="category-icon">
-                            <i class="ph ph-heart"></i>
-                        </div>
-                        <h3>Cuidado para Idosos</h3>
-                        <p>Cuidadores especializados em terceira idade</p>
+            <section class="servicos" id="serviceCategories">
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-dog" style="font-size: 40px; color: #1B475D;"></i>
                     </div>
-                    
-                    <div class="category-card childcare" data-category="childcare">
-                        <div class="category-icon">
-                            <i class="ph ph-baby"></i>
-                        </div>
-                        <h3>Cuidado Infantil</h3>
-                        <p>Babás e cuidadores para crianças</p>
+                    <h3>Cuidado para Pets</h3>
+                    <p>Serviços veterinários completos e cuidados especiais para seu animal.</p>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Encontrar Cuidador</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-heartbeat" style="font-size: 40px; color: #1B475D;"></i>
                     </div>
-                    
-                    <div class="category-card petcare" data-category="petcare">
-                        <div class="category-icon">
-                            <i class="ph ph-dog"></i>
-                        </div>
-                        <h3>Cuidados Pet</h3>
-                        <p>Pet sitters e cuidadores de animais</p>
+                    <h3>Cuidado de Idosos</h3>
+                    <p>Atendimento especializado para pessoas idosas.</p>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Encontrar Cuidador</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-baby" style="font-size: 40px; color: #1B475D;"></i>
                     </div>
+                    <h3>Cuidado Infantil</h3>
+                    <p>Atendimento especializado para bebês e crianças.</p>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Encontrar Cuidador</a>
                 </div>
             </section>
 
             <!-- Caregivers Section -->
-            <section class="caregivers-section">
-                <div class="section-header">
-                    <h2>Melhores sugestões de cuidadores para você!</h2>
-                    <div class="section-actions">
-                        <button type="button" class="btn primary" id="filterBtn">
-                            <i class="ph ph-funnel"></i>
-                            Filtros
-                        </button>
-                        <button type="button" class="btn primary" id="sortBtn">
-                            <i class="ph ph-sort-ascending"></i>
-                            Ordenar
-                        </button>
-                    </div>
-                </div>
-
-                <div class="caregivers-grid" id="caregiversGrid">
-                    <!-- Cuidadores serão carregados dinamicamente -->
-                </div>
-
-                <div class="load-more-section">
-                    <button type="button" class="btn primary btn-lg" id="loadMoreBtn">
-                        Carregar mais cuidadores
-                        <i class="ph ph-arrow-down" aria-hidden="true"></i>
+            <div style="text-align: center; margin: 40px 0;">
+                <h2 style="font-size: 28px; font-weight: bold; color: var(--azul-escuro); margin-bottom: 20px;">Melhores sugestões de cuidadores para você!</h2>
+                <div class="buttons" style="margin-bottom: 40px;">
+                    <button type="button" class="btn primary" id="filterBtn">
+                        <i class="ph ph-funnel"></i>
+                        Filtros
+                    </button>
+                    <button type="button" class="btn outline" id="sortBtn">
+                        <i class="ph ph-sort-ascending"></i>
+                        Ordenar
                     </button>
                 </div>
+            </div>
+
+            <!-- Primeira leva de cuidadores (visível por padrão) -->
+            <section class="servicos" id="firstCaregivers">
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Maria Silva</h3>
+                    <p>Cuidadora especializada em idosos com 5 anos de experiência.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.9 (127 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>João Santos</h3>
+                    <p>Cuidador infantil certificado, especialista em primeiros socorros.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.7 (89 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Ana Costa</h3>
+                    <p>Pet sitter experiente, ama animais e oferece cuidados especiais.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">5.0 (203 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Pedro Almeida</h3>
+                    <p>Cuidador com experiência em fisioterapia e reabilitação.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.8 (92 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
             </section>
+
+            <!-- Cuidadores adicionais (inicialmente ocultos) -->
+            <section class="servicos" id="moreCaregivers" style="display: none;">
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Carlos Oliveira</h3>
+                    <p>Enfermeiro especializado em cuidados domiciliares para idosos.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.8 (156 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Lucia Ferreira</h3>
+                    <p>Babá certificada com experiência em desenvolvimento infantil.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.9 (98 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Roberto Lima</h3>
+                    <p>Veterinário e pet sitter, especialista em cuidados com animais.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.6 (234 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Sandra Mendes</h3>
+                    <p>Psicóloga especializada em cuidados com idosos e demência.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">5.0 (78 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+            </section>
+
+            <!-- Mais cuidadores (segunda leva) -->
+            <section class="servicos" id="evenMoreCaregivers" style="display: none;">
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Patricia Alves</h3>
+                    <p>Fisioterapeuta especializada em reabilitação geriátrica.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">5.0 (87 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Fernando Santos</h3>
+                    <p>Educador infantil com especialização em necessidades especiais.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.7 (145 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Camila Rocha</h3>
+                    <p>Adestradora e cuidadora de pets, especialista em comportamento animal.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.9 (176 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="ph ph-user" style="font-size: 40px; color: #1B475D;"></i>
+                    </div>
+                    <h3>Ricardo Souza</h3>
+                    <p>Técnico em enfermagem com especialização em home care.</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                        <div style="display: flex; color: #FAD564;">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph ph-star"></i>
+                        </div>
+                        <span style="font-size: 14px; color: #666;">4.7 (134 avaliações)</span>
+                    </div>
+                    <a href="#" class="btn primary" style="margin-top: 16px;">Ver Perfil</a>
+                </div>
+            </section>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <button type="button" class="btn primary" id="loadMoreBtn">
+                    Carregar mais cuidadores
+                    <i class="ph ph-arrow-down" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </main>
 
@@ -258,8 +563,45 @@
         </div>
     </div>
 
+    <!-- Footer consistente -->
+    <footer class="rodape">
+        <div class="container rodape-container">
+            <div class="col logo">
+                <img src="../assets/Logotipo_5_vetorizado.svg" alt="Logo CuidaFast" />
+            </div>
+        
+            <div class="linha-vertical"></div>
+        
+            <div class="col">
+                <h4>CuidaFast</h4>
+                <p class="p-rodape">
+                    Cuidados quando e onde precisar.
+                </p>
+            </div>
+        
+            <div class="col">
+                <h4>Contato</h4>
+                <p><i class="ph ph-linktree-logo"></i> <a href="https://linktr.ee/cuidafast" target="_blank">LinkTree</a></p>
+                <p><i class="ph ph-envelope-simple"></i> <a href="mailto:CuidaFast@gmail.com">CuidaFast@gmail.com</a></p>
+                <p><i class="ph ph-map-pin"></i> <a href="https://www.google.com/maps/place/São+Paulo,+SP" target="_blank">São Paulo, SP</a></p>
+            </div>
+            
+            <div class="col redes-sociais-col">
+                <h4>Redes Sociais</h4>
+                <div class="redes-sociais">
+                    <a href="https://www.instagram.com/CuidaFast" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="https://www.linkedin.com/in/CuidaFast" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="https://www.facebook.com/CuidaFast" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </footer>
+
     <!-- JavaScript -->
     <script src="../../js/main.js"></script>
     <script src="../JS/homeCliente.js"></script>
+    
 </body>
 </html>
