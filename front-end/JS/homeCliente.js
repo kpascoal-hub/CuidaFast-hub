@@ -416,7 +416,6 @@ function loadRecentActivities() {
 }
 
 
-
 // ===== EXPORTAR FUNÇÕES =====
 
 window.CuidaFastClient = {
@@ -435,14 +434,152 @@ window.CuidaFastClient = {
 (function() {
   const HomeCliente = {
     init() {
+      this.initModernHeader();
       this.initSidebar();
       this.loadUserData();
-      this.loadCaregivers();
-      this.initFilters();
-      this.initCategorySelection();
       this.initLoadMore();
       this.initLogout();
       console.log('HomeCliente inicializada');
+    },
+
+    // Inicializar funcionalidades do header moderno
+    initModernHeader() {
+      this.initProfileDropdown();
+      this.initHeaderSearch();
+      this.initMobileMenu();
+      this.initHeaderActions();
+    },
+
+    // Dropdown do perfil do usuário
+    initProfileDropdown() {
+      const profileBtn = document.getElementById('userProfileBtn');
+      const profileDropdown = document.getElementById('userProfileDropdown');
+      const dropdownMenu = document.getElementById('profileDropdownMenu');
+      
+      if (!profileBtn || !profileDropdown) return;
+
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profileDropdown.classList.toggle('open');
+      });
+
+      // Fechar dropdown ao clicar fora
+      document.addEventListener('click', (e) => {
+        if (!profileDropdown.contains(e.target)) {
+          profileDropdown.classList.remove('open');
+        }
+      });
+
+      // Logout do header
+      const headerLogoutBtn = document.getElementById('headerLogoutBtn');
+      if (headerLogoutBtn) {
+        headerLogoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.handleLogout();
+        });
+      }
+    },
+
+    // Busca no header
+    initHeaderSearch() {
+      const headerSearch = document.getElementById('headerSearch');
+      const searchBtn = document.querySelector('.search-btn');
+      const mobileSearchInput = document.querySelector('.mobile-search-input');
+      const mobileSearchBtn = document.querySelector('.mobile-search-btn');
+
+      if (headerSearch) {
+        headerSearch.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.performHeaderSearch(headerSearch.value);
+          }
+        });
+      }
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+          this.performHeaderSearch(headerSearch.value);
+        });
+      }
+
+      if (mobileSearchInput) {
+        mobileSearchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.performHeaderSearch(mobileSearchInput.value);
+          }
+        });
+      }
+
+      if (mobileSearchBtn) {
+        mobileSearchBtn.addEventListener('click', () => {
+          this.performHeaderSearch(mobileSearchInput.value);
+        });
+      }
+    },
+
+    // Menu mobile
+    initMobileMenu() {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const sidebar = document.getElementById('clientSidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+
+      if (mobileMenuToggle && sidebar && overlay) {
+        mobileMenuToggle.addEventListener('click', () => {
+          sidebar.classList.add('open');
+          overlay.classList.add('active');
+        });
+      }
+    },
+
+    // Ações do header (notificações, mensagens)
+    initHeaderActions() {
+      const notificationBtn = document.getElementById('notificationBtn');
+      const messageBtn = document.getElementById('messageBtn');
+
+      if (notificationBtn) {
+        notificationBtn.addEventListener('click', () => {
+          window.location.href = '../HTML/notificacao.html';
+        });
+      }
+
+      if (messageBtn) {
+        messageBtn.addEventListener('click', () => {
+          window.location.href = '../HTML/mensagens.html';
+        });
+      }
+    },
+
+    // Busca do header
+    performHeaderSearch(query) {
+      if (!query.trim()) return;
+      
+      console.log('Buscando por:', query);
+      
+      // Implementar busca real aqui
+      if (window.allCaregivers) {
+        const filtered = window.allCaregivers.filter(caregiver => 
+          caregiver.name.toLowerCase().includes(query.toLowerCase()) ||
+          caregiver.specialty.toLowerCase().includes(query.toLowerCase())
+        );
+        this.displayCaregivers(filtered);
+      }
+      
+      // Feedback visual
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer) {
+        searchContainer.style.borderColor = 'var(--verde-escuro)';
+        setTimeout(() => {
+          searchContainer.style.borderColor = 'transparent';
+        }, 2000);
+      }
+    },
+
+    // Função de logout atualizada
+    handleLogout() {
+      if (confirm('Tem certeza que deseja sair da sua conta?')) {
+        localStorage.removeItem('userData');
+        localStorage.removeItem('userType');
+        window.location.href = '../HTML/index.html';
+      }
     },
 
     // Sidebar desta página (usa ids: menuToggle, clientSidebar, sidebarOverlay)
@@ -484,144 +621,38 @@ window.CuidaFastClient = {
       if (welcomeNameEl) welcomeNameEl.textContent = user.firstName;
     },
 
-    loadCaregivers() {
-      const caregivers = [
-        { id: 1, name: 'Sarah Johnson', specialty: 'Cuidadora de Idosos', rating: 4.9, reviews: 127, experience: '5 anos', distance: '2.3 km', price: 35, image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face' },
-        { id: 2, name: 'Jennifer Lopez', specialty: 'Pet sitter e Cuidadora de Idosos', rating: 4.8, reviews: 93, experience: '3 anos', distance: '1.8 km', price: 28, image: 'https://s2.glbimg.com/XcrPi1OFnbbUybFQK52JC_0Jjrs=/smart/e.glbimg.com/og/ed/f/original/2019/01/19/jlo_50163141_329600424430635_8889962438239638413_n.jpg' },
-        { id: 3, name: 'Emily Rodriguez', specialty: 'Cuidadora de Idosos', rating: 4.9, reviews: 156, experience: '7 anos', distance: '3.1 km', price: 42, image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face' },
-        { id: 4, name: 'David Thompson', specialty: 'Cuidador Especializado', rating: 4.7, reviews: 84, experience: '4 anos', distance: '2.7 km', price: 38, image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face' },
-        { id: 5, name: 'Maria Santos', specialty: 'Cuidado Infantil', rating: 4.8, reviews: 112, experience: '6 anos', distance: '1.5 km', price: 32, image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face' },
-        { id: 6, name: 'James Wilson', specialty: 'Cuidador Noturno', rating: 4.6, reviews: 67, experience: '2 anos', distance: '4.2 km', price: 45, image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face' }
-      ];
-
-      this.displayCaregivers(caregivers);
-      window.allCaregivers = caregivers;
-    },
-
-    displayCaregivers(caregivers) {
-      const caregiversGrid = document.getElementById('caregiversGrid');
-      if (!caregiversGrid) return;
-      caregiversGrid.innerHTML = caregivers.map(caregiver => `
-        <div class="caregiver-card" data-id="${caregiver.id}">
-          <div class="caregiver-header">
-            <div class="caregiver-avatar">
-              <img src="${caregiver.image}" alt="${caregiver.name}" loading="lazy">
-            </div>
-            <div class="caregiver-info">
-              <h3>${caregiver.name}</h3>
-              <p class="caregiver-specialty">${caregiver.specialty}</p>
-              <div class="caregiver-rating">
-                ${this.generateStars(caregiver.rating)}
-                <span class="rating-text">${caregiver.rating} (${caregiver.reviews} reviews)</span>
-              </div>
-            </div>
-          </div>
-          <div class="caregiver-details">
-            <div class="detail-row"><span class="detail-label">Experiência</span><span class="detail-value">${caregiver.experience}</span></div>
-            <div class="detail-row"><span class="detail-label">Distância</span><span class="detail-value">${caregiver.distance}</span></div>
-            <div class="detail-row"><span class="detail-label">Preço/hora</span><span class="detail-value">R$ ${caregiver.price}</span></div>
-          </div>
-          <div class="caregiver-actions">
-            <button type="button" class="btn primary" onclick="HomeCliente.viewCaregiverProfile(${caregiver.id})">Abrir perfil do cuidador</button>
-          </div>
-        </div>
-      `).join('');
-    },
-
-    generateStars(rating) {
-      const fullStars = Math.floor(rating);
-      const hasHalfStar = rating % 1 !== 0;
-      let stars = '';
-      for (let i = 0; i < fullStars; i++) stars += '<i class="ph ph-star star" aria-hidden="true"></i>';
-      if (hasHalfStar) stars += '<i class="ph ph-star-half star" aria-hidden="true"></i>';
-      const emptyStars = 5 - Math.ceil(rating);
-      for (let i = 0; i < emptyStars; i++) stars += '<i class="ph ph-star" style="color: var(--cinza-claro);" aria-hidden="true"></i>';
-      return stars;
-    },
-
-    viewCaregiverProfile(caregiverId) {
-      localStorage.setItem('selectedCaregiverId', caregiverId);
-      window.location.href = '../HTML/open-perfil-cuidador.html';
-    },
-
-    initFilters() {
-      const filterBtn = document.getElementById('filterBtn');
-      const filterModal = document.getElementById('filterModal');
-      const closeFilterModal = document.getElementById('closeFilterModal');
-      const applyFilters = document.getElementById('applyFilters');
-      const clearFilters = document.getElementById('clearFilters');
-      if (!filterBtn || !filterModal) return;
-
-      filterBtn.addEventListener('click', () => { filterModal.style.display = 'flex'; });
-      if (closeFilterModal) closeFilterModal.addEventListener('click', () => { filterModal.style.display = 'none'; });
-      filterModal.addEventListener('click', (e) => { if (e.target === filterModal) filterModal.style.display = 'none'; });
-
-      const ratingRange = document.getElementById('ratingRange');
-      const ratingValue = document.getElementById('ratingValue');
-      const distanceRange = document.getElementById('distanceRange');
-      const distanceValue = document.getElementById('distanceValue');
-      if (ratingRange && ratingValue) {
-        ratingRange.addEventListener('input', () => {
-          ratingValue.textContent = parseFloat(ratingRange.value).toFixed(1);
-          this.updateStarsDisplay(parseFloat(ratingRange.value));
-        });
-      }
-      if (distanceRange && distanceValue) {
-        distanceRange.addEventListener('input', () => { distanceValue.textContent = distanceRange.value; });
-      }
-      if (applyFilters) applyFilters.addEventListener('click', () => { this.applyFilterSettings(); filterModal.style.display = 'none'; });
-      if (clearFilters) clearFilters.addEventListener('click', () => { this.resetFilters(); });
-    },
-
-    updateStarsDisplay(rating) {
-      const starsContainer = document.querySelector('.rating-display .stars');
-      if (starsContainer) starsContainer.innerHTML = this.generateStars(rating);
-    },
-
-    applyFilterSettings() {
-      console.log('Filtros aplicados');
-      // Implementar lógica real de filtros se necessário
-    },
-
-    resetFilters() {
-      const ratingRange = document.getElementById('ratingRange');
-      const ratingValue = document.getElementById('ratingValue');
-      const distanceRange = document.getElementById('distanceRange');
-      const distanceValue = document.getElementById('distanceValue');
-      const minPrice = document.getElementById('minPrice');
-      const maxPrice = document.getElementById('maxPrice');
-
-      if (ratingRange) ratingRange.value = 4;
-      if (ratingValue) ratingValue.textContent = '4.0';
-      if (distanceRange) distanceRange.value = 15;
-      if (distanceValue) distanceValue.textContent = '15';
-      if (minPrice) minPrice.value = 20;
-      if (maxPrice) maxPrice.value = 80;
-
-      const checkboxes = document.querySelectorAll('.filter-option input[type="checkbox"]');
-      checkboxes.forEach(checkbox => { checkbox.checked = checkbox.value === 'elderly'; });
-      this.updateStarsDisplay(4);
-    },
-
-    initCategorySelection() {
-      const categoryCards = document.querySelectorAll('.category-card');
-      categoryCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const category = card.dataset.category;
-          this.filterByCategory(category);
-        });
-      });
-    },
-
-    filterByCategory(category) {
-      console.log(`Filtrando por categoria: ${category}`);
-    },
-
+    // Função para carregar mais cuidadores
     initLoadMore() {
       const btn = document.getElementById('loadMoreBtn');
       if (!btn) return;
+      
+      let currentLoad = 0;
+      
       btn.addEventListener('click', () => {
         console.log('Carregando mais cuidadores...');
+        
+        if (currentLoad === 0) {
+          // Mostrar segunda seção de cuidadores
+          const moreCaregivers = document.getElementById('moreCaregivers');
+          if (moreCaregivers) {
+            moreCaregivers.style.display = 'grid';
+            moreCaregivers.classList.add('show');
+          }
+          currentLoad = 1;
+          btn.innerHTML = 'Carregar mais cuidadores <i class="ph ph-arrow-down" aria-hidden="true"></i>';
+        } else if (currentLoad === 1) {
+          // Mostrar terceira seção de cuidadores
+          const evenMoreCaregivers = document.getElementById('evenMoreCaregivers');
+          if (evenMoreCaregivers) {
+            evenMoreCaregivers.style.display = 'grid';
+            evenMoreCaregivers.classList.add('show');
+          }
+          btn.innerHTML = 'Todos os cuidadores carregados <i class="ph ph-check" aria-hidden="true"></i>';
+          btn.disabled = true;
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'not-allowed';
+          currentLoad = 2;
+        }
       });
     },
 
