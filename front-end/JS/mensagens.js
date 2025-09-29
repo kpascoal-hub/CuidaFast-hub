@@ -56,8 +56,9 @@ const addButton = document.getElementById('add-button');
 const attachmentMenu = document.getElementById('attachment-menu');
 const fileInput = document.getElementById('file-input');
 const searchInput = document.getElementById('search-input');
-const menuIcon = document.querySelector('.menu-icon');
-const sidebar = document.querySelector('.sidebar');
+// Compatibilidade com header antigo ('.menu-icon') e com o header moderno
+const menuIcon = document.querySelector('.menu-icon') || document.querySelector('#mobileMenuToggle') || document.querySelector('.mobile-menu-toggle');
+const sidebar = document.querySelector('#clientSidebar') || document.querySelector('.sidebar');
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -81,7 +82,7 @@ function setupEventListeners() {
         filterContacts(e.target.value);
     });
 
-    menuIcon.addEventListener('click', toggleSidebar);
+    if (menuIcon) menuIcon.addEventListener('click', toggleSidebar);
     addButton.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleAttachmentMenu();
@@ -253,7 +254,11 @@ function filterContacts(searchTerm) {
 }
 
 function toggleSidebar() {
+    if (!sidebar) return;
+    // Suporta classes usadas por diferentes headers: 'open' e 'active'
     sidebar.classList.toggle('open');
+    sidebar.classList.toggle('active');
+    document.body.classList.toggle('sidebar-open');
 }
 
 function scrollToBottom() {
