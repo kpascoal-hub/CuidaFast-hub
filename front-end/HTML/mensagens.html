@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CuidaFast - Mensagens</title>
-    <link rel="stylesheet" href="../CSS/pages/mensagens.css">
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <script>
         // Aguardar carregamento completo da página
@@ -48,20 +47,116 @@
             }, 500);
         });
     </script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/icone_verde.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- CSS: mantém o estilo específico de mensagens e adiciona os estilos do header moderno -->
+    <link rel="stylesheet" href="../CSS/pages/mensagens.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+    <link rel="stylesheet" href="../CSS/pages/notification-styles.css">
 </head>
-<body>
+<body class="client-home">
     <div class="container">
-        <header class="header">
-            <div class="logo">
-                <img src="../assets/Logotipo_1_vetorizado.svg" alt="Logo CuidaFast" />
+        <!-- Header moderno (igual ao de notificacoes) - ajustado para Mensagens -->
+        <header class="modern-header">
+            <div class="header-container">
+                <!-- Logo Section -->
+                <div class="header-left">
+                    <a href="homeCliente.html" class="logo-link">
+                        <img id="logo" src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
+                        <span class="logo-text">CuidaFast</span>
+                    </a>
+                </div>
+                
+                <!-- Espaço vazio onde estava a barra de pesquisa -->
+                <div class="header-center"></div>
+                
+                <!-- User Actions -->
+                <div class="header-right">
+                    <!-- Notifications -->
+                    <button class="header-action-btn notification-btn" id="notificationBtn">
+                        <i class="ph ph-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <!-- Messages (DEVE estar selecionado nesta página) -->
+                    <button class="header-action-btn message-btn active" id="messageBtn">
+                        <i class="ph ph-chat-circle"></i>
+                        <span class="message-badge">2</span>
+                    </button>
+                    
+                    <!-- User Profile -->
+                    <div class="user-profile-dropdown" id="userProfileDropdown">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
+                            <span class="user-name" id="headerUserName">João Silva</span>
+                            <i class="ph ph-caret-down dropdown-arrow"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                            <div class="dropdown-header">
+                                <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
+                                <div class="dropdown-user-info">
+                                    <h4>João Silva</h4>
+                                    <p>Cliente Premium</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="ph ph-user"></i>
+                                <span>Meu Perfil</span>
+                            </a>
+                            <a href="../HTML/configuracoes.html" class="dropdown-item">
+                                <i class="ph ph-gear"></i>
+                                <span>Configurações</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="ph ph-clock"></i>
+                                <span>Histórico</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="ph ph-question"></i>
+                                <span>Ajuda</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                                <i class="ph ph-sign-out"></i>
+                                <span>Sair</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
             </div>
-            <div class="menu-icon">
-                <i class="ph ph-list"></i>
+            
+            <!-- Mobile Search Bar -->
+            <div class="mobile-search-container" id="mobileSearchContainer">
+                <div class="mobile-search-wrapper">
+                    <i class="ph ph-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Buscar cuidadores..." class="mobile-search-input">
+                    <button class="mobile-search-btn" type="button">
+                        <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
             </div>
         </header>
 
         <div class="main-content">
-            <aside class="sidebar">
+            <aside id="clientSidebar" class="sidebar">
                 <div class="search-bar">
                     <input type="text" placeholder="Buscar contatos..." id="search-input">
                 </div>
@@ -154,6 +249,7 @@
         </div>
     </div>
 
+    <script src="../JS/header.js"></script>
     <script src="../JS/mensagens.js"></script>
 </body>
 </html>
