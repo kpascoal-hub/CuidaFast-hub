@@ -112,3 +112,19 @@
     gap: 1rem;
   }
 }
+
+/* Forçar estilos de modal globalmente para não ficar transparente atrás do header */
+.modal-backdrop {
+  background-color: rgba(0,0,0,0.5) !important;
+  opacity: 1 !important;
+  z-index: 1100 !important; /* acima do header (1000) */
+}
+
+.modal {
+  z-index: 1200 !important; /* garantir que o modal fique acima do backdrop e do header */
+}
+
+.modal-content {
+  background-color: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
