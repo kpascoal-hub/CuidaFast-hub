@@ -23,6 +23,50 @@
     <link rel="stylesheet" href="../CSS/pages/homeCliente.css">
 </head>
 <body class="client-home">
+    <!-- Firebase SDK -->
+<script type="module">
+  // Importa SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js";
+
+  // Configuração do seu projeto Firebase
+  const firebaseConfig = {
+    apiKey: "SUA_API_KEY",
+    authDomain: "SEU_PROJETO.firebaseapp.com",
+    projectId: "SEU_PROJETO",
+    storageBucket: "SEU_PROJETO.appspot.com",
+    messagingSenderId: "NUMERO_SENDER",
+    appId: "SUA_APP_ID",
+    measurementId: "SUA_MEASUREMENT_ID"
+  };
+
+  // Inicializa Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const messaging = getMessaging(app);
+
+  // Solicitar permissão para notificações
+  async function initFCM() {
+    try {
+      const token = await getToken(messaging, { vapidKey: "SUA_VAPID_KEY" });
+      console.log("Token de notificação:", token);
+
+      // Aqui você pode salvar o token no Firestore
+      // ex: salvarTokens(token);
+    } catch (error) {
+      console.error("Erro ao obter token:", error);
+    }
+  }
+
+  // Receber notificações em primeiro plano
+  onMessage(messaging, (payload) => {
+    console.log("Notificação recebida:", payload);
+    alert(`Mensagem: ${payload.notification.title}`);
+  });
+
+  initFCM();
+</script>
     
     <!-- Header Moderno -->
     <header class="modern-header">
