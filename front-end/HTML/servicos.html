@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviço</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../CSS/styles.css">
+  <link rel="stylesheet" href="../CSS/pages/servicos.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="client-header">
+    <div class="containerzin">
+      <nav class="client-navbar">
+        <!-- Logo no canto esquerdo -->
+        <a href="../../index.html" class="client-brand">
+          <img id="logoscuda" src="../assets/Logotipo_1_vetorizado.svg" 
+               alt="CuidaFast Logo" width="200" height="90">
+        </a>
+
+        <!-- Menu Toggle -->
+        <button type="button" class="menu-toggle" id="menuToggle">
+          <i class="ph ph-list"></i>
+        </button>
+
+        <!-- User Profile (no canto direito) -->
+        <div class="user-profile" id="userProfile">
+          <div class="user-avatar">
+            <img src="../assets/images.webp" alt="Foto do usuário" class="avatar-header">
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+   <!-- Sidebar -->
+   <aside class="client-sidebar" id="clientSidebar">
+    <div class="sidebar-content">
+        <div class="sidebar-header">
+            <div class="user-info">
+                <div class="user-avatar-large">
+     <img id="avatar" class="avatar" src="../assets/images.webp"
+         alt="cuidafast">
+                </div>
+                <div class="user-details">
+                    <h3 id="userName">João Silva</h3>
+                    <p>Cliente desde 2024</p>
+                </div>
+            </div>
+        </div>
+       
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="homeCliente.html" class="nav-link">
+                        <i class="ph ph-house" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../HTML/mensagens.html" class="nav-link">
+                        <i class="ph ph-chat-circle"></i>
+                        <span>Mensagens</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../HTML/notificacao.html" class="nav-link">
+                        <i class="ph ph-bell" aria-hidden="true"></i>
+                        <span>Notificações</span>
+                        <span class="nav-badge">5</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="in-time.html" class="nav-link">
+                        <i class="ph ph-lightning"></i>
+                        <span>InTime</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../HTML/configuracoes.html" class="nav-link">
+                        <i class="ph ph-gear"></i>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="logoutBtn">
+                        <i class="ph ph-sign-out"></i>
+                        <span>Sair da conta</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="container">
+  <div class="form-section">
+    <div class="back">
+      <a href="javascript:history.back()" class="back-link">
+        <i class="ph ph-arrow-circle-left"></i>
+      </a>
+    </div>
+
+    <h1 class="titulo">Sheila chegou para cuidar de João</h1>
+
+    <section class="conteudo">
+      <div class="card-profissional">
+        <div class="perfil">
+          <img src="sheila.jpg" alt="Foto da profissional" class="foto">
+          <div>
+            <h3>Sheila Mendes</h3>
+            <p>Função: Babá</p>
+          </div>
+        </div>
+        <p><strong>Data:</strong> 02/08/2025</p>
+        <p><strong>Check-in:</strong> 07:58</p>
+        <p><strong>Check-out:</strong> 12:35</p>
+        <p><strong>Localização confirmada no endereço:</strong></p>
+      </div>
+
+      <div class="mapa">
+        <!-- Aqui você vai colocar sua API externa -->
+        <iframe 
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-46.633%2C-23.55%2C-46.62%2C-23.54&amp;layer=mapnik" 
+          style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section class="acoes">
+      <button class="btn" id="btnAgendamento">Agendamento →</button>
+      <button class="btn" id="btnServico">Serviço InTime →</button>
+    </section>
+  </div>
+
+  <script src="../JS/serviço.js"></script>
+  <script src="../JS/sidebar.js"></script>
+</body>
+</html>
