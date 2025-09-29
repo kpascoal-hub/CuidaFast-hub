@@ -6,11 +6,130 @@ body {
     background: var(--creme);
     min-height: 100vh;
 }
+
+/* Quando não houver resultados, encurtar o conteúdo para deixar o rodapé visível */
+.short-page .client-main,
+.short-page #main-content,
+.short-page .containerzin {
+    min-height: 60vh; /* reduz a altura do conteúdo para aproximar o rodapé */
+}
+
+/* Remover o min-height do body quando encurtamos a página */
+body.short-page.client-home,
+body.short-page {
+    min-height: auto !important;
+}
+
+/* Forçar colapso forte quando short-page estiver ativo */
+body.short-page, html.short-page {
+    height: auto !important;
+    min-height: auto !important;
+}
+
+body.short-page .client-home,
+body.short-page main,
+body.short-page .client-main,
+body.short-page #main-content,
+body.short-page .containerzin {
+    height: auto !important;
+    min-height: auto !important;
+    padding-bottom: 16px !important;
+}
+
+/* Esconder elementos de demo/absolutos que podem empurrar a página */
+body.short-page .macbook-air-1,
+body.short-page .newsletter-section,
+body.short-page .some-demo,
+body.short-page .hero-demo {
+    display: none !important;
+}
+
+/* Garantir que o rodapé esteja posicionado logo após o conteúdo */
+body.short-page .rodape{
+    position: relative !important;
+    margin-top: 12px !important;
+}
+
+.short-page .welcome-section,
+.short-page #serviceCategories {
+    transition: opacity 0.25s ease, max-height 0.25s ease;
+    opacity: 0.9;
+}
+
+/* No results box */
+.no-results-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    /* blend with page background so only the shadow is apparent */
+    background: transparent;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(27,71,93,0.06);
+    color: var(--azul-escuro);
+    max-width: 720px;
+    margin: 18px auto;
+}
+
+.no-results-box .no-results-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(180deg, rgba(27,71,93,0.08), rgba(27,71,93,0.02));
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 28px;
+    color: var(--azul-escuro);
+}
+
+.no-results-box h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.no-results-box p {
+    margin: 0;
+    color: #6b7280;
+}
+
+/* Disabled button appearance (general) */
+
 .avatar{
  width: 50px; /* Define a largura para 50px */
   height: 50px; /* Define a altura para 50px */
   border-radius: 50%; /* Transforma a imagem em círculo */
   object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+}
+
+/* Responsividade específica para os cards de cuidadores */
+#caregiversContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+    padding: 0 1rem 2rem 1rem;
+}
+
+/* Garantir que cards dentro do container se estiquem corretamente (não usar width fixa) */
+#caregiversContainer .card{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ajustes finos para tamanhos de coluna em breakpoints específicos */
+@media (min-width: 1200px){
+    #caregiversContainer{ grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 992px) and (max-width:1199px){
+    #caregiversContainer{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 700px) and (max-width:991px){
+    #caregiversContainer{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width:699px){
+    #caregiversContainer{ grid-template-columns: 1fr; }
 }
 /* ===== HEADER MODERNO ===== */
 .modern-header {
@@ -24,6 +143,22 @@ body {
     height: 80px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(10px);
+}
+
+/* Página homeCliente: override para cards nesta página para suportar grid responsivo */
+.servicos .card {
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+/* Outline disabled look for load more button to match 'Ordenar' but muted */
+.btn.outline.disabled, .btn.outline:disabled {
+    background: transparent !important;
+    color: #9ca3af !important; /* gray text */
+    border: 2px solid #e5e7eb !important; /* light gray border */
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    opacity: 0.95;
 }
 
 .header-container {
@@ -397,6 +532,52 @@ body {
     padding: 0.5rem;
     border-radius: 8px;
     transition: all 0.3s ease;
+}
+
+/* ===== Modal styles (copiado de notification-styles para consistência) ===== */
+.modal {
+    --bs-modal-bg: var(--bege);
+    --bs-modal-header-border-color: rgba(0, 0, 0, 0.1);
+    --bs-modal-footer-border-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    background-color: var(--branco);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1.25rem 1.5rem;
+}
+
+.modal-title {
+    color: var(--azul-escuro);
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.5rem;
+}
+
+.modal-footer .btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 .menu-toggle,
