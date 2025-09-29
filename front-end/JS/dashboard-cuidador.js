@@ -9,9 +9,21 @@ document.addEventListener('DOMContentLoaded', function() {
     initPerformanceChart();
     initServicosChart();
     initHistoricoPagamentos();
+    initMessageButton();
     
     console.log('Dashboard do Cuidador carregado com sucesso!');
 });
+
+// Função para inicializar o botão de mensagens
+function initMessageButton() {
+    const messageBtn = document.getElementById('messageBtn');
+    
+    if (messageBtn) {
+        messageBtn.addEventListener('click', function() {
+            window.location.href = '../HTML/mensagens.html';
+        });
+    }
+}
 
 // Função para alternar visualização do valor arrecadado
 function initToggleValor() {
