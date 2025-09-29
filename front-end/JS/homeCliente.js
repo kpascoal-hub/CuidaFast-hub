@@ -66,6 +66,224 @@ function initSidebar() {
     }
 }
 
+// ===== FILTRAGEM DE CARDS VIA HEADER SEARCH =====
+(function(){
+  function normalize(text){
+    return (text||'').toString().toLowerCase().trim();
+  }
+
+  const headerSearch = document.getElementById('headerSearch');
+  const searchBtn = document.querySelector('.search-btn');
+  const mobileSearch = document.querySelector('.mobile-search-input');
+  const container = document.querySelector('.containerzin') || document.getElementById('main-content') || document.body;
+
+  // Dataset falso de cuidadores (substitui os cards estáticos)
+  const FAKE_CAREGIVERS = [
+    { name: 'Maria Silva', specialty: 'Idosos', bio: 'Cuidadora especializada em idosos com 5 anos de experiência.', rating: 4.9, reviews: 127 },
+    { name: 'João Santos', specialty: 'Infantil', bio: 'Cuidador infantil certificado, especialista em primeiros socorros.', rating: 4.7, reviews: 89 },
+    { name: 'Ana Costa', specialty: 'Pets', bio: 'Pet sitter experimente, ama animais e oferece cuidados especiais.', rating: 5.0, reviews: 203 },
+    { name: 'Pedro Almeida', specialty: 'Reabilitação', bio: 'Cuidador com experiência em fisioterapia e reabilitação.', rating: 4.8, reviews: 92 },
+    { name: 'Carlos Oliveira', specialty: 'Idosos', bio: 'Enfermeiro especializado em cuidados domiciliares para idosos.', rating: 4.8, reviews: 156 },
+    { name: 'Lucia Ferreira', specialty: 'Infantil', bio: 'Babá certificada com experiência em desenvolvimento infantil.', rating: 4.9, reviews: 98 },
+    { name: 'Roberto Lima', specialty: 'Pets', bio: 'Veterinário e pet sitter, especialista em cuidados com animais.', rating: 4.6, reviews: 234 },
+    { name: 'Sandra Mendes', specialty: 'Idosos', bio: 'Psicóloga especializada em cuidados com idosos e demência.', rating: 5.0, reviews: 78 },
+    { name: 'Patricia Alves', specialty: 'Reabilitação', bio: 'Fisioterapeuta especializada em reabilitação geriátrica.', rating: 5.0, reviews: 87 },
+    { name: 'Fernando Santos', specialty: 'Infantil', bio: 'Educador infantil com especialização em necessidades especiais.', rating: 4.7, reviews: 145 },
+    { name: 'Camila Rocha', specialty: 'Pets', bio: 'Adestradora e cuidadora de pets, especialista em comportamento animal.', rating: 4.9, reviews: 176 },
+    { name: 'Ricardo Souza', specialty: 'Home Care', bio: 'Técnico em enfermagem com especialização em home care.', rating: 4.7, reviews: 134 }
+  ];
+
+  // Estado de paginação e filtro
+  let caregiversState = {
+    items: FAKE_CAREGIVERS.slice(), // cópia
+    page: 0,
+    perPage: 4,
+    filtered: null
+  };
+
+  function renderCard(c) {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+      <div class="icon"><i class="ph ph-user" style="font-size:40px;color:#1B475D"></i></div>
+      <h3>${escapeHtml(c.name)}</h3>
+      <p>${escapeHtml(c.bio)}</p>
+      <div style="display:flex;align-items:center;gap:8px;margin:12px 0;">
+        <div style="display:flex;color:#FAD564">
+          ${renderStars(c.rating)}
+        </div>
+        <span style="font-size:14px;color:#666;">${c.rating} (${c.reviews} avaliações)</span>
+      </div>
+      <a href="#" class="btn primary" style="margin-top:16px;">Ver Perfil</a>
+    `;
+    return div;
+  }
+
+  function renderStars(r){
+    const full = Math.round(r);
+    let out = '';
+    for(let i=0;i<full;i++) out += '<i class="ph-fill ph-star"></i>';
+    for(let i=full;i<5;i++) out += '<i class="ph ph-star"></i>';
+    return out;
+  }
+
+  function escapeHtml(s){
+    return (s||'').toString().replace(/[&<>"']/g, function(ch){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[ch];
+    });
+  }
+
+  function getActiveList(){
+    return caregiversState.filtered || caregiversState.items;
+  }
+
+  function renderNextPage(reset){
+    const containerEl = document.getElementById('caregiversContainer');
+    if(!containerEl) return;
+    if(reset){ containerEl.innerHTML = ''; caregiversState.page = 0; }
+    const list = getActiveList();
+    const start = caregiversState.page * caregiversState.perPage;
+    const slice = list.slice(start, start + caregiversState.perPage);
+    slice.forEach(item => containerEl.appendChild(renderCard(item)));
+    caregiversState.page++;
+
+    // controlar botão "Carregar mais" - mostrar botão cinza semelhante ao 'Ordenar' quando não houver mais itens
+    const loadBtn = document.getElementById('loadMoreBtn');
+    if (loadBtn) {
+      if (caregiversState.page * caregiversState.perPage >= list.length) {
+        // Não há mais itens: manter o botão visível, torná-lo outline + disabled (cinza)
+        loadBtn.style.display = '';
+        loadBtn.disabled = true;
+        loadBtn.className = 'btn outline disabled';
+        loadBtn.innerHTML = 'Todos os cuidadores carregados';
+        loadBtn.style.opacity = '';
+        loadBtn.style.cursor = 'not-allowed';
+      } else {
+        // Ainda há itens: garantir que o botão esteja habilitado e com estilo primário
+        loadBtn.style.display = '';
+        loadBtn.disabled = false;
+        loadBtn.className = 'btn primary';
+        loadBtn.innerHTML = 'Carregar mais cuidadores <i class="ph ph-arrow-down" aria-hidden="true"></i>';
+        loadBtn.style.opacity = '';
+        loadBtn.style.cursor = '';
+      }
+    }
+  }
+
+  // hook initial render
+  document.addEventListener('DOMContentLoaded', function(){
+    // exibir primeira página
+    renderNextPage(true);
+    const loadBtn = document.getElementById('loadMoreBtn');
+    if(loadBtn){
+      loadBtn.addEventListener('click', function(){ renderNextPage(false); });
+    }
+  });
+
+  function filterCards(query){
+    const q = normalize(query);
+    // filtrar no dataset
+    const list = FAKE_CAREGIVERS.slice();
+    const filtered = list.filter(c => ((c.name + ' ' + c.bio + ' ' + c.specialty).toLowerCase().indexOf(q) !== -1));
+    caregiversState.filtered = q === '' ? null : filtered;
+    // re-render a partir da página 0
+    renderNextPage(true);
+    const sections = Array.from(document.querySelectorAll('.servicos'));
+    let anyVisible = false;
+
+    // Hide the welcome and top service categories while searching
+    const welcomeSection = document.querySelector('.welcome-section');
+    const topServices = document.getElementById('serviceCategories');
+    if(q !== ''){
+      if(welcomeSection) welcomeSection.style.display = 'none';
+      if(topServices) topServices.style.display = 'none';
+      // ocultar botão carregar mais durante busca
+      const loadBtnDuringSearch = document.getElementById('loadMoreBtn');
+      if (loadBtnDuringSearch) {
+        loadBtnDuringSearch.style.display = 'none';
+      }
+    } else {
+      if(welcomeSection) welcomeSection.style.display = '';
+      if(topServices) topServices.style.display = '';
+      // restaurar botão carregar mais ao limpar busca (o renderNextPage cuidará do estado)
+      const loadBtnAfterSearch = document.getElementById('loadMoreBtn');
+      if (loadBtnAfterSearch) {
+        loadBtnAfterSearch.style.display = '';
+      }
+    }
+
+    // compute anyVisible based on rendered cards
+    const rendered = Array.from(document.querySelectorAll('#caregiversContainer .card'));
+    anyVisible = rendered.length > 0;
+    // hide the static service sections when searching
+    
+
+    const noId = 'homeSearchNoResults';
+    let no = document.getElementById(noId);
+
+    // Mostrar/ocultar header de cuidadores
+    const caregiversHeader = document.getElementById('caregiversHeader');
+    if(caregiversHeader){
+      caregiversHeader.style.display = anyVisible ? '' : 'none';
+    }
+
+    if(!anyVisible && q !== ''){
+      if(!no){
+        no = document.createElement('div');
+        no.id = noId;
+        no.className = 'no-results-box';
+        no.innerHTML = `
+          <div class="no-results-icon">
+            <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+          </div>
+          <div class="no-results-text">
+            <h3>Nenhum cuidador encontrado</h3>
+            <p>Tente outra palavra-chave ou remova filtros para ver mais resultados.</p>
+          </div>
+        `;
+        container.prepend(no);
+      }
+      // adicionar classe para encurtar a página e mostrar o rodapé
+      document.body.classList.add('short-page');
+      // Forçar inline styles caso exista regra conflitante de min-height
+      try {
+        document.body.style.minHeight = 'auto';
+        const mainEl = document.getElementById('main-content') || document.querySelector('main');
+        if (mainEl) mainEl.style.minHeight = '60vh';
+        if (container) container.style.minHeight = '60vh';
+      } catch (e) {
+        // ignore
+      }
+    } else if(no){
+      no.remove();
+      // remover a classe quando houver resultados
+      document.body.classList.remove('short-page');
+      // limpar estilos inline aplicados anteriormente
+      try {
+        document.body.style.minHeight = '';
+        const mainEl = document.getElementById('main-content') || document.querySelector('main');
+        if (mainEl) mainEl.style.minHeight = '';
+        if (container) container.style.minHeight = '';
+      } catch (e) {}
+    }
+  }
+
+  function debounce(fn,delay){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),delay);};}
+
+  const deb = debounce(function(){
+    const v = (headerSearch && headerSearch.value) || (mobileSearch && mobileSearch.value) || '';
+    filterCards(v);
+  },200);
+
+  if(headerSearch){ headerSearch.addEventListener('input', deb); headerSearch.addEventListener('keypress', function(e){ if(e.key==='Enter'){ e.preventDefault(); filterCards(headerSearch.value); } }); }
+  if(mobileSearch){ mobileSearch.addEventListener('input', deb); mobileSearch.addEventListener('keypress', function(e){ if(e.key==='Enter'){ e.preventDefault(); filterCards(mobileSearch.value); } }); }
+  if(searchBtn){ searchBtn.addEventListener('click', function(){ const v = (headerSearch && headerSearch.value) || (mobileSearch && mobileSearch.value) || ''; filterCards(v); }); }
+
+  // Expor para console (opcional)
+  window.CuidaFast = window.CuidaFast || {};
+  window.CuidaFast.filterCards = filterCards;
+})();
+
 
 // ===== USER MENU =====
 
@@ -160,6 +378,7 @@ function updateNotificationCount() {
 
 function initModals() {
     initFindCuidadorModal();
+    initFilterModal();
 }
 
 function initFindCuidadorModal() {
@@ -550,11 +769,22 @@ window.CuidaFastClient = {
 
     // Busca do header
     performHeaderSearch(query) {
-      if (!query.trim()) return;
-      
+      if (!query || !query.trim()) {
+        // resetizar filtros visuais quando a query estiver vazia
+        if (window.CuidaFast && typeof window.CuidaFast.filterCards === 'function') {
+          window.CuidaFast.filterCards('');
+        }
+        return;
+      }
+
       console.log('Buscando por:', query);
-      
-      // Implementar busca real aqui
+
+      // Filtrar os cards já visíveis através da função comum
+      if (window.CuidaFast && typeof window.CuidaFast.filterCards === 'function') {
+        window.CuidaFast.filterCards(query);
+      }
+
+      // Implementar busca real aqui (opcional)
       if (window.allCaregivers) {
         const filtered = window.allCaregivers.filter(caregiver => 
           caregiver.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -670,6 +900,96 @@ window.CuidaFastClient = {
     }
   };
 
+  // Inicialização do modal de filtro
+  function initFilterModal() {
+    const filterModal = new bootstrap.Modal(document.getElementById('filterModal'));
+    const openFilterBtn = document.getElementById('openFilterBtn');
+    const applyFiltersBtn = document.getElementById('applyFilters');
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    const ratingRange = document.getElementById('ratingRange');
+    const ratingValue = document.getElementById('ratingValue');
+    const distanceRange = document.getElementById('distanceRange');
+    const distanceValue = document.getElementById('distanceValue');
+    const minPrice = document.getElementById('minPrice');
+    const maxPrice = document.getElementById('maxPrice');
+    
+    // Abrir modal de filtro
+    if (openFilterBtn) {
+      openFilterBtn.addEventListener('click', function() {
+        filterModal.show();
+      });
+    }
+    
+    // Atualizar valor da avaliação quando o range for alterado
+    if (ratingRange && ratingValue) {
+      ratingRange.addEventListener('input', function() {
+        ratingValue.textContent = this.value;
+        updateStars(this.value);
+      });
+    }
+    
+    // Atualizar valor da distância quando o range for alterado
+    if (distanceRange && distanceValue) {
+      distanceRange.addEventListener('input', function() {
+        distanceValue.textContent = this.value;
+      });
+    }
+    
+    // Aplicar filtros
+    if (applyFiltersBtn) {
+      applyFiltersBtn.addEventListener('click', function() {
+        // Aqui você pode adicionar a lógica para aplicar os filtros
+        console.log('Filtros aplicados:', {
+          rating: ratingRange ? ratingRange.value : null,
+          distance: distanceRange ? distanceRange.value : null,
+          minPrice: minPrice ? minPrice.value : null,
+          maxPrice: maxPrice ? maxPrice.value : null
+        });
+        
+        // Fechar o modal
+        filterModal.hide();
+      });
+    }
+    
+    // Limpar filtros
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', function() {
+        // Resetar todos os filtros
+        if (ratingRange) ratingRange.value = 4;
+        if (ratingValue) ratingValue.textContent = '4.0';
+        if (distanceRange) distanceRange.value = 15;
+        if (distanceValue) distanceValue.textContent = '15';
+        if (minPrice) minPrice.value = '20';
+        if (maxPrice) maxPrice.value = '80';
+        
+        // Atualizar estrelas
+        updateStars(4);
+        
+        console.log('Filtros limpos');
+      });
+    }
+    
+    // Função para atualizar as estrelas de avaliação
+    function updateStars(rating) {
+      const stars = document.querySelectorAll('.stars i');
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      
+      stars.forEach((star, index) => {
+        if (index < fullStars) {
+          star.className = 'ph-fill ph-star';
+        } else if (index === fullStars && hasHalfStar) {
+          star.className = 'ph ph-star-half';
+        } else {
+          star.className = 'ph ph-star';
+        }
+      });
+    }
+    
+    // Inicializar estrelas
+    updateStars(ratingRange ? ratingRange.value : 4);
+  }
+
   // Expor no escopo global para o onclick do botão
   window.HomeCliente = HomeCliente;
 
@@ -678,6 +998,7 @@ window.CuidaFastClient = {
     // Executar somente se existir um marcador desta página
     if (document.body && document.body.classList.contains('client-home')) {
       HomeCliente.init();
+      initFilterModal();
     }
   });
 })();
