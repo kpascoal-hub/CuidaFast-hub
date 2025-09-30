@@ -36,7 +36,9 @@ async function salvarToken(token) {
 async function initFCM() {
   try {
     // 🔑 Troque pela sua VAPID KEY do Firebase Console (Configurações > Cloud Messaging)
-    const token = await getToken(messaging, { BAMeCbsVy0Wy1fqHjxiyHcviJhGUQC4S6VhLKC9FMgB8wJlYWYzW2EaEzqR8wY1SalKrwc0-D3aRotYl2VmHqwA" });
+    const token = await getToken(messaging, { 
+  vapidKey: "BAMeCbsVy0Wy1fqjHxjyHcviJhGUQC4S6VhLKC9FMgB8wJIYWYzW2EaEzqR8wY1SaIKrwc0-D3aRotYl2VmHqwA" 
+})/
 
     if (token) {
       console.log("📲 Token de notificação gerado:", token);
