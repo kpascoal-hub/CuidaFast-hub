@@ -19,18 +19,25 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const messaging = getMessaging(app);
 
-// Função para salvar token no Firestore
-async function salvarToken(token) {
+// Solicitar permissão e obter token
+async function initFCM() {
   try {
-    await addDoc(collection(db, "tokens"), {
-      token: token,
-      createdAt: new Date()
+    // 🔑 Sua VAPID KEY do Firebase Console
+    const token = await getToken(messaging, { 
+      vapidKey: "BAMeCbsVy0Wy1fqjHxjyHcviJhGUQC4S6VhLKC9FMgB8wJIYWYzW2EaEzqR8wY1SaIKrwc0-D3aRotYl2VmHqwA"
     });
-    console.log("✅ Token salvo no Firestore:", token);
-  } catch (e) {
-    console.error("❌ Erro ao salvar token:", e);
+
+    if (token) {
+      console.log("📲 Token de notificação gerado:", token);
+      salvarToken(token);
+    } else {
+      console.warn("⚠️ Usuário não concedeu permissão para notificações.");
+    }
+  } catch (error) {
+    console.error("❌ Erro ao obter token:", error);
   }
 }
+
 
 // Solicitar permissão e obter token
 async function initFCM() {
