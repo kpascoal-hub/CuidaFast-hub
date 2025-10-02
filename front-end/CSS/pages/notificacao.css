@@ -187,7 +187,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--branco);
+    color: var(--creme);
     cursor: pointer;
     transition: all 0.3s ease;
     margin-left: 0.5rem;
@@ -397,7 +397,7 @@ body {
 .mobile-search-container {
     display: none;
     padding: 0.75rem 1.5rem;
-    background: var(--branco);
+    background: var(--creme);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -575,7 +575,7 @@ body {
 
 /* Estilos para o modal de configurações */
 .modal {
-    --bs-modal-bg: var(--branco);
+    --bs-modal-bg: var(--creme);
     --bs-modal-header-border-color: rgba(0, 0, 0, 0.1);
     --bs-modal-footer-border-color: rgba(0, 0, 0, 0.1);
 }
