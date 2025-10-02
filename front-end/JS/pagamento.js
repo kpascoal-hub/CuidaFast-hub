@@ -457,4 +457,3 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPage('agendado');
 });
 
-
