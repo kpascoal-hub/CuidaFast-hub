@@ -28,7 +28,7 @@
   font-size: 30px;
   text-decoration: none;
   text-decoration: none;
-  color: inherit; /* opcional: mantém a cor herdada, sem azul padrão */
+  color: var(--azul-escuro); /* opcional: mantém a cor herdada, sem azul padrão */
   }
 
   h1 {
