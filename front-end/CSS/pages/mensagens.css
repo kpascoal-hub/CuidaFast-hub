@@ -114,7 +114,7 @@ body.client-home .main-content{
   padding: 12px 16px;
   border: 1px solid var(--cinza-input);
   border-radius: 25px;
-  background-color: white;
+  background-color: var(--creme);
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s ease;
@@ -226,7 +226,7 @@ body.client-home .main-content{
 .message.sent {
   align-self: flex-end;
   background-color: var(--azul-escuro);
-  color: white;
+  color: var(--creme);
   border-bottom-right-radius: 6px;
 }
 
@@ -253,7 +253,7 @@ body.client-home .main-content{
   position: absolute;
   bottom: 100%;
   left: 20px;
-  background-color: white;
+  background-color: var(--creme);
   border-radius: 12px;
   box-shadow: 0 4px 20px var(--shadow-strong);
   padding: 8px;
@@ -321,7 +321,7 @@ body.client-home .main-content{
 
 .add-button.active {
   background-color: var(--azul-escuro);
-  color: white;
+  color: var(--creme);
   transform: rotate(45deg);
 }
 
@@ -330,7 +330,7 @@ body.client-home .main-content{
   padding: 12px 20px;
   border: 1px solid var(--cinza-input);
   border-radius: 25px;
-  background-color: white;
+  background-color: var(--creme);
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s ease;
@@ -346,7 +346,7 @@ body.client-home .main-content{
   border-radius: 50%;
   border: none;
   background-color: var(--azul-escuro);
-  color: white;
+  color: var(--creme);
   cursor: pointer;
   display: flex;
   align-items: center;
