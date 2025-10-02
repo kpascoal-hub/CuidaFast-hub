@@ -746,6 +746,7 @@ body {
     display: grid;
     gap: 1.25rem;
     margin-top: 2rem;
+    width: var(--bs-border-width);
 }
 
 .notification-card {
