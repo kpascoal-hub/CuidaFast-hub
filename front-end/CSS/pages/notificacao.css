@@ -23,7 +23,7 @@ body {
 /* Estilo para o rodapé */
 .rodape {
     background-color: var(--azul-escuro);
-    color: white;
+    color: var(--creme);
     padding: 3rem 0 2rem;
     margin-top: auto;
     position: relative;
@@ -53,7 +53,7 @@ body {
 }
 
 .rodape h4 {
-    color: white;
+    color: var(--creme);
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
@@ -718,7 +718,7 @@ body {
 
 .btn-primary {
     background-color: var(--azul-escuro);
-    color: white;
+    color: var(--creme);
     border-color: var(--azul-escuro);
 }
 
@@ -749,7 +749,7 @@ body {
 }
 
 .notification-card {
-    background: white;
+    background: var(--creme);
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -871,7 +871,7 @@ body {
 .filter-tag {
     padding: 0.6rem 1.25rem;
     border-radius: 8px;
-    background-color: white;
+    background-color: var(--creme);
     border: 2px solid var(--cinza-borda);
     cursor: pointer;
     font-size: 0.95rem;
@@ -887,7 +887,7 @@ body {
 
 .filter-tag.active {
     background-color: var(--azul-escuro);
-    color: white;
+    color: var(--creme);
     border-color: var(--azul-escuro);
 }
 
@@ -895,7 +895,7 @@ body {
 .no-notifications {
     text-align: center;
     padding: 4rem 2rem;
-    background: white;
+    background: var(--creme);
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
