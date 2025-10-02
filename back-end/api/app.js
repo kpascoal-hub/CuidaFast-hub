@@ -1,27 +1,32 @@
-// app.js
 const express = require('express');
 const path = require('path');
-const cadastroRoutes = require('./routes/cadastroRoutes'); // corrigido o nome do arquivo
+const cadastroRoutes = require('./routes/cadastroRoutes');
+const notificationRoutes = require('./routes/notificationRoutes'); // 👈 adiciona
+const moment = require('moment'); 
 
 const app = express();
 
-// Middleware para ler JSON do corpo das requisições
 app.use(express.json());
-
-// Servir arquivos estáticos (front-end) da pasta 'public'
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// Rotas da API prefixadas por /api
-app.use('/api', cadastroRoutes);
+// suas rotas já existentes
+app.use('/cadastroi', cadastroRoutes);
 
-// Rota de teste simples
+// nova rota de notificações
+app.use('/notificacoes', notificationRoutes); // 👈 conecta aqui
+
+// rota simples de teste
 app.get('/api/teste', (req, res) => {
   res.json({ ok: true });
 });
 
-// Iniciar servidor
+// rota que retorna a data
+app.get('/api/data', (req, res) => {
+  const agora = moment().format('DD/MM/YYYY HH:mm');
+  res.json({ dataAtual: agora });
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-
