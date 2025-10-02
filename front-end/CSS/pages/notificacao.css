@@ -310,7 +310,7 @@ body {
     top: calc(100% + 10px);
     right: 0;
     width: 280px;
-    background: var(--branco);
+    background: var(--creme);
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 1rem 0;
@@ -581,15 +581,13 @@ body {
 }
 
 .modal-content {
-    background-color: var(--branco);
+    background-color: var(--creme);
     border: none;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 1 !important;
+    background-color: var(--creme);
 }
 
 .modal-header {
