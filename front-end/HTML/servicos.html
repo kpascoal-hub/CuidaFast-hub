@@ -3,141 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serviço</title>
+  <title>Mapa com informações</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link rel="stylesheet" href="../CSS/styles.css">
-  <link rel="stylesheet" href="../CSS/pages/servicos.css">
+  <link rel="stylesheet" href="CSS/servicos.css">
+  <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
-  <!-- Header -->
-  <header class="client-header">
-    <div class="containerzin">
-      <nav class="client-navbar">
-        <!-- Logo no canto esquerdo -->
-        <a href="../../index.html" class="client-brand">
-          <img id="logoscuda" src="../assets/Logotipo_1_vetorizado.svg" 
-               alt="CuidaFast Logo" width="200" height="90">
-        </a>
 
-        <!-- Menu Toggle -->
-        <button type="button" class="menu-toggle" id="menuToggle">
-          <i class="ph ph-list"></i>
+<body>
+  <!-- HEADER -->
+  <header class="modern-header">
+    <div class="header-container">
+      <div class="header-left">
+        <a href="homeCliente.html" class="logo-link">
+          <img id="logo" src="assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
+          
+        </a>
+      </div>
+
+      <div class="header-right">
+        <button class="header-action-btn" id="sidebarToggle">
+        <!--  <i class="ph ph-list"></i>-->
+        </button>
+        
+        <button class="header-action-btn notification-btn" id="notificationBtn">
+          <i class="ph ph-bell"></i>
+          <span class="notification-badge">5</span>
         </button>
 
-        <!-- User Profile (no canto direito) -->
-        <div class="user-profile" id="userProfile">
-          <div class="user-avatar">
-            <img src="../assets/images.webp" alt="Foto do usuário" class="avatar-header">
+        <button class="header-action-btn message-btn" id="messageBtn">
+          <i class="ph ph-chat-circle"></i>
+          <span class="message-badge">2</span>
+        </button>
+
+        <div class="user-profile-dropdown" id="userProfileDropdown">
+          <button class="user-profile-btn" id="userProfileBtn">
+            <img src="assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
+            <span class="user-name">João Silva</span>
+            <i class="ph ph-caret-down dropdown-arrow"></i>
+          </button>
+          <div class="dropdown-menu" id="dropdownMenu">
+
+            <a href="#" class="dropdown-item">
+              <i class="ph ph-house" aria-hidden="true"></i> Home
+            </a>
+
+            <a href="in-time.html" class="dropdown-item">
+              <i class="ph ph-lightning"></i> InTime
+            </a>
+
+            <a href="perfil.html" class="dropdown-item">
+              <i class="ph ph-user"></i> Meu Perfil
+            </a>
+
+            <a href="configuracoes.html" class="dropdown-item">
+              <i class="ph ph-gear"></i> Configurações
+            </a>
+
+            <hr class="dropdown-divider" />
+            <a href="index.html" class="dropdown-item logout">
+              <i class="ph ph-sign-out"></i> Sair
+            </a>
+
           </div>
         </div>
-      </nav>
+      </div>
     </div>
   </header>
 
-   <!-- Sidebar -->
-   <aside class="client-sidebar" id="clientSidebar">
+  <!-- SIDEBAR -->
+<!--  <aside class="client-sidebar" id="clientSidebar">
     <div class="sidebar-content">
-        <div class="sidebar-header">
-            <div class="user-info">
-                <div class="user-avatar-large">
-     <img id="avatar" class="avatar" src="../assets/images.webp"
-         alt="cuidafast">
-                </div>
-                <div class="user-details">
-                    <h3 id="userName">João Silva</h3>
-                    <p>Cliente desde 2024</p>
-                </div>
-            </div>
-        </div>
-       
-        <nav class="sidebar-nav">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="homeCliente.html" class="nav-link">
-                        <i class="ph ph-house" aria-hidden="true"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../HTML/mensagens.html" class="nav-link">
-                        <i class="ph ph-chat-circle"></i>
-                        <span>Mensagens</span>
-                        <span class="nav-badge">3</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../HTML/notificacao.html" class="nav-link">
-                        <i class="ph ph-bell" aria-hidden="true"></i>
-                        <span>Notificações</span>
-                        <span class="nav-badge">5</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="in-time.html" class="nav-link">
-                        <i class="ph ph-lightning"></i>
-                        <span>InTime</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../HTML/configuracoes.html" class="nav-link">
-                        <i class="ph ph-gear"></i>
-                        <span>Configurações</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="logoutBtn">
-                        <i class="ph ph-sign-out"></i>
-                        <span>Sair da conta</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</aside>
+      <div class="sidebar-header">
+        <div class="user-info">
 
-<!-- Sidebar Overlay -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-<div class="container">
-  <div class="form-section">
-    <div class="back">
-      <a href="javascript:history.back()" class="back-link">
-        <i class="ph ph-arrow-circle-left"></i>
-      </a>
-    </div>
-
-    <h1 class="titulo">Sheila chegou para cuidar de João</h1>
-
-    <section class="conteudo">
-      <div class="card-profissional">
-        <div class="perfil">
-          <img src="sheila.jpg" alt="Foto da profissional" class="foto">
-          <div>
-            <h3>Sheila Mendes</h3>
-            <p>Função: Babá</p>
+          <div class="user-details">
+            <h3 id="userName">João Silva</h3>
+            <p>Cliente desde 2024</p>
           </div>
         </div>
-        <p><strong>Data:</strong> 02/08/2025</p>
-        <p><strong>Check-in:</strong> 07:58</p>
-        <p><strong>Check-out:</strong> 12:35</p>
-        <p><strong>Localização confirmada no endereço:</strong></p>
       </div>
 
-      <div class="mapa">
-        <!-- Aqui você vai colocar sua API externa -->
-        <iframe 
-          src="https://www.openstreetmap.org/export/embed.html?bbox=-46.633%2C-23.55%2C-46.62%2C-23.54&amp;layer=mapnik" 
-          style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-    </section>
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">
+              <i class="ph ph-house" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../HTML/mensagens.html" class="nav-link">
+              <i class="ph ph-chat-circle"></i>
+              <span>Mensagens</span>
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../HTML/notificacao.html" class="nav-link">
+              <i class="ph ph-bell" aria-hidden="true"></i>
+              <span>Notificações</span>
+              <span class="nav-badge">5</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="in-time.html" class="nav-link">
+              <i class="ph ph-lightning"></i>
+              <span>InTime</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../HTML/configuracoes.html" class="nav-link">
+              <i class="ph ph-gear"></i>
+              <span>Configurações</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="logoutBtn">
+              <i class="ph ph-sign-out"></i>
+              <span>Sair da conta</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside> 
+-->
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <section class="acoes">
-      <button class="btn" id="btnAgendamento">Agendamento →</button>
-      <button class="btn" id="btnServico">Serviço InTime →</button>
-    </section>
+  <!-- CONTEÚDO PRINCIPAL -->
+  <h2>Sheila chegou para cuidar de João</h2>
+
+  <div class="container">
+    <div class="info-card">
+      <p><b>Sheila Mendes</b><br>
+      Função: Babá<br><br>
+      <b>Data:</b> 02/08/2025<br>
+      <b>Check-in:</b> 07:58<br>
+      <b>Check-out:</b> 12:35<br>
+      <b>Localização confirmada no endereço:</b></p>
+    </div>
+
+    <div id="map"></div>
   </div>
 
-  <script src="../JS/serviço.js"></script>
-  <script src="../JS/sidebar.js"></script>
+  <div class="footer">
+    <button>Agendamento →</button>
+    <button>Serviço InTime →</button>
+  </div>
+
+  <!-- Firebase + Leaflet libs (mesmas versões que você usou) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Seus scripts (separados) -->
+  <script src="JS/FirebaseConfig.js"></script>
+  <script src="JS/leafletConfig.js"></script>
+  <script src="JS/main.js"></script>
 </body>
 </html>
