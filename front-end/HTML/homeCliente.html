@@ -66,7 +66,18 @@
 
   initFCM();
 </script>
-    
+    <!-- Pop-up de confirmação de logout -->
+<div class="logout-popup" id="logoutPopup">
+  <div class="logout-popup-content">
+    <h3>Tem certeza que deseja sair?</h3>
+    <p>Você será redirecionado para a página inicial.</p>
+    <div class="logout-popup-buttons">
+      <button id="confirmLogout" class="confirm-btn">Sim, sair</button>
+      <button id="cancelLogout" class="cancel-btn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
     <!-- Header Moderno -->
     <header class="modern-header">
         <div class="header-container">
@@ -121,7 +132,7 @@
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="perfilCliente.html" class="dropdown-item">
                             <i class="ph ph-user"></i>
                             <span>Meu Perfil</span>
                         </a>
@@ -129,16 +140,16 @@
                             <i class="ph ph-gear"></i>
                             <span>Configurações</span>
                         </a>
-                        <a href="#" class="dropdown-item">
+                        <a href="contratarInTime.html" class="dropdown-item">
                             <i class="ph ph-clock"></i>
-                            <span>Histórico</span>
+                            <span>In-time</span>
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="ph ph-question"></i>
                             <span>Ajuda</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                        <a href="../../index.html" class="dropdown-item logout-item" id="headerLogoutBtn">
                             <i class="ph ph-sign-out"></i>
                             <span>Sair</span>
                         </a>
@@ -433,5 +444,51 @@
             return new bootstrap.Popover(popoverTriggerEl);
         });
     </script>
+<script>
+  const logoutPopup = document.getElementById("logoutPopup");
+  const confirmLogoutBtn = document.getElementById("confirmLogout");
+  const cancelLogoutBtn = document.getElementById("cancelLogout");
+  const logoutBtn = document.getElementById("headerLogoutBtn") || document.getElementById("logoutBtn");
+
+  // Função que executa o logout real
+  function handleLogout() {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("userType");
+    window.location.href = "../../index.html";
+  }
+
+  // Função que inicializa o botão e o pop-up
+  function initLogout() {
+    if (!logoutBtn) return;
+
+    // Abre o pop-up ao clicar em "Sair"
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      logoutPopup.classList.add("active");
+    });
+
+    // Confirma o logout
+    confirmLogoutBtn.addEventListener("click", () => {
+      handleLogout();
+    });
+
+    // Cancela o logout
+    cancelLogoutBtn.addEventListener("click", () => {
+      logoutPopup.classList.remove("active");
+    });
+
+    // Fecha o pop-up se clicar fora dele
+    logoutPopup.addEventListener("click", (e) => {
+      if (e.target === logoutPopup) {
+        logoutPopup.classList.remove("active");
+      }
+    });
+  }
+
+  // Inicializa quando o DOM estiver pronto
+  document.addEventListener("DOMContentLoaded", initLogout);
+</script>
+
+
 </body>
 </html>

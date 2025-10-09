@@ -803,14 +803,7 @@ window.CuidaFastClient = {
       }
     },
 
-    // Função de logout atualizada
-    handleLogout() {
-      if (confirm('Tem certeza que deseja sair da sua conta?')) {
-        localStorage.removeItem('userData');
-        localStorage.removeItem('userType');
-        window.location.href = '../HTML/index.html';
-      }
-    },
+
 
     // Sidebar desta página (usa ids: menuToggle, clientSidebar, sidebarOverlay)
     initSidebar() {
@@ -886,18 +879,7 @@ window.CuidaFastClient = {
       });
     },
 
-    initLogout() {
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (!logoutBtn) return;
-      logoutBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (confirm('Tem certeza que deseja sair da sua conta?')) {
-          localStorage.removeItem('userData');
-          localStorage.removeItem('userType');
-          window.location.href = '../HTML/index.html';
-        }
-      });
-    }
+
   };
 
   // Inicialização do modal de filtro
