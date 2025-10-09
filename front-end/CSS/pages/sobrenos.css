@@ -1,183 +1,220 @@
- /* Reset básico */
- * {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
- }
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fffbec;
+  color: #1E293B;
+  line-height: 1.6;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 48px;
+  background-color: #fffbec;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar .logo {
+  height: 48px;
+}
+
+.navbar img#logo {
+  height: 48px;
+  display: block;
+}
 
 
- 
- body {
-     font-family: Arial, sans-serif;
-     background-color: #fffbec;
-     color: #1E293B;
-     /* cor do texto escuro */
- }
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 
- .navbar {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding: 24px 64px;
-     background-color: #fffbec;
-     /* ou var(--azul-escuro) */
- }
+.menu a {
+  text-decoration: none;
+  color: #0E4F4F;
+  font-weight: 500;
+  transition: 0.3s;
+}
 
- .logo img {
-     height: 40px;
- }
+.menu a:hover {
+  color: #1b475d;
+}
 
- .menu a {
-     margin-left: 32px;
-     text-decoration: none;
-     color: var(--azul-escuro);
-     font-weight: 500;
- }
+/* ===== MAIN ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
 
+h2 {
+  color: #0E4F4F;
+  text-align: center;
+  margin-bottom: 40px;
+}
 
- header img {
-     height: 40px;
- }
+/* Seções */
+.section {
+  margin-bottom: 60px;
+}
 
- main {
-     max-width: 1000px;
-     margin: 0 auto;
-     padding: 40px 20px;
- }
+/* ===== PROBLEMA / SOLUÇÃO ===== */
+.problem-solution {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  text-align: justify;
+}
 
- h2 {
-     color: #0E4F4F;
-     /* cor principal */
-     margin-bottom: 50px;
-     text-align: center;
-     
- }
-
- .section {
-     margin-bottom: 0px;
- }
-
- .problem-solution {
-     display: flex;
-     flex-wrap: wrap;
-     gap: 50px;
- }
-
- 
- .problem {
-    flex: 1;
-   width: 280px;  
+.problem, .solution {
+  flex: 1;
+  min-width: 260px;
+  max-width: 400px;
 }
 
 .solution {
-    flex: 1;
-   width: 280px;  
-   padding-top: 100px;
+  padding-top: 0; /* antes estava 100px */
 }
 
-
- /* Container dos membros da equipe */
+/* ===== TIME ===== */
 .team-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas iguais */
-    gap: 20px; /* espaçamento entre os cartões */
-    justify-items: center; /* centraliza os cartões horizontalmente */
-    padding: 60px; /* espaçamento interno do container */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  align-items: start;
+  padding: 20px 0 60px;
 }
 
-/* Cartões individuais */
 .team-member {
-    
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 250px; /* largura fixa para consistência */
-   
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-4px);
 }
 
 .team-member img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 .team-member h3 {
-    margin-bottom: 8px;
-    font-size: 1.1em;
+  margin-bottom: 6px;
+  font-size: 1.1em;
+  color: #0E4F4F;
 }
 
 .team-member p {
-    font-size: 0.9em;
-    color: #555;
+  font-size: 0.9em;
+  color: #555;
 }
 
- /* Footer */
- .rodape {
-    
-     background-color: #1b475d;
-     color: #fffbec;
-     /* branco */
-     padding: 40px;
-     font-family: 'Inter', sans-serif;
- }
+/* ===== FOOTER ===== */
+.rodape {
+  background-color: #1b475d;
+  color: #fffbec;
+  padding: 50px 30px;
+}
 
- .rodape-container {
-     display: flex;
-     align-items: flex-start;
-     justify-content: space-between;
-     gap: 40px;
-     flex-wrap: wrap;
- }
+.rodape-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
- .rodape .logo {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-    /* max-width: 200px;*/
-     height: 100px;
-     width: 200px;
- }
+.rodape .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+}
 
- .rodape .logo img {
-     width: 500;
-     /* ajuste para px: 500px se quiser largura fixa */
-     margin-bottom: 0;
-     vertical-align: middle;
- }
+.rodape .logo img {
+  width: 150px;
+  margin-bottom: 10px;
+}
 
- .linha-vertical {
-     width: 1px;
-     background-color: #dcdcdc;
-     height: 100px;
-     margin: 0 20px;
- }
+.linha-vertical {
+  width: 1px;
+  background-color: #dcdcdc;
+  height: 100px;
+}
 
- .rodape .col {
-     max-width: 200px;
-     color: var(--footer-text);
- }
+.rodape .col {
+  flex: 1;
+  min-width: 180px;
+}
 
- .rodape h4 {
-     font-size: 150%;
-     margin-bottom: 10px;
-     color: var(--footer-text);
- }
+.rodape h4 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #fffbec;
+}
 
- .rodape a {
-     font-size: 0.9em;
-     text-decoration: none;
-     color: inherit;
- }
+.rodape a {
+  font-size: 0.9em;
+  text-decoration: none;
+  color: inherit;
+}
 
- .redes-sociais {
-     display: flex;
-     gap: 10px;
- }
+.redes-sociais {
+  display: flex;
+  gap: 12px;
+}
 
- .redes-sociais i {
-     color: var(--footer-text);
-     /* ou outra cor que queira para os ícones */
-     font-size: 24px;
-     cursor: pointer;
- }
+.redes-sociais i {
+  font-size: 24px;
+  color: #fffbec;
+  transition: color 0.3s;
+}
+
+.redes-sociais i:hover {
+  color: #FFD700;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .rodape-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .linha-vertical {
+    display: none;
+  }
+}
