@@ -22,9 +22,15 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-.logo img {
+.navbar .logo {
   height: 48px;
 }
+
+.navbar img#logo {
+  height: 48px;
+  display: block;
+}
+
 
 .menu {
   display: flex;
