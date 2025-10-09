@@ -128,46 +128,6 @@ function initIndividualActions() {
     });
 }
 
-function handleNotificationAction(button) {
-    const notificationItem = button.closest('.notification-item');
-    const action = button.textContent.trim().toLowerCase();
-    
-    switch (action) {
-        case 'ver detalhes':
-            showAlert('Abrindo detalhes do agendamento...', 'info');
-            break;
-        case 'mensagem':
-        case 'responder':
-            showAlert('Abrindo conversa...', 'info');
-            setTimeout(() => {
-                window.location.href = 'mensagens.html';
-            }, 1000);
-            break;
-        case 'ver conversa':
-            window.location.href = 'mensagens.html';
-            break;
-        case 'ver recibo':
-            showAlert('Abrindo recibo do pagamento...', 'info');
-            break;
-        case 'avaliar serviço':
-            showAlert('Abrindo formulário de avaliação...', 'info');
-            break;
-        case 'reagendar':
-            showAlert('Redirecionando para reagendamento...', 'info');
-            break;
-        case 'buscar substituto':
-            showAlert('Buscando cuidadores disponíveis...', 'info');
-            break;
-        case 'contratar novamente':
-            showAlert('Iniciando nova contratação...', 'info');
-            break;
-        case 'saiba mais':
-            showAlert('Abrindo informações de segurança...', 'info');
-            break;
-        default:
-            console.log('Ação não reconhecida:', action);
-    }
-
     if (notificationItem.classList.contains('unread')) {
         markAsRead(notificationItem);
     }
