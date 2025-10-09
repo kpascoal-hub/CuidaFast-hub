@@ -456,4 +456,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Carregar a página inicial
     loadPage('agendado');
 });
-
