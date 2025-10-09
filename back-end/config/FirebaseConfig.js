@@ -1,11 +1,22 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyBsiC8RaCd-6bwuThixa1ZxFkK4JhHgfjk",
-  authDomain: "cuidafast-hub-af250.firebaseapp.com",
-  projectId: "cuidafast-hub-af250",
-  storageBucket: "cuidafast-hub-af250.firebasestorage.app",
-  messagingSenderId: "263800638065",
-  appId: "1:263800638065:web:9b655c9d3e3acea160e9d0",
-  measurementId: "G-701M8B5CZC"
-};
-  firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const admin = require('firebase-admin');
+const fs = require('fs');
+const path = require('path');
+
+// Caminho para o JSON da service account
+const serviceAccount = JSON.parse(
+  fs.readFileSync(path.resolve('./config/firebase-service-account.json'), 'utf8')
+);
+
+// Inicializa o Firebase Admin se ainda não foi inicializado
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
+
+// Exporta auth, firestore e messaging em CommonJS
+const auth = admin.auth();
+const db = admin.firestore();
+const messaging = admin.messaging();
+
+module.exports = { auth, db, messaging };
