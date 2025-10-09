@@ -13,10 +13,26 @@ class UsuarioModel {
 
   static async create(usuario) {
     const { nome, email, senha, telefone, data_nascimento, firebase_uid } = usuario;
+
+    // Campos e valores básicos
+    const fields = ['nome', 'email', 'senha', 'telefone', 'data_nascimento'];
+    const values = [nome, email, senha || null, telefone || null, data_nascimento || null];
+
+    // Só adiciona firebase_uid se existir
+    if (firebase_uid) {
+      fields.push('firebase_uid');
+      values.push(firebase_uid);
+    }
+
+    // Gera placeholders de forma dinâmica
+    const placeholders = fields.map(() => '?').join(', ');
+
+    // Query final
     const [result] = await db.query(
-      'INSERT INTO usuario (nome, email, senha, telefone, data_nascimento, firebase_uid, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, NOW())',
-      [nome, email, senha || null, telefone || null, data_nascimento || null, firebase_uid || null]
+      `INSERT INTO usuario (${fields.join(', ')}, data_cadastro) VALUES (${placeholders}, NOW())`,
+      values
     );
+
     return result.insertId;
   }
 
@@ -37,6 +53,16 @@ class UsuarioModel {
   static async findByFirebaseUid(uid) {
     const [rows] = await db.query('SELECT * FROM usuario WHERE firebase_uid = ?', [uid]);
     return rows[0];
+  }
+
+  static async setLastLogin(id) {
+    const [result] = await db.query('UPDATE usuario SET ultimo_login = NOW() WHERE id = ?', [id]);
+    return result.affectedRows;
+  }
+
+  static async updatePassword(id, passwordHash) {
+    const [result] = await db.query('UPDATE usuario SET senha = ? WHERE id = ?', [passwordHash, id]);
+    return result.affectedRows;
   }
 
   static async findOrCreateByFirebase(uid, email, nome) {

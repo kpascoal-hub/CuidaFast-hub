@@ -1,9 +1,9 @@
-const admin = require('./firebaseAdmin'); 
+const { auth } = require('./firebaseAdmin');
 const UsuarioModel = require('../models/UsuarioModel');
 
 async function loginWithGoogle(token) {
   try {
-    const decoded = await admin.auth().verifyIdToken(token);
+    const decoded = await auth.verifyIdToken(token);
     const { uid, email, name } = decoded;
 
     if (!email) throw new Error("Email não encontrado no token");
@@ -24,7 +24,7 @@ async function loginWithGoogle(token) {
 
 async function verifyToken(token) {
   try {
-    const decoded = await admin.auth().verifyIdToken(token);
+    const decoded = await auth.verifyIdToken(token);
     return decoded;
   } catch (error) {
     console.error('Erro ao verificar token:', error);
@@ -33,4 +33,3 @@ async function verifyToken(token) {
 }
 
 module.exports = { loginWithGoogle, verifyToken };
-

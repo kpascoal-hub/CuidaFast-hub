@@ -1,32 +1,49 @@
+// app.js
 const express = require('express');
 const path = require('path');
-const cadastroRoutes = require('./routes/cadastroRoutes');
-const notificationRoutes = require('./routes/notificationRoutes'); // 👈 adiciona
-const moment = require('moment'); 
+const cors = require('cors');
+const moment = require('moment-timezone');
+
+const authRoutes = require('./routes/authRoutes');
+// const pagamentoRoutes = require('./routes/pagamentoRoutes'); // se existir
 
 const app = express();
 
+moment.tz.setDefault('America/Sao_Paulo');
+
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// suas rotas já existentes
-app.use('/cadastroi', cadastroRoutes);
+// Rotas
+app.use('/api/auth', authRoutes);
+// app.use('/api/pagamento', pagamentoRoutes);
 
-// nova rota de notificações
-app.use('/notificacoes', notificationRoutes); // 👈 conecta aqui
+app.get('/api/health', (req, res) => res.json({ ok: true }));
+app.get('/api/teste', (req, res) => res.json({ ok: true, mensagem: 'API funcionando corretamente!' }));
 
-// rota simples de teste
-app.get('/api/teste', (req, res) => {
-  res.json({ ok: true });
-});
+// Listagem de rotas (seguro)
+if (app._router && app._router.stack) {
+  console.log('=== ROTAS REGISTRADAS ===');
+  app._router.stack.forEach((layer) => {
+    if (layer.route && layer.route.path) {
+      const methods = Object.keys(layer.route.methods).map(m => m.toUpperCase()).join(', ');
+      console.log(`${methods} ${layer.route.path}`);
+    } else if (layer.name === 'router' && layer.handle && layer.handle.stack) {
+      layer.handle.stack.forEach((fn) => {
+        if (fn.route && fn.route.path) {
+          const methods = Object.keys(fn.route.methods).map(m => m.toUpperCase()).join(', ');
+          console.log(`${methods} ${fn.route.path}`);
+        }
+      });
+    }
+  });
+  console.log('=== FIM DAS ROTAS ===');
+} else {
+  console.log('Nenhum router encontrado em app._router.stack');
+}
 
-// rota que retorna a data
-app.get('/api/data', (req, res) => {
-  const agora = moment().format('DD/MM/YYYY HH:mm');
-  res.json({ dataAtual: agora });
-});
+module.exports = app;
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
