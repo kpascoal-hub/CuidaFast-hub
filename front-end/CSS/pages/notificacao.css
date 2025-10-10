@@ -958,3 +958,14 @@ body {
         font-size: 0.85rem;
     }
 }
+.header-action-btn {
+  text-decoration: none !important;
+
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.header-action-btn:hover {
+
+  background: transparent !important;
+}
