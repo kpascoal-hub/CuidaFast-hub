@@ -21,14 +21,16 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/pages/perfilCliente.css">
+    <link rel="stylesheet" href="../CSS/header.css">
+
 </head>
 <body class="client-profile">
-    <!-- Header -->
+    <!-- Header Moderno -->
     <header class="modern-header">
         <div class="header-container">
             <!-- Logo Section -->
             <div class="header-left">
-                <a href="homeCliente.html" class="logo-link">
+                <a href="../html/homeCliente.html" class="logo-link">
                     <img id="logo" src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
                     <span class="logo-text"></span>
                 </a>
@@ -48,7 +50,7 @@
             <!-- User Actions -->
             <div class="header-right">
                 <!-- Notifications -->
-                <button class="header-action-btn notification-btn" id="notificationBtn">
+                <button class="header-action-btn notification-btn active" id="notificationBtn">
                     <i class="ph ph-bell"></i>
                     <span class="notification-badge">3</span>
                 </button>
@@ -77,24 +79,24 @@
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="perfilCliente.html" class="dropdown-item active">
+                        <a href="perfilCliente.html" class="dropdown-item">
                             <i class="ph ph-user"></i>
                             <span>Meu Perfil</span>
                         </a>
-                        <a href="configuracoes.html" class="dropdown-item">
+                        <a href="../HTML/configuracoes.html" class="dropdown-item">
                             <i class="ph ph-gear"></i>
                             <span>Configurações</span>
                         </a>
-                        <a href="#" class="dropdown-item">
+                        <a href="../HTML/contratarInTime.html" class="dropdown-item">
                             <i class="ph ph-clock"></i>
-                            <span>Histórico</span>
+                            <span>In-time</span>
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="ph ph-question"></i>
                             <span>Ajuda</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                        <a href="../../index.html" class="dropdown-item logout-item" id="headerLogoutBtn">
                             <i class="ph ph-sign-out"></i>
                             <span>Sair</span>
                         </a>
@@ -107,7 +109,20 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container" id="mobileSearchContainer">
+            <div class="mobile-search-wrapper">
+                <i class="ph ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Buscar cuidadores..." class="mobile-search-input">
+                <button class="mobile-search-btn" type="button">
+                    <i class="ph ph-arrow-right"></i>
+                </button>
+            </div>
+        </div>
     </header>
+
+
 
     <main class="profile-container">
         <div class="profile-header">
@@ -137,7 +152,7 @@
             <div class="profile-card">
                 <div class="card-header">
                     <h2>Informações Pessoais</h2>
-                    <a href="../HTML/PerfilClienteEditarInformacoesPessoais.html" class="edit-link">
+                    <a href="perfilClienteEditarInformações.html" class="edit-link">
                         <i class="ph ph-pencil-simple"></i> Editar
                     </a>
                 </div>
@@ -203,5 +218,6 @@
     </main>
 
     <script src="../JS/perfilCliente.js"></script>
+    <script src="../JS/header.js"></script>
 </body>
 </html>
