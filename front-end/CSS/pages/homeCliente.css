@@ -376,6 +376,7 @@ body.short-page .rodape{
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 1001;
+    background-color: var(--creme);
 }
 
 .user-profile-dropdown.open .profile-dropdown-menu {
