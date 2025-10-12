@@ -80,12 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btnGoogleLogin) {
     btnGoogleLogin.addEventListener('click', function() {
       console.log('[Login] Login com Google clicado');
-      alert('🔄 Login com Google será implementado em breve!\n\nPara implementar, você precisa:\n1. Configurar Firebase Auth\n2. Adicionar as credenciais do Google\n3. Descomentar o código de integração');
-      
-      // TODO: Para implementar login com Google, siga os passos:
-      // 1. Configure Firebase Auth no Console do Firebase
-      // 2. Adicione o Google como provedor de autenticação
-      // 3. Descomente o código abaixo e remova o alert acima
       
       // Código para login com Google (Firebase Auth já configurado!)
       import('https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js')
