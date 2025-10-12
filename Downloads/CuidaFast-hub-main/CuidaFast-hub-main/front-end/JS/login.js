@@ -1,18 +1,18 @@
-// login.js - Sistema de login para o modal do index.html
+// login.js - Sistema de login para modais (index.html e sobre-nos.html)
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('[Login] Sistema de login inicializado');
 
-  // Selecionar o formulário de login pelo ID
-  const loginForm = document.getElementById('loginForm');
+  // Tentar selecionar formulário do index.html ou sobre-nos.html
+  const loginForm = document.getElementById('loginForm') || document.getElementById('loginFormSobre');
   if (!loginForm) {
     console.warn('[Login] Formulário de login não encontrado');
     return;
   }
 
-  // Selecionar campos de input
-  const emailInput = document.getElementById('loginEmail');
-  const passwordInput = document.getElementById('loginPassword');
+  // Selecionar campos de input (index ou sobre-nos)
+  const emailInput = document.getElementById('loginEmail') || document.getElementById('loginEmailSobre');
+  const passwordInput = document.getElementById('loginPassword') || document.getElementById('loginPasswordSobre');
 
   if (!emailInput || !passwordInput) {
     console.warn('[Login] Campos de email ou senha não encontrados');
@@ -52,10 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Redirecionar baseado no tipo de usuário
       setTimeout(() => {
+        const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/';
+        const pathPrefix = isIndexPage ? 'front-end/HTML/' : '../HTML/';
+        
         if (loginResult.userData.tipo === 'cuidador') {
-          window.location.href = 'front-end/HTML/dashboard-cuidador.html';
+          window.location.href = pathPrefix + 'dashboard-cuidador.html';
         } else if (loginResult.userData.tipo === 'cliente') {
-          window.location.href = 'front-end/HTML/homeCliente.html';
+          window.location.href = pathPrefix + 'homeCliente.html';
         } else {
           console.error('[Login] Tipo de usuário desconhecido:', loginResult.userData.tipo);
           alert('❌ Erro: Tipo de usuário não identificado.');
@@ -75,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Verificar se já está logado
   verificarSessaoAtiva();
 
-  // Botão de login com Google no modal
-  const btnGoogleLogin = document.getElementById('btnGoogleLogin');
+  // Botão de login com Google no modal (index ou sobre-nos)
+  const btnGoogleLogin = document.getElementById('btnGoogleLogin') || document.getElementById('btnGoogleLoginSobre');
   if (btnGoogleLogin) {
     btnGoogleLogin.addEventListener('click', function() {
       console.log('[Login] Login com Google clicado');
@@ -110,9 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const modalInstance = bootstrap.Modal.getInstance(loginModal);
                 if (modalInstance) modalInstance.hide();
                 
-                // Redirecionar
+                // Redirecionar (ajustar path se estiver em sobre-nos)
                 alert(`✅ Bem-vindo(a), ${userData.primeiroNome}!`);
-                window.location.href = 'front-end/HTML/homeCliente.html';
+                const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/';
+                window.location.href = isIndexPage ? 'front-end/HTML/homeCliente.html' : '../HTML/homeCliente.html';
               })
               .catch((error) => {
                 console.error('Erro no login com Google:', error);

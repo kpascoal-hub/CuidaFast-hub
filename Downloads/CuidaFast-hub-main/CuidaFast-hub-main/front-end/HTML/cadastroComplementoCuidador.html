@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complete seu Cadastro - CuidaFast</title>
   <link rel="icon" type="image/svg+xml" href="../assets/icone_verde.svg">
-  <link rel="stylesheet" href="../CSS/pages/cadastroComplemento.css">
+  <link rel="stylesheet" href="../CSS/styles.css">
+  <link rel="stylesheet" href="../CSS/pages/cadastroComplementoCuidador.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
@@ -23,6 +25,21 @@
       <div class="form-header">
         <h1>Complete seu Cadastro</h1>
         <p>Precisamos de mais algumas informações para finalizar</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 50%;"></div>
+      </div>
+
+      <div class="step-indicator">
+        Passo 2 de 4
+      </div>
+
+      <!-- Info Box -->
+      <div class="info-box">
+        <i class="ph ph-info"></i>
+        <p>Essas informações são necessárias para validar sua identidade e garantir a segurança da plataforma.</p>
       </div>
 
       <form id="complementForm">
@@ -72,18 +89,17 @@
           >
         </div>
 
-        <!-- Botão Continuar -->
-        <button type="submit" class="btn-submit">
-          Continuar
-          <i class="ph ph-arrow-right"></i>
-        </button>
-
-        <!-- Termos -->
-        <p class="terms">
-          Ao continuar, você concorda com nossos 
-          <a href="#">Termos de Uso</a> e 
-          <a href="#">Políticas de Privacidade</a>
-        </p>
+        <!-- Botões -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+            <i class="ph ph-arrow-left"></i>
+            Voltar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Continuar
+            <i class="ph ph-arrow-right"></i>
+          </button>
+        </div>
       </form>
     </main>
   </div>

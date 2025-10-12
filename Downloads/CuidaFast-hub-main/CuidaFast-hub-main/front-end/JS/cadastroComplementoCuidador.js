@@ -19,17 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  if (telefoneInput) {
-    telefoneInput.addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length <= 11) {
-        value = value.replace(/(\d{2})(\d)/, '($1) $2');
-        value = value.replace(/(\d{5})(\d)/, '$1-$2');
-      }
-      e.target.value = value;
-    });
-  }
-
   // Formulário
   const form = document.getElementById('complementForm');
   if (form) {
