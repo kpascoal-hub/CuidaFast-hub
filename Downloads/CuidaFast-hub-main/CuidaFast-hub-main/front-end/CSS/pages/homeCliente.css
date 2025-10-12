@@ -369,19 +369,21 @@ body.short-page .rodape{
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
-    background: var(--bege);
+    background: #FFFBEC !important;
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(27, 71, 93, 0.1);
     min-width: 280px;
+    opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 1001;
-    background-color: var(--creme);
 }
 
-.user-profile-dropdown.open .profile-dropdown-menu {
+.user-profile-dropdown.open .profile-dropdown-menu,
+.profile-dropdown-menu.show {
+    opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
@@ -449,9 +451,6 @@ body.short-page .rodape{
 .logout-item:hover {
     background: rgba(255, 71, 87, 0.1);
     color: #ff4757;
-}
-.profile-dropdown-menu {
-  background: var(--bege);
 }
 
 /* Mobile Menu Toggle */

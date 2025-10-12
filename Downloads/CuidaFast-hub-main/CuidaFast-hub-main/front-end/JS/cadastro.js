@@ -63,7 +63,7 @@ btnGoogle.addEventListener("click", () => {
 
       setTimeout(() => {
         if (tipoUsuario === 'cuidador') {
-          location.assign("../HTML/enviardocumentoscuidador.html");
+          location.assign("../HTML/cadastroComplementoCuidador.html");
         } else {
           // Cliente vai para página de complemento
           location.assign("../HTML/cadastroComplemento.html");
@@ -152,9 +152,9 @@ form.addEventListener("submit", (event) => {
 
   console.log('Usuário cadastrado:', userData);
 
-  // Redirecionar para página de complemento ou documentos
+  // Redirecionar para página de complemento
   if (tipoUsuario === 'cuidador') {
-    window.location.href = "../HTML/enviardocumentoscuidador.html";
+    window.location.href = "../HTML/cadastroComplementoCuidador.html";
   } else {
     // Cliente vai para página de complemento (data de nascimento e endereço)
     window.location.href = "../HTML/cadastroComplemento.html";

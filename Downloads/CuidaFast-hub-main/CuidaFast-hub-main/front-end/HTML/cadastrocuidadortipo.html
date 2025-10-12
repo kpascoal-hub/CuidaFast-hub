@@ -3,57 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CuidaFast - Cadastro de Serviço</title>
-  <link rel="stylesheet" href="../CSS/pages/cadastrocuidadortipo.css">
-  <link rel="stylesheet" href="../CSS/styles.css">
-  <script src="../js/homeCliente.js"></script>
+  <title>Tipo de Serviço - CuidaFast</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icone_verde.svg">
+  <link rel="stylesheet" href="../CSS/pages/cadastroComplemento.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
-
-
-   <div class="containerzin">
-    <div class="back">
-      <a href="../HTML/cadastro.html" class="back-link">
-        <i class="ph ph-arrow-circle-left"></i>
-    </a>
+  <div class="container">
+    <!-- Botão Voltar -->
+    <div class="back-button">
+      <a href="cadastroComplementoCuidador.html" class="back-link">
+        <i class="ph ph-arrow-left"></i>
+        Voltar
+      </a>
     </div>
-    </header>
 
-    <main>
-      <h1>Qual serviço você vai fornecer?</h1>
-
-      <div class="cards">
-        <label class="cardzin">
-          <input type="checkbox">
-          <div class="card-content">
-            <span class="card-title">Cuidador de Idoso</span>
-            <p>Quero oferecer serviços de cuidado a pessoas idosas</p>
-          </div>
-        </label>
-
-        <label class="cardzin">
-          <input type="checkbox">
-          <div class="card-content">
-            <span class="card-title">Cuidador de Pet</span>
-            <p>Quero oferecer serviços relacionados a pets, como: petwalker, petsitter</p>
-          </div>
-        </label>
-
-        <label class="cardzin">
-          <input type="checkbox">
-          <div class="card-content">
-            <span class="card-title">Cuidador Infantil</span>
-            <p>Quero oferecer serviços de cuidados infantil.</p>
-          </div>
-        </label>
+    <!-- Formulário -->
+    <main class="form-container">
+      <div class="form-header">
+        <h1>Qual serviço você vai fornecer?</h1>
+        <p>Selecione um ou mais tipos de cuidado que você oferece</p>
       </div>
 
-      <button class="btn">Continuar</button>
+      <form id="servicoForm">
+        <div class="service-cards">
+          <label class="service-card">
+            <input type="checkbox" name="servico" value="idoso" id="servico-idoso">
+            <div class="card-content">
+              <i class="ph ph-user"></i>
+              <span class="card-title">Cuidador de Idoso</span>
+              <p>Oferecer serviços de cuidado a pessoas idosas</p>
+            </div>
+          </label>
 
-      <p class="terms">
-        Ao criar uma conta, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>
-      </p>
+          <label class="service-card">
+            <input type="checkbox" name="servico" value="pet" id="servico-pet">
+            <div class="card-content">
+              <i class="ph ph-dog"></i>
+              <span class="card-title">Cuidador de Pet</span>
+              <p>Serviços relacionados a pets: petwalker, petsitter</p>
+            </div>
+          </label>
+
+          <label class="service-card">
+            <input type="checkbox" name="servico" value="infantil" id="servico-infantil">
+            <div class="card-content">
+              <i class="ph ph-baby"></i>
+              <span class="card-title">Cuidador Infantil</span>
+              <p>Oferecer serviços de cuidados infantil</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Botão Continuar -->
+        <button type="submit" class="btn-submit">
+          Continuar
+          <i class="ph ph-arrow-right"></i>
+        </button>
+
+        <!-- Termos -->
+        <p class="terms">
+          Ao continuar, você concorda com nossos 
+          <a href="#">Termos de Uso</a> e 
+          <a href="#">Políticas de Privacidade</a>
+        </p>
+      </form>
     </main>
   </div>
+
+  <script src="../JS/cadastrocuidadortipo.js"></script>
 </body>
 </html>
