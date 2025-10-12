@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Complete seu Cadastro - CuidaFast</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../CSS/styles.css">
+  <link rel="stylesheet" href="../CSS/pages/cadastro.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/icone_verde.svg">
+  <style>
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(27, 71, 93, 0.1);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--azul-escuro), var(--amarelo));
+      width: 66%;
+      transition: width 0.3s ease;
+    }
+    
+    .step-indicator {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--azul-escuro);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .input-with-icon i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--azul-escuro);
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+    
+    .input-with-icon input {
+      padding-left: 45px;
+    }
+    
+    .info-box {
+      background: rgba(250, 213, 100, 0.15);
+      border-left: 4px solid var(--amarelo);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: start;
+      gap: 0.75rem;
+    }
+    
+    .info-box i {
+      color: var(--amarelo);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    
+    .info-box p {
+      margin: 0;
+      color: var(--azul-escuro);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-cadastro">
+    <div class="back">
+      <a href="cadastro.html" class="back-link">
+        <i class="ph ph-arrow-circle-left"></i>
+      </a>
+    </div>
+    
+    <div class="step-indicator">
+      Passo 2 de 3
+    </div>
+    
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+    
+    <h1>Complete seu Perfil</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+      Precisamos de mais algumas informações para personalizar sua experiência
+    </p>
+
+    <div class="info-box">
+      <i class="ph ph-info"></i>
+      <p>Essas informações nos ajudam a encontrar os melhores cuidadores próximos a você e garantir que você tenha a melhor experiência.</p>
+    </div>
+
+    <form id="form-complemento">
+      <div class="input-group">
+        <label for="dataNascimento" style="display: block; margin-bottom: 0.5rem; color: var(--azul-escuro); font-weight: 600;">
+          Data de Nascimento
+        </label>
+        <div class="input-with-icon">
+          <i class="ph ph-calendar"></i>
+          <input 
+            type="date" 
+            id="dataNascimento" 
+            name="dataNascimento" 
+            required 
+            max="2010-12-31"
+          />
+        </div>
+      </div>
+
+      <div class="divider"><span>Endereço</span></div>
+
+      <div class="input-group">
+        <div class="form-row">
+          <div class="input-with-icon">
+            <i class="ph ph-map-pin"></i>
+            <input 
+              type="text" 
+              id="cep" 
+              name="cep" 
+              placeholder="CEP" 
+              required 
+              maxlength="9"
+              pattern="\d{5}-?\d{3}"
+            />
+          </div>
+          <button type="button" id="btnBuscarCep" class="btn" style="height: 50px; margin: 0;">
+            <i class="ph ph-magnifying-glass"></i> Buscar CEP
+          </button>
+        </div>
+
+        <div class="input-with-icon">
+          <i class="ph ph-road-horizon"></i>
+          <input 
+            type="text" 
+            id="rua" 
+            name="rua" 
+            placeholder="Rua" 
+            required 
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="input-with-icon">
+            <i class="ph ph-hash"></i>
+            <input 
+              type="text" 
+              id="numero" 
+              name="numero" 
+              placeholder="Número" 
+              required 
+            />
+          </div>
+          <div class="input-with-icon">
+            <i class="ph ph-building"></i>
+            <input 
+              type="text" 
+              id="complemento" 
+              name="complemento" 
+              placeholder="Complemento (opcional)" 
+            />
+          </div>
+        </div>
+
+        <div class="input-with-icon">
+          <i class="ph ph-map-trifold"></i>
+          <input 
+            type="text" 
+            id="bairro" 
+            name="bairro" 
+            placeholder="Bairro" 
+            required 
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="input-with-icon">
+            <i class="ph ph-buildings"></i>
+            <input 
+              type="text" 
+              id="cidade" 
+              name="cidade" 
+              placeholder="Cidade" 
+              required 
+            />
+          </div>
+          <div class="input-with-icon">
+            <i class="ph ph-flag"></i>
+            <input 
+              type="text" 
+              id="estado" 
+              name="estado" 
+              placeholder="Estado" 
+              required 
+              maxlength="2"
+              style="text-transform: uppercase;"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn">
+        <i class="ph ph-check-circle"></i> Finalizar Cadastro
+      </button>
+    </form>
+    
+    <br>
+    <p class="terms" style="text-align: center;">
+      Suas informações estão seguras e protegidas conosco.
+    </p>
+  </div>
+
+  <script type="module">
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { app } from '../firebase-init.js';
+
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Verificar se usuário está autenticado
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        alert('Você precisa estar logado para acessar esta página.');
+        window.location.href = 'cadastro.html';
+        return;
+      }
+
+      // Verificar se já completou o cadastro
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists() && userDoc.data().cadastroCompleto) {
+        window.location.href = 'homeCliente.html';
+      }
+    });
+
+    // Buscar CEP
+    document.getElementById('btnBuscarCep').addEventListener('click', async function() {
+      const cep = document.getElementById('cep').value.replace(/\D/g, '');
+      
+      if (cep.length !== 8) {
+        alert('CEP inválido. Digite um CEP com 8 dígitos.');
+        return;
+      }
+
+      try {
+        this.disabled = true;
+        this.innerHTML = '<i class="ph ph-spinner"></i> Buscando...';
+        
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+          alert('CEP não encontrado.');
+          return;
+        }
+
+        document.getElementById('rua').value = data.logradouro || '';
+        document.getElementById('bairro').value = data.bairro || '';
+        document.getElementById('cidade').value = data.localidade || '';
+        document.getElementById('estado').value = data.uf || '';
+        
+        document.getElementById('numero').focus();
+      } catch (error) {
+        console.error('Erro ao buscar CEP:', error);
+        alert('Erro ao buscar CEP. Tente novamente.');
+      } finally {
+        this.disabled = false;
+        this.innerHTML = '<i class="ph ph-magnifying-glass"></i> Buscar CEP';
+      }
+    });
+
+    // Formatar CEP
+    document.getElementById('cep').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 5) {
+        value = value.slice(0, 5) + '-' + value.slice(5, 8);
+      }
+      e.target.value = value;
+    });
+
+    // Submeter formulário
+    document.getElementById('form-complemento').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const user = auth.currentUser;
+      if (!user) {
+        alert('Sessão expirada. Faça login novamente.');
+        window.location.href = 'cadastro.html';
+        return;
+      }
+
+      const formData = {
+        dataNascimento: document.getElementById('dataNascimento').value,
+        endereco: {
+          cep: document.getElementById('cep').value,
+          rua: document.getElementById('rua').value,
+          numero: document.getElementById('numero').value,
+          complemento: document.getElementById('complemento').value,
+          bairro: document.getElementById('bairro').value,
+          cidade: document.getElementById('cidade').value,
+          estado: document.getElementById('estado').value
+        },
+        cadastroCompleto: true,
+        updatedAt: new Date().toISOString()
+      };
+
+      try {
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Salvando...';
+
+        await setDoc(doc(db, 'users', user.uid), formData, { merge: true });
+
+        alert('Cadastro completado com sucesso!');
+        window.location.href = 'homeCliente.html';
+      } catch (error) {
+        console.error('Erro ao salvar dados:', error);
+        alert('Erro ao completar cadastro. Tente novamente.');
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="ph ph-check-circle"></i> Finalizar Cadastro';
+      }
+    });
+  </script>
+</body>
+</html>

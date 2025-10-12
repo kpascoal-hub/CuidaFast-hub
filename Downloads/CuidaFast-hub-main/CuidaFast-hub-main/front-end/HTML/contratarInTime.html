@@ -3,83 +3,247 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contratar</title>
-  <link rel="stylesheet" href="contratacaoInTime.css">
+  <title>Contratar Cuidador - CuidaFast</title>
+  
+  <!-- Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/styles.css">
+  <link rel="stylesheet" href="../CSS/header.css">
+  <link rel="stylesheet" href="../CSS/pages/contratarInTime.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/icone_verde.svg">
 </head>
-<body>
-  <header>
-    <a href="#" class="voltar">&lt; Voltar</a>
+<body class="client-home">
+  <!-- Header Moderno -->
+  <header class="modern-header">
+    <div class="header-container">
+      <div class="header-left">
+        <a href="homeCliente.html" class="logo-link">
+          <img src="../assets/Logotipo_5_vetorizado.svg" alt="CuidaFast" class="logo">
+        </a>
+      </div>
+      
+      <div class="header-right">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <h1>Contratar InTime</h1>
-
-    <section class="form-container">
-      <h2>Verificando local</h2>
-      <form>
-        <div class="linha">
-          <div class="campo">
-            <label for="cep">CEP</label>
-            <input type="text" id="cep" placeholder="015001-002">
-          </div>
-          <div class="campo">
-            <label for="complemento1">Complemento</label>
-            <input type="text" id="complemento1" placeholder="(55)11 0000-0000">
-          </div>
-        </div>
-
-        <div class="linha">
-          <div class="campo">
-            <label for="logradouro">Logradouro</label>
-            <input type="text" id="logradouro" placeholder="Rua zumbi dos palmares 201">
-          </div>
-          <div class="campo">
-            <label for="complemento2">Complemento</label>
-            <input type="text" id="complemento2" placeholder="Apt 123">
-          </div>
-        </div>
-
-        <div class="linha">
-          <div class="campo">
-            <label for="bairro">Bairro</label>
-            <input type="text" id="bairro" placeholder="Liberdade">
-          </div>
-          <div class="campo">
-            <label for="cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="São Paulo">
-          </div>
-          <div class="campo">
-            <label for="estado">Estado</label>
-            <input type="text" id="estado" placeholder="SP">
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <section class="selecionar">
-      <p>Selecione o tipo de cuidador que você precisa agora</p>
-      <div class="opcoes">
-        <label class="opcao">
-          <input type="checkbox" name="cuidador" value="idosos">
-          <span class="icone">🧓</span>
-          <span class="texto">Cuidador de<br>idosos</span>
-        </label>
-
-        <label class="opcao">
-          <input type="checkbox" name="cuidador" value="pet">
-          <span class="icone">🐶</span>
-          <span class="texto">Cuidador de<br>pet</span>
-        </label>
-
-        <label class="opcao">
-          <input type="checkbox" name="cuidador" value="crianca">
-          <span class="icone">👶</span>
-          <span class="texto">Cuidador de<br>criança</span>
-        </label>
+  <main class="contratar-main">
+    <div class="contratar-container">
+      <div class="page-header">
+        <a href="homeCliente.html" class="back-btn">
+          <i class="ph ph-arrow-left"></i> Voltar
+        </a>
+        <h1>Contratar Cuidador</h1>
+        <p class="subtitle">Encontre o cuidador ideal para suas necessidades</p>
       </div>
-    </section>
 
-    <button class="contratar-btn">Contratar agora</button>
+      <section class="form-container">
+        <div class="section-header">
+          <i class="ph ph-map-pin"></i>
+          <h2>Local do Atendimento</h2>
+        </div>
+        
+        <div class="address-info" id="addressInfo">
+          <i class="ph ph-info"></i>
+          <p>Carregando seu endereço cadastrado...</p>
+        </div>
+        
+        <form id="addressForm">
+          <div class="linha">
+            <div class="campo">
+              <label for="cep"><i class="ph ph-map-trifold"></i> CEP</label>
+              <input type="text" id="cep" placeholder="00000-000" maxlength="9">
+            </div>
+            <div class="campo">
+              <label for="numero"><i class="ph ph-hash"></i> Número</label>
+              <input type="text" id="numero" placeholder="123">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo campo-full">
+              <label for="rua"><i class="ph ph-road-horizon"></i> Rua</label>
+              <input type="text" id="rua" placeholder="Nome da rua">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="complemento"><i class="ph ph-building"></i> Complemento</label>
+              <input type="text" id="complemento" placeholder="Apt, Bloco, etc (opcional)">
+            </div>
+            <div class="campo">
+              <label for="bairro"><i class="ph ph-map-pin-line"></i> Bairro</label>
+              <input type="text" id="bairro" placeholder="Bairro">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="cidade"><i class="ph ph-buildings"></i> Cidade</label>
+              <input type="text" id="cidade" placeholder="Cidade">
+            </div>
+            <div class="campo campo-small">
+              <label for="estado"><i class="ph ph-flag"></i> Estado</label>
+              <input type="text" id="estado" placeholder="UF" maxlength="2">
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="selecionar">
+        <div class="section-header">
+          <i class="ph ph-user-focus"></i>
+          <h2>Tipo de Cuidador</h2>
+        </div>
+        <p class="section-description">Selecione o tipo de cuidador que você precisa</p>
+        
+        <div class="opcoes">
+          <label class="opcao">
+            <input type="radio" name="cuidador" value="idosos" required>
+            <div class="opcao-content">
+              <i class="ph ph-heartbeat icone"></i>
+              <span class="texto">Cuidador de Idosos</span>
+              <span class="descricao">Atendimento especializado para pessoas idosas</span>
+            </div>
+            <i class="ph ph-check-circle check-icon"></i>
+          </label>
+
+          <label class="opcao">
+            <input type="radio" name="cuidador" value="pet" required>
+            <div class="opcao-content">
+              <i class="ph ph-dog icone"></i>
+              <span class="texto">Cuidador de Pet</span>
+              <span class="descricao">Cuidados especiais para seu animal</span>
+            </div>
+            <i class="ph ph-check-circle check-icon"></i>
+          </label>
+
+          <label class="opcao">
+            <input type="radio" name="cuidador" value="crianca" required>
+            <div class="opcao-content">
+              <i class="ph ph-baby icone"></i>
+              <span class="texto">Cuidador Infantil</span>
+              <span class="descricao">Atendimento para bebês e crianças</span>
+            </div>
+            <i class="ph ph-check-circle check-icon"></i>
+          </label>
+        </div>
+      </section>
+
+      <div class="action-buttons">
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='homeCliente.html'">
+          <i class="ph ph-x"></i> Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" id="contratarBtn">
+          <i class="ph ph-check-circle"></i> Contratar Agora
+        </button>
+      </div>
+    </div>
   </main>
+
+  <script type="module">
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { app } from '../firebase-init.js';
+
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Carregar endereço do cliente
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        alert('Você precisa estar logado para contratar um cuidador.');
+        window.location.href = '../../index.html';
+        return;
+      }
+
+      try {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists() && userDoc.data().endereco) {
+          const endereco = userDoc.data().endereco;
+          
+          // Preencher campos
+          document.getElementById('cep').value = endereco.cep || '';
+          document.getElementById('rua').value = endereco.rua || '';
+          document.getElementById('numero').value = endereco.numero || '';
+          document.getElementById('complemento').value = endereco.complemento || '';
+          document.getElementById('bairro').value = endereco.bairro || '';
+          document.getElementById('cidade').value = endereco.cidade || '';
+          document.getElementById('estado').value = endereco.estado || '';
+          
+          // Mostrar mensagem de sucesso
+          const addressInfo = document.getElementById('addressInfo');
+          addressInfo.innerHTML = '<i class="ph ph-check-circle"></i><p>Endereço carregado com sucesso! Você pode editá-lo se necessário.</p>';
+          addressInfo.style.background = 'rgba(46, 204, 113, 0.1)';
+          addressInfo.style.borderColor = '#27ae60';
+        } else {
+          const addressInfo = document.getElementById('addressInfo');
+          addressInfo.innerHTML = '<i class="ph ph-warning"></i><p>Nenhum endereço cadastrado. Por favor, preencha os campos abaixo.</p>';
+          addressInfo.style.background = 'rgba(250, 213, 100, 0.15)';
+          addressInfo.style.borderColor = '#FAD564';
+        }
+      } catch (error) {
+        console.error('Erro ao carregar endereço:', error);
+        const addressInfo = document.getElementById('addressInfo');
+        addressInfo.innerHTML = '<i class="ph ph-x-circle"></i><p>Erro ao carregar endereço. Preencha manualmente.</p>';
+        addressInfo.style.background = 'rgba(231, 76, 60, 0.1)';
+        addressInfo.style.borderColor = '#e74c3c';
+      }
+    });
+
+    // Formatar CEP
+    document.getElementById('cep').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 5) {
+        value = value.slice(0, 5) + '-' + value.slice(5, 8);
+      }
+      e.target.value = value;
+    });
+
+    // Contratar
+    document.getElementById('contratarBtn').addEventListener('click', function() {
+      const tipoCuidador = document.querySelector('input[name="cuidador"]:checked');
+      
+      if (!tipoCuidador) {
+        alert('Por favor, selecione o tipo de cuidador.');
+        return;
+      }
+      
+      const cep = document.getElementById('cep').value;
+      const rua = document.getElementById('rua').value;
+      const numero = document.getElementById('numero').value;
+      const bairro = document.getElementById('bairro').value;
+      const cidade = document.getElementById('cidade').value;
+      const estado = document.getElementById('estado').value;
+      
+      if (!cep || !rua || !numero || !bairro || !cidade || !estado) {
+        alert('Por favor, preencha todos os campos de endereço obrigatórios.');
+        return;
+      }
+      
+      // Salvar dados da contratação
+      const contratacao = {
+        tipoCuidador: tipoCuidador.value,
+        endereco: { cep, rua, numero, complemento: document.getElementById('complemento').value, bairro, cidade, estado },
+        data: new Date().toISOString(),
+        status: 'pendente'
+      };
+      
+      localStorage.setItem('cuidafast_contratacao', JSON.stringify(contratacao));
+      
+      alert('Solicitação enviada com sucesso! Em breve um cuidador entrará em contato.');
+      window.location.href = 'homeCliente.html';
+    });
+  </script>
 </body>
 </html>

@@ -60,7 +60,8 @@ btnGoogle.addEventListener("click", () => {
         if (tipoUsuario === 'cuidador') {
           location.assign("../HTML/enviardocumentoscuidador.html");
         } else {
-          location.assign("../HTML/enviardocumentocliente.html");
+          // Cliente vai para página de complemento
+          location.assign("../HTML/cadastroComplemento.html");
         }
       }, 100);
     })
@@ -142,11 +143,12 @@ form.addEventListener("submit", (event) => {
 
   console.log('Usuário cadastrado:', userData);
 
-  // Redirecionar para página de documentos
+  // Redirecionar para página de complemento ou documentos
   if (tipoUsuario === 'cuidador') {
     window.location.href = "../HTML/enviardocumentoscuidador.html";
   } else {
-    window.location.href = "../HTML/enviardocumentocliente.html";
+    // Cliente vai para página de complemento (data de nascimento e endereço)
+    window.location.href = "../HTML/cadastroComplemento.html";
   }
 });
 
