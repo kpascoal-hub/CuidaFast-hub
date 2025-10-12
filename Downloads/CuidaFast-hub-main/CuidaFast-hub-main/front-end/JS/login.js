@@ -3,25 +3,21 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('[Login] Sistema de login inicializado');
 
-  // Selecionar o formulário de login
-  const loginModal = document.getElementById('loginModal');
-  if (!loginModal) {
-    console.warn('[Login] Modal de login não encontrado');
-    return;
-  }
-
-  const loginForm = loginModal.querySelector('form');
+  // Selecionar o formulário de login pelo ID
+  const loginForm = document.getElementById('loginForm');
   if (!loginForm) {
     console.warn('[Login] Formulário de login não encontrado');
     return;
   }
 
-  // Adicionar IDs aos campos para facilitar o acesso
-  const emailInput = loginForm.querySelector('input[type="text"]');
-  const passwordInput = loginForm.querySelector('input[type="password"]');
+  // Selecionar campos de input
+  const emailInput = document.getElementById('loginEmail');
+  const passwordInput = document.getElementById('loginPassword');
 
-  if (emailInput) emailInput.id = 'login-email';
-  if (passwordInput) passwordInput.id = 'login-password';
+  if (!emailInput || !passwordInput) {
+    console.warn('[Login] Campos de email ou senha não encontrados');
+    return;
+  }
 
   // Event listener para o formulário de login
   loginForm.addEventListener('submit', function(e) {
@@ -33,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Validar campos
     if (!email || !senha) {
-      alert('Por favor, preencha todos os campos.');
+      alert('❌ Por favor, preencha todos os campos.');
       return;
     }
 
@@ -45,13 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('[Login] Login bem-sucedido:', loginResult.userData);
       
       // Fechar modal
+      const loginModal = document.getElementById('loginModal');
       const modalInstance = bootstrap.Modal.getInstance(loginModal);
       if (modalInstance) {
         modalInstance.hide();
       }
 
       // Mostrar mensagem de sucesso
-      alert(`Bem-vindo(a), ${loginResult.userData.primeiroNome || loginResult.userData.nome}!`);
+      alert(`✅ Bem-vindo(a), ${loginResult.userData.primeiroNome || loginResult.userData.nome}!`);
 
       // Redirecionar baseado no tipo de usuário
       setTimeout(() => {
@@ -61,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
           window.location.href = 'front-end/HTML/homeCliente.html';
         } else {
           console.error('[Login] Tipo de usuário desconhecido:', loginResult.userData.tipo);
-          alert('Erro: Tipo de usuário não identificado.');
+          alert('❌ Erro: Tipo de usuário não identificado.');
         }
       }, 500);
     } else {
@@ -77,6 +74,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Verificar se já está logado
   verificarSessaoAtiva();
+
+  // Botão de login com Google no modal
+  const btnGoogleLogin = document.getElementById('btnGoogleLogin');
+  if (btnGoogleLogin) {
+    btnGoogleLogin.addEventListener('click', function() {
+      console.log('[Login] Login com Google clicado');
+      alert('🔄 Login com Google será implementado em breve!\n\nPara implementar, você precisa:\n1. Configurar Firebase Auth\n2. Adicionar as credenciais do Google\n3. Descomentar o código de integração');
+      
+      // TODO: Para implementar login com Google, siga os passos:
+      // 1. Configure Firebase Auth no Console do Firebase
+      // 2. Adicione o Google como provedor de autenticação
+      // 3. Descomente o código abaixo e remova o alert acima
+      
+      // Código para login com Google (Firebase Auth já configurado!)
+      import('https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js')
+        .then(({ signInWithPopup, GoogleAuthProvider }) => {
+          import('../JS/firebase-init.js').then(({ auth }) => {
+            
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+              .then((result) => {
+                const user = result.user;
+                
+                // Salvar no localStorage
+                const userData = {
+                  nome: user.displayName,
+                  email: user.email,
+                  photoURL: user.photoURL,
+                  tipo: 'cliente',
+                  dataCadastro: new Date().toISOString(),
+                  primeiroNome: user.displayName.split(' ')[0]
+                };
+                
+                localStorage.setItem('cuidafast_user', JSON.stringify(userData));
+                localStorage.setItem('cuidafast_isLoggedIn', 'true');
+                salvarUsuarioNaLista(userData);
+                
+                // Fechar modal
+                const loginModal = document.getElementById('loginModal');
+                const modalInstance = bootstrap.Modal.getInstance(loginModal);
+                if (modalInstance) modalInstance.hide();
+                
+                // Redirecionar
+                alert(`✅ Bem-vindo(a), ${userData.primeiroNome}!`);
+                window.location.href = 'front-end/HTML/homeCliente.html';
+              })
+              .catch((error) => {
+                console.error('Erro no login com Google:', error);
+                alert('❌ Erro ao fazer login com Google: ' + error.message);
+              });
+          });
+        });
+    });
+  }
 });
 
 /**

@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
@@ -13,9 +14,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const messaging = getMessaging(app);
 const db = getFirestore(app);
-const vapidKey = "..."; // sua VAPID key
+const vapidKey = "BAMeCbsVy0Wy1fqHjxiyHcviJhGUQC4S6VhLKC9FMgB8wJlYWYzW2EaEzqR8wY1SalKrwc0-D3aRotYl2VmHqwA"; // sua VAPID key
 
 export async function initFCM() {
   const permission = await Notification.requestPermission();
@@ -35,3 +37,6 @@ export async function initFCM() {
 onMessage(messaging, (payload) => {
   alert(`🔔 ${payload.notification.title}\n${payload.notification.body}`);
 });
+
+// Exportar auth para uso em outros módulos (ex: login.js)
+export { auth, db, messaging };

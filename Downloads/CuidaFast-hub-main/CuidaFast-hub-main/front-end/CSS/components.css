@@ -128,3 +128,45 @@
   background-color: #ffffff !important;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
 }
+
+/* ===== Divider e Social Icons (para modais e formulários) ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #666;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+  padding: 0 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 10px 0 20px;
+}
+
+.social-icons i {
+  color: var(--azul-escuro);
+  font-size: 47px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-icons i:hover {
+  transform: scale(1.15);
+  color: var(--amarelo);
+}

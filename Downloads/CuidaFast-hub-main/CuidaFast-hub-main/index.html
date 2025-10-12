@@ -222,14 +222,26 @@
         <button type="button" class="btn-close position-absolute end-0 top-0 m-2" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <!-- Acesso Rápido -->
+        <div class="divider"><span>Acesso rápido</span></div>
+        
+        <div class="social-icons">
+          <i id="btnGoogleLogin" class="ph-fill ph-google-logo" title="Google"></i>
+          <i class="ph-fill ph-facebook-logo" title="Facebook"></i>
+          <i class="ph-fill ph-twitter-logo" title="Twitter"></i>
+          <i class="ph-fill ph-squares-four" title="Microsoft"></i>
+        </div>
+
+        <div class="divider"><span>Ou</span></div>
+
+        <form id="loginForm">
           <div class="input-group mb-3">
             <span class="input-group-text"><i class="ph ph-envelope-simple"></i></span>
-            <input type="text" class="form-control" placeholder="E-mail ou usuário" required>
+            <input type="email" id="loginEmail" class="form-control" placeholder="E-mail" required>
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text"><i class="ph ph-lock"></i></span>
-            <input type="password" class="form-control" placeholder="Senha" required>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Senha" required>
           </div>
           <button type="submit" class="btn btn-login-cuidafast w-100">Entrar</button>
         </form>
