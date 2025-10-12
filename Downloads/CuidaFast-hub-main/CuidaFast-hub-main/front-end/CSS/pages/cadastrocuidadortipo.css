@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFBEC ; /* fundo creme */
+  color: #1c1c1c;
+
+  /* Centralizar tudo na vertical e horizontal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative; /* necessário para a seta absoluta */
+}
+
+.containerzin {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+ .voltar {
+    display: block;
+    text-align: left;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+  }
+
+h1 {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.cardzin {
+  display: flex;
+  align-items: center;    /* <-- centraliza checkbox verticalmente com o conteúdo */
+  gap: 12px;              /* espaçamento checkbox ↔ conteúdo */
+  background-color: #FFFBEC ;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 14px;
+  cursor: pointer;
+  border: 1px solid #eee;
+}
+
+.cardzin input[type="checkboxi"] {
+  margin: 0;              /* importante: remove o margin-top que pode deslocar só um checkbox */
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  accent-color: #000;
+  flex: 0 0 20px;
+  align-self: center;     /* garante alinhamento dentro do flex */
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;           
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.cardzin p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  background-color: #0b3342; /* azul escuro do print */
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #094252;
+}
+
+.terms {
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.4;
+}
+
+.terms a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}

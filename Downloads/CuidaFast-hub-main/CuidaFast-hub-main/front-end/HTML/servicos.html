@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa com informações</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../CSS/pages/servicos.css">
+  <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="modern-header">
+    <div class="header-container">
+      <div class="header-left">
+        <a href="homeCliente.html" class="logo-link">
+          <img id="logo" src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
+          
+        </a>
+      </div>
+
+      <div class="header-right">
+        <button class="header-action-btn" id="sidebarToggle">
+        <!--  <i class="ph ph-list"></i>-->
+        </button>
+        
+        <button class="header-action-btn notification-btn" id="notificationBtn">
+          <i class="ph ph-bell"></i>
+          <span class="notification-badge">5</span>
+        </button>
+
+        <button class="header-action-btn message-btn" id="messageBtn">
+          <a href="mensagens.html"><i class="ph ph-chat-circle"></i>
+          </a>
+          <span class="message-badge">2</span>
+        </button>
+
+        <div class="user-profile-dropdown" id="userProfileDropdown">
+          <button class="user-profile-btn" id="userProfileBtn">
+            <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
+            <span class="user-name">João Silva</span>
+            <i class="ph ph-caret-down dropdown-arrow"></i>
+          </button>
+          <div class="dropdown-menu" id="dropdownMenu">
+
+            <a href="#" class="dropdown-item">
+              <i class="ph ph-house" aria-hidden="true"></i> Home
+            </a>
+
+            <a href="in-time.html" class="dropdown-item">
+              <i class="ph ph-lightning"></i> InTime
+            </a>
+
+            <a href="perfil.html" class="dropdown-item">
+              <i class="ph ph-user"></i> Meu Perfil
+            </a>
+
+            <a href="configuracoes.html" class="dropdown-item">
+              <i class="ph ph-gear"></i> Configurações
+            </a>
+
+            <hr class="dropdown-divider" />
+            <a href="../../index.html" class="dropdown-item logout">
+              <i class="ph ph-sign-out"></i> Sair
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+<!--  <aside class="client-sidebar" id="clientSidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <div class="user-info">
+
+          <div class="user-details">
+            <h3 id="userName">João Silva</h3>
+            <p>Cliente desde 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">
+              <i class="ph ph-house" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../HTML/mensagens.html" class="nav-link">
+              <i class="ph ph-chat-circle"></i>
+              <span>Mensagens</span>
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../HTML/notificacao.html" class="nav-link">
+              <i class="ph ph-bell" aria-hidden="true"></i>
+              <span>Notificações</span>
+              <span class="nav-badge">5</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="in-time.html" class="nav-link">
+              <i class="ph ph-lightning"></i>
+              <span>InTime</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../HTML/configuracoes.html" class="nav-link">
+              <i class="ph ph-gear"></i>
+              <span>Configurações</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="logoutBtn">
+              <i class="ph ph-sign-out"></i>
+              <span>Sair da conta</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside> 
+-->
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <h2>Sheila chegou para cuidar de João</h2>
+
+  <div class="container">
+    <div class="info-card">
+      <p><b>Sheila Mendes</b><br>
+      Função: Babá<br><br>
+      <b>Data:</b> 02/08/2025<br>
+      <b>Check-in:</b> 07:58<br>
+      <b>Check-out:</b> 12:35<br>
+      <b>Localização confirmada no endereço:</b></p>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <div class="footer">
+    <button>Agendamento →</button>
+    <button>Serviço InTime →</button>
+  </div>
+
+  <!-- Firebase + Leaflet libs (mesmas versões que você usou) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Seus scripts (separados) -->
+  <script src="../../back-end/config/FirebaseConfig.js"></script>
+  <script src="../../back-end/api/controllers/MapController.js"></script>
+  <script src="../JS/servicos.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contratar</title>
+  <link rel="stylesheet" href="contratacaoInTime.css">
+</head>
+<body>
+  <header>
+    <a href="#" class="voltar">&lt; Voltar</a>
+  </header>
+
+  <main>
+    <h1>Contratar InTime</h1>
+
+    <section class="form-container">
+      <h2>Verificando local</h2>
+      <form>
+        <div class="linha">
+          <div class="campo">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" placeholder="015001-002">
+          </div>
+          <div class="campo">
+            <label for="complemento1">Complemento</label>
+            <input type="text" id="complemento1" placeholder="(55)11 0000-0000">
+          </div>
+        </div>
+
+        <div class="linha">
+          <div class="campo">
+            <label for="logradouro">Logradouro</label>
+            <input type="text" id="logradouro" placeholder="Rua zumbi dos palmares 201">
+          </div>
+          <div class="campo">
+            <label for="complemento2">Complemento</label>
+            <input type="text" id="complemento2" placeholder="Apt 123">
+          </div>
+        </div>
+
+        <div class="linha">
+          <div class="campo">
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro" placeholder="Liberdade">
+          </div>
+          <div class="campo">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" placeholder="São Paulo">
+          </div>
+          <div class="campo">
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" placeholder="SP">
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="selecionar">
+      <p>Selecione o tipo de cuidador que você precisa agora</p>
+      <div class="opcoes">
+        <label class="opcao">
+          <input type="checkbox" name="cuidador" value="idosos">
+          <span class="icone">🧓</span>
+          <span class="texto">Cuidador de<br>idosos</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="cuidador" value="pet">
+          <span class="icone">🐶</span>
+          <span class="texto">Cuidador de<br>pet</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="cuidador" value="crianca">
+          <span class="icone">👶</span>
+          <span class="texto">Cuidador de<br>criança</span>
+        </label>
+      </div>
+    </section>
+
+    <button class="contratar-btn">Contratar agora</button>
+  </main>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="../CSS/pages/enviardocumentoscuidador.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+  <div class="container">
+          <a href="cadastro.html" class="back-link">
+        <i class="ph ph-arrow-circle-left"></i>
+        </a>
+    <h1>Cadastre-se</h1>
+    <h2>Documentos Necessários</h2>
+
+    <!-- Upload RG/CNH -->
+    <div class="upload-box">
+      <p><strong>RG ou CNH</strong><br>Arquivo em PDF ou imagem (máx. 5MB)</p>
+      <label class="upload-btn">
+        Fazer Upload
+        <input type="file" accept=".pdf,.jpg,.jpeg,.png" id="rg-cnh">
+      </label>
+    </div>
+
+    <!-- Upload Feedback -->
+    <div class="upload-box">
+      <p><strong>Envie-nos feedback que já recebeu</strong><br>Avaliações de clientes (não obrigatório)</p>
+      <label class="upload-btn">
+        Fazer Upload
+        <input type="file" accept=".pdf,.jpg,.jpeg,.png" id="feedback">
+      </label>
+    </div>
+
+    <!-- Botão Finalizar -->
+    <button class="continue-btn" onclick="window.location.href='../HTML/dashboard-cuidador.html'">
+  Finalizar
+</button>
+
+    <!-- Termos -->
+    <p class="termos">
+      Ao criar uma conta, você concorda com nossos
+      <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>
+    </p>
+  </div>
+</body>
+</html>
