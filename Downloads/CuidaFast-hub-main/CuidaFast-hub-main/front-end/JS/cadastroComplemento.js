@@ -1,109 +1,73 @@
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { app } from '../firebase-init.js';
+// ---------- cadastroComplemento.js ----------
+// Versão sem Firebase, mas com localStorage (dados persistem no perfil local)
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('[cadastroComplemento] Iniciado');
 
-// -----------------------------
-// 🔒 Verificação de autenticação
-// -----------------------------
-auth.onAuthStateChanged(async (user) => {
-  if (!user) {
-    alert('Você precisa estar logado para acessar esta página.');
-    window.location.href = 'cadastro.html';
-    return;
-  }
+  // ----------- FUNÇÃO: buscar CEP -----------
+  function buscarCEP(cepDigitado) {
+    const cepInput = document.getElementById('cep');
+    const btnBuscar = document.getElementById('btnBuscarCep');
 
-  // Se já completou o cadastro, redireciona
-  const userDoc = await getDoc(doc(db, 'users', user.uid));
-  if (userDoc.exists() && userDoc.data().cadastroCompleto) {
-    window.location.href = 'homeCliente.html';
-  }
-});
+    const id = cepDigitado || cepInput.value;
+    const cepLimpo = id.replace(/\D/g, '');
 
-// -----------------------------
-// 🧭 Função para buscar CEP
-// -----------------------------
-function buscarCEP(cepDigitado) {
-  const cepInput = document.getElementById('cep');
-  const btnBuscar = document.getElementById('btnBuscarCep');
-  const id = cepDigitado || cepInput.value;
-  const cepLimpo = id.replace(/\D/g, '');
+    if (!id || cepLimpo.length !== 8) {
+      alert('CEP inválido. Digite um CEP com 8 dígitos.');
+      return;
+    }
 
-  if (!id || cepLimpo.length !== 8) {
-    alert('CEP inválido. Digite um CEP com 8 dígitos.');
-    return;
-  }
+    const originalHTML = btnBuscar.innerHTML;
+    btnBuscar.disabled = true;
+    btnBuscar.innerHTML = '<i class="ph ph-spinner ph-spin"></i>';
+    btnBuscar.style.opacity = '0.6';
 
-  const originalHTML = btnBuscar.innerHTML;
+    fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
+      .then(response => {
+        if (!response.ok) throw new Error('Erro ao buscar CEP na API');
+        return response.json();
+      })
+      .then(data => {
+        if (data.erro) throw new Error('CEP não encontrado');
 
-  // Feedback visual
-  btnBuscar.disabled = true;
-  btnBuscar.innerHTML = '<i class="ph ph-spinner ph-spin"></i>';
-  btnBuscar.style.opacity = '0.6';
+        document.getElementById('rua').value = data.logradouro || '';
+        document.getElementById('bairro').value = data.bairro || '';
+        document.getElementById('cidade').value = data.localidade || '';
+        document.getElementById('estado').value = data.uf || '';
 
-  console.log('🔎 Buscando CEP:', cepLimpo);
+        btnBuscar.innerHTML = '<i class="ph ph-check"></i>';
+        setTimeout(() => {
+          btnBuscar.innerHTML = originalHTML;
+          btnBuscar.disabled = false;
+          btnBuscar.style.opacity = '1';
+        }, 1500);
 
-  fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
-    .then(response => {
-      if (!response.ok) throw new Error('Erro ao buscar CEP na API');
-      return response.json();
-    })
-    .then(data => {
-      console.log('📦 Resposta ViaCEP:', data);
-
-      if (data.erro) throw new Error('CEP não encontrado');
-
-      document.getElementById('rua').value = data.logradouro || '';
-      document.getElementById('bairro').value = data.bairro || '';
-      document.getElementById('cidade').value = data.localidade || '';
-      document.getElementById('estado').value = data.uf || '';
-
-      // Feedback de sucesso
-      btnBuscar.innerHTML = '<i class="ph ph-check"></i>';
-      setTimeout(() => {
+        document.getElementById('numero').focus();
+      })
+      .catch(error => {
+        console.error('❌ Erro ao buscar CEP:', error);
+        alert(error.message || 'Erro ao buscar CEP. Verifique sua conexão.');
         btnBuscar.innerHTML = originalHTML;
         btnBuscar.disabled = false;
         btnBuscar.style.opacity = '1';
-      }, 2000);
+      });
+  }
 
-      document.getElementById('numero').focus();
-    })
-    .catch(error => {
-      console.error('❌ Erro ao buscar CEP:', error);
-      alert(error.message || 'Erro ao buscar CEP. Verifique sua conexão e tente novamente.');
-      btnBuscar.innerHTML = originalHTML;
-      btnBuscar.disabled = false;
-      btnBuscar.style.opacity = '1';
-    });
-}
-
-// -----------------------------
-// ⚙️ Eventos e formatações
-// -----------------------------
-document.addEventListener('DOMContentLoaded', function () {
-  console.log('✅ DOM carregado - Inicializando eventos...');
-
-  // Formatar CEP
+  // ----------- FORMATAR CAMPOS -----------
   const cepInput = document.getElementById('cep');
   if (cepInput) {
     cepInput.addEventListener('input', (e) => {
       let value = e.target.value.replace(/\D/g, '');
-      if (value.length > 5) {
-        value = value.slice(0, 5) + '-' + value.slice(5, 8);
-      }
+      if (value.length > 5) value = value.slice(0, 5) + '-' + value.slice(5, 8);
       e.target.value = value;
     });
 
-    // Buscar CEP ao sair do campo
     cepInput.addEventListener('blur', (e) => {
       const cep = e.target.value.replace(/\D/g, '');
       if (cep.length === 8) buscarCEP(cep);
     });
   }
 
-  // Botão buscar CEP
   const btnBuscarCep = document.getElementById('btnBuscarCep');
   if (btnBuscarCep) {
     btnBuscarCep.addEventListener('click', (e) => {
@@ -112,11 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (cep && cep.trim() !== '') buscarCEP(cep);
       else alert('Por favor, digite um CEP primeiro.');
     });
-  } else {
-    console.error('🚫 Botão btnBuscarCep não encontrado!');
   }
 
-  // Formatar CPF
   const cpfInput = document.getElementById('cpf');
   if (cpfInput) {
     cpfInput.addEventListener('input', (e) => {
@@ -129,61 +90,83 @@ document.addEventListener('DOMContentLoaded', function () {
       e.target.value = value;
     });
   }
-});
 
-// -----------------------------
-// 💾 Submeter formulário
-// -----------------------------
-document.getElementById('form-complemento').addEventListener('submit', async function (e) {
-  e.preventDefault();
+  // ----------- CARREGAR DADOS SALVOS -----------
+  const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+  if (Object.keys(userData).length > 0) {
+    console.log('[cadastroComplemento] Dados carregados do localStorage:', userData);
+    document.getElementById('dataNascimento').value = userData.dataNascimento || '';
+    document.getElementById('cpf').value = userData.cpf || '';
+    document.getElementById('cep').value = userData.endereco?.cep || '';
+    document.getElementById('rua').value = userData.endereco?.rua || '';
+    document.getElementById('numero').value = userData.endereco?.numero || '';
+    document.getElementById('complemento').value = userData.endereco?.complemento || '';
+    document.getElementById('bairro').value = userData.endereco?.bairro || '';
+    document.getElementById('cidade').value = userData.endereco?.cidade || '';
+    document.getElementById('estado').value = userData.endereco?.estado || '';
+  }
 
-  const formData = {
-    dataNascimento: document.getElementById('dataNascimento').value,
-    cpf: document.getElementById('cpf').value,
-    endereco: {
-      cep: document.getElementById('cep').value,
-      rua: document.getElementById('rua').value,
-      numero: document.getElementById('numero').value,
-      complemento: document.getElementById('complemento').value,
-      bairro: document.getElementById('bairro').value,
-      cidade: document.getElementById('cidade').value,
-      estado: document.getElementById('estado').value,
-    },
-    cadastroCompleto: true,
-    updatedAt: new Date().toISOString(),
-  };
+  // ----------- SALVAR DADOS AO ENVIAR -----------
+  const form = document.getElementById('form-complemento');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-  const submitBtn = this.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Salvando...';
+      // Pegar dados existentes do localStorage
+      const existingData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
 
-  try {
-    const user = auth.currentUser;
-    if (user) {
-      await setDoc(doc(db, 'users', user.uid), formData, { merge: true });
-    }
+      // Mesclar com novos dados do formulário
+      const updatedData = {
+        ...existingData, // Mantém nome, email, telefone, tipo, photoURL, etc
+        dataNascimento: document.getElementById('dataNascimento').value,
+        cpf: document.getElementById('cpf').value,
+        endereco: {
+          cep: document.getElementById('cep').value,
+          rua: document.getElementById('rua').value,
+          numero: document.getElementById('numero').value,
+          complemento: document.getElementById('complemento').value,
+          bairro: document.getElementById('bairro').value,
+          cidade: document.getElementById('cidade').value,
+          estado: document.getElementById('estado').value,
+        },
+        cadastroCompleto: true,
+        updatedAt: new Date().toISOString(),
+      };
 
-    // Salvar localmente também
-    const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
-    Object.assign(userData, formData);
-    localStorage.setItem('cuidafast_user', JSON.stringify(userData));
-
-    alert('Cadastro completado com sucesso!');
-    window.location.href = 'homeCliente.html';
-  } catch (error) {
-    console.error('⚠️ Erro ao salvar dados:', error);
-
-    try {
-      const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
-      Object.assign(userData, formData);
-      localStorage.setItem('cuidafast_user', JSON.stringify(userData));
-
-      alert('Dados salvos localmente. Cadastro completado!');
+      localStorage.setItem('cuidafast_user', JSON.stringify(updatedData));
+      
+      // Atualizar também na lista de usuários
+      atualizarUsuarioNaLista(updatedData);
+      
+      console.log('[cadastroComplemento] Dados mesclados e salvos:', updatedData);
+      alert('✅ Cadastro completado com sucesso!');
       window.location.href = 'homeCliente.html';
-    } catch (localError) {
-      alert('Erro ao completar cadastro. Tente novamente.');
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="ph ph-check-circle"></i> Finalizar Cadastro';
-    }
+    });
   }
 });
+
+/**
+ * Atualiza o usuário na lista de cadastrados
+ */
+function atualizarUsuarioNaLista(userData) {
+  let usuarios = [];
+  
+  const usuariosExistentes = localStorage.getItem('cuidafast_usuarios');
+  if (usuariosExistentes) {
+    try {
+      usuarios = JSON.parse(usuariosExistentes);
+    } catch (error) {
+      console.error('[cadastroComplemento] Erro ao carregar lista:', error);
+      usuarios = [];
+    }
+  }
+
+  // Procurar usuário por email
+  const index = usuarios.findIndex(u => u.email === userData.email);
+  if (index !== -1) {
+    // Atualizar usuário existente
+    usuarios[index] = userData;
+    localStorage.setItem('cuidafast_usuarios', JSON.stringify(usuarios));
+    console.log('[cadastroComplemento] Usuário atualizado na lista');
+  }
+}

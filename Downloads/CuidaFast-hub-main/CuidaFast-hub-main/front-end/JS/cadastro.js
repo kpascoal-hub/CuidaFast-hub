@@ -44,15 +44,20 @@ btnGoogle.addEventListener("click", () => {
         nome: user.displayName || 'Usuário',
         email: user.email,
         telefone: user.phoneNumber || '',
+        senha: user.uid, // Usar UID do Google como "senha" para login
         tipo: tipoUsuario,
         dataCadastro: new Date().toISOString(),
         primeiroNome: (user.displayName || 'Usuário').split(' ')[0],
-        photoURL: user.photoURL || ''
+        photoURL: user.photoURL || '',
+        loginGoogle: true // Flag para identificar login do Google
       };
 
       // Salvar no localStorage
       localStorage.setItem('cuidafast_user', JSON.stringify(userData));
       localStorage.setItem('cuidafast_isLoggedIn', 'true');
+
+      // Salvar na lista de usuários para login posterior
+      salvarUsuarioNaLista(userData);
 
       alert(`Bem-vindo, ${userData.nome}!`);
 
@@ -132,6 +137,7 @@ form.addEventListener("submit", (event) => {
     nome: nome,
     email: email,
     telefone: telefone,
+    senha: senha, // Salvar senha (em produção, use hash!)
     tipo: tipoUsuario,
     dataCadastro: new Date().toISOString(),
     primeiroNome: nome.split(' ')[0]
@@ -140,6 +146,9 @@ form.addEventListener("submit", (event) => {
   // Salvar no localStorage
   localStorage.setItem('cuidafast_user', JSON.stringify(userData));
   localStorage.setItem('cuidafast_isLoggedIn', 'true');
+
+  // Salvar na lista de usuários para login posterior
+  salvarUsuarioNaLista(userData);
 
   console.log('Usuário cadastrado:', userData);
 
@@ -164,6 +173,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+/**
+ * Função para salvar usuário na lista de cadastrados
+ * Permite que múltiplos usuários possam fazer login
+ */
+function salvarUsuarioNaLista(userData) {
+  let usuarios = [];
+  
+  const usuariosExistentes = localStorage.getItem('cuidafast_usuarios');
+  if (usuariosExistentes) {
+    try {
+      usuarios = JSON.parse(usuariosExistentes);
+    } catch (error) {
+      console.error('Erro ao carregar lista de usuários:', error);
+      usuarios = [];
+    }
+  }
+
+  // Verificar se usuário já existe (por email)
+  const index = usuarios.findIndex(u => u.email === userData.email);
+  if (index !== -1) {
+    // Atualizar usuário existente
+    usuarios[index] = userData;
+    console.log('Usuário atualizado na lista:', userData.email);
+  } else {
+    // Adicionar novo usuário
+    usuarios.push(userData);
+    console.log('Novo usuário adicionado à lista:', userData.email);
+  }
+
+  localStorage.setItem('cuidafast_usuarios', JSON.stringify(usuarios));
+  console.log('Total de usuários cadastrados:', usuarios.length);
+}
 
 
 

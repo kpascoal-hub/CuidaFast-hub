@@ -51,12 +51,80 @@ function loadUserProfile() {
         updateInfoField('Telefone', formatPhone(userData.telefone));
     }
 
-    // Atualizar foto do perfil
+    // Atualizar CPF se existir
+    if (userData.cpf) {
+        updateInfoField('CPF', userData.cpf);
+    }
+
+    // Atualizar data de nascimento se existir
+    if (userData.dataNascimento) {
+        const dataNasc = new Date(userData.dataNascimento + 'T00:00:00');
+        const dataFormatada = dataNasc.toLocaleDateString('pt-BR');
+        updateInfoField('Data de Nascimento', dataFormatada);
+    }
+
+    // Atualizar endereço se existir
+    if (userData.endereco) {
+        const end = userData.endereco;
+        let enderecoCompleto = '';
+        
+        if (end.rua) enderecoCompleto += end.rua;
+        if (end.numero) enderecoCompleto += `, ${end.numero}`;
+        if (end.complemento) enderecoCompleto += ` - ${end.complemento}`;
+        if (end.bairro) enderecoCompleto += `\n${end.bairro}`;
+        if (end.cidade && end.estado) enderecoCompleto += ` - ${end.cidade}/${end.estado}`;
+        if (end.cep) enderecoCompleto += `\nCEP: ${end.cep}`;
+        
+        if (enderecoCompleto) {
+            updateInfoField('Endereço', enderecoCompleto);
+        }
+    }
+
+    // Atualizar descrição se for cuidador
+    if (userData.tipo === 'cuidador') {
+        if (userData.descricao) {
+            updateInfoField('Descrição', userData.descricao);
+        } else {
+            updateInfoField('Descrição', '-');
+        }
+    }
+
+    // Atualizar foto do perfil APENAS se tiver photoURL (Google ou upload)
     if (userData.photoURL) {
         const avatarImages = document.querySelectorAll('.avatar-img, .user-avatar-img, .dropdown-avatar');
         avatarImages.forEach(img => {
             img.src = userData.photoURL;
             img.alt = `Foto de ${userData.nome}`;
+        });
+    } else {
+        // Remover foto padrão - mostrar apenas ícone ou iniciais
+        const avatarImages = document.querySelectorAll('.avatar-img, .user-avatar-img, .dropdown-avatar');
+        avatarImages.forEach(img => {
+            img.style.display = 'none'; // Esconde a imagem
+        });
+        
+        // Mostrar iniciais no lugar
+        const avatarContainers = document.querySelectorAll('.avatar, .user-avatar, .dropdown-user');
+        avatarContainers.forEach(container => {
+            const iniciais = userData.nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const iniciaisDiv = container.querySelector('.avatar-iniciais') || document.createElement('div');
+            iniciaisDiv.className = 'avatar-iniciais';
+            iniciaisDiv.textContent = iniciais;
+            iniciaisDiv.style.cssText = `
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #1B475D, #2A5F7A);
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 600;
+                border-radius: 50%;
+            `;
+            if (!container.querySelector('.avatar-iniciais')) {
+                container.appendChild(iniciaisDiv);
+            }
         });
     }
 
