@@ -340,62 +340,6 @@
     <script src="../../js/main.js"></script>
     <script src="../JS/homeCliente.js"></script>
     
-    <script>
-        // Inicializar tooltips e popovers do Bootstrap
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-        
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl);
-        });
-    </script>
-<script>
-  const logoutPopup = document.getElementById("logoutPopup");
-  const confirmLogoutBtn = document.getElementById("confirmLogout");
-  const cancelLogoutBtn = document.getElementById("cancelLogout");
-  const logoutBtn = document.getElementById("headerLogoutBtn") || document.getElementById("logoutBtn");
-
-  // Função que executa o logout real
-  function handleLogout() {
-    localStorage.removeItem("userData");
-    localStorage.removeItem("userType");
-    window.location.href = "../../index.html";
-  }
-
-  // Função que inicializa o botão e o pop-up
-  function initLogout() {
-    if (!logoutBtn) return;
-
-    // Abre o pop-up ao clicar em "Sair"
-    logoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      logoutPopup.classList.add("active");
-    });
-
-    // Confirma o logout
-    confirmLogoutBtn.addEventListener("click", () => {
-      handleLogout();
-    });
-
-    // Cancela o logout
-    cancelLogoutBtn.addEventListener("click", () => {
-      logoutPopup.classList.remove("active");
-    });
-
-    // Fecha o pop-up se clicar fora dele
-    logoutPopup.addEventListener("click", (e) => {
-      if (e.target === logoutPopup) {
-        logoutPopup.classList.remove("active");
-      }
-    });
-  }
-
-  // Inicializa quando o DOM estiver pronto
-  document.addEventListener("DOMContentLoaded", initLogout);
-</script>
 
 <!-- Auth System -->
 <script src="../JS/auth.js"></script>

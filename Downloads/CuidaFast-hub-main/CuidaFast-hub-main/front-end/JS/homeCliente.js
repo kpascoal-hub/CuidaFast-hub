@@ -905,6 +905,8 @@ window.CuidaFastClient = {
 
   // Inicialização do modal de filtro
   function initFilterModal() {
+    console.log('Inicializando modal de filtros...');
+    
     const filterModalEl = document.getElementById('filterModal');
     const openFilterBtn = document.getElementById('openFilterBtn');
     const applyFiltersBtn = document.getElementById('applyFilters');
@@ -916,16 +918,28 @@ window.CuidaFastClient = {
     const minPrice = document.getElementById('minPrice');
     const maxPrice = document.getElementById('maxPrice');
     
+    console.log('Elementos encontrados:', {
+      filterModalEl: !!filterModalEl,
+      openFilterBtn: !!openFilterBtn,
+      bootstrap: typeof bootstrap !== 'undefined'
+    });
+    
     if (!filterModalEl) {
-      console.error('Modal de filtro não encontrado');
+      console.error('Modal de filtro não encontrado no DOM');
+      return;
+    }
+    
+    if (typeof bootstrap === 'undefined') {
+      console.error('Bootstrap não está carregado');
       return;
     }
     
     let filterModal;
     try {
       filterModal = new bootstrap.Modal(filterModalEl);
+      console.log('Modal Bootstrap criado com sucesso');
     } catch (error) {
-      console.error('Erro ao inicializar modal:', error);
+      console.error('Erro ao inicializar modal Bootstrap:', error);
       return;
     }
     
@@ -933,11 +947,18 @@ window.CuidaFastClient = {
     if (openFilterBtn) {
       openFilterBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        console.log('Abrindo modal de filtros...');
-        filterModal.show();
+        e.stopPropagation();
+        console.log('Clique no botão de filtros detectado');
+        try {
+          filterModal.show();
+          console.log('Modal.show() chamado');
+        } catch (error) {
+          console.error('Erro ao abrir modal:', error);
+        }
       });
+      console.log('Event listener adicionado ao botão de filtros');
     } else {
-      console.error('Botão de filtro não encontrado');
+      console.error('Botão de filtro (#openFilterBtn) não encontrado no DOM');
     }
     
     // Atualizar valor da avaliação quando o range for alterado
@@ -1081,3 +1102,70 @@ if (!document.getElementById('notification-styles')) {
   `;
   document.head.appendChild(style);
 }
+
+// ===== BOOTSTRAP TOOLTIPS E POPOVERS =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Inicializar tooltips do Bootstrap
+  if (typeof bootstrap !== 'undefined') {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+    
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+  }
+});
+
+// ===== SISTEMA DE LOGOUT =====
+document.addEventListener('DOMContentLoaded', function() {
+  const logoutPopup = document.getElementById("logoutPopup");
+  const confirmLogoutBtn = document.getElementById("confirmLogout");
+  const cancelLogoutBtn = document.getElementById("cancelLogout");
+  const logoutBtn = document.getElementById("headerLogoutBtn") || document.getElementById("logoutBtn");
+
+  // Função que executa o logout real
+  function handleLogout() {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("cuidafast_user");
+    localStorage.removeItem("cuidafast_isLoggedIn");
+    window.location.href = "../../index.html";
+  }
+
+  // Função que inicializa o botão e o pop-up
+  function initLogout() {
+    if (!logoutBtn || !logoutPopup) return;
+
+    // Abre o pop-up ao clicar em "Sair"
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      logoutPopup.classList.add("active");
+    });
+
+    // Confirma o logout
+    if (confirmLogoutBtn) {
+      confirmLogoutBtn.addEventListener("click", () => {
+        handleLogout();
+      });
+    }
+
+    // Cancela o logout
+    if (cancelLogoutBtn) {
+      cancelLogoutBtn.addEventListener("click", () => {
+        logoutPopup.classList.remove("active");
+      });
+    }
+
+    // Fecha o pop-up se clicar fora dele
+    logoutPopup.addEventListener("click", (e) => {
+      if (e.target === logoutPopup) {
+        logoutPopup.classList.remove("active");
+      }
+    });
+  }
+
+  initLogout();
+});
