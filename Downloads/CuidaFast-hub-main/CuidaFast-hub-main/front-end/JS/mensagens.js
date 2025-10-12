@@ -509,8 +509,8 @@ async function sendMessageToBackend(message) {
 
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
-     
-        showErrorNotification('Erro ao enviar mensagem. Tente novamente.');
+        // Não mostrar erro para o usuário, pois a mensagem já foi adicionada localmente
+        // showErrorNotification('Erro ao enviar mensagem. Tente novamente.');
     }
 }
 

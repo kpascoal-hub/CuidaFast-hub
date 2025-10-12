@@ -27,11 +27,29 @@
         <!-- Pop-up de confirmação de logout -->
 <div class="logout-popup" id="logoutPopup">
   <div class="logout-popup-content">
-    <h3>Tem certeza que deseja sair?</h3>
+    <div class="popup-icon logout-icon">
+      <i class="ph ph-sign-out"></i>
+    </div>
+    <h3>Sair da conta?</h3>
     <p>Você será redirecionado para a página inicial.</p>
     <div class="logout-popup-buttons">
       <button id="confirmLogout" class="confirm-btn">Sim, sair</button>
       <button id="cancelLogout" class="cancel-btn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pop-up de confirmação de exclusão de conta -->
+<div class="logout-popup" id="deletePopup">
+  <div class="logout-popup-content delete-popup-content">
+    <div class="popup-icon delete-icon">
+      <i class="ph ph-warning"></i>
+    </div>
+    <h3>Excluir conta permanentemente?</h3>
+    <p>Esta ação não pode ser desfeita. Todos os seus dados serão removidos permanentemente.</p>
+    <div class="logout-popup-buttons">
+      <button id="confirmDelete" class="confirm-btn delete-confirm-btn">Sim, excluir</button>
+      <button id="cancelDelete" class="cancel-btn">Cancelar</button>
     </div>
   </div>
 </div>
@@ -121,9 +139,7 @@
                     <p class="text-muted">Gerencie suas preferências e configurações de conta</p>
                 </div>
                 <div class="settings-actions">
-                    <button id="saveSettings" class="btn btn-primary">
-                        <i class="ph ph-floppy-disk"></i> Salvar alterações
-                    </button>
+                    <!-- Botão removido conforme solicitado -->
                 </div>
             </div>
         </header>
@@ -144,7 +160,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="atividadesCliente.html" class="settings-option">
+                        <a href="atividadeCliente.html" class="settings-option">
                             <div class="option-icon">
                                 <i class="ph ph-clock-counter-clockwise"></i>
                             </div>
@@ -173,9 +189,8 @@
                             <i class="ph ph-caret-right option-arrow"></i>
                         </a>
                     </li>
-                <ul class="settings-options">
                     <li>
-                        <a href="../../index.html" class="settings-option delete-option" id="deleteAccount">
+                        <a href="#" class="settings-option delete-option" id="deleteAccount">
                             <div class="option-icon">
                                 <i class="ph ph-trash"></i>
                             </div>
@@ -231,17 +246,46 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === logoutPopup) logoutPopup.classList.remove("active");
   });
 
-  // Botão de exclusão de conta
+  // Modal de exclusão de conta
+  const deletePopup = document.getElementById("deletePopup");
+  const confirmDeleteBtn = document.getElementById("confirmDelete");
+  const cancelDeleteBtn = document.getElementById("cancelDelete");
   const deleteAccount = document.getElementById('deleteAccount');
+  
   if (deleteAccount) {
     deleteAccount.addEventListener('click', (e) => {
       e.preventDefault();
-      const confirmar = confirm("⚠️ Tem certeza que deseja excluir sua conta? Essa ação não poderá ser desfeita.");
-      if (confirmar) {
-        window.location.href = '../../index.html';
-      }
+      deletePopup.classList.add("active");
     });
   }
+
+  // Confirma exclusão
+  confirmDeleteBtn.addEventListener("click", () => {
+    // Limpar todos os dados do usuário
+    localStorage.removeItem("cuidafast_user");
+    localStorage.removeItem("cuidafast_isLoggedIn");
+    localStorage.removeItem("userData");
+    localStorage.removeItem("userType");
+    
+    // Remover da lista de usuários
+    const usuarios = JSON.parse(localStorage.getItem('cuidafast_usuarios') || '[]');
+    const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+    const novosUsuarios = usuarios.filter(u => u.email !== userData.email);
+    localStorage.setItem('cuidafast_usuarios', JSON.stringify(novosUsuarios));
+    
+    alert('Conta excluída com sucesso.');
+    window.location.href = '../../index.html';
+  });
+
+  // Cancela exclusão
+  cancelDeleteBtn.addEventListener("click", () => {
+    deletePopup.classList.remove("active");
+  });
+
+  // Fecha popup ao clicar fora
+  deletePopup.addEventListener("click", (e) => {
+    if (e.target === deletePopup) deletePopup.classList.remove("active");
+  });
 
   // Dropdown de perfil
   const profileBtn = document.getElementById('userProfileBtn');

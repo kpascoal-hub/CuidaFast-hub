@@ -625,23 +625,63 @@ body {
 
 .logout-popup-content {
   background: var(--bege, #f8f1e4);
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 380px;
+  max-width: 420px;
   width: 90%;
+  animation: popupSlideIn 0.3s ease;
+}
+
+@keyframes popupSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.popup-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+}
+
+.logout-icon {
+  background: rgba(255, 107, 129, 0.15);
+  color: #ff4757;
+}
+
+.delete-icon {
+  background: rgba(255, 71, 87, 0.15);
+  color: #ff4757;
+}
+
+.delete-popup-content {
+  max-width: 450px;
 }
 
 .logout-popup-content h3 {
   color: var(--azul-escuro, #1b475d);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .logout-popup-content p {
   color: var(--verde-escuro, #2f5d50);
   font-size: 0.95rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
 }
 
 .logout-popup-buttons {
@@ -667,6 +707,16 @@ body {
 
 .confirm-btn:hover {
   background: #ff6b81;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+}
+
+.delete-confirm-btn {
+  background: #dc3545;
+}
+
+.delete-confirm-btn:hover {
+  background: #c82333;
 }
 
 .cancel-btn {
