@@ -63,7 +63,7 @@
                 <div class="user-profile-dropdown" id="userProfileDropdown">
                     <button class="user-profile-btn" id="userProfileBtn">
                         <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
-                        <span class="user-name" id="headerUserName">Maria Santos</span>
+                        <span class="user-name" id="headerUserName">Cuidador</span>
                         <i class="ph ph-caret-down dropdown-arrow"></i>
                     </button>
                     
@@ -72,8 +72,8 @@
                         <div class="dropdown-header">
                             <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
                             <div class="dropdown-user-info">
-                                <h4>Maria Santos</h4>
-                                <p>Cuidadora Profissional</p>
+                                <h4 id="dropdownUserName">Cuidador</h4>
+                                <p>Cuidador Profissional</p>
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
@@ -200,5 +200,28 @@
 
     <script src="../JS/auth.js"></script>
     <script src="../JS/perfilCliente.js"></script>
+    <script>
+        // Carregar dados do cuidador logado
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+            
+            if (!userData || !userData.nome) {
+                console.warn('[PerfilCuidador] Usuário não autenticado');
+                window.location.href = '../../index.html';
+                return;
+            }
+
+            // Atualizar nome no header e dropdown
+            const headerUserName = document.getElementById('headerUserName');
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            
+            const primeiroNome = userData.primeiroNome || userData.nome.split(' ')[0];
+            
+            if (headerUserName) headerUserName.textContent = primeiroNome;
+            if (dropdownUserName) dropdownUserName.textContent = userData.nome;
+            
+            console.log('[PerfilCuidador] Cuidador carregado:', userData.nome);
+        });
+    </script>
 </body>
 </html>

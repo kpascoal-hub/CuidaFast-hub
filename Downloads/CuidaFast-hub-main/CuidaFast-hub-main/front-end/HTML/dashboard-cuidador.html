@@ -34,12 +34,12 @@
                 </a>
             </div>
             
-            <!-- Barra de Pesquisa (escondida no dashboard) -->
+            <!-- Barra de Pesquisa -->
             <div class="header-center">
                 <div class="search-container">
                     <i class="ph ph-magnifying-glass search-icon"></i>
-                    <input type="text" class="search-input" placeholder="Buscar...">
-                    <button class="search-btn">
+                    <input type="text" class="search-input" id="headerSearch" placeholder="Buscar oportunidades...">
+                    <button class="search-btn" type="button">
                         <i class="ph ph-arrow-right"></i>
                     </button>
                 </div>
@@ -72,7 +72,7 @@
                         <div class="dropdown-header">
                             <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
                             <div class="dropdown-user-info">
-                                <h4>Cuidador</h4>
+                                <h4 id="dropdownUserName">Cuidador</h4>
                                 <p>Conta Profissional</p>
                             </div>
                         </div>
@@ -417,5 +417,97 @@
     <script src="../JS/header.js"></script>
     <script src="../JS/dashboard-cuidador.js"></script>
     <script src="../JS/taskbar.js"></script>
+    <script>
+        // Carregar dados do cuidador e configurar busca de oportunidades
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+            
+            if (!userData || !userData.nome) {
+                console.warn('[DashboardCuidador] Usuário não autenticado');
+                window.location.href = '../../index.html';
+                return;
+            }
+
+            // Atualizar nome no header e dropdown
+            const headerUserName = document.getElementById('headerUserName');
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            
+            const primeiroNome = userData.primeiroNome || userData.nome.split(' ')[0];
+            
+            if (headerUserName) headerUserName.textContent = primeiroNome;
+            if (dropdownUserName) dropdownUserName.textContent = userData.nome;
+            
+            console.log('[DashboardCuidador] Cuidador carregado:', userData.nome);
+
+            // Configurar busca de oportunidades (clientes)
+            const headerSearch = document.getElementById('headerSearch');
+            const searchBtn = document.querySelector('.search-btn');
+
+            function buscarOportunidades(query) {
+                console.log('[DashboardCuidador] Buscando oportunidades:', query);
+                
+                // Carregar clientes cadastrados
+                const usuarios = localStorage.getItem('cuidafast_usuarios');
+                if (!usuarios) {
+                    alert('Nenhum cliente cadastrado ainda.');
+                    return;
+                }
+
+                try {
+                    const listaUsuarios = JSON.parse(usuarios);
+                    const clientes = listaUsuarios.filter(u => u.tipo === 'cliente');
+                    
+                    if (clientes.length === 0) {
+                        alert('Nenhum cliente cadastrado ainda.');
+                        return;
+                    }
+
+                    // Filtrar clientes por query
+                    const q = query.toLowerCase().trim();
+                    const filtered = q ? clientes.filter(c => 
+                        (c.nome || '').toLowerCase().includes(q) ||
+                        (c.endereco?.cidade || '').toLowerCase().includes(q) ||
+                        (c.endereco?.estado || '').toLowerCase().includes(q)
+                    ) : clientes;
+
+                    console.log(`[DashboardCuidador] ${filtered.length} oportunidades encontradas`);
+                    
+                    // Mostrar resultados
+                    if (filtered.length > 0) {
+                        let mensagem = `Encontrados ${filtered.length} clientes:\n\n`;
+                        filtered.slice(0, 5).forEach(c => {
+                            mensagem += `• ${c.nome}`;
+                            if (c.endereco?.cidade) mensagem += ` - ${c.endereco.cidade}`;
+                            mensagem += '\n';
+                        });
+                        if (filtered.length > 5) mensagem += `\n... e mais ${filtered.length - 5} clientes`;
+                        alert(mensagem);
+                    } else {
+                        alert('Nenhum cliente encontrado com esses critérios.');
+                    }
+                } catch (error) {
+                    console.error('[DashboardCuidador] Erro ao buscar clientes:', error);
+                    alert('Erro ao buscar oportunidades.');
+                }
+            }
+
+            if (headerSearch) {
+                headerSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        buscarOportunidades(this.value);
+                    }
+                });
+            }
+
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    if (headerSearch) {
+                        buscarOportunidades(headerSearch.value);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -158,11 +158,10 @@ function initSidebar() {
     // Salvar dados do cuidador selecionado no sessionStorage
     sessionStorage.setItem('selectedCaregiver', JSON.stringify(caregiver));
     
-    // Mostrar informações do cuidador (pode ser um modal ou redirecionamento)
-    alert(`Visualizando perfil de ${caregiver.name}\n\nEspecialidade: ${caregiver.specialty}\nAvaliação: ${caregiver.rating} ⭐\n\nEm breve você será redirecionado para a página completa do perfil.`);
+    console.log('[HomeCliente] Redirecionando para perfil de:', caregiver.name);
     
-    // Em produção, redirecionar para página de perfil do cuidador
-    // window.location.href = `perfilCuidadorPublico.html?id=${caregiver.id}`;
+    // Redirecionar para página de perfil do cuidador
+    window.location.href = 'perfilCuidadorPublico.html';
   }
 
   function renderStars(r){
@@ -935,13 +934,27 @@ window.CuidaFastClient = {
     loadUserData() {
       // Carregar dados do sistema de autenticação
       const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
-      const defaultUser = { nome: 'João Silva', primeiroNome: 'João' };
-      const user = { ...defaultUser, ...userData };
+      
+      // Se não houver dados, redirecionar para login
+      if (!userData || !userData.nome) {
+        console.warn('[HomeCliente] Usuário não autenticado');
+        window.location.href = '../../index.html';
+        return;
+      }
 
       const userNameEl = document.getElementById('userName');
       const welcomeNameEl = document.getElementById('welcomeName');
-      if (userNameEl) userNameEl.textContent = user.nome;
-      if (welcomeNameEl) welcomeNameEl.textContent = user.primeiroNome || user.nome.split(' ')[0];
+      const headerUserName = document.getElementById('headerUserName');
+      const dropdownUserName = document.getElementById('dropdownUserName');
+      
+      const primeiroNome = userData.primeiroNome || userData.nome.split(' ')[0];
+      
+      if (userNameEl) userNameEl.textContent = userData.nome;
+      if (welcomeNameEl) welcomeNameEl.textContent = primeiroNome;
+      if (headerUserName) headerUserName.textContent = primeiroNome;
+      if (dropdownUserName) dropdownUserName.textContent = userData.nome;
+      
+      console.log('[HomeCliente] Usuário carregado:', userData.nome);
     },
 
     // Função para carregar mais cuidadores

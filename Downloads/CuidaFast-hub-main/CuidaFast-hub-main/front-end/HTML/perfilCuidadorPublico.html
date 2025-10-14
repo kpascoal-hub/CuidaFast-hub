@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Cuidador - CuidaFast</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/icone_verde.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/header.css">
+    <style>
+        .caregiver-profile-page {
+            padding-top: 100px;
+            min-height: 100vh;
+            background: var(--bege);
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--azul-escuro);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            gap: 0.75rem;
+            color: var(--amarelo-sólido);
+        }
+
+        .profile-header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--azul-escuro);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-specialty {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .profile-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: var(--amarelo-sólido);
+            font-size: 1.25rem;
+        }
+
+        .rating-text {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--azul-escuro);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #163947;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 71, 93, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--azul-escuro);
+            border: 2px solid var(--azul-escuro);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(27, 71, 93, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .detail-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-card h3 i {
+            font-size: 1.75rem;
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(27, 71, 93, 0.1);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--azul-escuro);
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            color: #666;
+        }
+
+        .bio-text {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body class="caregiver-profile-page">
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="homeCliente.html" class="logo-link">
+                    <img src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="homeCliente.html" class="btn-secondary" style="padding: 0.5rem 1rem;">
+                    <i class="ph ph-arrow-left"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <a href="homeCliente.html" class="back-button">
+            <i class="ph ph-arrow-left"></i>
+            Voltar para busca
+        </a>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <img src="../assets/images.webp" alt="Foto do cuidador" class="profile-avatar" id="caregiverAvatar">
+            
+            <div class="profile-info">
+                <h1 class="profile-name" id="caregiverName">Carregando...</h1>
+                <p class="profile-specialty" id="caregiverSpecialty">Especialidade</p>
+                
+                <div class="profile-rating">
+                    <div class="stars" id="caregiverStars">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                    <span class="rating-text" id="caregiverRating">5.0 (0 avaliações)</span>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn btn-primary" id="btnContratar">
+                        <i class="ph ph-check-circle"></i>
+                        Contratar Cuidador
+                    </button>
+                    <button class="btn btn-secondary" id="btnMensagem">
+                        <i class="ph ph-chat-circle"></i>
+                        Enviar Mensagem
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="profile-details">
+            <!-- Sobre -->
+            <div class="detail-card">
+                <h3>
+                    <i class="ph ph-user-circle"></i>
+                    Sobre
+                </h3>
+                <p class="bio-text" id="caregiverBio">Carregando informações...</p>
+            </div>
+
+            <!-- Informações de Contato -->
+            <div class="detail-card">
+                <h3>
+                    <i class="ph ph-address-book"></i>
+                    Contato
+                </h3>
+                <div class="detail-item">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value" id="caregiverEmail">-</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Telefone</div>
+                    <div class="detail-value" id="caregiverPhone">-</div>
+                </div>
+            </div>
+
+            <!-- Localização -->
+            <div class="detail-card" id="locationCard" style="display: none;">
+                <h3>
+                    <i class="ph ph-map-pin"></i>
+                    Localização
+                </h3>
+                <div class="detail-item">
+                    <div class="detail-label">Cidade</div>
+                    <div class="detail-value" id="caregiverCity">-</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Estado</div>
+                    <div class="detail-value" id="caregiverState">-</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Carregar dados do cuidador do sessionStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const caregiverData = sessionStorage.getItem('selectedCaregiver');
+            
+            if (!caregiverData) {
+                alert('Nenhum cuidador selecionado. Redirecionando...');
+                window.location.href = 'homeCliente.html';
+                return;
+            }
+
+            try {
+                const caregiver = JSON.parse(caregiverData);
+                console.log('[PerfilCuidador] Dados carregados:', caregiver);
+
+                // Preencher informações
+                document.getElementById('caregiverName').textContent = caregiver.name || 'Cuidador';
+                document.getElementById('caregiverSpecialty').textContent = caregiver.specialty || 'Cuidador Geral';
+                document.getElementById('caregiverBio').textContent = caregiver.bio || 'Informações não disponíveis.';
+                document.getElementById('caregiverEmail').textContent = caregiver.email || 'Não informado';
+                document.getElementById('caregiverPhone').textContent = caregiver.telefone || 'Não informado';
+
+                // Avatar
+                if (caregiver.photoURL) {
+                    document.getElementById('caregiverAvatar').src = caregiver.photoURL;
+                }
+
+                // Rating e estrelas
+                const rating = caregiver.rating || 5.0;
+                const reviews = caregiver.reviews || 0;
+                document.getElementById('caregiverRating').textContent = `${rating.toFixed(1)} (${reviews} avaliações)`;
+                
+                // Renderizar estrelas
+                const starsContainer = document.getElementById('caregiverStars');
+                const fullStars = Math.floor(rating);
+                const hasHalfStar = rating % 1 >= 0.5;
+                let starsHTML = '';
+                
+                for (let i = 0; i < fullStars; i++) {
+                    starsHTML += '<i class="ph-fill ph-star"></i>';
+                }
+                if (hasHalfStar) {
+                    starsHTML += '<i class="ph ph-star-half"></i>';
+                }
+                for (let i = Math.ceil(rating); i < 5; i++) {
+                    starsHTML += '<i class="ph ph-star"></i>';
+                }
+                starsContainer.innerHTML = starsHTML;
+
+                // Localização
+                if (caregiver.endereco && (caregiver.endereco.cidade || caregiver.endereco.estado)) {
+                    document.getElementById('locationCard').style.display = 'block';
+                    document.getElementById('caregiverCity').textContent = caregiver.endereco.cidade || '-';
+                    document.getElementById('caregiverState').textContent = caregiver.endereco.estado || '-';
+                }
+
+                // Botão Contratar
+                document.getElementById('btnContratar').addEventListener('click', function() {
+                    // Salvar cuidador selecionado para contratação
+                    localStorage.setItem('cuidador_para_contratar', JSON.stringify(caregiver));
+                    window.location.href = 'contratarInTime.html';
+                });
+
+                // Botão Mensagem
+                document.getElementById('btnMensagem').addEventListener('click', function() {
+                    // Redirecionar para mensagens
+                    window.location.href = 'mensagens.html';
+                });
+
+            } catch (error) {
+                console.error('[PerfilCuidador] Erro ao carregar dados:', error);
+                alert('Erro ao carregar perfil do cuidador.');
+                window.location.href = 'homeCliente.html';
+            }
+        });
+    </script>
+</body>
+</html>
