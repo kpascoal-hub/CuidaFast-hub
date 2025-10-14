@@ -77,25 +77,51 @@ function initSidebar() {
   const mobileSearch = document.querySelector('.mobile-search-input');
   const container = document.querySelector('.containerzin') || document.getElementById('main-content') || document.body;
 
-  // Dataset falso de cuidadores (substitui os cards estáticos)
-  const FAKE_CAREGIVERS = [
-    { name: 'Maria Silva', specialty: 'Idosos', bio: 'Cuidadora especializada em idosos com 5 anos de experiência.', rating: 4.9, reviews: 127 },
-    { name: 'João Santos', specialty: 'Infantil', bio: 'Cuidador infantil certificado, especialista em primeiros socorros.', rating: 4.7, reviews: 89 },
-    { name: 'Ana Costa', specialty: 'Pets', bio: 'Pet sitter experimente, ama animais e oferece cuidados especiais.', rating: 5.0, reviews: 203 },
-    { name: 'Pedro Almeida', specialty: 'Reabilitação', bio: 'Cuidador com experiência em fisioterapia e reabilitação.', rating: 4.8, reviews: 92 },
-    { name: 'Carlos Oliveira', specialty: 'Idosos', bio: 'Enfermeiro especializado em cuidados domiciliares para idosos.', rating: 4.8, reviews: 156 },
-    { name: 'Lucia Ferreira', specialty: 'Infantil', bio: 'Babá certificada com experiência em desenvolvimento infantil.', rating: 4.9, reviews: 98 },
-    { name: 'Roberto Lima', specialty: 'Pets', bio: 'Veterinário e pet sitter, especialista em cuidados com animais.', rating: 4.6, reviews: 234 },
-    { name: 'Sandra Mendes', specialty: 'Idosos', bio: 'Psicóloga especializada em cuidados com idosos e demência.', rating: 5.0, reviews: 78 },
-    { name: 'Patricia Alves', specialty: 'Reabilitação', bio: 'Fisioterapeuta especializada em reabilitação geriátrica.', rating: 5.0, reviews: 87 },
-    { name: 'Fernando Santos', specialty: 'Infantil', bio: 'Educador infantil com especialização em necessidades especiais.', rating: 4.7, reviews: 145 },
-    { name: 'Camila Rocha', specialty: 'Pets', bio: 'Adestradora e cuidadora de pets, especialista em comportamento animal.', rating: 4.9, reviews: 176 },
-    { name: 'Ricardo Souza', specialty: 'Home Care', bio: 'Técnico em enfermagem com especialização em home care.', rating: 4.7, reviews: 134 }
-  ];
+  // Carregar cuidadores cadastrados do localStorage
+  function loadRegisteredCaregivers() {
+    const usuarios = localStorage.getItem('cuidafast_usuarios');
+    let cuidadores = [];
+    
+    if (usuarios) {
+      try {
+        const listaUsuarios = JSON.parse(usuarios);
+        // Filtrar apenas usuários do tipo 'cuidador'
+        cuidadores = listaUsuarios
+          .filter(u => u.tipo === 'cuidador')
+          .map(c => ({
+            name: c.nome || 'Cuidador',
+            specialty: c.especialidade || c.tipoCuidador || 'Cuidador Geral',
+            bio: c.bio || c.descricao || `Cuidador profissional com experiência em ${c.especialidade || 'cuidados gerais'}.`,
+            rating: c.rating || (4.5 + Math.random() * 0.5), // Rating entre 4.5 e 5.0
+            reviews: c.reviews || Math.floor(Math.random() * 100) + 50,
+            email: c.email,
+            telefone: c.telefone,
+            endereco: c.endereco,
+            photoURL: c.photoURL || null
+          }));
+        
+        console.log(`[HomeCliente] ${cuidadores.length} cuidadores cadastrados carregados`);
+      } catch (error) {
+        console.error('[HomeCliente] Erro ao carregar cuidadores:', error);
+      }
+    }
+    
+    // Se não houver cuidadores cadastrados, mostrar mensagem
+    if (cuidadores.length === 0) {
+      console.warn('[HomeCliente] Nenhum cuidador cadastrado encontrado');
+      // Retornar array vazio para mostrar mensagem apropriada
+      return [];
+    }
+    
+    return cuidadores;
+  }
+
+  // Carregar cuidadores reais do sistema
+  const REGISTERED_CAREGIVERS = loadRegisteredCaregivers();
 
   // Estado de paginação e filtro
   let caregiversState = {
-    items: FAKE_CAREGIVERS.slice(), // cópia
+    items: REGISTERED_CAREGIVERS.slice(), // cópia
     page: 0,
     perPage: 4,
     filtered: null
@@ -162,6 +188,23 @@ function initSidebar() {
     if(!containerEl) return;
     if(reset){ containerEl.innerHTML = ''; caregiversState.page = 0; }
     const list = getActiveList();
+    
+    // Se não houver cuidadores, mostrar mensagem
+    if (list.length === 0 && reset) {
+      containerEl.innerHTML = `
+        <div class="no-results-box" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+          <div class="no-results-icon">
+            <i class="ph ph-users" style="font-size: 4rem; color: var(--azul-escuro);"></i>
+          </div>
+          <div class="no-results-text">
+            <h3>Nenhum cuidador cadastrado ainda</h3>
+            <p>Aguarde enquanto novos cuidadores se cadastram na plataforma.</p>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    
     const start = caregiversState.page * caregiversState.perPage;
     const slice = list.slice(start, start + caregiversState.perPage);
     slice.forEach(item => containerEl.appendChild(renderCard(item)));
@@ -202,8 +245,8 @@ function initSidebar() {
 
   function filterCards(query){
     const q = normalize(query);
-    // filtrar no dataset
-    const list = FAKE_CAREGIVERS.slice();
+    // filtrar no dataset de cuidadores registrados
+    const list = REGISTERED_CAREGIVERS.slice();
     const filtered = list.filter(c => ((c.name + ' ' + c.bio + ' ' + c.specialty).toLowerCase().indexOf(q) !== -1));
     caregiversState.filtered = q === '' ? null : filtered;
     // re-render a partir da página 0
@@ -299,9 +342,45 @@ function initSidebar() {
   if(mobileSearch){ mobileSearch.addEventListener('input', deb); mobileSearch.addEventListener('keypress', function(e){ if(e.key==='Enter'){ e.preventDefault(); filterCards(mobileSearch.value); } }); }
   if(searchBtn){ searchBtn.addEventListener('click', function(){ const v = (headerSearch && headerSearch.value) || (mobileSearch && mobileSearch.value) || ''; filterCards(v); }); }
 
+  // Função para aplicar filtros avançados
+  function applyAdvancedFilters(filters) {
+    console.log('[CuidaFast] Aplicando filtros avançados:', filters);
+    
+    const list = REGISTERED_CAREGIVERS.slice();
+    let filtered = list;
+    
+    // Filtrar por avaliação mínima
+    if (filters.rating > 0) {
+      filtered = filtered.filter(c => c.rating >= filters.rating);
+    }
+    
+    // Filtrar por especialidade (se alguma foi selecionada)
+    if (filters.specialties && filters.specialties.length > 0) {
+      filtered = filtered.filter(c => {
+        const specialty = c.specialty.toLowerCase();
+        return filters.specialties.some(s => {
+          if (s === 'elderly') return specialty.includes('idoso');
+          if (s === 'childcare') return specialty.includes('infantil') || specialty.includes('criança');
+          if (s === 'petcare') return specialty.includes('pet');
+          return false;
+        });
+      });
+    }
+    
+    // Atualizar estado com filtros aplicados
+    caregiversState.filtered = filtered;
+    caregiversState.page = 0;
+    
+    // Re-renderizar
+    renderNextPage(true);
+    
+    console.log(`[CuidaFast] ${filtered.length} cuidadores após filtros`);
+  }
+
   // Expor para console (opcional)
   window.CuidaFast = window.CuidaFast || {};
   window.CuidaFast.filterCards = filterCards;
+  window.CuidaFast.applyAdvancedFilters = applyAdvancedFilters;
 })();
 
 
@@ -979,16 +1058,33 @@ window.CuidaFastClient = {
     // Aplicar filtros
     if (applyFiltersBtn) {
       applyFiltersBtn.addEventListener('click', function() {
-        // Aqui você pode adicionar a lógica para aplicar os filtros
-        console.log('Filtros aplicados:', {
-          rating: ratingRange ? ratingRange.value : null,
-          distance: distanceRange ? distanceRange.value : null,
-          minPrice: minPrice ? minPrice.value : null,
-          maxPrice: maxPrice ? maxPrice.value : null
+        // Coletar valores dos filtros
+        const filters = {
+          rating: ratingRange ? parseFloat(ratingRange.value) : 0,
+          distance: distanceRange ? parseInt(distanceRange.value) : 50,
+          minPrice: minPrice ? parseFloat(minPrice.value) : 0,
+          maxPrice: maxPrice ? parseFloat(maxPrice.value) : 999,
+          specialties: []
+        };
+        
+        // Coletar especialidades selecionadas
+        const specialtyCheckboxes = document.querySelectorAll('#filterModal input[type="checkbox"]:checked');
+        specialtyCheckboxes.forEach(cb => {
+          filters.specialties.push(cb.value);
         });
+        
+        console.log('Filtros aplicados:', filters);
+        
+        // Aplicar filtros aos cuidadores
+        if (window.CuidaFast && typeof window.CuidaFast.applyAdvancedFilters === 'function') {
+          window.CuidaFast.applyAdvancedFilters(filters);
+        }
         
         // Fechar o modal
         filterModal.hide();
+        
+        // Mostrar notificação
+        showNotification('Filtros aplicados com sucesso!');
       });
     }
     
