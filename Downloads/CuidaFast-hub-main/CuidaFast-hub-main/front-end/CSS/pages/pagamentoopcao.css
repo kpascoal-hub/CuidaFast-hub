@@ -231,11 +231,35 @@ body {
     padding-top: 6rem;
   }
   
-  .back {
-    top: 1rem;
-    left: 1rem;
-  }
-  
+/* Botão voltar */
+.payment-card-centered {
+  position: relative; /* cria contexto para o botão */
+}
+
+.back {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  color: var(--azul-escuro, #0047ab);
+  font-size: 1.8rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-3px);
+}
+
   .payment-card-centered {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
