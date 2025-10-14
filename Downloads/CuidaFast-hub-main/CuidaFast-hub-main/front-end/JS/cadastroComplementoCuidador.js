@@ -40,10 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Coletar novos dados
       const cpf = document.getElementById('cpf').value;
       const dataNascimento = document.getElementById('dataNascimento').value;
-      const telefone = document.getElementById('telefone').value;
 
       // Validações
-      if (!cpf || !dataNascimento || !telefone) {
+      if (!cpf || !dataNascimento) {
         alert('Por favor, preencha todos os campos.');
         return;
       }
@@ -55,19 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
-      // Validar telefone (10 ou 11 dígitos)
-      const telefoneLimpo = telefone.replace(/\D/g, '');
-      if (telefoneLimpo.length < 10) {
-        alert('Telefone inválido.');
-        return;
-      }
-
       // Mesclar dados: mantém tudo que já existia + adiciona novos campos
       const updatedData = {
         ...existingData, // Mantém nome, email, tipo, photoURL, etc
         cpf: cpf,
         dataNascimento: dataNascimento,
-        telefone: telefone,
         cadastroComplementoCompleto: true,
         updatedAt: new Date().toISOString(),
       };
@@ -81,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('[cadastroComplementoCuidador] Dados mesclados e salvos:', updatedData);
       alert('✅ Dados salvos com sucesso!');
       
-      // Redirecionar para escolher tipo de serviço
-      window.location.href = 'cadastrocuidadortipo.html';
+      // Redirecionar para dashboard do cuidador
+      window.location.href = 'dashboard-cuidador.html';
     });
   }
 });

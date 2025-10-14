@@ -30,36 +30,53 @@ function initFAQ() {
   });
 }
 // ===== NEWSLETTER =====
+ function initNewsletterForm() {
+  const newsletterForm = document.getElementById('newsletterForm');
 
-function initNewsletterForm() {
-    const newsletterForm = document.getElementById('newsletterForm');
-    
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            
-            if (!name || !email) {
-                showAlert('Por favor, preencha todos os campos.', 'error');
-                return;
-            }
-            
-            if (!isValidEmail(email)) {
-                showAlert('Por favor, digite um e-mail válido.', 'error');
-                return;
-            }
-            
-            // Simular envio
-            showAlert('Cadastro realizado com sucesso! Obrigado por se inscrever.', 'success');
-            
-            // Limpar formulário
-            this.reset();
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = this.querySelector('input[type="text"]').value.trim();
+      const email = this.querySelector('input[type="email"]').value.trim();
+
+      if (!name || !email) {
+        showAlert('Por favor, preencha todos os campos.', 'error');
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        showAlert('Por favor, digite um e-mail válido.', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch('salvar_newsletter.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email })
         });
-    }
+
+        const data = await response.json();
+
+        if (data.success) {
+          showAlert('Cadastro realizado com sucesso! Obrigado por se inscrever.', 'success');
+          this.reset();
+        } else {
+          showAlert('Erro ao salvar no banco. Tente novamente.', 'error');
+        }
+      } catch (error) {
+        console.error(error);
+        showAlert('Erro na conexão com o servidor.', 'error');
+      }
+    });
+  }
 }
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 
 
 function showAlert(message, type = 'info') {

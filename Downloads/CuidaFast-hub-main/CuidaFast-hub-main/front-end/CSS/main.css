@@ -1,5 +1,6 @@
 :root {
-  --creme: #FFFBEC;
+  --bege: #FFFBEC;
+  --creme: #f5efe0;
   --creme-claro: #FFFBED;
   --azul-escuro: #1B475D;
   --verde-escuro: rgba(142, 189, 157, 0.5);
@@ -21,6 +22,7 @@
 }
 
 body {
-  background-color: var(--creme);
+  background-color: var(--bege) !important;
   font-family: 'Inter', sans-serif;
+  min-height: 100vh;
 }

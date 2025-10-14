@@ -20,7 +20,7 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="../CSS/styles.css">
-    <link rel="stylesheet" href="../CSS/components.css">
+    <link rel="stylesheet" href="../CSS/header.css">
     <link rel="stylesheet" href="../CSS/pages/configuracao.css">
 </head>
 <body class="client-home">
@@ -64,9 +64,6 @@
                 </a>
             </div>
             
-            <!-- Espaço vazio onde estava a barra de pesquisa -->
-            <div class="header-center"></div>
-            
             <!-- User Actions -->
             <div class="header-right">
                 <!-- Notifications -->
@@ -76,7 +73,7 @@
                 </a>
               
               <!-- Messages -->
-                <a href="notificacao.html" class="header-action-btn notification-btn active" id="notificationBtn">
+                <a href="mensagens.html" class="header-action-btn message-btn" id="messageBtn">
                   <i class="ph ph-chat-circle"></i>
                   <span class="message-badge">2</span>
                   </a>
@@ -106,16 +103,16 @@
                             <i class="ph ph-gear"></i>
                             <span>Configurações</span>
                         </a>
-                        <a href="#" class="dropdown-item">
+                        <a href="contratarInTime.html" class="dropdown-item">
                             <i class="ph ph-clock"></i>
-                            <span>Histórico</span>
+                            <span>In-time</span>
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="ph ph-question"></i>
                             <span>Ajuda</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                        <a href="../../index.html" class="dropdown-item logout-item" id="headerLogoutBtn">
                             <i class="ph ph-sign-out"></i>
                             <span>Sair</span>
                         </a>
@@ -125,6 +122,17 @@
                 <!-- Mobile Menu Toggle -->
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <i class="ph ph-list"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container" id="mobileSearchContainer">
+            <div class="mobile-search-wrapper">
+                <i class="ph ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Buscar cuidadores..." class="mobile-search-input">
+                <button class="mobile-search-btn" type="button">
+                    <i class="ph ph-arrow-right"></i>
                 </button>
             </div>
         </div>
@@ -310,7 +318,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../JS/auth.js"></script>
 <script src="../JS/header.js"></script>
 <script src="../JS/theme.js"></script>
 

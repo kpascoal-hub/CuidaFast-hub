@@ -6,8 +6,8 @@
     padding: 0;
   }
   
+  /* Body background removed - using main.css global styles */
   body {
-    background-color: var(--creme);
     padding: 20px;
     color: #000;
   }

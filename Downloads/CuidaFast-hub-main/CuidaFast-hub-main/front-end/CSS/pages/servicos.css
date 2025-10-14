@@ -1,17 +1,8 @@
 /* ===== VARIÁVEIS DE CORES ===== */
-:root {
-  --bege: #fdfdf5;
-  --creme: #f0f0e6;
-  --azul-escuro: #1b475d;
-  --verde-escuro: #7bb69c;
-  --cinza-claro: #ddd;
-  --cinza-escuro: #666;
-  --branco: #fff;
-}
+/* Removido redefinição de variáveis - usando as do header.css */
 
+/* Body background removed - using main.css global styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: var(--bege);
   margin: 0;
   padding-top: 90px; /* espaço para header fixo */
   text-align: center;

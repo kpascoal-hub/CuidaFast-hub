@@ -359,10 +359,9 @@ body.client-home .header-right {
 }
 
 /* Ajustes para o conteúdo principal */
+/* Body background removed - using main.css global styles */
 body {
     padding-top: 80px;
-    background-color: var(--creme);
-    min-height: 100vh;
 }
 
 /* Estilos existentes do dashboard */

@@ -5,9 +5,8 @@
   box-sizing: border-box;
 }
 
+/* Body background removed - using main.css global styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fffbec;
   color: #1E293B;
   line-height: 1.6;
 }
@@ -18,7 +17,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 16px 48px;
-  background-color: #fffbec;
+  background-color: var(--bege);
   border-bottom: 1px solid #ddd;
 }
 

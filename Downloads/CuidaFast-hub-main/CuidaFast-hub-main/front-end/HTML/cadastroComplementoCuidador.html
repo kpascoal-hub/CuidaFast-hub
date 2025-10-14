@@ -13,10 +13,9 @@
 <body>
   <div class="container">
     <!-- Botão Voltar -->
-    <div class="back-button">
+    <div class="back">
       <a href="cadastro.html" class="back-link">
-        <i class="ph ph-arrow-left"></i>
-        Voltar
+        <i class="ph ph-arrow-circle-left"></i>
       </a>
     </div>
 
@@ -27,21 +26,12 @@
         <p>Precisamos de mais algumas informações para finalizar</p>
       </div>
 
-      <!-- Progress Bar -->
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 50%;"></div>
-      </div>
-
-      <div class="step-indicator">
-        Passo 2 de 4
-      </div>
-
       <!-- Info Box -->
       <div class="info-box">
         <i class="ph ph-info"></i>
         <p>Essas informações são necessárias para validar sua identidade e garantir a segurança da plataforma.</p>
       </div>
-
+      
       <form id="complementForm">
         <!-- CPF -->
         <div class="form-group">
@@ -73,31 +63,10 @@
           >
         </div>
 
-        <!-- Telefone -->
-        <div class="form-group">
-          <label for="telefone">
-            <i class="ph ph-phone"></i>
-            Telefone
-          </label>
-          <input 
-            type="tel" 
-            id="telefone" 
-            name="telefone" 
-            placeholder="(00) 00000-0000"
-            maxlength="15"
-            required
-          >
-        </div>
-
         <!-- Botões -->
         <div class="form-actions">
-          <button type="button" class="btn btn-secondary" onclick="window.history.back()">
-            <i class="ph ph-arrow-left"></i>
-            Voltar
-          </button>
           <button type="submit" class="btn btn-primary">
-            Continuar
-            <i class="ph ph-arrow-right"></i>
+            Finalizar
           </button>
         </div>
       </form>

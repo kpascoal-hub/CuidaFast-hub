@@ -1,33 +1,3 @@
-
-  // ===== SIDEBAR =====
-  const sidebar = document.getElementById('clientSidebar');
-  const sidebarOverlay = document.getElementById('sidebarOverlay');
-  const sidebarToggle = document.getElementById('sidebarToggle');
-
-  sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-    sidebarOverlay.classList.toggle('active');
-  });
-
-  sidebarOverlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('active');
-  });
-
-  // ===== DROPDOWN PERFIL =====
-  const userProfileDropdown = document.getElementById('userProfileDropdown');
-  const userProfileBtn = document.getElementById('userProfileBtn');
-
-  userProfileBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    userProfileDropdown.classList.toggle('open');
-  });
-
-  document.addEventListener('click', () => {
-    userProfileDropdown.classList.remove('open');
-  });
-
-  // ===== LEAFLET MAPA =====
   const map = L.map('map').setView([-23.5505, -46.6333], 12);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'

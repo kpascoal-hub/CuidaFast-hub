@@ -20,9 +20,8 @@
   box-sizing: border-box;
 }
 
+/* Body background removed - using main.css global styles */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--creme);
   color: var(--azul-escuro);
   height: 100vh;
   overflow: hidden;

@@ -1,11 +1,8 @@
 
 
-body {
-    background-color: #FFFBEC;
-}
+/* Body background removed - using main.css global styles */
 
 .client-home {
-    background: var(--creme);
     min-height: 100vh;
 }
 

@@ -150,14 +150,29 @@ function realizarLogin(email, senha) {
     };
   }
 
-  // Verificar senha (em produção, use hash!)
-  // Por enquanto, como não temos senha salva, vamos aceitar qualquer senha
-  // ou verificar se a senha está salva no objeto
+  // Verificar senha
+  // Se o usuário fez login com Google, a senha será o UID do Google
+  if (usuario.loginGoogle && usuario.senha) {
+    // Para usuários do Google, não verificamos senha no login manual
+    return {
+      success: false,
+      message: 'Esta conta foi criada com Google. Use o botão "Login com Google".'
+    };
+  }
+  
+  // Para usuários normais, verificar senha
   if (usuario.senha && usuario.senha !== senha) {
     return {
       success: false,
       message: 'Senha incorreta. Tente novamente.'
     };
+  }
+
+  // Se não houver senha cadastrada, aceitar qualquer senha (compatibilidade)
+  if (!usuario.senha) {
+    console.warn('[Login] Usuário sem senha cadastrada. Atualizando...');
+    usuario.senha = senha;
+    salvarUsuarioNaLista(usuario);
   }
 
   // Login bem-sucedido
@@ -219,17 +234,26 @@ function verificarSessaoAtiva() {
       const user = JSON.parse(userData);
       console.log('[Login] Sessão ativa detectada para:', user.nome);
       
-      // Opcional: Redirecionar automaticamente se já estiver logado
-      // Descomente as linhas abaixo se quiser redirecionar automaticamente
-      /*
-      if (user.tipo === 'cuidador') {
-        window.location.href = 'front-end/HTML/dashboard-cuidador.html';
-      } else if (user.tipo === 'cliente') {
-        window.location.href = 'front-end/HTML/homeCliente.html';
+      // Redirecionar automaticamente se já estiver logado e estiver na página inicial
+      const isIndexPage = window.location.pathname.includes('index.html') || 
+                         window.location.pathname === '/' ||
+                         window.location.pathname.includes('sobre-nos.html');
+      
+      if (isIndexPage) {
+        console.log('[Login] Redirecionando usuário logado...');
+        const pathPrefix = window.location.pathname.includes('sobre-nos.html') ? '../HTML/' : 'front-end/HTML/';
+        
+        if (user.tipo === 'cuidador') {
+          window.location.href = pathPrefix + 'dashboard-cuidador.html';
+        } else if (user.tipo === 'cliente') {
+          window.location.href = pathPrefix + 'homeCliente.html';
+        }
       }
-      */
     } catch (error) {
       console.error('[Login] Erro ao verificar sessão:', error);
+      // Limpar dados corrompidos
+      localStorage.removeItem('cuidafast_isLoggedIn');
+      localStorage.removeItem('cuidafast_user');
     }
   }
 }

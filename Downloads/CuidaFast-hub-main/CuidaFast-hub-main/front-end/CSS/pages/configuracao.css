@@ -16,16 +16,13 @@
   --transicao: all 0.3s ease;
 }
 
-/* Reset de margens e padding para o body */
+/* Body background removed - using main.css global styles */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--creme);
   color: var(--azul-escuro);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   position: relative;
 }
 
@@ -332,172 +329,6 @@ body {
   .option-details p {
     font-size: 13px;
   }
-}
-
-/* Estilos para o cabeçalho */
-.header-action-btn {
-    position: relative;
-    background: none;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: var(--azul-escuro);
-    font-size: 1.25rem;
-}
-
-.header-action-btn:hover {
-    background: var(--creme);
-    transform: translateY(-1px);
-}
-
-.header-action-btn.active {
-    background: var(--amarelo-light);
-}
-
-.notification-badge,
-.message-badge {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    background: #ff4757;
-    color: var(--branco);
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 0.125rem 0.375rem;
-    border-radius: 10px;
-    min-width: 18px;
-    text-align: center;
-    line-height: 1.2;
-}
-
-/* Estilos para o dropdown do perfil */
-.user-profile-dropdown {
-  position: relative;
-  margin-left: 0.5rem;
-}
-
-.user-profile-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  border-radius: 2rem;
-  transition: all 0.2s ease;
-}
-
-.user-profile-btn:hover {
-  background: var(--creme);
-}
-
-.user-avatar-img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--azul-escuro);
-}
-
-.user-name {
-  font-weight: 500;
-  color: var(--azul-escuro);
-  font-size: 0.9rem;
-}
-
-.dropdown-arrow {
-  font-size: 0.8rem;
-  color: var(--azul-escuro);
-  transition: transform 0.2s ease;
-}
-
-.user-profile-dropdown.active .dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-/* Menu dropdown */
-.profile-dropdown-menu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 260px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.2s ease;
-  z-index: 1000;
-}
-
-.user-profile-dropdown.active .profile-dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdown-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--cinza-borda);
-}
-
-.dropdown-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--azul-escuro);
-}
-
-.dropdown-user-info h4 {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--azul-escuro);
-}
-
-.dropdown-user-info p {
-  margin: 0.1rem 0 0;
-  font-size: 0.8rem;
-  color: var(--cinza-texto);
-}
-
-.dropdown-divider {
-  height: 1px;
-  background: var(--cinza-borda);
-  margin: 0.25rem 0;
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
-  color: var(--azul-escuro);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.dropdown-item i {
-  font-size: 1.1rem;
-  width: 20px;
-  text-align: center;
-}
-
-.dropdown-item:hover {
-  background: var(--creme);
-  padding-left: 1.5rem;
-}
-
-.dropdown-item.logout-item {
-  color: var(--vermelho);
 }
 
 /* Menu móvel */

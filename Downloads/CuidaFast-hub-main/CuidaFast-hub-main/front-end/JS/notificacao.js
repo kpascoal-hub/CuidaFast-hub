@@ -128,10 +128,6 @@ function initIndividualActions() {
     });
 }
 
-    if (notificationItem.classList.contains('unread')) {
-        markAsRead(notificationItem);
-    }
-}
 
 function markAllAsRead() {
     const unreadItems = document.querySelectorAll('.notification-item.unread');
@@ -554,4 +550,126 @@ window.CuidaFastNotifications = {
     updateFilterCounts: updateFilterCounts,
     updateNotificationBadges: updateNotificationBadges
 };
+/* ===== PATCH ÚNICO — Controle de Filtros e Cor Ativa ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("[CuidaFast] Sistema de filtros inicializado");
 
+  const filtersContainer = document.querySelector(".notification-filters");
+  const notificationList = document.getElementById("notification-list");
+  if (!filtersContainer || !notificationList) return;
+
+  // Garante que os botões de filtro funcionem visualmente e logicamente
+  filtersContainer.addEventListener("click", (e) => {
+    const tag = e.target.closest(".filter-tag");
+    if (!tag) return;
+
+    // Remove .active de todos e aplica só no clicado
+    filtersContainer.querySelectorAll(".filter-tag").forEach(t => t.classList.remove("active"));
+    tag.classList.add("active");
+
+    // Lê o tipo de filtro
+    const filter = tag.dataset.filter || "all";
+
+    // Chama o render correspondente
+    if (typeof renderNotifications === "function") {
+      renderNotifications(filter);
+    } else if (typeof filterNotifications === "function") {
+      const items = document.querySelectorAll(".notification-card, .notification-item");
+      const emptyState = document.querySelector(".no-notifications") || null;
+      filterNotifications(filter, items, emptyState);
+    } else {
+      // Fallback básico (caso nenhuma função esteja disponível)
+      document.querySelectorAll(".notification-card, .notification-item").forEach(item => {
+        const isUnread = item.classList.contains("unread");
+        const subtype = item.dataset.subtype || item.dataset.type || "";
+        let show = false;
+        switch (filter) {
+          case "all": show = true; break;
+          case "unread": show = isUnread; break;
+          case "important": show = item.classList.contains("important"); break;
+          case "system": show = subtype === "system"; break;
+          case "messages": show = subtype === "messages"; break;
+        }
+        item.style.display = show ? "" : "none";
+      });
+
+      const hasVisible = Array.from(document.querySelectorAll(".notification-card, .notification-item"))
+        .some(i => i.style.display !== "none");
+      const placeholder = document.querySelector(".no-notifications");
+      if (placeholder) placeholder.style.display = hasVisible ? "none" : "";
+    }
+
+    // Debug opcional
+    // console.log(`Filtro ativado: ${filter}`);
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const filtersContainer = document.querySelector(".notification-filters");
+
+  if (!filtersContainer) return;
+
+  filtersContainer.addEventListener("click", (e) => {
+    const clicked = e.target.closest(".filter-tag");
+    if (!clicked) return;
+
+    // remove o active do botão que estava selecionado
+    const activeButton = filtersContainer.querySelector(".filter-tag.active");
+    if (activeButton) activeButton.classList.remove("active");
+
+    // adiciona active no botão clicado
+    clicked.classList.add("active");
+
+    // aplica o filtro correspondente
+    const filter = clicked.dataset.filter || "all";
+    if (typeof renderNotifications === "function") {
+      renderNotifications(filter);
+    }
+  });
+});
+
+/* ===== PATCH ÚNICO — Controle de Filtros e Cor Ativa ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("[CuidaFast] Sistema de filtros inicializado");
+
+  const filtersContainer = document.querySelector(".notification-filters");
+  const notificationList = document.getElementById("notification-list");
+  if (!filtersContainer || !notificationList) return;
+
+  filtersContainer.addEventListener("click", (e) => {
+    const tag = e.target.closest(".filter-tag");
+    if (!tag) return;
+
+    // ---- 1️⃣ Atualiza visual do botão ativo ----
+    const active = filtersContainer.querySelector(".filter-tag.active");
+    if (active) active.classList.remove("active");
+    tag.classList.add("active");
+
+    // ---- 2️⃣ Aplica o filtro ----
+    const filter = tag.dataset.filter || "all";
+
+    if (typeof renderNotifications === "function") {
+      renderNotifications(filter);
+    } else {
+      // fallback simples caso renderNotifications não exista
+      document.querySelectorAll(".notification-card, .notification-item").forEach(item => {
+        const isUnread = item.classList.contains("unread");
+        const subtype = item.dataset.subtype || item.dataset.type || "";
+        let show = false;
+
+        switch (filter) {
+          case "all": show = true; break;
+          case "unread": show = isUnread; break;
+          case "important": show = item.classList.contains("important"); break;
+          case "system": show = subtype === "system"; break;
+          case "messages": show = subtype === "messages"; break;
+        }
+        item.style.display = show ? "" : "none";
+      });
+
+      const anyVisible = Array.from(document.querySelectorAll(".notification-card, .notification-item"))
+        .some(i => i.style.display !== "none");
+      const placeholder = document.querySelector(".no-notifications");
+      if (placeholder) placeholder.style.display = anyVisible ? "none" : "";
+    }
+  });
+});

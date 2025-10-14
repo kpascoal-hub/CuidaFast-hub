@@ -7,10 +7,8 @@
   padding: 0;
 }
 
+/* Body background removed - using main.css global styles */
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--creme, #FFFBEC);
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,20 +23,17 @@ body {
 }
 
 /* Botão Voltar */
-.back-button {
-  margin-bottom: 1.5rem;
+.back {
+  margin-bottom: 0.5rem;
 }
 
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   color: var(--azul-escuro, #1B475D);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 2rem;
   transition: all 0.3s ease;
-  padding: 0.5rem 0;
 }
 
 .back-link:hover {
@@ -47,15 +42,15 @@ body {
 }
 
 .back-link i {
-  font-size: 1.2rem;
+  font-size: 2rem;
 }
 
 /* Form Container */
 .form-container {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(27, 71, 93, 0.1);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 /* Form Header */
@@ -209,7 +204,7 @@ body {
 }
 
 .btn {
-  flex: 1;
+  width: 100%;
   padding: 0.875rem 1.5rem;
   border: none;
   border-radius: 10px;

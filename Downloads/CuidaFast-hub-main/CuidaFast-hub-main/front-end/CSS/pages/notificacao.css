@@ -1,14 +1,11 @@
 /* Estilos para a página de notificações */
 
-/* Reset de margens e padding para o body */
+/* Body background removed - using main.css global styles */
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--creme);
-    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     position: relative; /* Garante que o rodapé fique no final da página */
 }
 
@@ -968,4 +965,30 @@ body {
 .header-action-btn:hover {
 
   background: transparent !important;
+}
+.notification-filters .filter-tag {
+  cursor: pointer;
+  padding: 0.6rem 1.15rem;
+  border-radius: 10px;
+  color: var(--azul-escuro, #1b475d);
+
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+/* hover */
+.notification-filters .filter-tag:hover {
+  background-color: rgba(27,71,93,0.05);
+}
+
+/* ativo */
+.notification-filters .filter-tag.active {
+  background-color: var(--azul-escuro, #1b475d);
+  color: #fff;
+  border-color: var(--azul-escuro, #1b475d);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(27,71,93,0.12);
 }
