@@ -26,8 +26,30 @@ export async function initFCM() {
   try {
     const token = await getToken(messaging, { vapidKey });
     if (token) {
-      await addDoc(collection(db, "tokens"), { token, createdAt: new Date() });
-      console.log("✅ Token salvo no Firestore:", token);
+      // Obter dados do usuário logado
+      const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+      
+      if (userData.id) {
+        // Salvar token no backend (MySQL)
+        const response = await fetch('http://localhost:3000/api/tokens', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            userId: userData.id, 
+            token 
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          console.log("✅ Token salvo no MySQL:", token);
+        } else {
+          console.error("❌ Erro ao salvar token:", result.message);
+        }
+      } else {
+        console.warn("⚠️ Usuário não logado, token não salvo");
+      }
     }
   } catch (err) {
     console.error("❌ Erro ao gerar token:", err);

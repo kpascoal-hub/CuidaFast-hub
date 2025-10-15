@@ -1,0 +1,24 @@
+-- ========================================
+-- TABELA: tokens
+-- ========================================
+-- ✅ Tabela JÁ EXISTE no banco cuidafast_db
+-- 
+-- Estrutura:
+-- +------------+--------------+------+-----+---------------------+----------------+
+-- | Field      | Type         | Null | Key | Default             | Extra          |
+-- +------------+--------------+------+-----+---------------------+----------------+
+-- | id         | int(11)      | NO   | PRI | NULL                | auto_increment |
+-- | user_id    | int(11)      | NO   | MUL | NULL                |                |
+-- | token      | varchar(500) | NO   |     | NULL                |                |
+-- | created_at | datetime     | YES  |     | current_timestamp() |                |
+-- +------------+--------------+------+-----+---------------------+----------------+
+--
+-- Descrição:
+-- - Armazena tokens FCM (Firebase Cloud Messaging) dos usuários
+-- - Cada usuário pode ter múltiplos tokens (múltiplos dispositivos)
+-- - Usado para enviar notificações push
+--
+-- Relacionamentos:
+-- - user_id → usuario(id) [Foreign Key]
+--
+-- ✅ TABELA PRONTA PARA USO!

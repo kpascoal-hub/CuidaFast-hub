@@ -64,6 +64,15 @@ const ServicosManager = {
     // Atualizar estatísticas do cuidador
     this.atualizarEstatisticasCuidador(cuidadorEmail);
 
+    // 🔔 ENVIAR NOTIFICAÇÃO PARA O CLIENTE
+    if (typeof NotificationEvents !== 'undefined') {
+      const cuidador = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+      NotificationEvents.onServicoAceito(
+        servicos[index].clienteId,
+        cuidador.nome || 'Cuidador'
+      ).catch(err => console.error('[Notificação] Erro:', err));
+    }
+
     console.log('[ServicosManager] Serviço aceito:', servicos[index]);
     return servicos[index];
   },
@@ -95,6 +104,15 @@ const ServicosManager = {
     const index = servicos.findIndex(s => s.id === servicoId && s.cuidadorEmail === cuidadorEmail);
     
     if (index === -1) return null;
+
+    // 🔔 ENVIAR NOTIFICAÇÃO PARA O CLIENTE
+    if (typeof NotificationEvents !== 'undefined') {
+      const cuidador = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+      NotificationEvents.onServicoConcluido(
+        servicos[index].clienteId,
+        cuidador.nome || 'Cuidador'
+      ).catch(err => console.error('[Notificação] Erro:', err));
+    }
 
     servicos[index].status = 'concluido';
     servicos[index].dataConclusao = new Date().toISOString();
