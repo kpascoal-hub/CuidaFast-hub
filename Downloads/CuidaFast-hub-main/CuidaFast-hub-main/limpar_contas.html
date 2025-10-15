@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpar Contas - CuidaFast</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .info h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .info li {
+            margin: 5px 0;
+        }
+        button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        button:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+        button.secondary {
+            background: #6c757d;
+        }
+        button.secondary:hover {
+            background: #5a6268;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ Limpar Todas as Contas</h1>
+        
+        <div class="warning">
+            <strong>⚠️ ATENÇÃO:</strong> Esta ação irá apagar permanentemente todos os dados salvos no navegador!
+        </div>
+
+        <div class="info">
+            <h3>📋 O que será apagado:</h3>
+            <ul>
+                <li>✅ Todas as contas de usuários</li>
+                <li>✅ Dados de login</li>
+                <li>✅ Informações de perfil</li>
+                <li>✅ Dados de cuidadores</li>
+                <li>✅ Histórico de serviços</li>
+                <li>✅ Cache local</li>
+            </ul>
+        </div>
+
+        <div class="info" id="contasInfo">
+            <h3>📊 Contas Encontradas:</h3>
+            <p id="contasCount">Carregando...</p>
+        </div>
+
+        <div class="success" id="successMessage">
+            ✅ Todas as contas foram apagadas com sucesso!
+        </div>
+
+        <button onclick="limparTudo()">🗑️ Apagar Tudo</button>
+        <button class="secondary" onclick="window.location.href='front-end/HTML/cadastro.html'">
+            ← Voltar para Cadastro
+        </button>
+    </div>
+
+    <script>
+        // Mostrar informações das contas ao carregar
+        window.addEventListener('DOMContentLoaded', function() {
+            mostrarContas();
+        });
+
+        function mostrarContas() {
+            const usuarios = JSON.parse(localStorage.getItem('cuidafast_usuarios') || '[]');
+            const userAtual = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+            
+            let info = `<strong>Total de usuários cadastrados:</strong> ${usuarios.length}<br><br>`;
+            
+            if (usuarios.length > 0) {
+                info += '<strong>Lista:</strong><br>';
+                usuarios.forEach((user, index) => {
+                    info += `${index + 1}. ${user.nome} (${user.email}) - ${user.tipo}<br>`;
+                });
+            } else {
+                info += '<em>Nenhum usuário encontrado</em>';
+            }
+
+            if (userAtual.email) {
+                info += `<br><br><strong>Usuário logado:</strong> ${userAtual.nome} (${userAtual.email})`;
+            }
+
+            document.getElementById('contasCount').innerHTML = info;
+        }
+
+        function limparTudo() {
+            if (!confirm('⚠️ TEM CERTEZA? Esta ação não pode ser desfeita!\n\nTodos os dados serão apagados permanentemente.')) {
+                return;
+            }
+
+            if (!confirm('🔴 ÚLTIMA CONFIRMAÇÃO!\n\nVocê realmente deseja apagar TUDO?')) {
+                return;
+            }
+
+            try {
+                // Lista de todas as chaves do localStorage relacionadas ao CuidaFast
+                const chavesParaRemover = [
+                    'cuidafast_usuarios',
+                    'cuidafast_user',
+                    'cuidafast_isLoggedIn',
+                    'cuidafast_servicos',
+                    'cuidafast_pagamentos'
+                ];
+
+                // Remover chaves específicas
+                chavesParaRemover.forEach(chave => {
+                    localStorage.removeItem(chave);
+                    console.log(`✅ Removido: ${chave}`);
+                });
+
+                // Remover também chaves dinâmicas (caregiver_*, client_*, etc)
+                const todasChaves = Object.keys(localStorage);
+                todasChaves.forEach(chave => {
+                    if (chave.startsWith('caregiver_') || 
+                        chave.startsWith('client_') || 
+                        chave.startsWith('cuidador_') ||
+                        chave.startsWith('servico_')) {
+                        localStorage.removeItem(chave);
+                        console.log(`✅ Removido: ${chave}`);
+                    }
+                });
+
+                // Mostrar mensagem de sucesso
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('contasInfo').style.display = 'none';
+                
+                console.log('✅ Todas as contas foram apagadas!');
+                
+                // Atualizar contador
+                mostrarContas();
+
+                // Redirecionar após 3 segundos
+                setTimeout(() => {
+                    if (confirm('Deseja ir para a página de cadastro?')) {
+                        window.location.href = 'front-end/HTML/cadastro.html';
+                    }
+                }, 2000);
+
+            } catch (error) {
+                console.error('❌ Erro ao limpar dados:', error);
+                alert('❌ Erro ao limpar dados. Verifique o console.');
+            }
+        }
+
+        // Atalho de teclado: Ctrl + Shift + Delete
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'Delete') {
+                limparTudo();
+            }
+        });
+    </script>
+</body>
+</html>

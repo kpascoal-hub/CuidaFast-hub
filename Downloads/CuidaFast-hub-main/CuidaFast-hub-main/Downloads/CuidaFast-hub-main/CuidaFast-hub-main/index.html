@@ -305,7 +305,7 @@ const db = firebase.firestore();
       if (typeof initNewsletterForm === "function") initNewsletterForm();
 
       // Inicializar EmailJS
-      emailjs.init("YOUR_PUBLIC_KEY"); // Substitua pela sua chave pública do EmailJS
+      emailjs.init("7gj__sONoSGkZ9_oW"); // Public Key configurada
 
       // Configurar envio de newsletter
       const newsletterForm = document.getElementById('newsletterForm');
@@ -336,7 +336,7 @@ const db = firebase.firestore();
           };
 
           // Enviar email usando EmailJS
-          emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+          emailjs.send('service_rvy4k5h', 'template_fwvasqi', templateParams)
             .then(function(response) {
               console.log('[Newsletter] Email enviado com sucesso!', response.status, response.text);
               alert('✅ Email enviado com sucesso! Obrigado por se inscrever.');

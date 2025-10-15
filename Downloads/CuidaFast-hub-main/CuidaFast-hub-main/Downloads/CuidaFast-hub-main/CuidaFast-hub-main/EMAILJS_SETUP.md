@@ -46,23 +46,24 @@ Equipe CuidaFast
 
 ## Passo 5: Atualizar o Código
 
-No arquivo `index.html`, substitua:
+No arquivo `index.html`, as credenciais já estão configuradas:
 
 ```javascript
-emailjs.init("YOUR_PUBLIC_KEY"); // Substitua pela sua Public Key
+emailjs.init("7gj__sONoSGkZ9_oW"); // Public Key já configurada
 ```
 
 E também:
 
 ```javascript
-emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+emailjs.send('service_rvy4k5h', 'template_fwvasqi', templateParams) // Service e Template já configurados
 ```
 
-**Exemplo:**
-```javascript
-emailjs.init("user_abc123xyz");
-emailjs.send('service_abc123', 'template_xyz789', templateParams)
-```
+**✅ Configuração Atual:**
+- **Public Key:** `7gj__sONoSGkZ9_oW`
+- **Service ID:** `service_rvy4k5h`
+- **Template ID:** `template_fwvasqi`
+
+**Observação:** Se você quiser usar suas próprias credenciais do EmailJS, substitua os valores acima pelos seus.
 
 ## Passo 6: Testar
 

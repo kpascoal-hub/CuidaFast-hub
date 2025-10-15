@@ -61,6 +61,7 @@
 
     <!-- CSS: mantém o estilo específico de mensagens e adiciona os estilos do header moderno -->
     <link rel="stylesheet" href="../CSS/pages/mensagens.css">
+    <link rel="stylesheet" href="../CSS/pages/mensagens-extra.css">
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/components.css">
     <link rel="stylesheet" href="../CSS/pages/notification-styles.css">
@@ -100,18 +101,18 @@
                     <!-- User Profile -->
                     <div class="user-profile-dropdown" id="userProfileDropdown">
                         <button class="user-profile-btn" id="userProfileBtn">
-                            <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
-                            <span class="user-name" id="headerUserName">João Silva</span>
+                            <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img" id="headerUserAvatar">
+                            <span class="user-name" id="headerUserName">Usuário</span>
                             <i class="ph ph-caret-down dropdown-arrow"></i>
                         </button>
                         
                         <!-- Dropdown Menu -->
                         <div class="profile-dropdown-menu" id="profileDropdownMenu">
                             <div class="dropdown-header">
-                                <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
+                                <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar" id="dropdownUserAvatar">
                                 <div class="dropdown-user-info">
-                                    <h4>João Silva</h4>
-                                    <p>Cliente Premium</p>
+                                    <h4 id="dropdownUserName">Usuário</h4>
+                                    <p id="dropdownUserType">Cliente</p>
                                 </div>
                             </div>
                             <div class="dropdown-divider"></div>
@@ -251,8 +252,64 @@
             </main>
         </div>
     </div>
-    <script src="../JS/auth.js"></script>
-    <script src="../JS/header.js"></script>
-    <script src="../JS/mensagens.js"></script>
+    <script src="../JS/mensagensAPI.js"></script>
+    <script src="../JS/mensagens-novo.js"></script>
+    <script>
+        // Carregar dados do usuário no header (APENAS dados cadastrados)
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+            
+            // Atualizar nome APENAS se existir
+            if (userData.nome) {
+                const primeiroNome = userData.nome.split(' ')[0];
+                document.getElementById('headerUserName').textContent = primeiroNome;
+                document.getElementById('dropdownUserName').textContent = userData.nome;
+            }
+            
+            // Atualizar tipo APENAS se existir
+            if (userData.tipo) {
+                const tipoTexto = userData.tipo === 'cuidador' ? 'Cuidador' : 'Cliente';
+                const dropdownType = document.getElementById('dropdownUserType');
+                if (dropdownType) dropdownType.textContent = tipoTexto;
+            }
+            
+            // Atualizar foto APENAS se existir
+            if (userData.photoURL || userData.foto_perfil) {
+                const foto = userData.photoURL || userData.foto_perfil;
+                const headerAvatar = document.getElementById('headerUserAvatar');
+                const dropdownAvatar = document.getElementById('dropdownUserAvatar');
+                if (headerAvatar) headerAvatar.src = foto;
+                if (dropdownAvatar) dropdownAvatar.src = foto;
+            }
+            
+            // Dropdown toggle
+            const userProfileBtn = document.getElementById('userProfileBtn');
+            const profileDropdownMenu = document.getElementById('profileDropdownMenu');
+            
+            if (userProfileBtn && profileDropdownMenu) {
+                userProfileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdownMenu.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!userProfileBtn.contains(e.target) && !profileDropdownMenu.contains(e.target)) {
+                        profileDropdownMenu.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Logout
+            const logoutBtn = document.getElementById('headerLogoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('cuidafast_isLoggedIn');
+                    localStorage.removeItem('cuidafast_user');
+                    window.location.href = '../../index.html';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

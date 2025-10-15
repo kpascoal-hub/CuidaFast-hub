@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const perfilRoutes = require('./routes/perfilRoutes');
 const pagamentoRoutes = require('./routes/pagamentoRoutes');
 const clienteRoutes = require('./routes/clienteRoutes');
+const mensagemRoutes = require('./routes/mensagemRoutes');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/perfil', perfilRoutes);
 app.use('/api/pagamento', pagamentoRoutes);
 app.use('/api/cliente', clienteRoutes);
+app.use('/api/mensagens', mensagemRoutes);
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 app.get('/api/teste', (req, res) => res.json({ ok: true, mensagem: 'API funcionando corretamente!' }));
