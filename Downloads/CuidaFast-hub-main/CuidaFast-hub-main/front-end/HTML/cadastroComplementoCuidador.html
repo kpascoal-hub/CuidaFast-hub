@@ -63,10 +63,36 @@
           >
         </div>
 
+        <!-- Foto de Perfil (apenas se não cadastrou com Google) -->
+        <div class="form-group" id="photoUploadGroup" style="display: none;">
+          <label for="photoUpload">
+            <i class="ph ph-camera"></i>
+            Foto de Perfil
+          </label>
+          <div class="photo-upload-container">
+            <div class="photo-preview" id="photoPreview">
+              <i class="ph ph-user-circle" style="font-size: 4rem; color: #ccc;"></i>
+              <p>Nenhuma foto selecionada</p>
+            </div>
+            <input 
+              type="file" 
+              id="photoUpload" 
+              name="photoUpload" 
+              accept="image/*"
+              style="display: none;"
+            >
+            <button type="button" class="btn btn-secondary" id="selectPhotoBtn">
+              <i class="ph ph-upload"></i>
+              Selecionar Foto
+            </button>
+            <p class="photo-hint">Formatos aceitos: JPG, PNG. Tamanho máximo: 5MB</p>
+          </div>
+        </div>
+
         <!-- Botões -->
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">
-            Finalizar
+            Continuar
           </button>
         </div>
       </form>

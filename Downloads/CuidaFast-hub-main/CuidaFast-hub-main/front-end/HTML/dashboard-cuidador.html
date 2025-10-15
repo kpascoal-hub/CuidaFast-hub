@@ -437,7 +437,34 @@
             if (headerUserName) headerUserName.textContent = primeiroNome;
             if (dropdownUserName) dropdownUserName.textContent = userData.nome;
             
+            // Atualizar foto do perfil (header e dropdown)
+            if (userData.photoURL) {
+                const headerAvatar = document.querySelector('.user-avatar-img');
+                const dropdownAvatar = document.querySelector('.dropdown-avatar');
+                
+                if (headerAvatar) headerAvatar.src = userData.photoURL;
+                if (dropdownAvatar) dropdownAvatar.src = userData.photoURL;
+                
+                console.log('[DashboardCuidador] Foto do perfil atualizada');
+            }
+            
             console.log('[DashboardCuidador] Cuidador carregado:', userData.nome);
+
+            // Configurar navegação para notificações e mensagens
+            const notificationBtn = document.getElementById('notificationBtn');
+            const messageBtn = document.getElementById('messageBtn');
+
+            if (notificationBtn) {
+                notificationBtn.addEventListener('click', function() {
+                    window.location.href = 'notificacao.html';
+                });
+            }
+
+            if (messageBtn) {
+                messageBtn.addEventListener('click', function() {
+                    window.location.href = 'mensagens.html';
+                });
+            }
 
             // Configurar busca de oportunidades (clientes)
             const headerSearch = document.getElementById('headerSearch');

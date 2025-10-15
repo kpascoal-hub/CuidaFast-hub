@@ -4,6 +4,59 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[cadastroComplemento] Iniciado');
 
+  // Verificar se usuário veio do Google (tem photoURL)
+  const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+  const photoUploadGroup = document.getElementById('photoUploadGroup');
+  const photoUpload = document.getElementById('photoUpload');
+  const photoPreview = document.getElementById('photoPreview');
+  const selectPhotoBtn = document.getElementById('selectPhotoBtn');
+  
+  let uploadedPhotoURL = null;
+
+  // Mostrar campo de foto apenas se NÃO cadastrou com Google
+  if (!userData.photoURL && photoUploadGroup) {
+    photoUploadGroup.style.display = 'block';
+    console.log('[cadastroComplemento] Campo de foto exibido (sem Google)');
+  } else if (userData.photoURL) {
+    console.log('[cadastroComplemento] Usando foto do Google:', userData.photoURL);
+  }
+
+  // Botão para selecionar foto
+  if (selectPhotoBtn && photoUpload) {
+    selectPhotoBtn.addEventListener('click', function() {
+      photoUpload.click();
+    });
+  }
+
+  // Preview da foto selecionada
+  if (photoUpload && photoPreview) {
+    photoUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        // Validar tamanho (5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Arquivo muito grande. Tamanho máximo: 5MB');
+          return;
+        }
+
+        // Validar tipo
+        if (!file.type.startsWith('image/')) {
+          alert('Por favor, selecione uma imagem válida.');
+          return;
+        }
+
+        // Ler e mostrar preview
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          uploadedPhotoURL = event.target.result;
+          photoPreview.innerHTML = `<img src="${uploadedPhotoURL}" alt="Preview da foto">`;
+          console.log('[cadastroComplemento] Foto carregada');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
   // ----------- FUNÇÃO: buscar CEP -----------
   function buscarCEP(cepDigitado) {
     const cepInput = document.getElementById('cep');
@@ -92,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ----------- CARREGAR DADOS SALVOS -----------
-  const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
   if (Object.keys(userData).length > 0) {
     console.log('[cadastroComplemento] Dados carregados do localStorage:', userData);
     document.getElementById('dataNascimento').value = userData.dataNascimento || '';
@@ -117,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Mesclar com novos dados do formulário
       const updatedData = {
-        ...existingData, // Mantém nome, email, telefone, tipo, photoURL, etc
+        ...existingData, // Mantém nome, email, telefone, tipo, photoURL do Google, etc
         dataNascimento: document.getElementById('dataNascimento').value,
         cpf: document.getElementById('cpf').value,
         endereco: {
@@ -132,6 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cadastroCompleto: true,
         updatedAt: new Date().toISOString(),
       };
+
+      // Se usuário fez upload de foto (não veio do Google), adicionar
+      if (uploadedPhotoURL && !existingData.photoURL) {
+        updatedData.photoURL = uploadedPhotoURL;
+        console.log('[cadastroComplemento] Foto do upload adicionada');
+      }
 
       localStorage.setItem('cuidafast_user', JSON.stringify(updatedData));
       

@@ -954,6 +954,17 @@ window.CuidaFastClient = {
       if (headerUserName) headerUserName.textContent = primeiroNome;
       if (dropdownUserName) dropdownUserName.textContent = userData.nome;
       
+      // Atualizar foto do perfil (header e dropdown)
+      if (userData.photoURL) {
+        const headerAvatar = document.querySelector('.user-avatar-img');
+        const dropdownAvatar = document.querySelector('.dropdown-avatar');
+        
+        if (headerAvatar) headerAvatar.src = userData.photoURL;
+        if (dropdownAvatar) dropdownAvatar.src = userData.photoURL;
+        
+        console.log('[HomeCliente] Foto do perfil atualizada');
+      }
+      
       console.log('[HomeCliente] Usuário carregado:', userData.nome);
     },
 
