@@ -68,16 +68,124 @@
         
         .solicitacao-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
         }
         
         .solicitacao-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
             transform: translateY(-2px);
+        }
+        
+        .solicitacao-card.pendente {
+            border-left-color: #f39c12;
+        }
+        
+        .solicitacao-card.aceito {
+            border-left-color: #3498db;
+        }
+        
+        .solicitacao-card.concluido {
+            border-left-color: #27ae60;
+        }
+        
+        .solicitacao-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .solicitacao-icon.pendente {
+            background: rgba(243, 156, 18, 0.1);
+            color: #f39c12;
+        }
+        
+        .solicitacao-icon.aceito {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+        
+        .solicitacao-icon.concluido {
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+        }
+        
+        .solicitacao-content {
+            flex: 1;
+        }
+        
+        .solicitacao-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        
+        .solicitacao-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--azul-escuro);
+            margin: 0;
+        }
+        
+        .solicitacao-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .solicitacao-badge.pendente {
+            background: rgba(243, 156, 18, 0.1);
+            color: #f39c12;
+        }
+        
+        .solicitacao-badge.aceito {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+        
+        .solicitacao-badge.concluido {
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+        }
+        
+        .solicitacao-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .info-item i {
+            color: var(--azul-escuro);
+        }
+        
+        .solicitacao-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
         
         .solicitacao-header {
@@ -234,16 +342,79 @@
     <!-- Header -->
     <header class="modern-header">
         <div class="header-container">
+            <!-- Logo Section -->
             <div class="header-left">
                 <a href="dashboard-cuidador.html" class="logo-link">
                     <img src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
                 </a>
             </div>
+            
+            <!-- Barra de Pesquisa -->
+            <div class="header-center">
+                <div class="search-container">
+                    <i class="ph ph-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar oportunidades...">
+                    <button class="search-btn" type="button">
+                        <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Actions -->
             <div class="header-right">
-                <a href="dashboard-cuidador.html" class="btn-secondary" style="padding: 0.5rem 1rem;">
-                    <i class="ph ph-arrow-left"></i>
-                    Voltar ao Dashboard
+                <!-- Notifications -->
+                <a href="solicitacoesServicos.html" class="header-action-btn notification-btn active">
+                    <i class="ph ph-bell"></i>
+                    <span class="notification-badge" id="notificationBadge">0</span>
                 </a>
+                
+                <!-- Messages -->
+                <a href="mensagens.html" class="header-action-btn message-btn">
+                    <i class="ph ph-chat-circle"></i>
+                    <span class="message-badge">0</span>
+                </a>
+                
+                <!-- User Profile -->
+                <div class="user-profile-dropdown" id="userProfileDropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
+                        <span class="user-name" id="headerUserName">Cuidador</span>
+                        <i class="ph ph-caret-down dropdown-arrow"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                        <div class="dropdown-header">
+                            <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
+                            <div class="dropdown-user-info">
+                                <h4 id="dropdownUserName">Cuidador</h4>
+                                <p>Conta Profissional</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="perfilCuidador.html" class="dropdown-item">
+                            <i class="ph ph-user"></i>
+                            <span>Meu Perfil</span>
+                        </a>
+                        <a href="configuracoes.html" class="dropdown-item">
+                            <i class="ph ph-gear"></i>
+                            <span>Configurações</span>
+                        </a>
+                        <a href="dashboard-cuidador.html" class="dropdown-item">
+                            <i class="ph ph-house"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="ph ph-question"></i>
+                            <span>Ajuda</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                            <i class="ph ph-sign-out"></i>
+                            <span>Sair</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -292,9 +463,54 @@
             const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
             
             if (!userData.email || userData.tipo !== 'cuidador') {
-                alert('⚠️ Acesso restrito a cuidadores.');
+                console.warn('[SolicitacoesServicos] Acesso restrito a cuidadores');
                 window.location.href = '../../index.html';
                 return;
+            }
+
+            // Atualizar nome no header e dropdown
+            const headerUserName = document.getElementById('headerUserName');
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            
+            const primeiroNome = userData.primeiroNome || userData.nome.split(' ')[0];
+            
+            if (headerUserName) headerUserName.textContent = primeiroNome;
+            if (dropdownUserName) dropdownUserName.textContent = userData.nome;
+            
+            // Atualizar foto do perfil
+            if (userData.photoURL) {
+                const headerAvatar = document.querySelector('.user-avatar-img');
+                const dropdownAvatar = document.querySelector('.dropdown-avatar');
+                
+                if (headerAvatar) headerAvatar.src = userData.photoURL;
+                if (dropdownAvatar) dropdownAvatar.src = userData.photoURL;
+            }
+
+            // Configurar dropdown menu
+            const userProfileBtn = document.getElementById('userProfileBtn');
+            const profileDropdownMenu = document.getElementById('profileDropdownMenu');
+            
+            if (userProfileBtn && profileDropdownMenu) {
+                userProfileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdownMenu.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!userProfileBtn.contains(e.target) && !profileDropdownMenu.contains(e.target)) {
+                        profileDropdownMenu.classList.remove('show');
+                    }
+                });
+            }
+
+            // Configurar logout
+            const logoutBtn = document.getElementById('headerLogoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('cuidafast_isLoggedIn');
+                    window.location.href = '../../index.html';
+                });
             }
 
             // Configurar tabs
@@ -367,50 +583,52 @@
                     'pet': 'Cuidado de Pets'
                 }[servico.tipo] || servico.tipo;
                 
+                let iconClass = 'ph-clock';
+                if (servico.status === 'aceito' || servico.status === 'em_andamento') iconClass = 'ph-check-circle';
+                if (servico.status === 'concluido') iconClass = 'ph-check-circle-fill';
+                
                 html += `
-                    <div class="solicitacao-card">
-                        <div class="solicitacao-header">
-                            <div class="cliente-info">
-                                <div class="cliente-avatar">${iniciais}</div>
-                                <div>
-                                    <div class="cliente-nome">${servico.clienteNome}</div>
-                                    <div class="cliente-email">${servico.clienteEmail}</div>
-                                </div>
-                            </div>
-                            <span class="status-badge ${statusClass}">${statusText}</span>
+                    <div class="solicitacao-card ${servico.status}">
+                        <div class="solicitacao-icon ${servico.status}">
+                            <i class="ph ${iconClass}"></i>
                         </div>
-                        
-                        <div class="solicitacao-body">
-                            <div class="info-row">
-                                <i class="ph ph-calendar"></i>
-                                <strong>Data da solicitação:</strong> ${dataFormatada}
+                        <div class="solicitacao-content">
+                            <div class="solicitacao-header">
+                                <h3 class="solicitacao-title">${servico.clienteNome}</h3>
+                                <span class="solicitacao-badge ${servico.status}">${statusText}</span>
                             </div>
-                            <div class="info-row">
-                                <i class="ph ph-list"></i>
-                                <strong>Tipo de serviço:</strong> ${tipoTexto}
-                            </div>
-                            <div class="info-row">
-                                <i class="ph ph-identification-card"></i>
-                                <strong>ID do serviço:</strong> ${servico.id}
+                            
+                            <div class="solicitacao-info">
+                                <div class="info-item">
+                                    <i class="ph ph-list"></i>
+                                    <span>${tipoTexto}</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="ph ph-calendar"></i>
+                                    <span>${dataFormatada}</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="ph ph-envelope"></i>
+                                    <span>${servico.clienteEmail}</span>
+                                </div>
                             </div>
                             
                             ${servico.observacoes ? `
-                                <div class="observacoes-box">
-                                    <strong><i class="ph ph-note"></i> Observações do cliente:</strong>
-                                    <p style="margin: 0.5rem 0 0 0;">${servico.observacoes}</p>
+                                <div class="info-item" style="margin-top: 0.5rem; color: #666;">
+                                    <i class="ph ph-note"></i>
+                                    <span><strong>Observações:</strong> ${servico.observacoes}</span>
                                 </div>
                             ` : ''}
-                        </div>
-                        
-                        <div class="solicitacao-actions">
-                            ${servico.status === 'pendente' ? `
-                                <button class="btn-aceitar" onclick="aceitarServico('${servico.id}')">
-                                    <i class="ph ph-check"></i> Aceitar Serviço
-                                </button>
-                                <button class="btn-recusar" onclick="recusarServico('${servico.id}')">
-                                    <i class="ph ph-x"></i> Recusar
-                                </button>
-                            ` : ''}
+                            
+                            <div class="solicitacao-actions">
+                                ${servico.status === 'pendente' ? `
+                                    <button class="btn btn-success btn-sm" onclick="aceitarServico('${servico.id}')">
+                                        <i class="ph ph-check"></i> Aceitar
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="recusarServico('${servico.id}')">
+                                        <i class="ph ph-x"></i> Recusar
+                                    </button>
+                                ` : ''}
                             
                             ${(servico.status === 'aceito' || servico.status === 'em_andamento') ? `
                                 <button class="btn-concluir" onclick="concluirServicoModal('${servico.id}')">

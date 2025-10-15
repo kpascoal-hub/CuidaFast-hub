@@ -48,10 +48,10 @@
             <!-- User Actions -->
             <div class="header-right">
                 <!-- Notifications -->
-                <button class="header-action-btn notification-btn" id="notificationBtn">
+                <a href="solicitacoesServicos.html" class="header-action-btn notification-btn" id="notificationBtn">
                     <i class="ph ph-bell"></i>
-                    <span class="notification-badge">3</span>
-                </button>
+                    <span class="notification-badge" id="notificationBadge">0</span>
+                </a>
                 
                 <!-- Messages -->
                 <button class="header-action-btn message-btn" id="messageBtn">
@@ -126,8 +126,8 @@
                         <h3>Total de Consultas</h3>
                     </div>
                     <div class="card-body">
-                        <div class="metric-value">127</div>
-                        <div class="metric-label">Consultas realizadas</div>
+                        <div class="metric-value" id="totalServicos">0</div>
+                        <div class="metric-label">Serviços realizados</div>
                         <div class="chart-container">
                             <canvas id="consultasChart"></canvas>
                         </div>
@@ -145,7 +145,7 @@
                     <div class="card-body">
                         <div class="metric-value" id="valorArrecadado">
                             <span class="hidden-value">••••••</span>
-                            <span class="real-value d-none">R$ 8.450,00</span>
+                            <span class="real-value d-none">R$ 0,00</span>
                         </div>
                         <div class="metric-label">Total este mês</div>
                         <button class="btn btn-sm btn-outline-primary mt-2" id="toggleValor">
@@ -163,7 +163,7 @@
                         <h3>Usuários Atendidos</h3>
                     </div>
                     <div class="card-body">
-                        <div class="metric-value">45</div>
+                        <div class="metric-value" id="usuariosAtendidos">0</div>
                         <div class="metric-label">Este mês</div>
                         <div class="period-selector mt-2">
                             <select class="form-select form-select-sm" id="periodoSelect">
@@ -185,16 +185,16 @@
                         <h3>Avaliação Média</h3>
                     </div>
                     <div class="card-body">
-                        <div class="metric-value">4.8</div>
+                        <div class="metric-value" id="avaliacaoMedia">-</div>
                         <div class="metric-label">
-                            <div class="stars">
-                                <i class="ph-fill ph-star"></i>
-                                <i class="ph-fill ph-star"></i>
-                                <i class="ph-fill ph-star"></i>
-                                <i class="ph-fill ph-star"></i>
-                                <i class="ph-fill ph-star"></i>
+                            <div class="stars" id="starsContainer">
+                                <i class="ph ph-star"></i>
+                                <i class="ph ph-star"></i>
+                                <i class="ph ph-star"></i>
+                                <i class="ph ph-star"></i>
+                                <i class="ph ph-star"></i>
                             </div>
-                            Baseado em 89 avaliações
+                            <span id="avaliacoesCount">Nenhuma avaliação ainda</span>
                         </div>
                     </div>
                 </div>
@@ -448,7 +448,71 @@
                 
                 console.log('[DashboardCuidador] Foto do perfil atualizada');
             }
+
+            // Corrigir dropdown menu
+            const userProfileBtn = document.getElementById('userProfileBtn');
+            const profileDropdownMenu = document.getElementById('profileDropdownMenu');
             
+            if (userProfileBtn && profileDropdownMenu) {
+                userProfileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdownMenu.classList.toggle('show');
+                    console.log('[DashboardCuidador] Dropdown toggled');
+                });
+                
+                // Fechar dropdown ao clicar fora
+                document.addEventListener('click', function(e) {
+                    if (!userProfileBtn.contains(e.target) && !profileDropdownMenu.contains(e.target)) {
+                        profileDropdownMenu.classList.remove('show');
+                    }
+                });
+            }
+
+            // Atualizar estatísticas do dashboard com dados reais
+            if (typeof ServicosManager !== 'undefined') {
+                const stats = ServicosManager.getEstatisticasCuidador(userData.email);
+                
+                // Atualizar total de serviços
+                const totalServicosEl = document.getElementById('totalServicos');
+                if (totalServicosEl) totalServicosEl.textContent = stats.totalServicos;
+                
+                // Atualizar valor arrecadado
+                const valorRealEl = document.querySelector('#valorArrecadado .real-value');
+                if (valorRealEl) valorRealEl.textContent = `R$ ${stats.valorTotal.toFixed(2).replace('.', ',')}`;
+                
+                // Atualizar usuários atendidos
+                const usuariosAtendidosEl = document.getElementById('usuariosAtendidos');
+                if (usuariosAtendidosEl) usuariosAtendidosEl.textContent = stats.clientesAtendidos;
+                
+                // Atualizar avaliação média
+                const avaliacaoMediaEl = document.getElementById('avaliacaoMedia');
+                const starsContainer = document.getElementById('starsContainer');
+                const avaliacoesCountEl = document.getElementById('avaliacoesCount');
+                
+                if (stats.avaliacaoMedia > 0) {
+                    if (avaliacaoMediaEl) avaliacaoMediaEl.textContent = stats.avaliacaoMedia.toFixed(1);
+                    if (avaliacoesCountEl) avaliacoesCountEl.textContent = `Baseado em ${stats.totalAvaliacoes} avaliações`;
+                    
+                    // Atualizar estrelas
+                    if (starsContainer) {
+                        const fullStars = Math.floor(stats.avaliacaoMedia);
+                        const stars = starsContainer.querySelectorAll('i');
+                        stars.forEach((star, index) => {
+                            if (index < fullStars) {
+                                star.classList.remove('ph');
+                                star.classList.add('ph-fill');
+                            }
+                        });
+                    }
+                }
+                
+                // Atualizar badge de notificações
+                const notificationBadge = document.getElementById('notificationBadge');
+                if (notificationBadge) notificationBadge.textContent = stats.servicosPendentes;
+                
+                console.log('[DashboardCuidador] Estatísticas atualizadas:', stats);
+            }
+
             console.log('[DashboardCuidador] Cuidador carregado:', userData.nome);
 
             // Configurar navegação para notificações e mensagens
