@@ -2,15 +2,25 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Carregar estatísticas reais do cuidador
-    carregarEstatisticasReais();
+    const stats = carregarEstatisticasReais();
     
     // Inicializar funcionalidades do dashboard
     initToggleValor();
-    initPeriodoSelector();
     initConsultasChart();
-    initCalendarHeatmap();
-    initPerformanceChart();
-    initServicosChart();
+    
+    // Verificar se há serviços realizados
+    const temServicos = stats && stats.totalServicos > 0;
+    
+    if (temServicos) {
+        // Mostrar gráficos com dados
+        initCalendarHeatmap();
+        initPerformanceChart();
+        initServicosChart();
+    } else {
+        // Mostrar estado vazio
+        mostrarEstadoVazio();
+    }
+    
     initHistoricoPagamentos();
     initMessageButton();
     
@@ -25,13 +35,13 @@ function carregarEstatisticasReais() {
     
     if (!userData.email || userData.tipo !== 'cuidador') {
         console.warn('[Dashboard] Usuário não é cuidador');
-        return;
+        return null;
     }
 
     // Verificar se ServicosManager está disponível
     if (typeof ServicosManager === 'undefined') {
         console.error('[Dashboard] ServicosManager não carregado');
-        return;
+        return null;
     }
 
     // Obter estatísticas
@@ -41,6 +51,8 @@ function carregarEstatisticasReais() {
     
     // Atualizar cards do dashboard
     atualizarCardsDashboard(stats);
+    
+    return stats;
 }
 
 /**
@@ -85,6 +97,30 @@ function atualizarCardsDashboard(stats) {
     console.log('[Dashboard] Cards atualizados com estatísticas reais');
 }
 
+/**
+ * Mostrar estado vazio quando não há serviços
+ */
+function mostrarEstadoVazio() {
+    // Ocultar canvas dos gráficos
+    const performanceChart = document.getElementById('performanceChart');
+    const servicosChart = document.getElementById('servicosChart');
+    
+    if (performanceChart) {
+        performanceChart.classList.add('hidden');
+        const emptyState = document.getElementById('performanceEmpty');
+        if (emptyState) emptyState.style.display = 'flex';
+    }
+    
+    if (servicosChart) {
+        servicosChart.classList.add('hidden');
+        const emptyState = document.getElementById('servicosEmpty');
+        if (emptyState) emptyState.style.display = 'flex';
+    }
+    
+    // Manter o estado vazio do heatmap (já está no HTML)
+    console.log('[Dashboard] Estado vazio exibido - nenhum serviço realizado');
+}
+
 // Função para inicializar o botão de mensagens
 function initMessageButton() {
     const messageBtn = document.getElementById('messageBtn');
@@ -121,34 +157,6 @@ function initToggleValor() {
     });
 }
 
-// Função para gerenciar seletor de período
-function initPeriodoSelector() {
-    const periodoSelect = document.getElementById('periodoSelect');
-    const metricValue = periodoSelect.closest('.dashboard-card').querySelector('.metric-value');
-    const metricLabel = periodoSelect.closest('.dashboard-card').querySelector('.metric-label');
-
-    // Dados simulados para diferentes períodos
-    const dadosPeriodo = {
-        mes: { valor: 45, label: 'Este mês' },
-        bimestre: { valor: 89, label: 'Este bimestre' },
-        trimestre: { valor: 134, label: 'Este trimestre' },
-        semestre: { valor: 267, label: 'Este semestre' }
-    };
-
-    periodoSelect.addEventListener('change', function() {
-        const periodo = this.value;
-        const dados = dadosPeriodo[periodo];
-        
-        // Animação de transição
-        metricValue.style.opacity = '0.5';
-        
-        setTimeout(() => {
-            metricValue.textContent = dados.valor;
-            metricLabel.textContent = dados.label;
-            metricValue.style.opacity = '1';
-        }, 200);
-    });
-}
 
 // Função para criar gráfico de consultas
 function initConsultasChart() {

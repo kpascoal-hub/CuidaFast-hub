@@ -48,13 +48,13 @@
             <!-- User Actions -->
             <div class="header-right">
                 <!-- Notifications -->
-                <a href="solicitacoesServicos.html" class="header-action-btn notification-btn" id="notificationBtn">
+                <a class="header-action-btn notification-btn" id="notificationBtn">
                     <i class="ph ph-bell"></i>
                     <span class="notification-badge" id="notificationBadge">0</span>
                 </a>
                 
                 <!-- Messages -->
-                <a href="mensagens.html" class="header-action-btn message-btn" id="messageBtn">
+                <a class="header-action-btn message-btn" id="messageBtn">
                     <i class="ph ph-chat-circle"></i>
                     <span class="message-badge">0</span>
                 </a>
@@ -190,7 +190,76 @@
             </div>
         </div>
 
+        <!-- Calendar Heatmap Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-calendar-dots card-icon"></i>
+                        <h3>Atividade de Serviços - Últimos 150 Dias</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="calendarHeatmap" class="calendar-heatmap-horizontal">
+                            <div class="empty-state text-center py-5">
+                                <i class="ph ph-calendar-x" style="font-size: 48px; color: #ccc;"></i>
+                                <p class="text-muted mt-3">Nenhum serviço realizado ainda</p>
+                                <small class="text-muted">Complete seu primeiro serviço para ver suas atividades aqui</small>
+                            </div>
+                        </div>
+                        <div class="heatmap-legend mt-3">
+                            <span class="legend-label">Menos</span>
+                            <div class="legend-colors">
+                                <div class="legend-color" data-level="0"></div>
+                                <div class="legend-color" data-level="1"></div>
+                                <div class="legend-color" data-level="2"></div>
+                                <div class="legend-color" data-level="3"></div>
+                                <div class="legend-color" data-level="4"></div>
+                            </div>
+                            <span class="legend-label">Mais</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Performance e Analytics -->
+        <div class="row g-4 mb-5">
+            <!-- Performance Geral -->
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-chart-line-up card-icon"></i>
+                        <h3>Performance Mensal</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="performanceChart" style="min-height: 300px;"></canvas>
+                        <div id="performanceEmpty" class="empty-state text-center py-5">
+                            <i class="ph ph-chart-line" style="font-size: 48px; color: #ccc;"></i>
+                            <p class="text-muted mt-3">Sem dados de performance ainda</p>
+                            <small class="text-muted">Complete serviços para ver seu desempenho mensal</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribuição de Serviços -->
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="ph ph-chart-pie card-icon"></i>
+                        <h3>Distribuição de Serviços</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="servicosChart" style="min-height: 300px;"></canvas>
+                        <div id="servicosEmpty" class="empty-state text-center py-5">
+                            <i class="ph ph-chart-donut" style="font-size: 48px; color: #ccc;"></i>
+                            <p class="text-muted mt-3">Sem serviços realizados ainda</p>
+                            <small class="text-muted">Complete serviços para ver a distribuição por tipo</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Histórico de Pagamentos -->
         <div class="row mb-5">
@@ -287,24 +356,7 @@
                 console.log('[DashboardCuidador] Foto do perfil atualizada');
             }
 
-            // Corrigir dropdown menu
-            const userProfileBtn = document.getElementById('userProfileBtn');
-            const profileDropdownMenu = document.getElementById('profileDropdownMenu');
-            
-            if (userProfileBtn && profileDropdownMenu) {
-                userProfileBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    profileDropdownMenu.classList.toggle('show');
-                    console.log('[DashboardCuidador] Dropdown toggled');
-                });
-                
-                // Fechar dropdown ao clicar fora
-                document.addEventListener('click', function(e) {
-                    if (!userProfileBtn.contains(e.target) && !profileDropdownMenu.contains(e.target)) {
-                        profileDropdownMenu.classList.remove('show');
-                    }
-                });
-            }
+            // Dropdown menu é gerenciado pelo header.js
 
             // Atualizar estatísticas do dashboard com dados reais
             if (typeof ServicosManager !== 'undefined') {
@@ -353,6 +405,8 @@
 
             console.log('[DashboardCuidador] Cuidador carregado:', userData.nome);
 
+            // Navegação (notificações e mensagens) é gerenciada pelo header.js
+
             // Configurar logout
             const logoutBtn = document.getElementById('headerLogoutBtn');
             if (logoutBtn) {
@@ -362,20 +416,6 @@
                     localStorage.removeItem('cuidafast_user');
                     window.location.href = '../../index.html';
                 });
-            }
-
-            // Atualizar badge de notificações
-            if (typeof ServicosManager !== 'undefined') {
-                const servicosPendentes = ServicosManager.getServicosCuidador(userData.email)
-                    .filter(s => s.status === 'pendente');
-                
-                if (servicosPendentes.length > 0) {
-                    const badge = document.getElementById('notificationBadge');
-                    if (badge) {
-                        badge.textContent = servicosPendentes.length;
-                        badge.style.display = 'flex';
-                    }
-                }
             }
 
             // Configurar busca de oportunidades (clientes)

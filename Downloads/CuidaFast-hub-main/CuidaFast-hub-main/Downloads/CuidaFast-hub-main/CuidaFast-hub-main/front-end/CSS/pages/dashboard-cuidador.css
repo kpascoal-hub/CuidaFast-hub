@@ -1,5 +1,38 @@
 /* Dashboard Cuidador Styles */
 
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.empty-state small {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Ocultar canvas quando vazio */
+canvas.hidden {
+    display: none !important;
+}
+
 /* Estilos da barra de tarefas */
 .modern-header {
     background: var(--creme);

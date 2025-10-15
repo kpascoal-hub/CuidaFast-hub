@@ -1,34 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
     const profileBtn = document.getElementById("userProfileBtn");
     const dropdownMenu = document.getElementById("profileDropdownMenu");
-    const userProfileDropdown = document.getElementById("userProfileDropdown");
 
     // Mostra/esconde dropdown
-    if (profileBtn && dropdownMenu && userProfileDropdown) {
+    if (profileBtn && dropdownMenu) {
       profileBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        userProfileDropdown.classList.toggle("open");
+        dropdownMenu.classList.toggle("show");
+        console.log('[Header] Dropdown toggled');
       });
 
       document.addEventListener("click", (event) => {
-        if (!userProfileDropdown.contains(event.target)) {
-          userProfileDropdown.classList.remove("open");
+        if (!profileBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.classList.remove("show");
         }
       });
     }
 
-    // Botões de mensagem e notificação usam o link do HTML
-    const messageBtn = document.getElementById("messageBtn");
+    // Configurar navegação - Notificações
     const notificationBtn = document.getElementById("notificationBtn");
+    if (notificationBtn) {
+      notificationBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = 'solicitacoesServicos.html';
+      });
+    }
 
-    [messageBtn, notificationBtn].forEach(btn => {
-      if (btn) {
-        btn.addEventListener("click", (e) => {
-          // Deixa o HTML cuidar do redirecionamento naturalmente
-          // Nenhum window.location.href é usado
-        });
-      }
-    });
+    // Configurar navegação - Mensagens
+    const messageBtn = document.getElementById("messageBtn");
+    if (messageBtn) {
+      messageBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = 'mensagens.html';
+      });
+    }
 
     console.log("Header carregada e interações ativas!");
   });
