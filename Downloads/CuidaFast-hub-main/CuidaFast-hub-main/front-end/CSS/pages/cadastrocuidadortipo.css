@@ -29,28 +29,20 @@ body {
 }
 
 /* Botão voltar */
-.back-button {
-  margin-bottom: 2rem;
+.back {
+  text-align: left;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #1B475D;
+  font-size: 30px;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
+  color: var(--azul-escuro, #1B475D);
 }
 
 .back-link:hover {
-  gap: 0.75rem;
-  color: #F2C94C;
-}
-
-.back-link i {
-  font-size: 1.25rem;
+  opacity: 0.7;
 }
 
 /* Header do formulário */
@@ -83,7 +75,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #FFFBEC;
+  background: transparent;
   border: 2px solid #e0e0e0;
   border-radius: 12px;
   padding: 1.25rem;
@@ -94,8 +86,7 @@ body {
 
 .service-card:hover {
   border-color: #1B475D;
-  box-shadow: 0 4px 12px rgba(27, 71, 93, 0.1);
-  transform: translateY(-2px);
+  background: rgba(27, 71, 93, 0.02);
 }
 
 .service-card input[type="checkbox"] {
@@ -112,7 +103,7 @@ body {
 
 .service-card:has(input:checked) {
   border-color: #1B475D;
-  background: rgba(27, 71, 93, 0.05);
+  background: rgba(27, 71, 93, 0.08);
 }
 
 .card-content {

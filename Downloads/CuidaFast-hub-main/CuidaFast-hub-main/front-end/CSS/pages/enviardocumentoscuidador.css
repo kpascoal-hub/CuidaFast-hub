@@ -29,25 +29,20 @@ body {
 }
 
 /* Botão voltar */
+.back {
+  text-align: left;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #1B475D;
+  font-size: 30px;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  margin-bottom: 2rem;
+  color: var(--azul-escuro, #1B475D);
 }
 
 .back-link:hover {
-  gap: 0.75rem;
-  color: #F2C94C;
-}
-
-.back-link i {
-  font-size: 1.25rem;
+  opacity: 0.7;
 }
 
 /* Títulos */
@@ -67,33 +62,23 @@ h2 {
   text-align: left;
 }
 
-/* Upload box */
+/* Upload section */
 .upload-box {
-  border: 2px dashed #e0e0e0;
-  padding: 2rem;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  background: #FFFBEC;
-  transition: all 0.3s ease;
-}
-
-.upload-box:hover {
-  border-color: #1B475D;
-  background: rgba(27, 71, 93, 0.02);
-}
-
-.upload-box i {
-  font-size: 3rem;
-  color: #1B475D;
-  margin-bottom: 1rem;
-  display: block;
+  margin-bottom: 2rem;
+  text-align: left;
 }
 
 .upload-box p {
   color: #666;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.upload-box p strong {
+  color: #1B475D;
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 /* Upload button */
@@ -101,21 +86,24 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: #1B475D;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  background: #f5f5f5;
+  color: #1B475D;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .upload-btn:hover {
-  background: #163947;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(27, 71, 93, 0.3);
+  background: #e8e8e8;
+  border-color: #1B475D;
+}
+
+.upload-btn i {
+  font-size: 1rem;
 }
 
 .upload-btn input {

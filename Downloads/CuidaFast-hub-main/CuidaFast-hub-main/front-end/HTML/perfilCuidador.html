@@ -181,6 +181,10 @@
                 <div class="card-body">
                     <div class="info-group">
                         <div class="info-item">
+                            <span class="info-label">Tipos de Serviço</span>
+                            <span class="info-value" id="tiposServico">-</span>
+                        </div>
+                        <div class="info-item">
                             <span class="info-label">Áreas de Atuação</span>
                             <span class="info-value">Cuidados com Idosos, Cuidados Paliativos, Reabilitação</span>
                         </div>
@@ -229,6 +233,27 @@
                 if (dropdownAvatar) dropdownAvatar.src = userData.photoURL;
                 
                 console.log('[PerfilCuidador] Foto do perfil atualizada');
+            }
+            
+            // Atualizar tipos de serviço
+            if (userData.servicosOferecidos && userData.servicosOferecidos.length > 0) {
+                const tiposMap = {
+                    'idoso': 'Cuidador de Idosos',
+                    'pet': 'Cuidador de Pet',
+                    'infantil': 'Cuidador Infantil',
+                    'crianca': 'Cuidador Infantil'
+                };
+                
+                const tiposTexto = userData.servicosOferecidos
+                    .map(tipo => tiposMap[tipo] || tipo)
+                    .join(', ');
+                
+                const tiposElement = document.getElementById('tiposServico');
+                if (tiposElement) {
+                    tiposElement.textContent = tiposTexto;
+                }
+                
+                console.log('[PerfilCuidador] Tipos de serviço:', tiposTexto);
             }
             
             console.log('[PerfilCuidador] Cuidador carregado:', userData.nome);
