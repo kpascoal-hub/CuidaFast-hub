@@ -2,8 +2,12 @@
 // Mapa e integração com Firestore + Geocoding
 // ======================================================
 
-// Inicializa o Firebase
-firebase.initializeApp(firebaseConfig);
+// Evita recriar o app se já estiver inicializado
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+// Reaproveita a instância global do Firestore
 const db = firebase.firestore();
 
 // Inicializa o mapa Leaflet
@@ -90,7 +94,7 @@ async function mostrarCasaUsuarioAtual() {
         if (coords) {
           geopoint = new firebase.firestore.GeoPoint(coords.lat, coords.lng);
           await clienteRef.update({ geopoint });
-          console.log("Geopoint salvo para o cliente:", uid);
+          console.log("✅ Geopoint salvo para o cliente:", uid);
         }
       }
     }
@@ -119,7 +123,7 @@ async function mostrarCasaUsuarioAtual() {
 }
 
 // ======================================================
-// Escutar cuidadores (como já fazia antes)
+// Escutar cuidadores (mantido igual, funcional)
 // ======================================================
 db.collection("cuidadores").onSnapshot(snapshot => {
   snapshot.docs.forEach(doc => {
@@ -130,6 +134,23 @@ db.collection("cuidadores").onSnapshot(snapshot => {
     atualizarCuidador(uid, data.geopoint.latitude, data.geopoint.longitude, ultimo);
   });
 });
+
+// ======================================================
+// 🔍 TESTE AUTOMÁTICO: marcador de exemplo
+// ======================================================
+// Serve apenas pra confirmar se o mapa e os ícones estão funcionando
+const testeCoords = { lat: -23.561684, lng: -46.625378 }; // ponto fixo (Av. Paulista)
+const testeIcon = L.divIcon({
+  className: "",
+  html: '<i class="ph ph-map-pin ph-bold ph-icon" style="color: red; font-size: 28px;"></i>',
+  iconSize: [32, 32],
+  iconAnchor: [16, 16]
+});
+
+L.marker([testeCoords.lat, testeCoords.lng], { icon: testeIcon })
+  .addTo(map)
+  .bindPopup("<b>Teste de Geopoint</b><br>Se você vê este ponto, o mapa está funcionando!")
+  .openPopup();
 
 // ======================================================
 // Inicializar quando o usuário estiver autenticado
