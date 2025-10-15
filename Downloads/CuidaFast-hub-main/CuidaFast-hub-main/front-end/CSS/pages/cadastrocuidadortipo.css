@@ -1,118 +1,219 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Body background removed - using main.css global styles */
-body {
+/* Reset e configurações globais */
+* {
   margin: 0;
   padding: 0;
-  color: #1c1c1c;
+  box-sizing: border-box;
+}
 
-  /* Centralizar tudo na vertical e horizontal */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #FFFBEC;
+  color: #1c1c1c;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* necessário para a seta absoluta */
+  padding: 2rem;
 }
 
-.containerzin {
+/* Container principal */
+.container {
   width: 100%;
-  max-width: 420px;
-  padding: 20px;
+  max-width: 600px;
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
- .voltar {
-    display: block;
-    text-align: left;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-  }
+/* Botão voltar */
+.back-button {
+  margin-bottom: 2rem;
+}
 
-h1 {
-  font-size: 22px;
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1B475D;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  gap: 0.75rem;
+  color: #F2C94C;
+}
+
+.back-link i {
+  font-size: 1.25rem;
+}
+
+/* Header do formulário */
+.form-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 2.5rem;
 }
 
-.cards {
+.form-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1B475D;
+  margin-bottom: 0.75rem;
+}
+
+.form-header p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Cards de serviço */
+.service-cards {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 24px;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.cardzin {
+.service-card {
   display: flex;
-  align-items: center;    /* <-- centraliza checkbox verticalmente com o conteúdo */
-  gap: 12px;              /* espaçamento checkbox ↔ conteúdo */
-  background-color: #FFFBEC ;
+  align-items: center;
+  gap: 1rem;
+  background: #FFFBEC;
+  border: 2px solid #e0e0e0;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  padding: 14px;
+  padding: 1.25rem;
   cursor: pointer;
-  border: 1px solid #eee;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.cardzin input[type="checkboxi"] {
-  margin: 0;              /* importante: remove o margin-top que pode deslocar só um checkbox */
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  accent-color: #000;
-  flex: 0 0 20px;
-  align-self: center;     /* garante alinhamento dentro do flex */
+.service-card:hover {
+  border-color: #1B475D;
+  box-shadow: 0 4px 12px rgba(27, 71, 93, 0.1);
+  transform: translateY(-2px);
+}
+
+.service-card input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #1B475D;
+  flex-shrink: 0;
+}
+
+.service-card input[type="checkbox"]:checked ~ .card-content {
+  color: #1B475D;
+}
+
+.service-card:has(input:checked) {
+  border-color: #1B475D;
+  background: rgba(27, 71, 93, 0.05);
 }
 
 .card-content {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   flex: 1;
-  min-width: 0;           
 }
 
-.card-title {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 4px;
+.card-content i {
+  font-size: 2.5rem;
+  color: #1B475D;
+  flex-shrink: 0;
 }
 
-.cardzin p {
-  font-size: 14px;
-  color: #555;
-  margin: 0;
+.card-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.btn {
+.card-content .card-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1B475D;
   display: block;
-  width: 100%;
-  background-color: #0b3342; /* azul escuro do print */
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 14px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-top: 10px;
 }
 
-.btn:hover {
-  background-color: #094252;
-}
-
-.terms {
-  font-size: 12px;
-  color: #555;
-  text-align: center;
-  margin-top: 16px;
+.card-content p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
   line-height: 1.4;
 }
 
+/* Botão submit */
+.btn-submit {
+  width: 100%;
+  background: #1B475D;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.btn-submit:hover {
+  background: #163947;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(27, 71, 93, 0.3);
+}
+
+.btn-submit i {
+  font-size: 1.25rem;
+}
+
+/* Termos */
+.terms {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
 .terms a {
-  color: #0077cc;
+  color: #1B475D;
   text-decoration: none;
+  font-weight: 600;
 }
 
 .terms a:hover {
   text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .form-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .card-content i {
+    font-size: 2rem;
+  }
+
+  .card-content .card-title {
+    font-size: 1rem;
+  }
 }
