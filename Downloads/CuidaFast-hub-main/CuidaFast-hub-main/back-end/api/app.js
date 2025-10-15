@@ -5,9 +5,9 @@ const cors = require('cors');
 const moment = require('moment-timezone');
 
 const authRoutes = require('./routes/authRoutes');
-const perfilRoutes = require('./routes/perfilRoutes'); // ← ADICIONAR ESTA LINHA
+const perfilRoutes = require('./routes/perfilRoutes');
 const pagamentoRoutes = require('./routes/pagamentoRoutes');
-// const pagamentoRoutes = require('./routes/pagamentoRoutes'); // se existir
+const clienteRoutes = require('./routes/clienteRoutes');
 
 const app = express();
 
@@ -21,11 +21,8 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Rotas
 app.use('/api/auth', authRoutes);
-app.use('/api/perfil', perfilRoutes); // ← ADICIONAR ESTA LINHA
-
+app.use('/api/perfil', perfilRoutes);
 app.use('/api/pagamento', pagamentoRoutes);
-
-const clienteRoutes = require('./routes/clienteRoutes');
 app.use('/api/cliente', clienteRoutes);
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
