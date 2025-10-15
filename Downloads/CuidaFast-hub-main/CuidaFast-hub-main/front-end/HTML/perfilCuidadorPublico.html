@@ -121,7 +121,7 @@
         }
 
         .btn-primary {
-            background: var(--azul-escuro);
+            background: #1B475D;
             color: white;
         }
 
@@ -132,14 +132,14 @@
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--azul-escuro);
-            border: 2px solid var(--azul-escuro);
+            background: #1B475D;
+            color: white;
         }
 
         .btn-secondary:hover {
-            background: rgba(27, 71, 93, 0.05);
+            background: #163947;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 71, 93, 0.3);
         }
 
         .profile-details {
@@ -219,16 +219,79 @@
     <!-- Header -->
     <header class="modern-header">
         <div class="header-container">
+            <!-- Logo Section -->
             <div class="header-left">
                 <a href="homeCliente.html" class="logo-link">
                     <img src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
                 </a>
             </div>
+            
+            <!-- Barra de Pesquisa -->
+            <div class="header-center">
+                <div class="search-container">
+                    <i class="ph ph-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar cuidadores...">
+                    <button class="search-btn" type="button">
+                        <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Actions -->
             <div class="header-right">
-                <a href="homeCliente.html" class="btn-secondary" style="padding: 0.5rem 1rem;">
-                    <i class="ph ph-arrow-left"></i>
-                    Voltar
+                <!-- Notifications -->
+                <a href="notificacoes.html" class="header-action-btn notification-btn">
+                    <i class="ph ph-bell"></i>
+                    <span class="notification-badge">0</span>
                 </a>
+                
+                <!-- Messages -->
+                <a href="mensagens.html" class="header-action-btn message-btn">
+                    <i class="ph ph-chat-circle"></i>
+                    <span class="message-badge">0</span>
+                </a>
+                
+                <!-- User Profile -->
+                <div class="user-profile-dropdown" id="userProfileDropdown">
+                    <button class="user-profile-btn" id="userProfileBtn">
+                        <img src="../assets/images.webp" alt="Avatar do usuário" class="user-avatar-img">
+                        <span class="user-name" id="headerUserName">Cliente</span>
+                        <i class="ph ph-caret-down dropdown-arrow"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                        <div class="dropdown-header">
+                            <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
+                            <div class="dropdown-user-info">
+                                <h4 id="dropdownUserName">Cliente</h4>
+                                <p>Conta Pessoal</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="perfilCliente.html" class="dropdown-item">
+                            <i class="ph ph-user"></i>
+                            <span>Meu Perfil</span>
+                        </a>
+                        <a href="configuracoes.html" class="dropdown-item">
+                            <i class="ph ph-gear"></i>
+                            <span>Configurações</span>
+                        </a>
+                        <a href="homeCliente.html" class="dropdown-item">
+                            <i class="ph ph-house"></i>
+                            <span>Início</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="ph ph-question"></i>
+                            <span>Ajuda</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="headerLogoutBtn">
+                            <i class="ph ph-sign-out"></i>
+                            <span>Sair</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -380,61 +443,111 @@
     
     <!-- Serviços Manager -->
     <script src="../JS/servicosManager.js"></script>
+    
+    <!-- API de Perfis (SEGURO - Backend) -->
+    <script src="../JS/perfilAPI.js"></script>
 
     <script>
-        // Carregar dados do cuidador do sessionStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            const caregiverData = sessionStorage.getItem('selectedCaregiver');
+        // Carregar dados do cuidador via API do backend
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Carregar dados do cliente no header
+            const clienteData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
             
-            if (!caregiverData) {
-                alert('Nenhum cuidador selecionado. Redirecionando...');
-                window.location.href = 'homeCliente.html';
-                return;
+            if (clienteData && clienteData.nome) {
+                const primeiroNome = clienteData.primeiroNome || clienteData.nome.split(' ')[0];
+                const headerUserName = document.getElementById('headerUserName');
+                const dropdownUserName = document.getElementById('dropdownUserName');
+                
+                if (headerUserName) headerUserName.textContent = primeiroNome;
+                if (dropdownUserName) dropdownUserName.textContent = clienteData.nome;
+                
+                // Atualizar foto do perfil
+                if (clienteData.photoURL) {
+                    const headerAvatar = document.querySelector('.user-avatar-img');
+                    const dropdownAvatar = document.querySelector('.dropdown-avatar');
+                    
+                    if (headerAvatar) headerAvatar.src = clienteData.photoURL;
+                    if (dropdownAvatar) dropdownAvatar.src = clienteData.photoURL;
+                }
+            }
+
+            // Configurar dropdown menu
+            const userProfileBtn = document.getElementById('userProfileBtn');
+            const profileDropdownMenu = document.getElementById('profileDropdownMenu');
+            
+            if (userProfileBtn && profileDropdownMenu) {
+                userProfileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdownMenu.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!userProfileBtn.contains(e.target) && !profileDropdownMenu.contains(e.target)) {
+                        profileDropdownMenu.classList.remove('show');
+                    }
+                });
+            }
+
+            // Configurar logout
+            const logoutBtn = document.getElementById('headerLogoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('cuidafast_isLoggedIn');
+                    window.location.href = '../../index.html';
+                });
             }
 
             try {
-                const caregiver = JSON.parse(caregiverData);
-                console.log('[PerfilCuidador] Dados carregados:', caregiver);
-
-                // Preencher informações
-                document.getElementById('caregiverName').textContent = caregiver.name || 'Cuidador';
-                document.getElementById('caregiverSpecialty').textContent = caregiver.specialty || 'Cuidador Geral';
-                document.getElementById('caregiverBio').textContent = caregiver.bio || 'Informações não disponíveis.';
-                document.getElementById('caregiverEmail').textContent = caregiver.email || 'Não informado';
-                document.getElementById('caregiverPhone').textContent = caregiver.telefone || 'Não informado';
-
-                // Avatar
-                if (caregiver.photoURL) {
-                    document.getElementById('caregiverAvatar').src = caregiver.photoURL;
-                }
-
-                // Rating e estrelas
-                const rating = caregiver.rating || 5.0;
-                const reviews = caregiver.reviews || 0;
-                document.getElementById('caregiverRating').textContent = `${rating.toFixed(1)} (${reviews} avaliações)`;
+                // ✅ NOVO: Obter ID do cuidador da URL (ao invés de email)
+                const urlParams = new URLSearchParams(window.location.search);
+                const cuidadorId = urlParams.get('id');
                 
-                // Renderizar estrelas
-                const starsContainer = document.getElementById('caregiverStars');
-                const fullStars = Math.floor(rating);
-                const hasHalfStar = rating % 1 >= 0.5;
-                let starsHTML = '';
+                if (!cuidadorId) {
+                    alert('Cuidador não especificado.');
+                    window.location.href = 'homeCliente.html';
+                    return;
+                }
+
+                // ✅ NOVO: Buscar dados do cuidador via API do backend (SEGURO)
+                console.log('[PerfilCuidador] Buscando perfil do cuidador ID:', cuidadorId);
+                const caregiver = await PerfilAPI.buscarPerfilCuidador(cuidadorId);
+                console.log('[PerfilCuidador] Perfil carregado:', caregiver.nome);
+
+                // ✅ NOVO: Preencher página automaticamente com função auxiliar
+                PerfilAPI.preencherPerfilCuidador(caregiver);
                 
-                for (let i = 0; i < fullStars; i++) {
-                    starsHTML += '<i class="ph-fill ph-star"></i>';
+                // Dados adicionais que não estão na função auxiliar
+                const rating = caregiver.avaliacao || 0;
+                const reviews = 0; // TODO: buscar do backend
+                
+                if (rating > 0) {
+                    document.getElementById('caregiverRating').textContent = `${rating.toFixed(1)} (${reviews} avaliações)`;
+                    
+                    // Renderizar estrelas
+                    const starsContainer = document.getElementById('caregiverStars');
+                    const fullStars = Math.floor(rating);
+                    const hasHalfStar = rating % 1 >= 0.5;
+                    let starsHTML = '';
+                    
+                    for (let i = 0; i < fullStars; i++) {
+                        starsHTML += '<i class="ph-fill ph-star"></i>';
+                    }
+                    if (hasHalfStar) {
+                        starsHTML += '<i class="ph ph-star-half"></i>';
+                    }
+                    for (let i = Math.ceil(rating); i < 5; i++) {
+                        starsHTML += '<i class="ph ph-star"></i>';
+                    }
+                    starsContainer.innerHTML = starsHTML;
                 }
-                if (hasHalfStar) {
-                    starsHTML += '<i class="ph ph-star-half"></i>';
-                }
-                for (let i = Math.ceil(rating); i < 5; i++) {
-                    starsHTML += '<i class="ph ph-star"></i>';
-                }
-                starsContainer.innerHTML = starsHTML;
 
                 // Localização
-                if (caregiver.endereco && (caregiver.endereco.cidade || caregiver.endereco.estado)) {
+                if (caregiver.local_trabalho) {
+                    const partes = caregiver.local_trabalho.split(',');
                     document.getElementById('locationCard').style.display = 'block';
-                    document.getElementById('caregiverCity').textContent = caregiver.endereco.cidade || '-';
-                    document.getElementById('caregiverState').textContent = caregiver.endereco.estado || '-';
+                    document.getElementById('caregiverCity').textContent = partes[0]?.trim() || '-';
+                    document.getElementById('caregiverState').textContent = partes[1]?.trim() || '-';
                 }
 
                 // Botão Contratar - Abrir modal
@@ -449,7 +562,7 @@
                     }
                     
                     // Preencher nome do cuidador no modal
-                    document.getElementById('modalCaregiverName').textContent = caregiver.name || 'este cuidador';
+                    document.getElementById('modalCaregiverName').textContent = caregiver.nome || 'este cuidador';
                     
                     // Abrir modal
                     const modal = new bootstrap.Modal(document.getElementById('modalContratar'));
@@ -513,10 +626,19 @@
                     }
                 });
 
-                // Botão Mensagem
+                // Botão Mensagem - Abrir chat com o cuidador
                 document.getElementById('btnMensagem').addEventListener('click', function() {
-                    // Redirecionar para mensagens
-                    window.location.href = 'mensagens.html';
+                    // Verificar se cliente está logado
+                    const clienteData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+                    
+                    if (!clienteData.email || clienteData.tipo !== 'cliente') {
+                        alert('⚠️ Você precisa estar logado como cliente para enviar mensagens.');
+                        window.location.href = '../../index.html';
+                        return;
+                    }
+                    
+                    // Redirecionar para mensagens com o ID do cuidador
+                    window.location.href = `mensagens.html?cuidador=${encodeURIComponent(caregiver.email)}`;
                 });
 
             } catch (error) {

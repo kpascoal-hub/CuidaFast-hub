@@ -52,8 +52,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Redirecionar baseado no tipo de usuário
       setTimeout(() => {
-        const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/';
-        const pathPrefix = isIndexPage ? 'front-end/HTML/' : '../HTML/';
+        const currentPath = window.location.pathname;
+        let pathPrefix = '';
+        
+        // Determinar o prefixo correto baseado na localização atual
+        if (currentPath.includes('index.html') || currentPath === '/' || currentPath.endsWith('/')) {
+          pathPrefix = 'front-end/HTML/';
+        } else if (currentPath.includes('/HTML/')) {
+          pathPrefix = '';
+        } else {
+          pathPrefix = '../HTML/';
+        }
+        
+        console.log('[Login] Redirecionando...', { tipo: loginResult.userData.tipo, pathPrefix });
         
         if (loginResult.userData.tipo === 'cuidador') {
           window.location.href = pathPrefix + 'dashboard-cuidador.html';
