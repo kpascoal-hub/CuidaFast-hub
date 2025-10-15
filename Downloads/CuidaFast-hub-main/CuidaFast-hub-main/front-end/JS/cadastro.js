@@ -21,71 +21,104 @@ getAnalytics(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const btnGoogle = document.getElementById("btnGoogle");
-btnGoogle.addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then(result => {
-      const user = result.user;
-      console.log("Usuário logado com Google:", user);
+// Inicializar botão do Google após DOM carregar
+document.addEventListener('DOMContentLoaded', () => {
+  const btnGoogle = document.getElementById("btnGoogle");
+  
+  if (btnGoogle) {
+    btnGoogle.addEventListener("click", () => {
+      console.log('[Cadastro] Login com Google iniciado');
       
-      // Determinar tipo de usuário
-      let tipoUsuario = '';
-      if (btnCuidador.classList.contains("active")) {
-        tipoUsuario = 'cuidador';
-      } else if (btnCliente.classList.contains("active")) {
-        tipoUsuario = 'cliente';
-      } else {
-        alert("Selecione um tipo de usuário antes de continuar.");
-        return;
-      }
+      signInWithPopup(auth, provider)
+        .then(result => {
+          const user = result.user;
+          console.log("[Cadastro] Usuário logado com Google:", user);
+          
+          // Determinar tipo de usuário
+          let tipoUsuario = '';
+          const btnCuidadorTemp = document.getElementById('btn-cuidador');
+          const btnClienteTemp = document.getElementById('btn-cliente');
+          
+          if (btnCuidadorTemp && btnCuidadorTemp.classList.contains("active")) {
+            tipoUsuario = 'cuidador';
+          } else if (btnClienteTemp && btnClienteTemp.classList.contains("active")) {
+            tipoUsuario = 'cliente';
+          } else {
+            alert("Selecione um tipo de usuário antes de continuar.");
+            return;
+          }
 
-      // Criar objeto de usuário com dados do Google
-      const userData = {
-        nome: user.displayName || 'Usuário',
-        email: user.email,
-        telefone: user.phoneNumber || '',
-        senha: user.uid, // Usar UID do Google como "senha" para login
-        tipo: tipoUsuario,
-        dataCadastro: new Date().toISOString(),
-        primeiroNome: (user.displayName || 'Usuário').split(' ')[0],
-        photoURL: user.photoURL || '',
-        loginGoogle: true // Flag para identificar login do Google
-      };
+          console.log('[Cadastro] Tipo selecionado:', tipoUsuario);
 
-      // Salvar no localStorage
-      localStorage.setItem('cuidafast_user', JSON.stringify(userData));
-      localStorage.setItem('cuidafast_isLoggedIn', 'true');
+          // Criar objeto de usuário com dados do Google
+          const userData = {
+            nome: user.displayName || 'Usuário',
+            email: user.email,
+            telefone: user.phoneNumber || '',
+            senha: user.uid, // Usar UID do Google como "senha" para login
+            tipo: tipoUsuario,
+            dataCadastro: new Date().toISOString(),
+            primeiroNome: (user.displayName || 'Usuário').split(' ')[0],
+            photoURL: user.photoURL || '',
+            loginGoogle: true // Flag para identificar login do Google
+          };
 
-      // Salvar na lista de usuários para login posterior
-      salvarUsuarioNaLista(userData);
+          // Salvar no localStorage
+          localStorage.setItem('cuidafast_user', JSON.stringify(userData));
+          localStorage.setItem('cuidafast_isLoggedIn', 'true');
 
-      alert(`Bem-vindo, ${userData.nome}!`);
+          // Salvar na lista de usuários para login posterior
+          salvarUsuarioNaLista(userData);
 
-      setTimeout(() => {
-        if (tipoUsuario === 'cuidador') {
-          location.assign("../HTML/cadastroComplementoCuidador.html");
-        } else {
-          // Cliente vai para página de complemento
-          location.assign("../HTML/cadastroComplemento.html");
-        }
-      }, 100);
-    })
-    .catch(error => {
-      console.error("Erro no login com Google:", error);
-      alert("Erro no login com Google: " + error.message);
+          console.log('[Cadastro] Usuário Google salvo:', userData);
+          alert(`✅ Bem-vindo(a), ${userData.nome}!`);
+
+          setTimeout(() => {
+            if (tipoUsuario === 'cuidador') {
+              console.log('[Cadastro] Redirecionando para complemento cuidador...');
+              location.assign("../HTML/cadastroComplementoCuidador.html");
+            } else {
+              console.log('[Cadastro] Redirecionando para complemento cliente...');
+              location.assign("../HTML/cadastroComplemento.html");
+            }
+          }, 100);
+        })
+        .catch(error => {
+          console.error("[Cadastro] Erro no login com Google:", error);
+          alert("Erro no login com Google: " + error.message);
+        });
     });
+  } else {
+    console.error('[Cadastro] Botão do Google não encontrado');
+  }
 });
-const btnCuidador = document.getElementById('btn-cuidador');
-const btnCliente = document.getElementById('btn-cliente');
-const form = document.querySelector('form'); 
-const btnSubmit = document.querySelector("button[type='submit']");
+let btnCuidador, btnCliente, form, btnSubmit;
 
 window.addEventListener('DOMContentLoaded', () => {
+  btnCuidador = document.getElementById('btn-cuidador');
+  btnCliente = document.getElementById('btn-cliente');
+  form = document.getElementById('form-cadastro'); 
+  btnSubmit = document.querySelector("button[type='submit']");
+
+  // Verificar se elementos foram encontrados
+  if (!btnCuidador || !btnCliente || !form) {
+    console.error('[Cadastro] Elementos não encontrados no DOM');
+    return;
+  }
+
+  // Cliente ativo por padrão
   btnCliente.classList.add('active');
   btnCliente.classList.remove('inactive');
   btnCuidador.classList.remove('active');
   btnCuidador.classList.add('inactive');
-  if (btnSubmit) btnSubmit.textContent = "Continuar"; 
+  if (btnSubmit) btnSubmit.textContent = "Continuar";
+
+  // Adicionar event listeners
+  btnCuidador.addEventListener('click', ativarCuidador);
+  btnCliente.addEventListener('click', ativarCliente);
+
+  // Event listener do formulário
+  form.addEventListener("submit", handleFormSubmit);
 });
 function ativarCuidador() {
   btnCuidador.classList.add('active');
@@ -103,17 +136,18 @@ function ativarCliente() {
   if (btnSubmit) btnSubmit.textContent = "Continuar";
 }
 
-btnCuidador.addEventListener('click', ativarCuidador);
-btnCliente.addEventListener('click', ativarCliente);
-
-form.addEventListener("submit", (event) => {
+function handleFormSubmit(event) {
   event.preventDefault();
+
+  console.log('[Cadastro] Formulário submetido');
 
   // Capturar dados do formulário
   const nome = document.querySelector('input[type="text"]').value.trim();
   const email = document.querySelector('input[type="email"]').value.trim();
   const telefone = document.querySelector('input[type="tel"]').value.trim();
   const senha = document.querySelector('input[type="password"]').value.trim();
+
+  console.log('[Cadastro] Dados capturados:', { nome, email, telefone: telefone ? 'preenchido' : 'vazio' });
 
   // Validar campos obrigatórios
   if (!nome || !email || !senha) {
@@ -131,6 +165,8 @@ form.addEventListener("submit", (event) => {
     alert("Selecione um tipo de usuário antes de continuar.");
     return;
   }
+
+  console.log('[Cadastro] Tipo de usuário:', tipoUsuario);
 
   // Criar objeto de usuário
   const userData = {
@@ -150,16 +186,19 @@ form.addEventListener("submit", (event) => {
   // Salvar na lista de usuários para login posterior
   salvarUsuarioNaLista(userData);
 
-  console.log('Usuário cadastrado:', userData);
+  console.log('[Cadastro] Usuário cadastrado:', userData);
+  alert(`✅ Cadastro realizado com sucesso!\nBem-vindo(a), ${userData.nome}!`);
 
   // Redirecionar para página de complemento
   if (tipoUsuario === 'cuidador') {
+    console.log('[Cadastro] Redirecionando para complemento cuidador...');
     window.location.href = "../HTML/cadastroComplementoCuidador.html";
   } else {
+    console.log('[Cadastro] Redirecionando para complemento cliente...');
     // Cliente vai para página de complemento (data de nascimento e endereço)
     window.location.href = "../HTML/cadastroComplemento.html";
   }
-});
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.social-icons i').forEach(icon => {
