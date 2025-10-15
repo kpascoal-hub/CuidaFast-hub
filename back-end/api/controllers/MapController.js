@@ -7,9 +7,6 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// Reaproveita a instância global do Firestore
-const db = firebase.firestore();
-
 // Inicializa o mapa Leaflet
 const map = L.map("map").setView([-23.5505, -46.6333], 13); // São Paulo padrão
 
