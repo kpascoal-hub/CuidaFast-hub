@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
       atualizarUsuarioNaLista(updatedData);
       
       console.log('[cadastrocuidadortipo] Dados salvos:', updatedData);
-      alert('✅ Serviços selecionados com sucesso!');
       
       // Redirecionar para enviar documentos
       window.location.href = 'enviardocumentoscuidador.html';

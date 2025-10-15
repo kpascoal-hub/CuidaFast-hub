@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
       atualizarUsuarioNaLista(updatedData);
       
       console.log('[cadastroComplementoCuidador] Dados mesclados e salvos:', updatedData);
-      alert('✅ Dados salvos com sucesso!');
       
       // Redirecionar para seleção de tipo de cuidador
       window.location.href = 'cadastrocuidadortipo.html';

@@ -266,7 +266,12 @@
     // Finalizar cadastro
     document.getElementById('btn-finalizar').addEventListener('click', function() {
       if (!rgFile) {
-        alert('Por favor, envie seu RG ou CNH antes de finalizar.');
+        console.warn('[EnviarDocumentos] RG/CNH não enviado');
+        // Destacar campo obrigatório
+        document.querySelector('.upload-box').style.borderColor = '#f44336';
+        setTimeout(() => {
+          document.querySelector('.upload-box').style.borderColor = '';
+        }, 2000);
         return;
       }
       
@@ -277,9 +282,10 @@
         feedback: feedbackFile ? feedbackFile.name : null,
         dataEnvio: new Date().toISOString()
       };
+      userData.cadastroCompleto = true;
       localStorage.setItem('cuidafast_user', JSON.stringify(userData));
       
-      alert('Documentos enviados com sucesso!');
+      console.log('[EnviarDocumentos] Documentos enviados com sucesso');
       window.location.href = '../HTML/dashboard-cuidador.html';
     });
   </script>

@@ -1,97 +1,209 @@
-/* Body background removed - using main.css global styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Reset e configurações globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    color: #1B475D;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 500px;
-    margin: 40px auto;
-    text-align: center;
-  }
-  
-  
-  h1 {
-    font-size: 28px;
-    margin-bottom: 5px;
-  }
-  
-  h2 {
-    font-size: 16px;
-    margin: 20px 0;
-    font-weight: 600;
-  }
-  
-  .upload-box {
-    border: 1px dashed #999;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .upload-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 18px;
-    background-color: #f1f1f1;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .upload-btn:hover {
-    background-color: #ddd;
-  }
-  
-  .upload-btn input {
-    display: none;
-  }
-  
-  .continue-btn {
-    margin-top: 20px;
-    padding: 14px 30px;
-    background-color: #0d3647;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .continue-btn:hover {
-    background-color: #092731;
-  }
-  
-  .termos {
-    margin-top: 20px;
-    font-size: 13px;
-    color: #444;
-  }
-  
-  .termos a {
-    color: #0073e6;
-    text-decoration: none;
-  }
-  
-  .termos a:hover {
-    text-decoration: underline;
-  }
-  
+  font-family: 'Inter', sans-serif;
+  background: #FFFBEC;
+  color: #1B475D;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Container principal */
+.container {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão voltar */
 .back-link {
-      display: block;
-    text-align: left;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-  font-size: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1B475D;
   text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.back-link:hover {
+  gap: 0.75rem;
+  color: #F2C94C;
+}
+
+.back-link i {
+  font-size: 1.25rem;
+}
+
+/* Títulos */
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1B475D;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1B475D;
+  margin: 1.5rem 0 1rem 0;
+  text-align: left;
+}
+
+/* Upload box */
+.upload-box {
+  border: 2px dashed #e0e0e0;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: #FFFBEC;
+  transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+  border-color: #1B475D;
+  background: rgba(27, 71, 93, 0.02);
+}
+
+.upload-box i {
+  font-size: 3rem;
+  color: #1B475D;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.upload-box p {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Upload button */
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #1B475D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  background: #163947;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(27, 71, 93, 0.3);
+}
+
+.upload-btn input {
+  display: none;
+}
+
+/* Upload status */
+.upload-status {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.upload-status.success {
+  color: #4caf50;
+}
+
+.upload-status.error {
+  color: #f44336;
+}
+
+/* Continue button */
+.continue-btn {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #1B475D;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.continue-btn:hover {
+  background: #163947;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(27, 71, 93, 0.3);
+}
+
+.continue-btn i {
+  font-size: 1.25rem;
+}
+
+/* Termos */
+.termos {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.termos a {
+  color: #1B475D;
   text-decoration: none;
-  color: var(--azul-escuro); /* opcional: mantém a cor herdada, sem azul padrão */
+  font-weight: 600;
+}
+
+.termos a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
   }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .upload-box {
+    padding: 1.5rem;
+  }
+
+  .upload-box i {
+    font-size: 2.5rem;
+  }
+}

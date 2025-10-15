@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
           salvarUsuarioNaLista(userData);
 
           console.log('[Cadastro] Usuário Google salvo:', userData);
-          alert(`✅ Bem-vindo(a), ${userData.nome}!`);
 
           setTimeout(() => {
             if (tipoUsuario === 'cuidador') {
@@ -187,7 +186,6 @@ function handleFormSubmit(event) {
   salvarUsuarioNaLista(userData);
 
   console.log('[Cadastro] Usuário cadastrado:', userData);
-  alert(`✅ Cadastro realizado com sucesso!\nBem-vindo(a), ${userData.nome}!`);
 
   // Redirecionar para página de complemento
   if (tipoUsuario === 'cuidador') {
