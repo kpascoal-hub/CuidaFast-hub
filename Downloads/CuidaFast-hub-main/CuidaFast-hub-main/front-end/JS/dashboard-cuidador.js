@@ -1,6 +1,9 @@
 // Dashboard Cuidador JavaScript - Versão Aprimorada
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Carregar estatísticas reais do cuidador
+    carregarEstatisticasReais();
+    
     // Inicializar funcionalidades do dashboard
     initToggleValor();
     initPeriodoSelector();
@@ -13,6 +16,74 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Dashboard do Cuidador carregado com sucesso!');
 });
+
+/**
+ * Carregar estatísticas reais do cuidador
+ */
+function carregarEstatisticasReais() {
+    const userData = JSON.parse(localStorage.getItem('cuidafast_user') || '{}');
+    
+    if (!userData.email || userData.tipo !== 'cuidador') {
+        console.warn('[Dashboard] Usuário não é cuidador');
+        return;
+    }
+
+    // Verificar se ServicosManager está disponível
+    if (typeof ServicosManager === 'undefined') {
+        console.error('[Dashboard] ServicosManager não carregado');
+        return;
+    }
+
+    // Obter estatísticas
+    const stats = ServicosManager.getEstatisticasCuidador(userData.email);
+    
+    console.log('[Dashboard] Estatísticas carregadas:', stats);
+    
+    // Atualizar cards do dashboard
+    atualizarCardsDashboard(stats);
+}
+
+/**
+ * Atualizar cards do dashboard com dados reais
+ */
+function atualizarCardsDashboard(stats) {
+    // Total de serviços realizados
+    const totalServicosEl = document.querySelector('.metric-value');
+    if (totalServicosEl && totalServicosEl.closest('.dashboard-card')?.querySelector('.metric-label')?.textContent.includes('mês')) {
+        totalServicosEl.textContent = stats.servicosConcluidos || 0;
+    }
+
+    // Valor arrecadado
+    const valorArrecadadoEl = document.getElementById('valorArrecadado')?.querySelector('.real-value');
+    if (valorArrecadadoEl) {
+        const valorFormatado = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(stats.receitaTotal || 0);
+        valorArrecadadoEl.textContent = valorFormatado;
+    }
+
+    // Média de avaliações
+    const avaliacoesEl = document.querySelector('.metric-value');
+    const cards = document.querySelectorAll('.dashboard-card');
+    cards.forEach(card => {
+        const label = card.querySelector('.metric-label');
+        if (label && label.textContent.includes('Avaliação')) {
+            const metricValue = card.querySelector('.metric-value');
+            if (metricValue) {
+                metricValue.textContent = stats.mediaAvaliacoes || '0.0';
+            }
+        }
+    });
+
+    // Atualizar badge de total de avaliações
+    const totalAvaliacoesEl = document.querySelector('.metric-badge');
+    if (totalAvaliacoesEl) {
+        totalAvaliacoesEl.textContent = `${stats.totalAvaliacoes || 0} avaliações`;
+    }
+
+    console.log('[Dashboard] Cards atualizados com estatísticas reais');
+}
 
 // Função para inicializar o botão de mensagens
 function initMessageButton() {

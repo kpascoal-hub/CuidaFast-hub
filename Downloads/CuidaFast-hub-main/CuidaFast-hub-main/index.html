@@ -171,9 +171,9 @@ const db = firebase.firestore();
     <!-- Formulário -->
     <div class="newsletter-form-wrapper">
       <form class="newsletter-form" id="newsletterForm">
-        <input type="text" class="newsletter-input" placeholder="Insira seu nome" required aria-label="Nome">
-        <input type="email" class="newsletter-input" placeholder="Insira seu e-mail" required aria-label="E-mail">
-        <button type="submit" class="newsletter-button">
+        <input type="text" id="newsletterName" class="newsletter-input" placeholder="Insira seu nome" required aria-label="Nome">
+        <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Insira seu e-mail" required aria-label="E-mail">
+        <button type="submit" class="newsletter-button" id="newsletterBtn">
           <i class="ph ph-paper-plane-tilt"></i>
           Enviar
         </button>
@@ -295,10 +295,73 @@ const db = firebase.firestore();
 
   <script src="front-end/JS/main.js" defer></script>
   <script src="front-end/JS/login.js" defer></script>
+  
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof initFAQ === "function") initFAQ();
       if (typeof initNewsletterForm === "function") initNewsletterForm();
+
+      // Inicializar EmailJS
+      emailjs.init("YOUR_PUBLIC_KEY"); // Substitua pela sua chave pública do EmailJS
+
+      // Configurar envio de newsletter
+      const newsletterForm = document.getElementById('newsletterForm');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('newsletterName').value;
+          const email = document.getElementById('newsletterEmail').value;
+          const btn = document.getElementById('newsletterBtn');
+          
+          if (!name || !email) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+          }
+
+          // Desabilitar botão durante envio
+          const originalHTML = btn.innerHTML;
+          btn.disabled = true;
+          btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Enviando...';
+
+          // Parâmetros do email
+          const templateParams = {
+            to_email: email,
+            to_name: name,
+            from_name: 'CuidaFast',
+            message: 'Obrigado por se inscrever na nossa newsletter! Você receberá novidades e atualizações sobre a CuidaFast.'
+          };
+
+          // Enviar email usando EmailJS
+          emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            .then(function(response) {
+              console.log('[Newsletter] Email enviado com sucesso!', response.status, response.text);
+              alert('✅ Email enviado com sucesso! Obrigado por se inscrever.');
+              
+              // Salvar no localStorage
+              let subscribers = JSON.parse(localStorage.getItem('cuidafast_newsletter') || '[]');
+              subscribers.push({
+                name: name,
+                email: email,
+                date: new Date().toISOString()
+              });
+              localStorage.setItem('cuidafast_newsletter', JSON.stringify(subscribers));
+              
+              // Limpar formulário
+              newsletterForm.reset();
+              btn.disabled = false;
+              btn.innerHTML = originalHTML;
+            }, function(error) {
+              console.error('[Newsletter] Erro ao enviar email:', error);
+              alert('❌ Erro ao enviar email. Por favor, tente novamente mais tarde.');
+              btn.disabled = false;
+              btn.innerHTML = originalHTML;
+            });
+        });
+      }
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

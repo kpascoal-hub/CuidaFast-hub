@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('[cadastroComplementoCuidador] Dados mesclados e salvos:', updatedData);
       alert('✅ Dados salvos com sucesso!');
       
-      // Redirecionar para dashboard do cuidador
-      window.location.href = 'enviardocumentoscuidador.html';
+      // Redirecionar para seleção de tipo de cuidador
+      window.location.href = 'cadastrocuidadortipo.html';
     });
   }
 });
