@@ -1,6 +1,7 @@
 const path = require('path');
 const { initializeApp, cert, getApps, getApp } = require('firebase-admin/app');
 const { getAuth } = require('firebase-admin/auth');
+const { getFirestore } = require('firebase-admin/firestore');
 
 const serviceAccount = require(path.join(__dirname, '../../config/firebase-service-account.json'));
 
@@ -14,5 +15,6 @@ if (!getApps().length) {
 }
 
 const auth = getAuth(app);
+const firestore = getFirestore(app);
 
-module.exports = { auth };
+module.exports = { auth, firestore };

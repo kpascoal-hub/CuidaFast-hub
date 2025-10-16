@@ -5,123 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Localização Cuidador</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="../CSS/map.css" />
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
-<style>
-  #map { height: 100vh; width: 100%; }
-  .ph-icon { font-size: 32px; color: black; } /* Ícones pretos */
-</style>
 </head>
 <body>
 <div id="map"></div>
+<p id="status"></p>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBssmyvDioKYOHdl-RAHWdfGRAGkkODnEw",
-  authDomain: "mapa-teste-75aca.firebaseapp.com",
-  projectId: "mapa-teste-75aca",
-  storageBucket: "mapa-teste-75aca.firebasestorage.app",
-  messagingSenderId: "819639718364",
-  appId: "1:819639718364:web:4913ce205910e26de03f19",
-  measurementId: "G-9CDZJCWPF2"
-};
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  const map = L.map('map').setView([-23.5505, -46.6333], 15);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
-
-  let marcadorCuidador = null;
-  let caminho = [];
-  let polyline = L.polyline(caminho, {color: 'blue'}).addTo(map);
-  let ultimaPosicao = null;
-  const meuUID = "Cuidador123";
-  let mapaCentralizado = false;
-
-  function distancia(lat1, lng1, lat2, lng2) {
-    const R = 6371e3;
-    const φ1 = lat1 * Math.PI/180;
-    const φ2 = lat2 * Math.PI/180;
-    const Δφ = (lat2-lat1)*Math.PI/180;
-    const Δλ = (lng2-lng1)*Math.PI/180;
-    const a = Math.sin(Δφ/2)**2 +
-              Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
-  }
-
-  async function atualizarPosicao(lat, lng) {
-    try {
-      await db.collection("cuidadores").doc(meuUID).set({
-        geopoint: new firebase.firestore.GeoPoint(lat, lng),
-        ultimoUpdate: firebase.firestore.Timestamp.now()
-      }, { merge: true });
-    } catch(e) { console.error("Erro:", e); }
-  }
-
-  function moverMarcadorSuave(marker, novaLat, novaLng) {
-    const latLngAtual = marker.getLatLng();
-    let lat = latLngAtual.lat, lng = latLngAtual.lng;
-    const passo = 0.1;
-    const interval = setInterval(() => {
-      lat += (novaLat - lat) * passo;
-      lng += (novaLng - lng) * passo;
-      marker.setLatLng([lat,lng]);
-      if (Math.abs(lat - novaLat)<0.0001 && Math.abs(lng - novaLng)<0.0001) clearInterval(interval);
-    },50);
-  }
-
-  function atualizarMarcador(lat,lng){
-    if(marcadorCuidador){
-      moverMarcadorSuave(marcadorCuidador,lat,lng);
-    } else {
-      const divIcon = L.divIcon({
-        className: "",
-        html: '<i class="ph-user ph-bold ph-icon"></i>',
-        iconSize: [32,32],
-        iconAnchor: [16,16]
-      });
-      marcadorCuidador = L.marker([lat,lng],{icon:divIcon}).addTo(map)
-        .bindPopup("Minha Posição").openPopup(); // <-- nome correto
-      if(!mapaCentralizado){ map.setView([lat,lng],15); mapaCentralizado=true; }
-    }
-    caminho.push([lat,lng]);
-    polyline.setLatLngs(caminho);
-  }
-
-  if(navigator.geolocation){
-    navigator.geolocation.watchPosition(pos=>{
-      const lat=pos.coords.latitude, lng=pos.coords.longitude;
-      if(!ultimaPosicao || distancia(lat,lng,ultimaPosicao.lat,ultimaPosicao.lng)>5){
-        atualizarPosicao(lat,lng);
-        atualizarMarcador(lat,lng);
-        ultimaPosicao={lat,lng};
-      }
-    },err=>console.error(err),{enableHighAccuracy:true});
-  } else alert("Geolocalização não suportada.");
-
-  // Marcador casa do cliente
-  db.collection("casas").doc("minhaCasa").get().then(doc=>{
-    if(doc.exists){
-      const data=doc.data();
-      const lat=data.geopoint.latitude;
-      const lng=data.geopoint.longitude;
-      const houseIcon=L.divIcon({
-        className:"",
-        html:'<i class="ph-house ph-bold ph-icon"></i>',
-        iconSize:[32,32],
-        iconAnchor:[16,16]
-      });
-      L.marker([lat,lng],{icon:houseIcon}).addTo(map)
-        .bindPopup("<b>Casa do Cliente</b>");
-    }
-  });
-</script>
+<script src="../../back-end/config/FirebaseConfig.js"></script>
+<script src="../JS/cuidaloc.js"></script>
 </body>
 </html>
