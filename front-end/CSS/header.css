@@ -227,7 +227,7 @@
 
 .profile-dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: 100%;
   right: 0;
   background: var(--creme);
   border-radius: 16px;
@@ -235,14 +235,79 @@
   border: 1px solid rgba(27, 71, 93, 0.1);
   min-width: 280px;
   visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 1001;
+  transform: translateY(0);
+  transition: all 0.2s ease;
+  z-index: 2000;
 }
 
 .user-profile-dropdown.open .profile-dropdown-menu {
   visibility: visible;
-  transform: translateY(0);
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--creme);
+  background-color: var(--creme);
+}
+
+.dropdown-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dropdown-user-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--azul-escuro);
+}
+
+.dropdown-user-info p {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.875rem;
+  color: var(--verde-escuro);
+  font-weight: 500;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--creme);
+  margin: 0.5rem 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  text-decoration: none;
+  color: var(--azul-escuro);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: var(--creme);
+  color: var(--azul-escuro);
+}
+
+.dropdown-item i {
+  font-size: 1.125rem;
+  width: 20px;
+}
+
+.logout-item {
+  color: #ff4757;
+}
+
+.logout-item:hover {
+  background: rgba(255, 71, 87, 0.1);
+  color: #ff4757;
 }
 
 /* Mobile Menu Toggle */
@@ -321,33 +386,6 @@
   }
 }
 
-
-/* Profile Dropdown Menu */
-.profile-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: 0;
-    background: var(--bege);
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(27, 71, 93, 0.1);
-    min-width: 280px;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-    background: var(--creme);
-}
-
-.user-profile-dropdown.open .profile-dropdown-menu {
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
     padding: 1.5rem;
     border-bottom: 1px solid var(--creme);
     background-color: var(--creme);
