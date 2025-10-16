@@ -21,7 +21,9 @@
   }
 
   // Identify caregiver and linked client
-  const usuarioId = Number(localStorage.getItem('usuario_id')) || Number(new URLSearchParams(location.search).get('id')) || null;
+  const params = new URLSearchParams(location.search);
+  const usuarioId = Number(localStorage.getItem('usuario_id')) || Number(params.get('id')) || null;
+  const view = (params.get('view') || '').toLowerCase(); // '' | 'cliente'
   let cuidadorUid = null;
   let clienteUid = null;
 
@@ -36,6 +38,13 @@
   async function fetchVinculoDoCuidador() {
     if (!usuarioId) return null;
     const res = await fetch(`/api/vinculo/cuidador/${usuarioId}`);
+    if (!res.ok) return null;
+    return res.json();
+  }
+
+  async function fetchVinculoDoCliente() {
+    if (!usuarioId) return null;
+    const res = await fetch(`/api/vinculo/cliente/${usuarioId}`);
     if (!res.ok) return null;
     return res.json();
   }
@@ -68,12 +77,26 @@
     }
   }
 
+  async function authFetch(url, options = {}, retry = true) {
+    const user = firebase.auth().currentUser;
+    if (!user) throw new Error('Não autenticado');
+    const token = await user.getIdToken();
+    const res = await fetch(url, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...(options.headers || {}) },
+    });
+    if (res.status === 401 && retry) {
+      const fresh = await user.getIdToken(true);
+      return fetch(url, { ...options, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${fresh}`, ...(options.headers || {}) } });
+    }
+    return res;
+  }
+
   async function postarLocalizacao(lat, lng) {
     try {
-      await fetch('/api/localizacao/cuidador', {
+      await authFetch('/api/localizacao/cuidador', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario_id: usuarioId, lat, lng })
+        body: JSON.stringify({ lat, lng })
       });
     } catch (e) {
       console.error('Falha ao enviar localização do cuidador', e);
@@ -93,19 +116,61 @@
     });
   }
 
+   function subscribeCuidadorRealtime(uid) {
+    if (!uid || !window.firebase || !window.firebase.firestore) return;
+    db.collection('localizacoes').collection('cuidadores').doc(uid).onSnapshot((doc) => {
+      const d = doc.data();
+      if (!d) return;
+      upsertCuidadorMarker(d.lat, d.lng);
+      map.setView([d.lat, d.lng], 15);
+      if (clienteMarker) {
+        const dist = haversine(d.lat, d.lng, clienteMarker.getLatLng().lat, clienteMarker.getLatLng().lng);
+        setStatus(`Distância até o cliente: ${km(dist)} km`);
+      }
+    });
+  }
+
+  async function carregarCasaDoClientePorAPI(id) {
+    try {
+      const res = await fetch(`/api/localizacao/cliente/${id}`);
+      if (!res.ok) return;
+      const json = await res.json();
+      if (json && json.coordinates) {
+        upsertClienteMarker(json.coordinates.lat, json.coordinates.lng);
+      }
+    } catch (e) {
+      console.warn('Falha ao obter localização do cliente por API');
+    }
+  }
+
   async function init() {
     setStatus('Inicializando...');
     try {
-      const vinculo = await fetchVinculoDoCuidador();
-      if (vinculo && vinculo.cliente_firebase_uid) {
-        clienteUid = vinculo.cliente_firebase_uid;
-        subscribeClienteHouse(clienteUid);
-      } else if (vinculo && vinculo.coordinates) {
-        upsertClienteMarker(vinculo.coordinates.lat, vinculo.coordinates.lng);
+      await new Promise((resolve) => firebase.auth().onAuthStateChanged((u)=>{ if(u) resolve(); else window.location.href = '../../index.html'; }));
+      if (view === 'cliente') {
+        const vinc = await fetchVinculoDoCliente();
+        if (vinc && vinc.cuidador_firebase_uid) {
+          cuidadorUid = vinc.cuidador_firebase_uid;
+          subscribeCuidadorRealtime(cuidadorUid);
+        }
+        await carregarCasaDoClientePorAPI(usuarioId);
+        setStatus('Aguardando localização do cuidador...');
+      } else {
+        const vinculo = await fetchVinculoDoCuidador();
+        if (vinculo && vinculo.cliente_firebase_uid) {
+          clienteUid = vinculo.cliente_firebase_uid;
+          subscribeClienteHouse(clienteUid);
+        } else if (vinculo && vinculo.coordinates) {
+          upsertClienteMarker(vinculo.coordinates.lat, vinculo.coordinates.lng);
+        }
+        setStatus('Ativando geolocalização...');
       }
-      setStatus('Ativando geolocalização...');
     } catch (e) {
       console.warn('Sem vínculo do cuidador encontrado ainda.');
+    }
+
+    if (view === 'cliente') {
+      return; // Cliente não envia geolocalização neste fluxo
     }
 
     if (!navigator.geolocation) {
@@ -135,6 +200,16 @@
       console.error(err);
       setStatus('Não foi possível obter a sua posição. Permita o acesso ao GPS.');
     }, { enableHighAccuracy: true });
+  }
+
+  const simulateBtn = document.getElementById('simulateBtn');
+  if (simulateBtn) {
+    simulateBtn.addEventListener('click', async () => {
+      const lat = -23.55 + (Math.random() * 0.02);
+      const lng = -46.63 + (Math.random() * 0.02);
+      upsertCuidadorMarker(lat, lng);
+      await postarLocalizacao(lat, lng);
+    });
   }
 
   init();

@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config({ path: path.join(__dirname, '../config/.env') });
 const moment = require('moment-timezone');
 
 const authRoutes = require('./routes/authRoutes');
@@ -17,7 +18,18 @@ const app = express();
 
 moment.tz.setDefault('America/Sao_Paulo');
 
-app.use(cors());
+const allowedOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5500';
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser tools
+    if (origin === allowedOrigin || /^https?:\/\/localhost(:\d+)?$/.test(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

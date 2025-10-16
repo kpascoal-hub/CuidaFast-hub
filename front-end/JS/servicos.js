@@ -27,6 +27,18 @@
   let clienteMarker = null;
   let cuidadorMarker = null;
 
+  async function authFetch(url, options = {}, retry = true) {
+    const user = firebase.auth().currentUser;
+    if (!user) throw new Error('Não autenticado');
+    const token = await user.getIdToken();
+    const res = await fetch(url, { ...options, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...(options.headers||{}) } });
+    if (res.status === 401 && retry) {
+      const fresh = await user.getIdToken(true);
+      return fetch(url, { ...options, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${fresh}`, ...(options.headers||{}) } });
+    }
+    return res;
+  }
+
   function upsertClienteMarker(lat, lng) {
     const icon = L.divIcon({ className: '', html: '<i class="ph-house ph-bold ph-icon" style="font-size:30px;color:#333"></i>', iconSize: [32,32], iconAnchor: [16,16] });
     if (clienteMarker) clienteMarker.setLatLng([lat,lng]); else clienteMarker = L.marker([lat,lng], { icon }).addTo(map).bindPopup('Minha casa');
@@ -52,24 +64,18 @@
   }
 
   async function loadClienteAndCenter() {
-    if (!usuarioId) return;
-    // Obtém dados do cliente + salva geocódigo no Firestore
-    const res = await fetch(`/api/cliente/${usuarioId}`);
-    if (res.ok) {
-      const data = await res.json();
-      clienteUid = data.firebase_uid || null;
-      if (data.coordinates) {
-        upsertClienteMarker(data.coordinates.lat, data.coordinates.lng);
-        map.setView([data.coordinates.lat, data.coordinates.lng], 15);
-      }
-      // também tenta ouvir em tempo real caso o endereço mude
-      if (clienteUid) {
-        db.collection('localizacoes').collection('clientes').doc(clienteUid).onSnapshot((doc) => {
-          const d = doc.data(); if (!d) return;
-          upsertClienteMarker(d.lat, d.lng);
-          updateDistanceIfPossible();
-        });
-      }
+    // Autenticado: obter dados do cliente logado
+    const res = await authFetch('/api/cliente/me');
+    if (!res.ok) return;
+    const data = await res.json();
+    clienteUid = data.firebaseUid || null;
+    if (clienteUid) {
+      db.collection('localizacoes').collection('clientes').doc(clienteUid).onSnapshot((doc) => {
+        const d = doc.data(); if (!d) return;
+        upsertClienteMarker(d.lat, d.lng);
+        map.setView([d.lat, d.lng], 15);
+        updateDistanceIfPossible();
+      });
     }
   }
 
@@ -90,6 +96,7 @@
   }
 
   (async function init(){
+    await new Promise((resolve)=> firebase.auth().onAuthStateChanged((u)=>{ if(u) resolve(); else window.location.href='../../index.html'; }));
     await loadClienteAndCenter();
     await subscribePairedCaregiver();
   })();

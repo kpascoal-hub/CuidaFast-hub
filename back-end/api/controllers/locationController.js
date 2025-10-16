@@ -3,7 +3,7 @@ const Cliente = require('../models/ClienteModel');
 const Cuidador = require('../models/CuidadorModel');
 const Vinculo = require('../models/VinculoModel');
 const { geocodeAddress } = require('../services/geocodeService');
-const { firestore } = require('../services/firebaseAdmin');
+const { firestore, FieldValue } = require('../services/firebaseAdmin');
 
 function nowTimestamp() {
   return new Date();
@@ -44,6 +44,89 @@ async function getCliente(req, res) {
   }
 }
 
+async function postClienteEndereco(req, res) {
+  try {
+    const uid = req.firebaseUid;
+    if (!uid) return res.status(401).json({ error: 'Não autenticado' });
+    const { endereco } = req.body || {};
+    if (!endereco) return res.status(400).json({ error: 'endereco é obrigatório' });
+
+    // Resolve usuario pelo firebase_uid
+    const usuario = await Usuario.findByFirebaseUid(uid);
+    if (!usuario) return res.status(404).json({ error: 'Usuário não encontrado' });
+
+    // Atualiza endereço do cliente no MySQL (mantém formato original)
+    const enderecoSalvar = typeof endereco === 'string' ? endereco : JSON.stringify(endereco);
+    await Cliente.update(usuario.id, { historico_contratacoes: null, endereco: enderecoSalvar, preferencias: null });
+
+    // Geocode e grava no Firestore
+    let coords = null;
+    try {
+      const texto = typeof endereco === 'string' ? endereco : enderecoSalvar;
+      coords = await geocodeAddress(texto);
+      if (coords) {
+        await firestore.collection('localizacoes').collection('clientes').doc(uid).set({
+          lat: Number(coords.lat),
+          lng: Number(coords.lng),
+          atualizadoEm: FieldValue.serverTimestamp(),
+        }, { merge: true });
+      }
+    } catch (e) {
+      // Não bloqueia salvamento no MySQL
+      console.warn('Geocoding falhou:', e?.message || e);
+    }
+
+    return res.json({ ok: true, coordinates: coords });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao salvar endereço do cliente' });
+  }
+}
+
+async function getClienteMe(req, res) {
+  try {
+    const uid = req.firebaseUid;
+    if (!uid) return res.status(401).json({ error: 'Não autenticado' });
+    const usuario = await Usuario.findByFirebaseUid(uid);
+    if (!usuario) return res.status(404).json({ error: 'Usuário não encontrado' });
+    const cliente = await Cliente.getById(usuario.id);
+    const enderecoTexto = cliente && cliente.endereco ? (typeof cliente.endereco === 'string' ? cliente.endereco : JSON.stringify(cliente.endereco)) : null;
+    return res.json({ usuario_id: usuario.id, firebaseUid: uid, endereco: enderecoTexto });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao obter dados do cliente' });
+  }
+}
+
+async function getLocalizacaoCuidadorByUid(req, res) {
+  try {
+    // Auth já validado, opcionalmente checar vínculo aqui
+    const { firebaseUid } = req.params;
+    if (!firebaseUid) return res.status(400).json({ error: 'firebaseUid é obrigatório' });
+    const snap = await firestore.collection('localizacoes').collection('cuidadores').doc(firebaseUid).get();
+    if (!snap.exists) return res.status(404).json({ error: 'Localização não encontrada' });
+    const data = snap.data();
+    return res.json({ lat: data.lat, lng: data.lng, atualizadoEm: data.atualizadoEm || null });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao obter localização do cuidador' });
+  }
+}
+
+async function sanityFirestoreTest(req, res) {
+  try {
+    await firestore.collection('localizacoes').collection('cuidadores').doc('teste').set({
+      lat: -23.561,
+      lng: -46.655,
+      atualizadoEm: FieldValue.serverTimestamp(),
+    }, { merge: true });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao escrever no Firestore' });
+  }
+}
+
 async function getCuidador(req, res) {
   try {
     const id = parseInt(req.params.id, 10);
@@ -68,19 +151,15 @@ async function getCuidador(req, res) {
 
 async function postLocalizacaoCuidador(req, res) {
   try {
-    const { usuario_id, firebase_uid, lat, lng } = req.body || {};
+    const { lat, lng } = req.body || {};
     if ((lat == null) || (lng == null)) return res.status(400).json({ error: 'lat e lng são obrigatórios' });
 
-    let uid = firebase_uid;
-    if (!uid) {
-      if (!usuario_id) return res.status(400).json({ error: 'usuario_id ou firebase_uid é obrigatório' });
-      const usuario = await Usuario.getById(usuario_id);
-      if (!usuario || !usuario.firebase_uid) return res.status(404).json({ error: 'firebase_uid não encontrado para usuario' });
-      uid = usuario.firebase_uid;
-    }
+    // uid vem SEMPRE do token verificado pelo middleware
+    const uid = req.firebaseUid;
+    if (!uid) return res.status(401).json({ error: 'Não autenticado' });
 
     const docRef = firestore.collection('localizacoes').collection('cuidadores').doc(uid);
-    await docRef.set({ lat: Number(lat), lng: Number(lng), atualizadoEm: nowTimestamp() }, { merge: true });
+    await docRef.set({ lat: Number(lat), lng: Number(lng), atualizadoEm: FieldValue.serverTimestamp() }, { merge: true });
     res.json({ ok: true });
   } catch (err) {
     console.error(err);
@@ -148,4 +227,8 @@ module.exports = {
   getLocalizacaoCliente,
   getVinculoByCliente,
   getVinculoByCuidador,
+  postClienteEndereco,
+  getClienteMe,
+  getLocalizacaoCuidadorByUid,
+  sanityFirestoreTest,
 };

@@ -1,39 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const profileBtn = document.getElementById("userProfileBtn");
-    const dropdownMenu = document.getElementById("profileDropdownMenu");
+  const dropdown = document.getElementById("userProfileDropdown");
+  const profileBtn = document.getElementById("userProfileBtn");
+  const dropdownMenu = document.getElementById("profileDropdownMenu");
 
-    // Mostra/esconde dropdown
-    if (profileBtn && dropdownMenu) {
-      profileBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        dropdownMenu.classList.toggle("show");
-        console.log('[Header] Dropdown toggled');
-      });
+  function closeDropdown() {
+    if (!dropdown) return;
+    dropdown.classList.remove("open");
+    if (profileBtn) profileBtn.setAttribute("aria-expanded", "false");
+  }
 
-      document.addEventListener("click", (event) => {
-        if (!profileBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
-          dropdownMenu.classList.remove("show");
-        }
-      });
-    }
+  function toggleDropdown() {
+    if (!dropdown) return;
+    const isOpen = dropdown.classList.toggle("open");
+    if (profileBtn) profileBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  }
 
-    // Configurar navegação - Notificações
-    const notificationBtn = document.getElementById("notificationBtn");
-    if (notificationBtn) {
-      notificationBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.location.href = 'solicitacoesServicos.html';
-      });
-    }
+  if (profileBtn && dropdownMenu && dropdown) {
+    profileBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
 
-    // Configurar navegação - Mensagens
-    const messageBtn = document.getElementById("messageBtn");
-    if (messageBtn) {
-      messageBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.location.href = 'mensagens.html';
-      });
-    }
+    document.addEventListener("click", (event) => {
+      if (!dropdown.contains(event.target)) {
+        closeDropdown();
+      }
+    });
 
-    console.log("Header carregada e interações ativas!");
-  });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeDropdown();
+    });
+  }
+
+  // Configurar navegação - Notificações
+  const notificationBtn = document.getElementById("notificationBtn");
+  if (notificationBtn) {
+    notificationBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = 'solicitacoesServicos.html';
+    });
+  }
+
+  // Configurar navegação - Mensagens
+  const messageBtn = document.getElementById("messageBtn");
+  if (messageBtn) {
+    messageBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = 'mensagens.html';
+    });
+  }
+});
