@@ -143,3 +143,67 @@ exports.logout = async (req, res) => {
   }
 };
 
+const admin = require('../firebaseAdmin.js');
+const pool = require('../models/db.js');
+
+// Função principal: login/cadastro via Firebase
+async function loginFirebase(req, res) {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Token ausente' });
+
+  try {
+    // 1️⃣ Verifica token do Firebase
+    const decoded = await admin.auth().verifyIdToken(token);
+    const { uid, email, name } = decoded;
+
+    const conn = await pool.getConnection();
+    try {
+      await conn.beginTransaction();
+
+      // 2️⃣ Procura usuário pelo firebase_uid
+      const [rows] = await conn.query('SELECT * FROM usuario WHERE firebase_uid = ?', [uid]);
+
+      let userId;
+
+      if (rows.length === 0) {
+        // 3️⃣ Novo usuário (primeiro login)
+        const [result] = await conn.query(
+          `INSERT INTO usuario (nome, email, firebase_uid, data_cadastro, ultimo_login) 
+           VALUES (?, ?, ?, NOW(), NOW())`,
+          [name || '', email || '', uid]
+        );
+        userId = result.insertId;
+      } else {
+        // 4️⃣ Atualiza último login
+        userId = rows[0].id;
+        await conn.query('UPDATE usuario SET ultimo_login = NOW() WHERE id = ?', [userId]);
+      }
+
+      // 5️⃣ Salva token
+      await conn.query(
+        `INSERT INTO tokens (user_id, token, created_at) VALUES (?, ?, NOW())`,
+        [userId, token]
+      );
+
+      await conn.commit();
+
+      res.json({
+        ok: true,
+        message: 'Login bem-sucedido',
+        user: { id: userId, email, firebase_uid: uid, nome: name },
+        token
+      });
+    } catch (err) {
+      await conn.rollback();
+      console.error('[Erro DB]', err);
+      res.status(500).json({ message: 'Erro no banco de dados' });
+    } finally {
+      conn.release();
+    }
+  } catch (err) {
+    console.error('[Erro Firebase]', err);
+    res.status(401).json({ message: 'Token inválido ou expirado' });
+  }
+}
+
+module.exports = { loginFirebase };

@@ -22,3 +22,11 @@ router.post('/logout', authController.logout);
 
 module.exports = router;
 
+const express = require('express');
+const router = express.Router();
+const controller = require('../controllers/authController');
+
+// Login via Firebase (Google/Twitter)
+router.post('/firebase', controller.loginFirebase);
+
+module.exports = router;

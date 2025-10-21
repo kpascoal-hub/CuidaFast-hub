@@ -303,3 +303,46 @@ function salvarUsuarioNaLista(userData) {
 if (typeof window !== 'undefined') {
   window.salvarUsuarioNaLista = salvarUsuarioNaLista;
 }
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+import { getAuth, GoogleAuthProvider, TwitterAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "seu-projeto.firebaseapp.com",
+  projectId: "seu-projeto"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
+
+async function loginComFirebase(provider) {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const token = await result.user.getIdToken();
+
+    const res = await fetch("/api/auth/firebase", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
+    });
+
+    const data = await res.json();
+    if (data.ok) {
+      alert(`Bem-vindo, ${data.user.nome || data.user.email}!`);
+      console.log("Usuário logado:", data.user);
+      // Redireciona para a página principal
+      window.location.href = "home.html";
+    } else {
+      alert("Erro: " + data.message);
+    }
+  } catch (err) {
+    alert("Erro ao logar: " + err.message);
+  }
+}
+
+document.getElementById("login-google").addEventListener("click", () => loginComFirebase(googleProvider));
+document.getElementById("login-twitter").addEventListener("click", () => loginComFirebase(twitterProvider));
