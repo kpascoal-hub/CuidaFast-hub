@@ -71,6 +71,3 @@ if (app._router && app._router.stack) {
 
 module.exports = app;
 
-// cole no final do app.js
-const authRoutes = require('./routes/authRoutes');
-app.use('/api/auth', authRoutes);
