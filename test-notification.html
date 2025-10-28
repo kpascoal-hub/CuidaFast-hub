@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Notificações - CuidaFast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-all {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-all:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-user {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-user:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result.success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+
+        .result.error {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+
+        .result h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .result pre {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔔 Teste de Notificações</h1>
+        <p class="subtitle">Sistema de Notificações Push - CuidaFast</p>
+
+        <div class="info-box">
+            <strong>ℹ️ Instruções:</strong><br>
+            1. Certifique-se de que o servidor está rodando (npm start)<br>
+            2. Verifique se há tokens cadastrados no banco<br>
+            3. Preencha os campos e clique em enviar
+        </div>
+
+        <form id="notificationForm">
+            <div class="form-group">
+                <label for="userId">🆔 ID do Usuário (opcional - deixe vazio para enviar para todos)</label>
+                <input type="number" id="userId" placeholder="Ex: 1">
+            </div>
+
+            <div class="form-group">
+                <label for="title">📌 Título da Notificação *</label>
+                <input type="text" id="title" placeholder="Ex: Nova Solicitação" required>
+            </div>
+
+            <div class="form-group">
+                <label for="body">📝 Mensagem *</label>
+                <textarea id="body" placeholder="Ex: Você tem uma nova solicitação de serviço!" required></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-all" onclick="sendToAll()">
+                    📢 Enviar para Todos
+                </button>
+                <button type="button" class="btn-user" onclick="sendToUser()">
+                    👤 Enviar para Usuário
+                </button>
+            </div>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api/notificacoes';
+
+        function showResult(success, message, data = null) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${success ? 'success' : 'error'}`;
+            resultDiv.style.display = 'block';
+            
+            let html = `<h3>${success ? '✅ Sucesso!' : '❌ Erro!'}</h3>`;
+            html += `<p>${message}</p>`;
+            
+            if (data) {
+                html += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+            
+            resultDiv.innerHTML = html;
+        }
+
+        async function sendToAll() {
+            const title = document.getElementById('title').value;
+            const body = document.getElementById('body').value;
+
+            if (!title || !body) {
+                showResult(false, 'Por favor, preencha título e mensagem!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/enviar`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, body })
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    showResult(true, 
+                        `Notificação enviada para ${data.totalTokens} dispositivo(s)!\n` +
+                        `Sucesso: ${data.successCount} | Falhas: ${data.failureCount}`,
+                        data
+                    );
+                } else {
+                    showResult(false, data.msg || 'Erro ao enviar notificação', data);
+                }
+            } catch (error) {
+                showResult(false, `Erro de conexão: ${error.message}`);
+            }
+        }
+
+        async function sendToUser() {
+            const userId = document.getElementById('userId').value;
+            const title = document.getElementById('title').value;
+            const body = document.getElementById('body').value;
+
+            if (!userId) {
+                showResult(false, 'Por favor, informe o ID do usuário!');
+                return;
+            }
+
+            if (!title || !body) {
+                showResult(false, 'Por favor, preencha título e mensagem!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/enviar-usuario`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: parseInt(userId), title, body })
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    showResult(true, 
+                        `Notificação enviada para o usuário ${userId}!\n` +
+                        `Sucesso: ${data.successCount} | Falhas: ${data.failureCount}`,
+                        data
+                    );
+                } else {
+                    showResult(false, data.msg || 'Erro ao enviar notificação', data);
+                }
+            } catch (error) {
+                showResult(false, `Erro de conexão: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html>

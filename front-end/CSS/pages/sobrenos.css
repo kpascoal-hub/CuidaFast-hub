@@ -1,0 +1,186 @@
+/* Body styles removed - using main.css global styles */
+body {
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero-sobre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #fffbe6, #fff);
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-text h1 {
+  font-size: 2.4rem;
+  color: #0E4F4F;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #334155;
+  max-width: 450px;
+}
+
+.hero-image {
+  flex: 1;
+  max-width: 450px;
+  width: 100%;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ===== PROBLEMA / SOLUÇÃO ===== */
+.problem-solution {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  padding: 60px 10%;
+  flex-wrap: wrap;
+}
+
+.info-box {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 30px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.info-box h3 {
+  color: #0E4F4F;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* ===== VALORES ===== */
+.valores {
+  text-align: center;
+  padding: 80px 10%;
+  background-color: #f7f9f3;
+}
+
+.valores h2 {
+  color: #0E4F4F;
+  margin-bottom: 40px;
+}
+
+.valores-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.valor-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px 20px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.valor-item:hover {
+  transform: translateY(-5px);
+  background-color: #fef9e7;
+}
+
+.valor-item i {
+  font-size: 2rem;
+  color: #0E4F4F;
+  margin-bottom: 10px;
+}
+
+.valor-item h4 {
+  color: #0E4F4F;
+  margin-bottom: 8px;
+}
+
+/* ===== TIME ===== */
+.team-section {
+  padding: 80px 10%;
+}
+
+.team-section h2 {
+  text-align: center;
+  color: #0E4F4F;
+  margin-bottom: 40px;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
+
+.team-member {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+  background-color: #f0fff7;
+}
+
+.team-member img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 900px) {
+  .hero-sobre {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .hero-text p {
+    margin: 0 auto;
+  }
+}
+main {
+  padding-top: 120px; /* Compensa a altura do header */
+}
+/* ===== AJUSTE DA HERO IMAGE ===== */
+.hero-image {
+  display: block;
+  margin: 40px auto; /* centraliza e afasta do topo */
+  max-width: 80%;    /* garante que não fique muito grande */
+  border-radius: 20px; /* bordas arredondadas */
+  object-fit: cover;
+}

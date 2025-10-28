@@ -1,0 +1,17 @@
+import { Client } from "mindee";
+
+const mindeeClient = new Client({
+  apiKey: process.env.MINDEE_API_KEY || "md_WV5FiUOnyhAdmZV8yrgqtfHuZqbQ6zZV"
+});
+
+export default mindeeClient;
+
+// config/mindee.js
+import * as mindee from "mindee";
+
+// 🔑 sua API Key
+const apiKey = process.env.MINDEE_API_KEY || "md_WV5FiUOnyhAdmZV8yrgqtfHuZqbQ6zZV// Cliente Mindee V2
+const mindeeClient = new mindee.ClientV2({ apiKey });
+
+export default mindeeClient;
+
