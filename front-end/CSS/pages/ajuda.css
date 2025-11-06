@@ -43,7 +43,10 @@
 
   --transicao-normal: 0.3s ease;
 }
-
+.title-gogos{
+  color: #1B475D;
+  text-align: center;
+}
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--creme);

@@ -15,7 +15,76 @@
 </head>
 <body>
 
-  <header>Central de Ajuda CuidaFast</header>
+  <header class="modern-header">
+    <div class="header-container">
+        <!-- Logo Section -->
+        <div class="header-left">
+            <a href="homeCliente.html" class="logo-link">
+                <img id="logo" src="../assets/Logotipo_1_vetorizado.svg" alt="Logotipo CuidaFast" class="logo" />
+                <span class="logo-text"></span>
+            </a>
+        </div>
+        
+        <h1 class="title-gogos">Central de Ajuda CuidaFast</h1>
+        
+        <!-- User Actions -->
+        <div class="header-right">
+
+            
+
+                
+                <!-- Dropdown Menu -->
+                <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                    <div class="dropdown-header">
+                        <img src="../assets/images.webp" alt="Avatar" class="dropdown-avatar">
+                        <div class="dropdown-user-info">
+                            <h4 id="dropdownUserName">Usuário</h4>
+                            <p>Cliente</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="perfilCliente.html" class="dropdown-item">
+                        <i class="ph ph-user"></i>
+                        <span>Meu Perfil</span>
+                    </a>
+                    <a href="../HTML/configuracoes.html" class="dropdown-item">
+                        <i class="ph ph-gear"></i>
+                        <span>Configurações</span>
+                    </a>
+                    <a href="contratarInTime.html" class="dropdown-item">
+                        <i class="ph ph-clock"></i>
+                        <span>In-time</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="ph ph-question"></i>
+                        <span>Ajuda</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="../../index.html" class="dropdown-item logout-item" id="headerLogoutBtn">
+                        <i class="ph ph-sign-out"></i>
+                        <span>Sair</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile Search Bar -->
+    <div class="mobile-search-container" id="mobileSearchContainer">
+        <div class="mobile-search-wrapper">
+            <i class="ph ph-magnifying-glass search-icon"></i>
+            <input type="text" placeholder="Buscar cuidadores..." class="mobile-search-input">
+            <button class="mobile-search-btn" type="button">
+                <i class="ph ph-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</header>
 
   <div class="help-container">
     <div class="help-header">
@@ -107,7 +176,8 @@
   <footer>
     © 2025 CuidaFast — Todos os direitos reservados.
   </footer>
-
+  <script src="../JS/header.js"></script>
+  <link rel="stylesheet" href="../CSS/header.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
