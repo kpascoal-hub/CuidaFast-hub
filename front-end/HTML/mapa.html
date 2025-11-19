@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Mapa</title>
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    // 1️⃣ Cria o mapa e define posição e zoom iniciais
+    const map = L.map('map').setView([-23.55052, -46.633308], 13); // São Paulo
+
+    // 2️⃣ Adiciona o mapa base (camadas visuais)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // 3️⃣ Adiciona um marcador
+    const marker = L.marker([-23.55052, -46.633308]).addTo(map);
+
+    // 4️⃣ Adiciona popup no marcador
+    marker.bindPopup("<b>Olá!</b><br>Este é um marcador em São Paulo.").openPopup();
+  </script>
+</body>
+</html>
