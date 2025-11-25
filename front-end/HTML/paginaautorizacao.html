@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprovação de Contas | CuidaFast</title>
+    <link rel="stylesheet" href="paginaautorizacao.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">CuidaFast ADM</div>
+        <nav class="menu">
+            <a href="#">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="titulo">Aprovação de Novas Contas</h1>
+        <p class="subtitulo">Analise os cadastros pendentes e autorize o acesso à plataforma</p>
+
+        <div class="lista-usuarios">
+
+            <div class="card-usuario" data-user="maria">
+                <div class="info">
+                    <h3>Maria Cardoso</h3>
+                    <p>Email: maria@gmail.com</p>
+                    <p>Tipo: Cuidador</p>
+                </div>
+                <div class="acoes">
+                    <button class="btn-text ver-mais" data-user="maria">Ver detalhes</button>
+                    <button class="btn aprovar">Aprovar</button>
+                    <button class="btn rejeitar">Rejeitar</button>
+                </div>
+            </div>
+
+            <div class="card-usuario" data-user="ricardo">
+                <div class="info">
+                    <h3>Ricardo Lopes</h3>
+                    <p>Email: ricardolopes@hotmail.com</p>
+                    <p>Tipo: Cliente</p>
+                </div>
+                <div class="acoes">
+                    <button class="btn-text ver-mais" data-user="ricardo">Ver detalhes</button>
+                    <button class="btn aprovar">Aprovar</button>
+                    <button class="btn rejeitar">Rejeitar</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+
+            <h2 id="modal-nome"></h2>
+            <p><strong>Email:</strong> <span id="modal-email"></span></p>
+            <p><strong>Tipo:</strong> <span id="modal-tipo"></span></p>
+            <p><strong>RG / Documento:</strong></p>
+            <img id="modal-rg" class="doc-image">
+
+            <p><strong>Currículo:</strong></p>
+            <a id="modal-cv" href="" target="_blank">Clique para abrir</a>
+        </div>
+    </div>
+
+<script src="modal.js"></script>
+</body>
+</html>
