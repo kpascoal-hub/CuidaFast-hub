@@ -16,6 +16,7 @@
 /* Body background removed - using main.css global styles */
 body.edit-profile {
     min-height: 100vh;
+    background-color: #fffbec;
 }
 
 /* Edit Profile Container */
