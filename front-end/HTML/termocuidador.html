@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso – Cuidador | CuidaFast</title>
+    <link rel="stylesheet" href="termo.css">
+</head>
+<body>
+
+
+<header>
+    <h1>Termos de Uso – Cuidador</h1>
+</header>
+
+
+<main class="container">
+    <section class="card">
+
+
+        <h2>TERMO DE USO – CUIDADOR CUIDAFAST</h2>
+
+
+        <h3>CLÁUSULA 1</h3>
+        <p>1.1. Ao se cadastrar na plataforma CuidaFast como Cuidador, você declara ter lido, compreendido e aceitado integralmente este Termo de Uso e Responsabilidade. O aceite formal é condição indispensável para o uso da plataforma.</p>
+        <p>1.2. A CuidaFast é uma plataforma de tecnologia que atua como intermediadora e facilitadora, conectando cuidadores autônomos e independentes a clientes que necessitam de serviços de cuidado domiciliar. A CuidaFast não é empregadora dos Cuidadores e não possui vínculo empregatício com eles.</p>
+
+
+        <h3>CLÁUSULA 2</h3>
+        <p>2.1. Qualificação e Registro: O Cuidador se compromete a fornecer documentação completa e verídica de sua identidade, formação, certificações (quando aplicáveis) e experiência profissional, permitindo que a CuidaFast realize a devida verificação.</p>
+        <p>2.2. Dever de Qualidade e Humanização: Em conformidade com os princípios da Política Nacional de Cuidados, o Cuidador se obriga a prestar seus serviços com:</p>
+        <ul>
+            <li>a) Respeito à Dignidade: Tratar o Cliente com urbanidade, respeito, dignidade, autonomia e discrição.</li>
+            <li>b) Qualidade Técnica: Aplicar seus conhecimentos técnicos e seguir o Plano de Cuidados acordado.</li>
+            <li>c) Segurança e Higiene: Garantir condições adequadas no ambiente de cuidado.</li>
+        </ul>
+        <p>2.3. Conduta: O Cuidador deve manter comportamento profissional e se abster de:</p>
+        <ul>
+            <li>a) Realizar procedimentos que exijam formação superior, exceto quando autorizado conforme a lei.</li>
+            <li>b) Solicitar ou aceitar presentes de alto valor.</li>
+            <li>c) Divulgar informações privadas do Cliente.</li>
+        </ul>
+
+
+        <h3>CLÁUSULA 3</h3>
+        <p>3.1. Responsabilidade Exclusiva pelo Serviço: O Cuidador é o único responsável pela execução do cuidado.</p>
+        <p>3.2. Responsabilidade Cível e Penal: O Cuidador é responsável por quaisquer danos causados ao Cliente ou terceiros.</p>
+        <p>3.3. Declaração de Autonomia: O Cuidador reconhece ser profissional autônomo e responsável por seus impostos e contribuições.</p>
+        <p>3.4. Sigilo e LGPD: O Cuidador deve respeitar a LGPD e tratar dados do Cliente de forma confidencial.</p>
+
+
+        <h3>CLÁUSULA 4</h3>
+        <p>4.1. Taxa de Intermediação: A CuidaFast poderá cobrar taxa percentual sobre os serviços realizados.</p>
+        <p>4.2. Veracidade de Dados: O Cuidador deve manter seu perfil atualizado e verdadeiro.</p>
+        <p>4.3. Avaliação e Reputação: O Cuidador concorda com a exibição de suas avaliações na plataforma.</p>
+
+
+        <h3>CLÁUSULA 5</h3>
+        <p>5.1. Suspensão e Exclusão: A CuidaFast poderá suspender ou excluir o Cuidador por:</p>
+        <ul>
+            <li>a) Reclamações graves comprovadas;</li>
+            <li>b) Violações da LGPD;</li>
+            <li>c) Fraudes ou informações falsas;</li>
+            <li>d) Descumprimento deste Termo.</li>
+        </ul>
+
+
+        <!-- === ADIÇÃO === -->
+        <div class="confirmacao-termos">
+            <input type="checkbox" id="aceite">
+            <label for="aceite">Declaro que li os termos e estou de acordo com eles</label>
+        </div>
+
+
+        <button id="btnAvancar" disabled onclick="window.location.href='proxima_pagina.html'">Avançar</button>
+
+
+    </section>
+</main>
+
+
+<footer>
+    <p>© 2025 CuidaFast – Todos os direitos reservados.</p>
+</footer>
+
+
+<script>
+    const checkbox = document.getElementById("aceite");
+    const button = document.getElementById("btnAvancar");
+
+
+    checkbox.addEventListener("change", () => {
+        button.disabled = !checkbox.checked;
+    });
+</script>
+
+
+</body>
+</html>
+
+
