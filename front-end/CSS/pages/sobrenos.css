@@ -1,7 +1,56 @@
 /* Body styles removed - using main.css global styles */
 body {
-  overflow-x: hidden;
+    overflow-x: hidden;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
 }
+
+/* Padronização de títulos */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #2d2d2d;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Cores de seleção — agora neutra */
+::selection {
+    background: #b8b8b8;
+    color: #fff;
+}
+
+/* Cards — remover fundo branco */
+.card {
+    background-color: #e9eef5 !important;
+    border-radius: 8px;
+    padding: 18px;
+    border: none;
+}
+
+/* Imagem principal — menor e proporcional */
+.hero-img img {
+    width: 280px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Ajuste do parágrafo abaixo do título */
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    color: #4b4b4b;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
 
 /* ===== HERO ===== */
 .hero-sobre {
@@ -44,16 +93,19 @@ body {
 }
 
 /* ===== PROBLEMA / SOLUÇÃO ===== */
-.problem-solution {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  padding: 60px 10%;
-  flex-wrap: wrap;
-}
+
+  .problem-solution {
+    background-color: #fffbec;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    padding: 60px 10%;
+    flex-wrap: wrap;
+  }
+  
 
 .info-box {
-  background: #fff;
+  background: #fffbec;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   padding: 30px;
@@ -141,20 +193,20 @@ body {
 }
 
 .team-member {
-  background: #fff;
-  padding: 20px;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: inherit;
-}
+    background: #fffbec;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
 
-.team-member:hover {
-  transform: translateY(-5px);
-  background-color: #f0fff7;
-}
+ .team-member:hover {
+    transform: translateY(-5px);
+
+  }
 
 .team-member img {
   width: 100%;
