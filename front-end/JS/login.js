@@ -1,141 +1,198 @@
 // login.js - Sistema de login para modais (index.html e sobre-nos.html)
 
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('[Login] Sistema de login inicializado');
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("[Login] Sistema de login inicializado")
+
+  //  show/hide password Toggle
+  
+  const togglePassword = document.getElementById("togglePassword")
+  const passwordInputHide = document.getElementById("loginPassword")
+  const toggleIcon = document.getElementById("togglePasswordIcon")
+
+  if (togglePassword && passwordInputHide && toggleIcon) {
+    togglePassword.addEventListener("click", () => {
+      const type =
+        passwordInputHide.getAttribute("type") === "password"
+          ? "text"
+          : "password"
+      passwordInputHide.setAttribute("type", type)
+
+      if (type === "password") {
+        toggleIcon.classList.remove("ph-eye-slash")
+        toggleIcon.classList.add("ph-eye")
+      } else {
+        toggleIcon.classList.remove("ph-eye")
+        toggleIcon.classList.add("ph-eye-slash")
+      }
+    })
+  } else {
+    console.warn("[Login] Elementos do toggle não encontrados", {
+      togglePassword: !!togglePassword,
+      passwordInputHide: !!passwordInputHide,
+      toggleIcon: !!toggleIcon,
+    })
+  }
+
 
   // Tentar selecionar formulário do index.html ou sobre-nos.html
-  const loginForm = document.getElementById('loginForm') || document.getElementById('loginFormSobre');
+  const loginForm =
+    document.getElementById("loginForm") ||
+    document.getElementById("loginFormSobre")
   if (!loginForm) {
-    console.warn('[Login] Formulário de login não encontrado');
-    return;
+    console.warn("[Login] Formulário de login não encontrado")
+    return
   }
 
   // Selecionar campos de input (index ou sobre-nos)
-  const emailInput = document.getElementById('loginEmail') || document.getElementById('loginEmailSobre');
-  const passwordInput = document.getElementById('loginPassword') || document.getElementById('loginPasswordSobre');
+  const emailInput =
+    document.getElementById("loginEmail") ||
+    document.getElementById("loginEmailSobre")
+  const passwordInput =
+    document.getElementById("loginPassword") ||
+    document.getElementById("loginPasswordSobre")
 
   if (!emailInput || !passwordInput) {
-    console.warn('[Login] Campos de email ou senha não encontrados');
-    return;
+    console.warn("[Login] Campos de email ou senha não encontrados")
+    return
   }
 
   // Event listener para o formulário de login
-  loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    console.log('[Login] Tentativa de login iniciada');
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault()
+    console.log("[Login] Tentativa de login iniciada")
 
-    const email = emailInput.value.trim();
-    const senha = passwordInput.value.trim();
+    const email = emailInput.value.trim()
+    const senha = passwordInput.value.trim()
 
     // Validar campos
     if (!email || !senha) {
-      alert('❌ Por favor, preencha todos os campos.');
-      return;
+      alert("❌ Por favor, preencha todos os campos.")
+      return
     }
 
     // Tentar fazer login
-    const loginResult = realizarLogin(email, senha);
+    const loginResult = realizarLogin(email, senha)
 
     if (loginResult.success) {
       // Login bem-sucedido
-      console.log('[Login] Login bem-sucedido:', loginResult.userData);
-      
+      console.log("[Login] Login bem-sucedido:", loginResult.userData)
+
       // Fechar modal
-      const loginModal = document.getElementById('loginModal');
-      const modalInstance = bootstrap.Modal.getInstance(loginModal);
+      const loginModal = document.getElementById("loginModal")
+      const modalInstance = bootstrap.Modal.getInstance(loginModal)
       if (modalInstance) {
-        modalInstance.hide();
+        modalInstance.hide()
       }
 
       // Mostrar mensagem de sucesso
-      alert(`✅ Bem-vindo(a), ${loginResult.userData.primeiroNome || loginResult.userData.nome}!`);
+      alert(
+        `✅ Bem-vindo(a), ${
+          loginResult.userData.primeiroNome || loginResult.userData.nome
+        }!`
+      )
 
       // Redirecionar baseado no tipo de usuário
       setTimeout(() => {
-        const currentPath = window.location.pathname;
-        let pathPrefix = '';
-        
+        const currentPath = window.location.pathname
+        let pathPrefix = ""
+
         // Determinar o prefixo correto baseado na localização atual
-        if (currentPath.includes('index.html') || currentPath === '/' || currentPath.endsWith('/')) {
-          pathPrefix = 'front-end/HTML/';
-        } else if (currentPath.includes('/HTML/')) {
-          pathPrefix = '';
+        if (
+          currentPath.includes("index.html") ||
+          currentPath === "/" ||
+          currentPath.endsWith("/")
+        ) {
+          pathPrefix = "front-end/HTML/"
+        } else if (currentPath.includes("/HTML/")) {
+          pathPrefix = ""
         } else {
-          pathPrefix = '../HTML/';
+          pathPrefix = "../HTML/"
         }
-        
-        console.log('[Login] Redirecionando...', { tipo: loginResult.userData.tipo, pathPrefix });
-        
-        if (loginResult.userData.tipo === 'cuidador') {
-          window.location.href = pathPrefix + 'dashboard-cuidador.html';
-        } else if (loginResult.userData.tipo === 'cliente') {
-          window.location.href = pathPrefix + 'homeCliente.html';
+
+        console.log("[Login] Redirecionando...", {
+          tipo: loginResult.userData.tipo,
+          pathPrefix,
+        })
+
+        if (loginResult.userData.tipo === "cuidador") {
+          window.location.href = pathPrefix + "dashboard-cuidador.html"
+        } else if (loginResult.userData.tipo === "cliente") {
+          window.location.href = pathPrefix + "homeCliente.html"
         } else {
-          console.error('[Login] Tipo de usuário desconhecido:', loginResult.userData.tipo);
-          alert('❌ Erro: Tipo de usuário não identificado.');
+          console.error(
+            "[Login] Tipo de usuário desconhecido:",
+            loginResult.userData.tipo
+          )
+          alert("❌ Erro: Tipo de usuário não identificado.")
         }
-      }, 500);
+      }, 500)
     } else {
       // Login falhou
-      console.warn('[Login] Falha no login:', loginResult.message);
-      alert(loginResult.message);
-      
+      console.warn("[Login] Falha no login:", loginResult.message)
+      alert(loginResult.message)
+
       // Limpar senha
-      passwordInput.value = '';
-      passwordInput.focus();
+      passwordInput.value = ""
+      passwordInput.focus()
     }
-  });
+  })
 
   // Verificar se já está logado
-  verificarSessaoAtiva();
+  verificarSessaoAtiva()
 
   // Botão de login com Google no modal (index ou sobre-nos)
-  const btnGoogleLogin = document.getElementById('btnGoogleLogin') || document.getElementById('btnGoogleLoginSobre');
+  const btnGoogleLogin =
+    document.getElementById("btnGoogleLogin") ||
+    document.getElementById("btnGoogleLoginSobre")
   if (btnGoogleLogin) {
-    btnGoogleLogin.addEventListener('click', function() {
-      console.log('[Login] Login com Google clicado');
-      
+    btnGoogleLogin.addEventListener("click", function () {
+      console.log("[Login] Login com Google clicado")
+
       // Código para login com Google (Firebase Auth já configurado!)
-      import('https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js')
-        .then(({ signInWithPopup, GoogleAuthProvider }) => {
-          import('../JS/firebase-init.js').then(({ auth }) => {
-            
-            const provider = new GoogleAuthProvider();
+      import("https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js").then(
+        ({ signInWithPopup, GoogleAuthProvider }) => {
+          import("../JS/firebase-init.js").then(({ auth }) => {
+            const provider = new GoogleAuthProvider()
             signInWithPopup(auth, provider)
               .then((result) => {
-                const user = result.user;
-                
+                const user = result.user
+
                 // Salvar no localStorage
                 const userData = {
                   nome: user.displayName,
                   email: user.email,
                   photoURL: user.photoURL,
-                  tipo: 'cliente',
+                  tipo: "cliente",
                   dataCadastro: new Date().toISOString(),
-                  primeiroNome: user.displayName.split(' ')[0]
-                };
-                
-                localStorage.setItem('cuidafast_user', JSON.stringify(userData));
-                localStorage.setItem('cuidafast_isLoggedIn', 'true');
-                salvarUsuarioNaLista(userData);
-                
+                  primeiroNome: user.displayName.split(" ")[0],
+                }
+
+                localStorage.setItem("cuidafast_user", JSON.stringify(userData))
+                localStorage.setItem("cuidafast_isLoggedIn", "true")
+                salvarUsuarioNaLista(userData)
+
                 // Fechar modal
-                const loginModal = document.getElementById('loginModal');
-                const modalInstance = bootstrap.Modal.getInstance(loginModal);
-                if (modalInstance) modalInstance.hide();
-                
+                const loginModal = document.getElementById("loginModal")
+                const modalInstance = bootstrap.Modal.getInstance(loginModal)
+                if (modalInstance) modalInstance.hide()
+
                 // Redirecionar (ajustar path se estiver em sobre-nos)
-                alert(`✅ Bem-vindo(a), ${userData.primeiroNome}!`);
-                const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/';
-                window.location.href = isIndexPage ? 'front-end/HTML/homeCliente.html' : '../HTML/homeCliente.html';
+                alert(`✅ Bem-vindo(a), ${userData.primeiroNome}!`)
+                const isIndexPage =
+                  window.location.pathname.includes("index.html") ||
+                  window.location.pathname === "/"
+                window.location.href = isIndexPage
+                  ? "front-end/HTML/homeCliente.html"
+                  : "../HTML/homeCliente.html"
               })
               .catch((error) => {
-                console.error('Erro no login com Google:', error);
-                alert('❌ Erro ao fazer login com Google: ' + error.message);
-              });
-          });
-        });
-    });
+                console.error("Erro no login com Google:", error)
+                alert("❌ Erro ao fazer login com Google: " + error.message)
+              })
+          })
+        }
+      )
+    })
   }
 });
 
@@ -274,29 +331,31 @@ function verificarSessaoAtiva() {
  * Deve ser chamada no cadastro.js
  */
 function salvarUsuarioNaLista(userData) {
-  let usuarios = [];
-  
-  const usuariosExistentes = localStorage.getItem('cuidafast_usuarios');
+  let usuarios = []
+
+  const usuariosExistentes = localStorage.getItem("cuidafast_usuarios")
   if (usuariosExistentes) {
     try {
-      usuarios = JSON.parse(usuariosExistentes);
+      usuarios = JSON.parse(usuariosExistentes)
     } catch (error) {
-      console.error('[Login] Erro ao carregar lista de usuários:', error);
+      console.error("[Login] Erro ao carregar lista de usuários:", error)
     }
   }
 
   // Verificar se usuário já existe (por email)
-  const index = usuarios.findIndex(u => u.email === userData.email);
+  const index = usuarios.findIndex((u) => u.email === userData.email)
   if (index !== -1) {
     // Atualizar usuário existente
-    usuarios[index] = userData;
+    usuarios[index] = userData
   } else {
     // Adicionar novo usuário
-    usuarios.push(userData);
+    usuarios.push(userData)
   }
 
-  localStorage.setItem('cuidafast_usuarios', JSON.stringify(usuarios));
-  console.log('[Login] Usuário salvo na lista. Total:', usuarios.length);
+
+
+  localStorage.setItem("cuidafast_usuarios", JSON.stringify(usuarios))
+  console.log("[Login] Usuário salvo na lista. Total:", usuarios.length)
 }
 
 // Exportar função para uso em outros arquivos

@@ -138,6 +138,20 @@
   color: #666;
 }
 
+
+#togglePassword {
+  border-left: none;
+  background-color: #fff;
+  color: #6c757d;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+#togglePassword:hover {
+  color: #fff;
+  background-color: #8ebd9d;
+}
+
 .divider::before,
 .divider::after {
   content: '';

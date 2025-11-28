@@ -24,7 +24,7 @@ const provider = new GoogleAuthProvider();
 // Inicializar botão do Google após DOM carregar
 document.addEventListener('DOMContentLoaded', () => {
   const btnGoogle = document.getElementById("btnGoogle");
-  
+
   if (btnGoogle) {
     btnGoogle.addEventListener("click", () => {
       console.log('[Cadastro] Login com Google iniciado');
